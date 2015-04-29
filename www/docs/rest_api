@@ -1,0 +1,60 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "0.0.0",
+        "title": "Wits Research Publication Archive - REST API"
+    },
+    "paths": {
+        "/documents": {
+            "get": {
+                "description": "Gets an array of `DocumentListItem` objects for each document in the archive\n",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Which page to fetch",
+                        "required": false,
+                        "type": "number",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The requested array",
+                        "schema": {
+                            "title": "ArrayOfDocuments",
+                            "type": "array",
+                            "items": {
+                                "title": "DocumentListItem",
+                                "type": "object",
+                                "properties": {
+                                    "Title": {
+                                        "type": "string"
+                                    },
+                                    "Authors": {
+                                        "type": "array",
+                                        "items": {
+                                            "title": "AuthorDetail",
+                                            "type": "object",
+                                            "properties": {
+                                                "Firstname": {
+                                                    "type": "string"
+                                                },
+                                                "Surname": {
+                                                    "type": "string"
+                                                },
+                                                "Initials": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
