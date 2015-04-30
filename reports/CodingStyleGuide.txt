@@ -1,0 +1,11 @@
+The style of all code regardless of which team memeber wrote it should abide by the following guidelines:
+
+1)Classes and scripts are named using capital camel case
+2)Functions and variables are named using lower camel case
+3)Object Oriented Programming is to be implimented whenever possible
+4)Separation of concerns (layer separation) is to be implimented whenever possible
+5)Restful practices are to be used when passing information via the server
+6)Global variables and magic numbers are to be avoided unless there is a justification for them (e.g. universal constants)
+7)For all python scripts the #include statments must be at the start of the script
+8)For all scripts(but especially javascript) all inline functions should be short enough to be viewed in one line on a normal computer screen
+9)Class objects should not be created in the constructor of another class. Instead these objects should be passed into classes as arguements

@@ -1,0 +1,28 @@
+This document describes what task and functionality is to be implimented in iteration one along with time estimates.
+
+Tasks to be completed:
+1)Design database to meet third normal form
+2)Create database and tables
+3)Create an abstract base class to define an interface for interacting with the database
+4)Create a restful API for server interactions
+5)Complete the following user stories:
+	5.1)G1: I as a general user would like to be able to view the details of a publication
+	5.2)G2: I as a general user would like to be able to download a pdf of a publication
+	5.3)
+	5.4)
+	
+Time estimates for user stories:
+
+1)G1: 3 hours with 2 programmers working on it - Sarah, Ant
+Subtasks:
+1.1)Retrieve a document from the database and format information into JSON to pass to the webpage - 3 hours, Sarah
+1.2)Lay out webpage with space for all document details and extract details from JSON object - 3 hours, Ant
+
+2)G2: 1 hours with 2 programmers working on it - Sarah, Ant
+Subtasks:
+2.1)Retrieve the download link to an online document from the database - 1 hour, Sarah
+2.2)On clicking a download button open a new tab using the download url of the current document - 1 hour, Ant
+
+3)
+
+4)

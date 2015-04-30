@@ -1,0 +1,5 @@
+When reviewing another team member's code the following guidelines should be abided by:
+
+1)Comments indicating any code changes should be indicated by a #! in python and a //! in javascript
+2)All changes should be explained allong with the reason for the change
+3)All code must be reviewed at least once by a team member other than the one who originally coded it
