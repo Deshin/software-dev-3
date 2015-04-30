@@ -1,4 +1,15 @@
-require([], function() {
+console.log("made it!");
+requirejs.config({
+    baseUrl: 'js',
+    paths: {
+        jquery: 'jquery-2.1.3.min',
+        knockout: 'knockout-3.3.0',
+        kopunches: 'knockout.punches.min',
+        pager: 'pager.min'
+    }
+});
+
+requirejs(['jquery', 'knockout', 'kopunches', 'pager'], function($, ko, kopunches, pager) {
 	function RootViewModel() {
 		var self = this;
 		self.user = ko.observable("User");
@@ -25,7 +36,7 @@ require([], function() {
 				// 	console.log(vm);
 				// 	callback(vm);
 				// });
-				require(['/js/ko/viewmodels/'+path+'.js'], function(mod) {
+				requirejs(['/js/ko/viewmodels/'+path+'.js'], function(mod) {
 					callback(mod);
 				});
 			}

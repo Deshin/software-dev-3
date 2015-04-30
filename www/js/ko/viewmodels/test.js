@@ -1,3 +1,3 @@
-define({
-	message: "Heloo"
+define(function() {
+	this.message = "Byeeeee";
 });
