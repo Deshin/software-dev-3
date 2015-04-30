@@ -1,4 +1,3 @@
-console.log("made it!");
 requirejs.config({
     baseUrl: 'js',
     urlArgs: "bust=" + (new Date()).getTime(),
@@ -17,9 +16,7 @@ requirejs(['jquery', 'knockout', 'kopunches', 'pager'], function($, ko, kopunche
 
 		self.getVM = function(path) {
 			return function(callback) {
-				console.log('getting ' + '/js/ko/viewmodels/'+path+'.js');
 				requirejs(['/js/ko/viewmodels/'+path+'.js'], function(mod) {
-					console.log(mod);
 					callback(mod);
 				});
 			}
