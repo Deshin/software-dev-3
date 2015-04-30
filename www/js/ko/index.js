@@ -1,4 +1,4 @@
-require(["/js/jquery-2.1.3.min.js", "/js/knockout-3.3.0.js", "/js/knockout.punches.min.js", "/js/pager.min.js"], function() {
+require([], function() {
 	function RootViewModel() {
 		var self = this;
 		self.user = ko.observable("User");
@@ -25,7 +25,7 @@ require(["/js/jquery-2.1.3.min.js", "/js/knockout-3.3.0.js", "/js/knockout.punch
 				// 	console.log(vm);
 				// 	callback(vm);
 				// });
-				require(['/js/ko/viewmodels'+path+'.js'], function(mod) {
+				require(['/js/ko/viewmodels/'+path+'.js'], function(mod) {
 					callback(mod);
 				});
 			}
