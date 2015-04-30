@@ -1,6 +1,6 @@
 #A wrapper class for sqlite. Implimentation is determined by the WrapperBase class
 import abc
-from DatabaseWrapper
+import DatabaseWrapper
 import sqlite3
 
 class SqliteWrapper(DatabaseWrapper):
