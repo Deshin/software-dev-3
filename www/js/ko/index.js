@@ -19,8 +19,8 @@ requirejs(['jquery', 'knockout', 'kopunches', 'pager'], function($, ko, kopunche
 				requirejs(['/js/ko/viewmodels/'+path+'.js'], function(mod) {
 					callback(mod);
 				});
-			}
-		}
+			};
+		};
 	}
 
 	rootViewModel = new RootViewModel();
