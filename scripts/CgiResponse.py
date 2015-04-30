@@ -13,8 +13,8 @@ class CgiResponse:
 
     # use send to send data
     def send(self):
-        print(self.header)
+        print self.header
         # TODO: format data... (?)
-        print(self.data)
+        print self.data
 
 

@@ -1,7 +1,6 @@
 import RestApi
 import SqliteWrapper
 import CgiResponse
-import cgi
 
 def main():
     db = SqliteWrapper()
