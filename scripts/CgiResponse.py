@@ -11,10 +11,10 @@ class CgiResponse:
     def data(self):
         return _data
 
-    # use print to send data
-    def print(self):
-        print(self.header)
+    # use send to send data
+    def send(self):
+        print self.header
         # TODO: format data... (?)
-        print(self.data)
+        print self.data
 
 
