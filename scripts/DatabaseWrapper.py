@@ -1,7 +1,7 @@
 #Abstract base class used to specify the interface for database wrappers
 import abc
 
-class WrapperBase(object):
+class DatabaseWrapper(object):
     __metaclass__=abc.ABCMeta
     
     @abc.abstractmethod
