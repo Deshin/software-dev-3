@@ -1,4 +1,4 @@
-import WrapperBase
+import DatabaseWrapper
 import CgiResponse
 
 class RestApi:
@@ -37,7 +37,14 @@ class RestApi:
         # TODO: do DB query
         data = databaseWrapper.query("some query here")
         header = "Content-type: application/json"
-        return CgiResponse(header, data)
+        return CgiResponse(header, data)   A
+
+    def getDocuments(self):
+        # TODO: do DB query
+        data = databaseWrapper.query("some query here")
+        header = "Content-type: application/json"
+        return CgiResponse(header, data)   A
+
 
 
 

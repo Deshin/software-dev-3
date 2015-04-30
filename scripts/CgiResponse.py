@@ -12,7 +12,7 @@ class CgiResponse:
         return _data
 
     # use print to send data
-    def print(self):
+    def send(self):
         print(self.header)
         # TODO: format data... (?)
         print(self.data)
