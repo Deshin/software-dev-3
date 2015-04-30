@@ -1,10 +1,10 @@
 #A wrapper class for sqlite. Implimentation is determined by the WrapperBase class
 import abc
-import DatabaseWrapper
+from WrapperBase import WrapperBase
 import sqlite3
 
-class SqliteWrapper(DatabaseWrapper):
-
+class SqliteWrapper(WrapperBase):
+#Initialisation
     def __init__(self):
         self._database= "../db/elen4010.sqlite3"
         self._cur=[]
@@ -39,7 +39,7 @@ class SqliteWrapper(DatabaseWrapper):
         
     
 # if __name__=='__main__':
-#     wrapper=SqliteWrapper("arb database")
+#     wrapper=SqliteWrapper()
 #     wrapper.connect()
 #     wrapper.query('SELECT SQLITE_VERSION()')
 #     wrapper.disconnect()
