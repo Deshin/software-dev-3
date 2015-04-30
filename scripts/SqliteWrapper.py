@@ -1,9 +1,9 @@
-#A wrapper class for sqlite. Implimentation is determined by the WrapperBase class
+#A wrapper class for sqlite. Implimentation is determined by the DatabaseWrapper class
 import abc
-from WrapperBase import WrapperBase
+from DatabaseWrapper import DatabaseWrapper
 import sqlite3
 
-class SqliteWrapper(WrapperBase):
+class SqliteWrapper(DatabaseWrapper):
 #Initialisation
     def __init__(self):
         self._database= "../db/elen4010.sqlite3"
