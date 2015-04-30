@@ -11,8 +11,8 @@ class CgiResponse:
     def data(self):
         return _data
 
+    # use print to send data
     def print(self):
-        # TODO: extend the whole header shpiel
         print(self.header)
         # TODO: format data... (?)
         print(self.data)

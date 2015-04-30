@@ -4,9 +4,9 @@ from WrapperBase import WrapperBase
 import sqlite3
 
 class SqliteWrapper(WrapperBase):
-#Initialisation
-    def __init__(self, database):
-        self._database=database
+
+    def __init__(self):
+        self._database= "../db/elen4010.sqlite3"
         self._cur=[]
         self._con=[]
 

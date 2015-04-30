@@ -27,19 +27,20 @@ class RestApi:
             fileID = params[scanID]    
             return getScan(fileID)
 
-    def post(route):
+    def post(self, route):
 
-    def put(route):
+    def put(self, route):
 
-    def delete(route):
+    def delete(self, route):
         
-    def getScan(fileID):
+    def getScan(self, fileID):
         # TODO: do DB query
         data = databaseWrapper.query("some query here")
-        # TODO: do proper header
-        header = "file\pdf"
-
+        header = "Content-type: application/json"
         return CgiResponse(header, data)
+
+
+
         
         
         

@@ -12,7 +12,6 @@ class WrapperBase(object):
     def disconnect(self):
         """Disconnect from the specified database"""
         
-    
     @abc.abstractmethod
     def query(self, queryString):
         """Search using a query string"""

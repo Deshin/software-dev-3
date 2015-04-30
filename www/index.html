@@ -19,8 +19,11 @@
 
 			<div data-bind="page: {id: 'start', title: 'Pager.js Test'}">
 				<h2>Welcome {{user}}</h2>
+				<a href="#!/test">Go to test</a>
 			</div>
 
+			<div data-bind="page: {id: 'test', title: 'Test Page', sourceOnShow: 'views/test.html .content', withOnShow: getVM('test')}">
+			</div>
 
 		</div>
 

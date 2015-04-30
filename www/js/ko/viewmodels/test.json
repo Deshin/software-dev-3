@@ -1,0 +1,5 @@
+{
+	getVM: function() {
+		this.message = "cake"
+	}
+}
