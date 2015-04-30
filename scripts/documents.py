@@ -1,11 +1,13 @@
 import RestApi
 import SqliteWrapper
 import CgiResponse
+import cgi
 
 def main():
     db = SqliteWrapper()
     rest = RestApi(db)
-    rest.getDocuments().send()    
+    cgiResponse = rest.getAllDocuments()
+    cgiResponse.send()
 
 if __name__ == "__main__":
     main()
