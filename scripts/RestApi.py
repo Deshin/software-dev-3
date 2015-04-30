@@ -8,19 +8,36 @@ class RESTAPI:
     def databaseWrapper(self):
         return databaseWrapper
 
-    def methods(m):
-        return {
-
-
-    def request(self, route, method):
+    def request(self, route, params, method):
         if method == "GET":
-            get(route)
+            return get(route, params)
         elif method == "POST":
-            post(route)
-        elif method == "...":
+            return post(route, params)
+        elif method == "PUT":
+            return put(route, params)
+        elif method == "DELETE":
+            return delete(route, params)
+        else
+            print("??")
+            # Request is screwed
         
-    def get(route):
+    def get(route, params):
+        if route == "scan":
+            fileID = params[scanID]    
+            return getScan(fileID)
 
     def post(route):
+
+    def put(route):
+
+    def delete(route):
+
+
+    def getScan(fileID):
+        
+        
+
+    
+
 
 
