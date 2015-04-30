@@ -8,10 +8,19 @@ class RESTAPI:
     def databaseWrapper(self):
         return databaseWrapper
 
-    def getScan(scanId):
-        queryString = "balls"
-        scanPath = dataBasewrapper.query(queryString)
-        return scanPath
+    def methods(m):
+        return {
 
-# TODO What functions do we need? just getX where X is a thing in the DB?
-# I have to pick up Dani from MM, will work more on this later...
+
+    def request(self, route, method):
+        if method == "GET":
+            get(route)
+        elif method == "POST":
+            post(route)
+        elif method == "...":
+        
+    def get(route):
+
+    def post(route):
+
+
