@@ -1,6 +1,7 @@
 import WrapperBase
+import CgiResponse
 
-class RESTAPI:
+class RestApi:
     def __init__(self, databaseWrapper):
         self._databaseWrapper = databaseWrapper
 
@@ -31,9 +32,15 @@ class RESTAPI:
     def put(route):
 
     def delete(route):
-
-
+        
     def getScan(fileID):
+        # TODO: do DB query
+        data = databaseWrapper.query("some query here")
+        # TODO: do proper header
+        header = "file\pdf"
+
+        return CgiResponse(header, data)
+        
         
         
 
