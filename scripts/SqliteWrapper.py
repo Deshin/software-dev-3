@@ -16,18 +16,27 @@ class SqliteWrapper(WrapperBase):
             print "Connecting to Database "+self._database
         except sqlite3.Error,e:
             print "Error %s:" %e.args[0]
-            sys.exit(1)
+            raise
         
     def disconnect(self):
         self._con.close()
         print "Disconnecting from the Database"
         
     def query(self, queryString):
+        try:
+            self._cur.execute(queryString)
+            if queryString.startswith("SELECT"):
+                items=self._cur.fetchall()  
+                return items
+                      
+        except sqlite3.Error,e:
+            print "Error %s:" %e.args[0]
+            raise
         print "The query string is "+queryString
-        return queryString
+        
     
 if __name__=='__main__':
     wrapper=SqliteWrapper("arb database")
     wrapper.connect()
-    wrapper.query("this is a query")
+    wrapper.query('SELECT SQLITE_VERSION()')
     wrapper.disconnect()
