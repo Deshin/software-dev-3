@@ -31,6 +31,7 @@ class SqliteWrapper(DatabaseWrapper):
             self._cur.execute(queryString)
             if queryString.startswith("SELECT"):
                 items=self._cur.fetchall()  
+                print items
                 return items                      
         except sqlite3.Error,e:
             print "Error %s:" %e.args[0]
@@ -38,8 +39,8 @@ class SqliteWrapper(DatabaseWrapper):
         print "The query string is "+queryString
         
     
-# if __name__=='__main__':
-#     wrapper=SqliteWrapper()
-#     wrapper.connect()
-#     wrapper.query('SELECT SQLITE_VERSION()')
-#     wrapper.disconnect()
+if __name__=='__main__':
+    wrapper=SqliteWrapper()
+    wrapper.connect()
+    wrapper.query("SELECT * FROM Publications")
+    wrapper.disconnect()

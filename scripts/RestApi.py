@@ -1,23 +1,23 @@
-import DatabaseWrapper
+from DatabaseWrapper import DatabaseWrapper 
 import CgiResponse       
 import json
 
 class RestApi:
-    def __init__(self, databaseWrapper):
-        self._databaseWrapper = databaseWrapper
+    def __init__(self, DatabaseWrapper):
+        self._databaseWrapper = DatabaseWrapper
 
     @property
     def databaseWrapper(self):
-        return databaseWrapper
+        return self._databaseWrapper
 
     def getScan(self, fileID):
         # TODO: generate DB Query
-        data = databaseWrapper.query("some query here")
+        data = self._databaseWrapper.query("some query here")
         header = "Content-type: application/json"
         return CgiResponse(header, data)   
 
     def getAllDocuments(self):
-        data = databaseWrapper.query("SELECT * FROM Publications")
+        data = self._databaseWrapper.query("SELECT * FROM Publications")
         jsonData = json.dumps(data)
         header = "Content-type: application/json"
         return CgiResponse(header, jsonData)   
