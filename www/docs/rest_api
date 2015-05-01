@@ -28,7 +28,19 @@
                                 "title": "DocumentListItem",
                                 "type": "object",
                                 "properties": {
+                                    "PublicationId": {
+                                        "type": "int"
+                                    },
                                     "Title": {
+                                        "type": "string"
+                                    },
+                                    "Category": {
+                                        "type": "string"
+                                    },
+                                    "Year": {
+                                        "type": "int"
+                                    },
+                                    "Publisher": {
                                         "type": "string"
                                     },
                                     "Authors": {
