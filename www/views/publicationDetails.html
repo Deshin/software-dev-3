@@ -11,17 +11,42 @@
   <div data-bind="if: publication">
     <div data-bind="text: publication().Abstract"></div>
     <br/>
-    <div style="min-width:50%; float: left"> <strong>Authors:</strong> <div data-bind="text: publication().Authors"></div> </div>
-    <div style="min-width:50%; float: left"> <strong>Category:</strong> <div data-bind="text: publication().Category"></div> </div>
-    <div style="min-width:50%; float: left"> <strong>ISSN:</strong> <div data-bind="text: publication().ISSN"></div> </div>
-    <div style="min-width:50%; float: left"> <strong>Accreditation:</strong> <div data-bind="text: publication().Accreditation"></div> </div>
-    <div style="min-width:50%; float: left"> <strong>Issue:</strong> <div data-bind="text: publication().Issue"></div> </div>
-    <div style="min-width:50%; float: left"> <strong>Publisher:</strong> <div data-bind="text: publication().Publisher"></div> </div>
-    <div style="min-width:50%; float: left"> <strong>Scan Path:</strong> <div data-bind="text: publication().ScanPath"></div> </div>
-    <div style="min-width:50%; float: left"> <strong>Table of Contents Path:</strong> <div data-bind="text: publication().TableOfContentsPath"></div> </div>
-    <div style="min-width:50%; float: left"> <strong>Type:</strong> <div data-bind="text: publication().Type"></div> </div>
-    <div style="min-width:50%; float: left"> <strong>Volume:</strong> <div data-bind="text: publication().Volume"></div> </div>
-    <div style="min-width:50%; float: left"> <strong>Year:</strong> <div data-bind="text: publication().Year"></div> </div>
+    <div style="min-width:50%; float: left">
+      <strong>Authors:</strong>
+      <div data-bind="text: publication().Authors"></div>
+    </div>
+    <div style="min-width:50%; float: left">
+      <strong>Category:</strong>
+      <div data-bind="text: publication().Category"></div>
+    </div>
+    <div style="min-width:50%; float: left">
+      <strong>ISSN:</strong>
+      <div data-bind="text: publication().ISSN"></div>
+    </div>
+    <div style="min-width:50%; float: left">
+      <strong>Accreditation:</strong>
+      <div data-bind="text: publication().Accreditation"></div>
+    </div>
+    <div data-bind="if: publication().Volume">
+      <div style="min-width:50%; float: left">
+        <strong>Volume:</strong>
+        <div data-bind="text: publication().Volume"></div>
+      </div>
+    </div>
+    <div data-bind="if: publication().Issue">
+      <div style="min-width:50%; float: left">
+        <strong>Issue:</strong>
+        <div data-bind="text: publication().Issue"></div>
+      </div>
+    </div>
+    <div style="min-width:50%; float: left">
+      <strong>Publisher:</strong>
+      <div data-bind="text: publication().Publisher"></div>
+    </div>
+    <div style="min-width:50%; float: left">
+      <strong>Year:</strong>
+      <div data-bind="text: publication().Year"></div>
+    </div>
   </div>
 </div>
 </body>
