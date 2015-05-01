@@ -12,7 +12,7 @@ define(["jquery", "knockout"], function($, ko) {
 		console.log(data);
 		for (var i = data.length - 1; i >= 0; i--) {
 			var authors = "";
-			for (var i = 0; j < data[i].Authors.length; j++) {
+			for (var j = 0; j < data[i].Authors.length; j++) {
 				authors += data[i].Authors[j].Initials + " " + data[i].Authors[j].Surname + ", ";
 			};
 			data[i].Authors = authors;
