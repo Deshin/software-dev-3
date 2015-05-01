@@ -22,13 +22,25 @@ class RestApi:
         return json.dumps(data)
 
     def getDocumentDetails(self, id):
-        details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id="+id)
+        try:
+            details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id="+id)
+        except:
+            return {}
         columnNames = [i[0] for i in self._databaseWrapper._cur.description]
         data=dict(zip(columnNames, details[0]))
         category=data["Category"].lower()
+        
         if category.startswith("journal"):
             journalPubDetails=self._databaseWrapper.query("SELECT * FROM JournalPublicationDetail WHERE PublicationID="+str(data["ID"]))
-            #print journalPubDetails
+            columnNames = [i[0] for i in self._databaseWrapper._cur.description]
+            journalPubDetails=dict(zip(columnNames, journalPubDetails[0]))
+            data=dict(data,**journalPubDetails)
+            
+            journalDetails=self._databaseWrapper.query("SELECT * FROM Journals WHERE ID="+str(data["PublicationID"]))
+            columnNames = [i[0] for i in self._databaseWrapper._cur.description]
+            journalDetails=dict(zip(columnNames, journalDetails[0]))
+            data=dict(data, **journalDetails)
+            
         data=json.dumps(data)
         return data
 
