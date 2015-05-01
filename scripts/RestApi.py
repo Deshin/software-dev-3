@@ -25,6 +25,9 @@ class RestApi:
         details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id="+id)
         columnNames = [i[0] for i in self._databaseWrapper._cur.description]
         data=dict(zip(columnNames, details[0]))
+        category=data["Category"].lower()
+        if category.startswith("journal"):
+            print "Found"
         data=json.dumps(data)
         return data
 
