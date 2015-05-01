@@ -1,8 +1,16 @@
+Unit Tests are performed with the build in python "unittest" library
+
 Restful Api
     - Use swagger to test whether the restful api produces well formed json objects
 
 Use Case: G3
     - Backend
+        - Unit Tests 
+            - Tests on changes in the restful API
+            - Tests on the CGI script that call the restful API
+        - Integration Tests
+            - Swagger tests on changes in the restful API
+
     - Frontend
         
 
