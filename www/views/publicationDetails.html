@@ -2,11 +2,23 @@
 <html>
 <body>
 <div class="content">
-    <h1>Cake</h1>
-    <p>{{message}}</p>
-    <input value="{{publicationID}}" />
+    <h1>{{publication().Title}}</h1>
 
-    <button click="{{getDocs}}">Get Publication</button>
+    <ul>
+      {{#if publication()}}
+        <li> Abstract - <pre>{{publication().Abstract}}</pre> </li>
+        <li> Accreditation - {{publication().Accreditation}} </li>
+        <li> Category - {{publication().Category}} </li>
+        <li> ISSN - {{publication().ISSN}} </li>
+        <li> Issue - {{publication().Issue}} </li>
+        <li> Publisher - {{publication().Publisher}} </li>
+        <li> Scan Path - {{publication().ScanPath}} </li>
+        <li> Table of Contents Path - {{publication().TableOfContentsPath}} </li>
+        <li> Type - {{publication().Type}} </li>
+        <li> Volume - {{publication().Volume}} </li>
+        <li> Year - {{publication().Year}} </li>
+      {{/if publication()}}
+    </ul>
 </div>
 </body>
 </html>
