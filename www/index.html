@@ -18,10 +18,14 @@
 
 			<div data-bind="page: {id: 'start', title: 'Pager.js Test'}">
 				<h2>Welcome {{user}}</h2>
-				<a href="#!/test">Go to test</a>
+				<p><a href="#!/test">Go to test</a></p>
+				<p><a href="#!/publicationDetails">View Publication Details</a></p>
 			</div>
 
 			<div data-bind="page: {id: 'test', title: 'Test Page', sourceOnShow: 'views/test.html .content', withOnShow: getVM('test')}">
+			</div>
+
+			<div data-bind="page: {id: 'publicationDetails', title: 'Publication Details', sourceOnShow: 'views/publicationDetails.html .content', withOnShow: getVM('publicationDetails')}">
 			</div>
 
 		</div>
