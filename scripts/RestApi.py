@@ -28,7 +28,7 @@ class RestApi:
         category=data["Category"].lower()
         if category.startswith("journal"):
             journalPubDetails=self._databaseWrapper.query("SELECT * FROM JournalPublicationDetail WHERE PublicationID="+str(data["ID"]))
-            print journalPubDetails
+            #print journalPubDetails
         data=json.dumps(data)
         return data
 
