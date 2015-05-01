@@ -2,6 +2,24 @@ Unit Tests are performed with the build in python "unittest" library
 
 Restful Api
     - Use swagger to test whether the restful api produces well formed json objects
+    
+Database Wrapper:
+	- Test that the wrapper can connect and disconnect from a database. 
+	- Test that items can be retrieved from the database
+	- Test that an error is thrown if an invalid connection or query is attempted
+
+Use Case: G1
+	- Backend
+		- Unit Tests
+			- Tests that the correct data is retrieved
+			- Tests that data from all relevent tables is concatenated
+		- Integration Tests
+			- Swagger tests on changes in the restful API
+	- Fronend
+		- Unit Tests
+			- Test that all mandatory fields are displayed
+			- Test that an error message is thrown if no documents are available to view
+			- Test that the mandatory fields change based on the category (journal, conference, book) of publication
 
 Use Case: G3
     - Backend
