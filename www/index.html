@@ -16,12 +16,15 @@
 	<body>
 		<div class="container">
 
-			<div data-bind="page: {id: 'start', title: 'Pager.js Test'}">
+<!-- 			<div data-bind="page: {id: 'start', title: 'Pager.js Test'}">
 				<h2>Welcome {{user}}</h2>
 				<a href="#!/test">Go to test</a>
-			</div>
+			</div> -->
 
 			<div data-bind="page: {id: 'test', title: 'Test Page', sourceOnShow: 'views/test.html .content', withOnShow: getVM('test')}">
+			</div>
+
+			<div data-bind="page: {role: 'start', id: 'documents', title: 'All publications', sourceOnShow: 'views/documents.html .content', withOnShow: getVM('documents')}">
 			</div>
 
 		</div>

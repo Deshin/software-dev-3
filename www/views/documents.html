@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div class="content">
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Title</th>
+			<th>Category</th>
+			<th>Year</th>
+			<th>Publisher</th>
+			<th>Authors</th>
+		</tr>
+		{{foreach: publications}}
+		<tr>
+			<td>{{PublicationId}}</td>
+			<td>{{Title}}</td>
+			<td>{{Category}}</td>
+			<td>{{Year}}</td>
+			<td>{{Publisher}}</td>
+			<td>{{Authors}}</td>
+		</tr>
+		{{/foreach}}
+	</table>
+</div>
+</body>
+</html>
