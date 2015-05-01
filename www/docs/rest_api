@@ -1,5 +1,6 @@
 {
     "swagger": "2.0",
+    "basePath": "http://wits-epsilon.is-an-engineer.com/api"
     "info": {
         "version": "0.0.0",
         "title": "Wits Research Publication Archive - REST API"
