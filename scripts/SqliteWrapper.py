@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 #A wrapper class for sqlite. Implimentation is determined by the DatabaseWrapper class
 import abc
 from DatabaseWrapper import DatabaseWrapper
