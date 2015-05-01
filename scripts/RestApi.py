@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
-from DatabaseWrapper import DatabaseWrapper 
-import CgiResponse       
+from DatabaseWrapper import DatabaseWrapper      
 import json
 
 class RestApi:
