@@ -2,6 +2,7 @@
 
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
+import cgi
 
 def main(id):
     db = SqliteWrapper()
@@ -12,4 +13,6 @@ def main(id):
     print result    
 
 if __name__ == "__main__":
-    main("1")
+    form=cgi.FieldStorage()
+    id=form.getlist('id')
+    main(id)
