@@ -8,7 +8,7 @@ Tasks to be completed:
 5)Complete the following user stories:
 	5.1)G1: I as a general user would like to be able to view the details of a publication
 	5.2)G2: I as a general user would like to be able to download a pdf of a publication
-	5.3)
+	5.3)G3: I s a general user would like to view a list of all the documents in the archive
 	5.4)
 	
 Time estimates for user stories:
@@ -23,6 +23,9 @@ Subtasks:
 2.1)Retrieve the download link to an online document from the database - 1 hour, Sarah
 2.2)On clicking a download button open a new tab using the download url of the current document - 1 hour, Ant
 
-3)
+3)G3: 3 hours with 2 programmers working on it - Jacques, Deshin
+Subtasks:
+3.1)Create a restful endpoint to retrieve a list of all the documents in the archive
+3.2)Create a page to call the restful endpoint and display all the documents as a list
 
 4)

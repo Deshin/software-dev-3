@@ -5,7 +5,7 @@ define(["jquery", "knockout"], function($, ko) {
 		console.log("clicked!");
 		vm.message("Loading!");
 		$.getJSON('/api/documents.py', function(data) {
-			vm.message(data);
+			console.log(data);
 		});
 	}
 	return vm;

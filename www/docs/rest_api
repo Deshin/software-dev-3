@@ -1,11 +1,12 @@
 {
     "swagger": "2.0",
+    "basePath": "http://wits-epsilon.is-an-engineer.com/api"
     "info": {
         "version": "0.0.0",
         "title": "Wits Research Publication Archive - REST API"
     },
     "paths": {
-        "/documents": {
+        "/documents.py": {
             "get": {
                 "description": "Gets an array of `DocumentListItem` objects for each document in the archive\n",
                 "parameters": [
@@ -28,7 +29,19 @@
                                 "title": "DocumentListItem",
                                 "type": "object",
                                 "properties": {
+                                    "PublicationId": {
+                                        "type": "int"
+                                    },
                                     "Title": {
+                                        "type": "string"
+                                    },
+                                    "Category": {
+                                        "type": "string"
+                                    },
+                                    "Year": {
+                                        "type": "int"
+                                    },
+                                    "Publisher": {
                                         "type": "string"
                                     },
                                     "Authors": {

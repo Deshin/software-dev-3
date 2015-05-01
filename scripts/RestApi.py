@@ -19,7 +19,26 @@ class RestApi:
         return json.dumps(data)
 
     def getAllDocuments(self):
-        data = self._databaseWrapper.query("SELECT * FROM Publications")
+        auths = self._databaseWrapper.query("SELECT * FROM Authors")
+        pubs = self._databaseWrapper.query("SELECT * FROM Publications")
+        
+        data = []
+        for i in range(0,len(pubs)):
+            
+            auth = []
+            for j in range(0, len(auths)):
+                if auths[j][1] == pubs[i][0]:
+                    auth.append({"First Name" : auths[j][2],
+                                 "Surname" : auths[j][3], 
+                                 "Initials" : auths[j][4]})
+
+            data.append({"PublicationId" : pubs[i][0], 
+                         "Title" : pubs[i][1], 
+                         "Category" : pubs[i][2], 
+                         "Year" : pubs[i][3], 
+                         "Publisher" :pubs[i][4],
+                         "Authors" : auth})
+
         return json.dumps(data)
 
     def getDocumentDetails(self, id):
