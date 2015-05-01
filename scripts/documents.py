@@ -6,8 +6,8 @@ import CgiResponse
 def main():
     db = SqliteWrapper()
     rest = RestApi(db)
-    cgiResponse = rest.getAllDocuments()
-    cgiResponse.send()
+    result = rest.getAllDocuments()
+    print result
 
 if __name__ == "__main__":
     main()
