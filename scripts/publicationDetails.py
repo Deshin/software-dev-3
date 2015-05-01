@@ -14,5 +14,6 @@ def main(id):
 
 if __name__ == "__main__":
     form=cgi.FieldStorage()
-    id=form.getlist('id')[0]
+    #id=form.getlist('id')[0]
+    id=2
     main(str(id))

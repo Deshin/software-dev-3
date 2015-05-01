@@ -22,12 +22,17 @@ class RestApi:
         return json.dumps(data)
 
     def getDocumentDetails(self, id):
+        
+        details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id="+id)
+        columnNames = [i[0] for i in self._databaseWrapper._cur.description]
+        data=dict(zip(columnNames, details[0]))
+        
+        authors = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID="+id)
+        columnNames = ["Authors"]
+        authors={"Authors":authors}
+        data=dict(data, **authors)
+        category=data["Category"].lower()
         try:
-            details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id="+id)
-            columnNames = [i[0] for i in self._databaseWrapper._cur.description]
-            data=dict(zip(columnNames, details[0]))
-            category=data["Category"].lower()
-            
             if category.startswith("journal"):
                 journalPubDetails=self._databaseWrapper.query("SELECT * FROM JournalPublicationDetail WHERE PublicationID="+str(data["ID"]))
                 columnNames = [i[0] for i in self._databaseWrapper._cur.description]
@@ -45,7 +50,7 @@ class RestApi:
                 conferencePubDetails=dict(zip(columnNames, conferencePubDetails[0]))
                 data=dict(data,**conferencePubDetails)
                 
-                conferenceDetails=self._databaseWrapper.query("SELECT * FROM Conferences WHERE ID="+str(data["PublicationID"]))
+                conferenceDetails=self._databaseWrapper.query("SELECT * FROM Conferences WHERE ID="+str(data["ConferenceID"]))
                 columnNames = [i[0] for i in self._databaseWrapper._cur.description]
                 conferenceDetails=dict(zip(columnNames, conferenceDetails[0]))
                 data=dict(data, **conferenceDetails)
@@ -69,7 +74,8 @@ class RestApi:
             data=json.dumps(data)
             return data
         except:
-            return {}
+            return{}
+
         
 
 
