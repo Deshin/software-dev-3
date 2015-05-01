@@ -6,11 +6,13 @@ define(["jquery", "knockout"], function($, ko) {
 
 	vm.pubId.subscribe(function(newVal) {
 		vm.publication(null);
-		vm.statusMsg = 'Loading Publication.';
+		vm.statusMsg('Loading Publication.');
 		$.getJSON('/api/publicationDetails.py?id=' + newVal, function(data) {
 			vm.publication(data);
+		}).done(function() {
+			vm.statusMsg("Success!");
 		}).fail(function() {
-			vm.statusMsg = "Error, Publication not found.";
+			vm.statusMsg("Error, Publication not found.");
 		});
 	});
 

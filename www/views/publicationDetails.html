@@ -6,7 +6,7 @@
     <strong data-bind="text: publication().Title"></strong>
   </div>
   <div data-bind="ifnot: publication">
-    <strong>Error, Publication not found</strong>
+    <strong data-bind="text: statusMsg"></strong>
   </div>
   <ul data-bind="if: publication">
     <li> Abstract: <pre data-bind="text: publication().Abstract"></pre> </li>
