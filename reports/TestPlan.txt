@@ -1,0 +1,8 @@
+Restful Api
+    - Use swagger to test whether the restful api produces well formed json objects
+
+Use Case: G3
+    - Backend
+    - Frontend
+        
+
