@@ -1,7 +1,7 @@
 define(["jquery", "knockout"], function($, ko) {
 	var vm = this;
 	vm.message = ko.observable("Test Message");
-	vm.publicationID = ko.observable(0);
+	vm.publicationID = ko.observable(null);
 	vm.getDocs = getDocs;
 
 	return vm;
