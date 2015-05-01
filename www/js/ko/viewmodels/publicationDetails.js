@@ -8,14 +8,29 @@ define(["jquery", "knockout"], function($, ko) {
 		vm.publication(null);
 		vm.statusMsg('Loading Publication.');
 		$.getJSON('/api/publicationDetails.py?id=' + newVal, function(data) {
+			// Fetch the publication information
+		}).done(function(data) {
+			var authors = "";
+			for (var j = 0; j < data.Authors.length; j++) {
+				authors += data.Authors[j][4] + " " + data.Authors[j][2];
+				if(j != data.Authors.length - 1) {
+					authors += ", ";
+				}
+			}
+			data.Authors = authors;
 			vm.publication(data);
-		}).done(function() {
 			vm.statusMsg("Success!");
-		}).fail(function() {
+		}).fail(function(err) {
 			vm.statusMsg("Error, Publication not found.");
 		});
 	});
 
 	return vm;
+
+	function parseAuthor(authors) {
+		for(var i = 0; i < Authors.length; i++) {
+
+		}
+	}
 
 });
