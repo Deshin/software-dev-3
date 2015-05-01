@@ -17,7 +17,7 @@ class SqliteWrapper(DatabaseWrapper):
             self._con=sqlite3.connect(self._database)
             self._cur=self._con.cursor()
         except sqlite3.Error,e:
-            print "Error %s:" %e.args[0]
+            #print "Error %s:" %e.args[0]
             raise
         
 #Function allowing one to disconnect from a database       
@@ -32,7 +32,7 @@ class SqliteWrapper(DatabaseWrapper):
                 items=self._cur.fetchall()  
                 return items                      
         except sqlite3.Error,e:
-            print "Error %s:" %e.args[0]
+            #print "Error %s:" %e.args[0]
             raise
         
     

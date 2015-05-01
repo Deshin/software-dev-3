@@ -8,6 +8,7 @@ def main():
     rest = RestApi(db)
     result = rest.getAllDocuments()
     print "Content-Type: application/json"
+    print ""
     print result
 
 if __name__ == "__main__":
