@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from DatabaseWrapper import DatabaseWrapper 
 import CgiResponse       
 import json

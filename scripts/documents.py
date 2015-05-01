@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
 from DatabaseWrapper import DatabaseWrapper 
