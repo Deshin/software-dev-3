@@ -5,7 +5,7 @@
         "title": "Wits Research Publication Archive - REST API"
     },
     "paths": {
-        "/documents": {
+        "/documents.py": {
             "get": {
                 "description": "Gets an array of `DocumentListItem` objects for each document in the archive\n",
                 "parameters": [
