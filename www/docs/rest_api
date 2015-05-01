@@ -73,17 +73,75 @@
                     "200": {
                         "description": "The requested array",
                         "schema": {
-                            "title": "ArrayOfDocuments",
+                            "title": "ArrayOfDocumentDetails.",
                             "type": "array",
                             "items": {
                                 "title": "DocumentDetails",
                                 "type": "object",
                                 "properties": {
-                                    "name": {
-                                        "type": "string"
+                                    "Title": {
+                                        "type": "string",
+                                        "required": true
                                     },
-                                    "single": {
-                                        "type": "boolean"
+                                    "Authors": {
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "Category": {
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "PublicationTitle": {
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "Volume": {
+                                        "type": "integer",
+                                        "required": false
+                                    },
+                                    "Number": {
+                                        "type": "integer",
+                                        "required": false
+                                    },
+                                    "Year": {
+                                        "type": "integer",
+                                        "required": true
+                                    },
+                                    "Abstract": {
+                                        "type": "string",
+                                        "required": false
+                                    },
+                                    "Publisher": {
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "ISBNorISSN": {
+                                        "type": "integer",
+                                        "required": false
+                                    },
+                                    "Country": {
+                                        "type": "string",
+                                        "required": false
+                                    },
+                                    "TOCUrl": {
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "PeerReview": {
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "Documentation": {
+                                        "type": "string",
+                                        "required": false
+                                    },
+                                    "Scanurl": {
+                                        "type": "string",
+                                        "required": true
+                                    },
+                                    "Motivation": {
+                                        "type": "string",
+                                        "required": false
                                     }
                                 }
                             }

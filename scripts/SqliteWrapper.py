@@ -16,7 +16,6 @@ class SqliteWrapper(DatabaseWrapper):
         try:
             self._con=sqlite3.connect(self._database)
             self._cur=self._con.cursor()
-            print "Connecting to Database "+self._database
         except sqlite3.Error,e:
             print "Error %s:" %e.args[0]
             raise
@@ -24,25 +23,21 @@ class SqliteWrapper(DatabaseWrapper):
 #Function allowing one to disconnect from a database       
     def disconnect(self):
         self._con.close()
-        print "Disconnecting from the Database"
 
 #Function to perform an SQL query and return any results if applicable        
     def query(self, queryString):
-        print queryString
         try:
             self._cur.execute(queryString)
             if queryString.startswith("SELECT"):
                 items=self._cur.fetchall()  
-                print items
                 return items                      
         except sqlite3.Error,e:
             print "Error %s:" %e.args[0]
             raise
-        print "The query string is "+queryString
         
     
-if __name__=='__main__':
-    wrapper=SqliteWrapper()
-    wrapper.connect()
-    wrapper.query("SELECT * FROM Publications")
-    wrapper.disconnect()
+# if __name__=='__main__':
+#     wrapper=SqliteWrapper()
+#     wrapper.connect()
+#     wrapper.query("SELECT * FROM Publications")
+#     wrapper.disconnect()

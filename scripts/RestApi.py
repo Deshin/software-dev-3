@@ -21,6 +21,9 @@ class RestApi:
         data = self._databaseWrapper.query("SELECT * FROM Publications")
         return json.dumps(data)
 
+    def getDocumentDetails(self, id):
+        data = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id="+id)
+        return json.dumps(data)
 
 
 
