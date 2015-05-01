@@ -1,20 +1,14 @@
 define(["jquery", "knockout"], function($, ko) {
 	var vm = this;
 	vm.publication = ko.observable({});
-	vm.getDocs = getDocs;
+	vm.pubId = ko.observable({});
 
-	getDocs(1);
+	vm.pubId.subscribe(function(newVal) {
+		$.getJSON('/api/publicationDetails.py?id=' + newVal, function(data) {
+			vm.publication(data);
+		});
+	});
 
 	return vm;
-
-	function getDocs(ID) {
-		vm.publication("Loading!");
-
-		$.getJSON('/api/publicationDetails.py?id=' + ID, function(data) {
-			vm.publication(data);
-			console.log(data);
-		});
-
-	}
 
 });
