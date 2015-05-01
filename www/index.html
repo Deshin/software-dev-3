@@ -12,15 +12,18 @@
 		<meta name="author" content="Wits-Epsilon">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<link rel="stylesheet" type="text/css" href="/css/topcoat-desktop-dark.min.css">
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="/css/bootswatch-yeti.min.css">
+
 	</head>
 
 	<body>
-		<div>
-			<div><img src="/img/wits-logo.jpg" style="width:10%"></div>
-			<div>Wits Research Repository</div>
-		</div>
-
+		<nav class="navbar navbar-default navbar-static-top">
+			<div class="navbar-header">
+				<a href="#!" class="navbar-brand h6">Wits Research Repository</a>
+			</div>
+		</nav>
+		
 		<div class="container">
 
 			<div data-bind="page: {id: 'test', title: 'Test Page', sourceOnShow: 'views/test.html .content', withOnShow: getVM('test')}">
