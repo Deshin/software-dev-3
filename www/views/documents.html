@@ -12,7 +12,7 @@
 			<th>Authors</th>
 		</tr>
 		{{#foreach: publications}}
-		<tr>
+		<tr data-bind="foreach: publications">
 			<td>{{PublicationId}}</td>
 			<td>{{Title}}</td>
 			<td>{{Category}}</td>
