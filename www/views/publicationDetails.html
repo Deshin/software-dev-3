@@ -3,7 +3,9 @@
 <body>
 <div class="content">
     <h1>{{publication().Title}}</h1>
-
+    <div>
+      <p>Publication ID: <span data-bind="text: pubId"></span></p>
+    </div>
     <ul>
       {{#if publication()}}
         <li> Abstract - <pre>{{publication().Abstract}}</pre> </li>

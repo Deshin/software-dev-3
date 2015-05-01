@@ -16,7 +16,7 @@ define(["jquery", "knockout"], function($, ko) {
 				authors += data[i].Authors[j].Initials + " " + data[i].Authors[j].Surname + ", ";
 			};
 			data[i].Authors = authors;
-			data[i].link = "#!/publicationDetails?id="+data[i].PublicationId.toString();
+			data[i].link = "#!/publicationDetails?pubId="+data[i].PublicationId.toString();
 			vm.publications.push(data[i]);
 		};
 	});
