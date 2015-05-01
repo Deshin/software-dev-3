@@ -22,10 +22,6 @@ class RestApi:
         return json.dumps(data)
 
     def getDocumentDetails(self, id):
-<<<<<<< HEAD
-        data = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id="+id)
-        return json.dumps(data)
-=======
         
         details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id="+id)
         columnNames = [i[0] for i in self._databaseWrapper._cur.description]
@@ -79,7 +75,6 @@ class RestApi:
             return data
         except:
             return{}
->>>>>>> origin/G1
 
         
 
