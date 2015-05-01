@@ -4,8 +4,7 @@ from SqliteWrapper import SqliteWrapper
 def main():
     db = SqliteWrapper()
     rest = RestApi(db)
-    result = rest.getDocumentDetails(id)
-    print result
+    result = rest.getDocumentDetails("1")
 
 if __name__ == "__main__":
     main()
