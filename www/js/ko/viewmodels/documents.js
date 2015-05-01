@@ -6,16 +6,17 @@ define(["jquery", "knockout"], function($, ko) {
 		Category: "",
 		Year: "",
 		Publisher: "",
-		Authors: ""
+		Authors: "",
+		link:"#!"
 	}]);
 	$.getJSON('/api/documents.py', function(data) {
-		console.log(data);
 		for (var i = data.length - 1; i >= 0; i--) {
 			var authors = "";
 			for (var j = 0; j < data[i].Authors.length; j++) {
 				authors += data[i].Authors[j].Initials + " " + data[i].Authors[j].Surname + ", ";
 			};
 			data[i].Authors = authors;
+			data[i].link = "#!/publicationDetails?id="+date[i].PublicationId.toString();
 			vm.publications.push(data[i]);
 		};
 	});
