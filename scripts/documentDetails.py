@@ -1,11 +1,18 @@
+#!/usr/bin/env python
+
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
+import cgi
 
-def main():
+def main(id):
     db = SqliteWrapper()
     rest = RestApi(db)
-    result = rest.getDocumentDetails("1")
-    print result
+    result = rest.getDocumentDetails(id)
+    print "Content-Type: application/json"
+    print ""
+    print result    
 
 if __name__ == "__main__":
-    main()
+    form=cgi.FieldStorage()
+    id=form.getlist('id')[0]
+    main(str(id))
