@@ -2,22 +2,25 @@
 <html>
 <body>
 <div class="content">
-    <h1>{{publication().Title}}</h1>
-    <ul>
-      {{#if publication()}}
-        <li> Abstract - <pre>{{publication().Abstract}}</pre> </li>
-        <li> Accreditation - {{publication().Accreditation}} </li>
-        <li> Category - {{publication().Category}} </li>
-        <li> ISSN - {{publication().ISSN}} </li>
-        <li> Issue - {{publication().Issue}} </li>
-        <li> Publisher - {{publication().Publisher}} </li>
-        <li> Scan Path - {{publication().ScanPath}} </li>
-        <li> Table of Contents Path - {{publication().TableOfContentsPath}} </li>
-        <li> Type - {{publication().Type}} </li>
-        <li> Volume - {{publication().Volume}} </li>
-        <li> Year - {{publication().Year}} </li>
-      {{/if publication()}}
-    </ul>
+  <div data-bind="if: publication">
+    <strong data-bind="text: publication().Title"></strong>
+  </div>
+  <div data-bind="ifnot: publication">
+    <strong>Error, Publication not found</strong>
+  </div>
+  <ul data-bind="if: publication">
+    <li> Abstract: <pre data-bind="text: publication().Abstract"></pre> </li>
+    <li> Accreditation: <span data-bind="text: publication().Accreditation"></span> </li>
+    <li> Category: <span data-bind="text: publication().Category"></span> </li>
+    <li> ISSN: <span data-bind="text: publication().ISSN"></span> </li>
+    <li> Issue: <span data-bind="text: publication().Issue"></span> </li>
+    <li> Publisher: <span data-bind="text: publication().Publisher"></span> </li>
+    <li> Scan Path: <span data-bind="text: publication().ScanPath"></span> </li>
+    <li> Table of Contents Path: <span data-bind="text: publication().TableOfContentsPath"></span> </li>
+    <li> Type: <span data-bind="text: publication().Type"></span> </li>
+    <li> Volume: <span data-bind="text: publication().Volume"></span> </li>
+    <li> Year: <span data-bind="text: publication().Year"></span> </li>
+  </ul>
 </div>
 </body>
 </html>
