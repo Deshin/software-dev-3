@@ -55,6 +55,42 @@
                     }
                 }
             }
+        },
+        "/documentDetails": {
+            "get": {
+                "description": "Gets an array of details for the selected document in the archive\n",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "Which page to fetch",
+                        "required": false,
+                        "type": "number",
+                        "format": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The requested array",
+                        "schema": {
+                            "title": "ArrayOfDocuments",
+                            "type": "array",
+                            "items": {
+                                "title": "DocumentDetails",
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "single": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
