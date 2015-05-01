@@ -14,11 +14,11 @@ define(["jquery", "knockout"], function($, ko) {
 			var authors = "";
 			for (var j = 0; j < data[i].Authors.length; j++) {
 				authors += data[i].Authors[j].Initials + " " + data[i].Authors[j].Surname + ", ";
-			};
+			}
 			data[i].Authors = authors;
 			data[i].link = "#!/publicationDetails?pubId="+data[i].PublicationId.toString();
 			vm.publications.push(data[i]);
-		};
+		}
 	});
 	return vm;
 });
