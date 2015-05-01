@@ -4,7 +4,7 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.getDocs = function() {
 		console.log("clicked!");
 		vm.message("Loading!");
-		$.get('/docs/rest_api', function(data) {
+		$.getJSON('/api/documents.py', function(data) {
 			vm.message(data);
 		});
 	}
