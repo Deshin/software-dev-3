@@ -7,7 +7,7 @@ def main():
     db = SqliteWrapper()
     rest = RestApi(db)
     result = rest.getAllDocuments()
-    if result = "404":
+    if result == "404":
         print "Status:404"
         print "Content-Type: text/html"
         print ""

@@ -8,6 +8,11 @@ def main(id):
     db = SqliteWrapper()
     rest = RestApi(db)
     result = rest.getDocumentDetails(id)
+    if result=="404":
+        print "Status:404"
+        print "Content-Type: text/html"
+        print ""
+        print "404 - No document details were found"
     print "Content-Type: application/json"
     print ""
     print result    

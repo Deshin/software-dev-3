@@ -22,7 +22,7 @@ class RestApi:
         pubs = self._databaseWrapper.query("SELECT * FROM Publications")
 
 # TODO: is this what is returned?
-        if pubs = None :
+        if pubs == None :
             return "404"
         
         data = []
@@ -97,7 +97,7 @@ class RestApi:
             data=json.dumps(data)
             return data
         except:
-            return{}
+            return "404"
 
         
 
