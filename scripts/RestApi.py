@@ -20,6 +20,10 @@ class RestApi:
     def getAllDocuments(self):
         auths = self._databaseWrapper.query("SELECT * FROM Authors")
         pubs = self._databaseWrapper.query("SELECT * FROM Publications")
+
+# TODO: is this what is returned?
+        if pubs = None :
+            return "404"
         
         data = []
         for i in range(0,len(pubs)):
