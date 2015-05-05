@@ -12,7 +12,7 @@ def main(id):
         print "Status:404"
         print "Content-Type: text/html"
         print ""
-        print "404 - No document details were found"
+        print "No document details were found"
     print "Content-Type: application/json"
     print ""
     print result    

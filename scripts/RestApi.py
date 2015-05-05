@@ -22,7 +22,7 @@ class RestApi:
         pubs = self._databaseWrapper.query("SELECT * FROM Publications")
 
 # TODO: is this what is returned?
-        if pubs == None :
+        if pubs == [] :
             return "404"
         
         data = []
