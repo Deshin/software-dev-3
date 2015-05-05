@@ -3,6 +3,7 @@
 from DatabaseWrapper import DatabaseWrapper      
 import json
 import g1
+import ru1
 
 class RestApi:
     def __init__(self, DatabaseWrapper):
@@ -65,7 +66,7 @@ class RestApi:
         
 
     def insertDocument(self, details):
-        print "Hello"
+        return ru1.insertDocument(self, details)
 
 
         
