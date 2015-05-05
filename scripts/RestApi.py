@@ -34,7 +34,7 @@ class RestApi:
         for j in range(0, len(auths)):
             auth.append({"ID":auths[j][0],
                          "PublicationID":auths[j][1],
-                         "First Name" : auths[j][2],
+                         "FirstName" : auths[j][2],
                          "Surname" : auths[j][3], 
                          "Initials" : auths[j][4]})
         return auth  
