@@ -26,9 +26,9 @@ class SqliteWrapper(DatabaseWrapper):
         self._con.close()
 
 #Function to perform an SQL query and return any results if applicable        
-    def query(self, queryString):
+    def query(self, queryString, values=()):
         try:
-            self._cur.execute(queryString)
+            self._cur.execute(queryString, values)
             if queryString.startswith("SELECT"):
                 items=self._cur.fetchall()  
                 return items                      
