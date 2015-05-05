@@ -18,7 +18,7 @@ class RestApi:
         return json.dumps(data)
 
     def getAuthors(self, pubId):
-        auths = self._databaseWrapper.query("SELECT * FROM Authors")
+        auths = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID="+str(pubId))
         auth = []
         for j in range(0, len(auths)):
             auth.append({"ID":auths[j][0],
@@ -29,7 +29,7 @@ class RestApi:
         return auth
 
     def getAllAuthors(self):
-        auths = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID="+str(id))
+        auths = self._databaseWrapper.query("SELECT * FROM Authors")
         auth = []
         for j in range(0, len(auths)):
             auth.append({"ID":auths[j][0],
