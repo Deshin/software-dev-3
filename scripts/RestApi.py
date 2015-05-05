@@ -110,7 +110,10 @@ class RestApi:
                 data=dict(data, **journalDetails)
                 
             data=json.dumps(data)
-            return data
+            if data==[]:
+                return "404"
+            else:
+                return data
         except:
             return "404"
 
