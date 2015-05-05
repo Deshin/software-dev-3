@@ -21,16 +21,15 @@ class RestApi:
         auths = self._databaseWrapper.query("SELECT * FROM Authors")
         auth = []
         for j in range(0, len(auths)):
-            if auths[j][1] == pubID:
-                auth.append({"ID":auths[j][0],
-                             "PublicationID":auths[j][1],
-                             "First Name" : auths[j][2],
-                             "Surname" : auths[j][3], 
-                             "Initials" : auths[j][4]})
+            auth.append({"ID":auths[j][0],
+                         "PublicationID":auths[j][1],
+                         "First Name" : auths[j][2],
+                         "Surname" : auths[j][3], 
+                         "Initials" : auths[j][4]})
         return auth
 
     def getAllAuthors(self):
-        auths = self._databaseWrapper.query("SELECT * FROM Authors")
+        auths = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID="+str(id))
         auth = []
         for j in range(0, len(auths)):
             auth.append({"ID":auths[j][0],
@@ -49,15 +48,7 @@ class RestApi:
         
         data = []
         for i in range(0,len(pubs)):
-<<<<<<< HEAD
             auth = self.getAuthors(pubs[i][0])
-=======
-            auth = self.getAllAuthors()
-            pubAuths = []
-            for a in auth:
-                if a["PublicationId"] == pubs[i][0]:
-                    pubAuths.append(a)
->>>>>>> origin/master
             
             data.append({"PublicationId" : pubs[i][0], 
                          "Title" : pubs[i][1], 
@@ -70,15 +61,14 @@ class RestApi:
 
     def getDocumentDetails(self, id):
         
-        details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id="+id)
+        details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id="+str(id))
         columnNames = [i[0] for i in self._databaseWrapper._cur.description]
         data=dict(zip(columnNames, details[0]))
-        
-        authors = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID="+id)
-        columnNames = ["Authors"]
+        authors = self.getAuthors(id)
         authors={"Authors":authors}
         data=dict(data, **authors)
         category=data["Category"].lower()
+        
         try:
             if category.startswith("journal"):
                 journalPubDetails=self._databaseWrapper.query("SELECT * FROM JournalPublicationDetail WHERE PublicationID="+str(data["ID"]))
