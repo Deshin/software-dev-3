@@ -4,6 +4,10 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.pubId = ko.observable();
 	vm.statusMsg = ko.observable('');
 
+	vm.btnDownload = function() {
+		console.log("Congratulations, your download won't begin shortly");
+	};
+
 	vm.pubId.subscribe(function(newVal) {
 		vm.publication(null);
 		vm.statusMsg('Loading Publication.');
