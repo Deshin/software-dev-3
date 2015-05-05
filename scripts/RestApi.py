@@ -17,30 +17,39 @@ class RestApi:
         data = self._databaseWrapper.query("some query here")
         return json.dumps(data)
 
-    def getAllDocuments(self):
+    def getAllAuthors(self):
         auths = self._databaseWrapper.query("SELECT * FROM Authors")
+        auth = []
+        for j in range(0, len(auths)):
+            #if auths[j][1] == pubs[i][0]:
+            auth.append({"ID":auths[j][0],
+                         "PublicationID":auths[j][1],
+                         "First Name" : auths[j][2],
+                         "Surname" : auths[j][3], 
+                         "Initials" : auths[j][4]})
+        return auth
+        
+    def getAllDocuments(self):
         pubs = self._databaseWrapper.query("SELECT * FROM Publications")
 
-# TODO: is this what is returned?
-        if pubs == [] :
+
+        if pubs == []:
             return "404"
         
         data = []
         for i in range(0,len(pubs)):
+            auth = self.getAllAuthors()
+            pubAuths = []
+            for a in auth:
+                if a["PublicationId"] == pubs[i][0]:
+                    pubAuths.append(a)
             
-            auth = []
-            for j in range(0, len(auths)):
-                if auths[j][1] == pubs[i][0]:
-                    auth.append({"First Name" : auths[j][2],
-                                 "Surname" : auths[j][3], 
-                                 "Initials" : auths[j][4]})
-
             data.append({"PublicationId" : pubs[i][0], 
                          "Title" : pubs[i][1], 
                          "Category" : pubs[i][2], 
                          "Year" : pubs[i][3], 
                          "Publisher" :pubs[i][4],
-                         "Authors" : auth})
+                         "Authors" : pubAuths})
 
         return json.dumps(data)
 
