@@ -117,7 +117,8 @@ class RestApi:
         except:
             return "404"
 
-        
+    def insertDocument(self, details):
+        print "Hello"
 
 
         
