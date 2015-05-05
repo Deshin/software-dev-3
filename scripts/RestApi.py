@@ -62,7 +62,7 @@ class RestApi:
     def getDocumentDetails(self, id):
         
         try:
-            details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id="+str(id))
+            details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id=?", (id))
             columnNames = [i[0] for i in self._databaseWrapper._cur.description]
             data=dict(zip(columnNames, details[0]))
             authors = self.getAuthors(id)
