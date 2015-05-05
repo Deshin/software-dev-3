@@ -43,12 +43,21 @@ class RestApi:
     def getAllDocuments(self):
         pubs = self._databaseWrapper.query("SELECT * FROM Publications")
 
+
         if pubs == []:
             return "404"
         
         data = []
         for i in range(0,len(pubs)):
+<<<<<<< HEAD
             auth = self.getAuthors(pubs[i][0])
+=======
+            auth = self.getAllAuthors()
+            pubAuths = []
+            for a in auth:
+                if a["PublicationId"] == pubs[i][0]:
+                    pubAuths.append(a)
+>>>>>>> origin/master
             
             data.append({"PublicationId" : pubs[i][0], 
                          "Title" : pubs[i][1], 
