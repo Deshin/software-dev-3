@@ -30,8 +30,9 @@ class SqliteWrapper(DatabaseWrapper):
         try:
             self._cur.execute(queryString, values)
             if queryString.startswith("SELECT"):
-                items=self._cur.fetchall()  
-                return items                      
+                items=self._cur.fetchall()
+                return items 
+                                 
         except sqlite3.Error,e:
             #print "Error %s:" %e.args[0]
             raise

@@ -22,7 +22,7 @@ if __name__ == "__main__":
     details=form.getlist('details')
     details={"Title": "This document is testing conference paper insertion",
              "Category": "Conference paper",
-             "Year": 2015,
+             "Year": 2014,
              "Publisher": "Testing publishers", 
              "TableOfContentsPath": "conferences\PRASA2014\TOC\PRASA2014",
              "ScanPath": "conferences\PRASA2014\Publications\TestingInsertion",
