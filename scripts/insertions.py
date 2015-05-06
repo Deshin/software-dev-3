@@ -32,6 +32,6 @@ if __name__ == "__main__":
              "PeerReview": "People read it :)",
              "PathToFile": "",
              "DocumentTitle": "",
-             "ConferenceTitle": "PRASA2014",
+             "ConferenceTitle": "PRASA",
              "Country": "South Africa"}
     main(details)
