@@ -1,60 +1,53 @@
-<!DOCTYPE html>
-<html>
-<body>
-  <div class="content">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-        <li><a data-bind="attr: {target: '_blank', href: pdfUrl}" ><span class="glyphicon glyphicon-download"></span> Download</a></li>
-      </ul>
-    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <div data-bind="if: publication">
-        <h1 data-bind="text: publication().Title"></h1>
-      </div>
-      <div data-bind="ifnot: publication">
-        <h4 data-bind="text: statusMsg"></h4>
-      </div>
-      <div data-bind="if: publication">
-        <div data-bind="text: publication().Abstract"></div>
-        <br/>
-        <div style="min-width:50%; float: left">
-          <strong>Authors:</strong>
-          <div data-bind="text: publication().Authors"></div>
-        </div>
-        <div style="min-width:50%; float: left">
-          <strong>Category:</strong>
-          <div data-bind="text: publication().Category"></div>
-        </div>
-        <div style="min-width:50%; float: left">
-          <strong>ISSN:</strong>
-          <div data-bind="text: publication().ISSN"></div>
-        </div>
-        <div style="min-width:50%; float: left">
-          <strong>Accreditation:</strong>
-          <div data-bind="text: publication().Accreditation"></div>
-        </div>
-        <div data-bind="if: publication().Volume">
-          <div style="min-width:50%; float: left">
-            <strong>Volume:</strong>
-            <div data-bind="text: publication().Volume"></div>
-          </div>
-        </div>
-        <div data-bind="if: publication().Issue">
-          <div style="min-width:50%; float: left">
-            <strong>Issue:</strong>
-            <div data-bind="text: publication().Issue"></div>
-          </div>
-        </div>
-        <div style="min-width:50%; float: left">
-          <strong>Publisher:</strong>
-          <div data-bind="text: publication().Publisher"></div>
-        </div>
-        <div style="min-width:50%; float: left">
-          <strong>Year:</strong>
-          <div data-bind="text: publication().Year"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
-</html>
+<div class="col-sm-3 col-md-2 sidebar">
+	<ul class="nav nav-sidebar">
+		<li class="active"><a data-bind="attr: {target: '_blank', href: pdfUrl}" ><span class="glyphicon glyphicon-download"></span> Download</a></li>
+	</ul>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+	<div data-bind="if: publication">
+		<h1 data-bind="text: publication().Title"></h1>
+	</div>
+	<div data-bind="ifnot: publication">
+		<h4 data-bind="text: statusMsg"></h4>
+	</div>
+	<div data-bind="if: publication">
+		<div data-bind="text: publication().Abstract"></div>
+		<br/>
+		<div style="min-width:50%; float: left">
+			<strong>Authors:</strong>
+			<div data-bind="text: publication().Authors"></div>
+		</div>
+		<div style="min-width:50%; float: left">
+			<strong>Category:</strong>
+			<div data-bind="text: publication().Category"></div>
+		</div>
+		<div style="min-width:50%; float: left">
+			<strong>ISSN:</strong>
+			<div data-bind="text: publication().ISSN"></div>
+		</div>
+		<div style="min-width:50%; float: left">
+			<strong>Accreditation:</strong>
+			<div data-bind="text: publication().Accreditation"></div>
+		</div>
+		<div data-bind="if: publication().Volume">
+			<div style="min-width:50%; float: left">
+				<strong>Volume:</strong>
+				<div data-bind="text: publication().Volume"></div>
+			</div>
+		</div>
+		<div data-bind="if: publication().Issue">
+			<div style="min-width:50%; float: left">
+				<strong>Issue:</strong>
+				<div data-bind="text: publication().Issue"></div>
+			</div>
+		</div>
+		<div style="min-width:50%; float: left">
+			<strong>Publisher:</strong>
+			<div data-bind="text: publication().Publisher"></div>
+		</div>
+		<div style="min-width:50%; float: left">
+			<strong>Year:</strong>
+			<div data-bind="text: publication().Year"></div>
+		</div>
+	</div>
+</div>

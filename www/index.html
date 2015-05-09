@@ -22,7 +22,7 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a href="/" class="navbar-brand h6">Wits Research Repository
+				<a href="/" class="navbar-brand">Wits Research Repository
 					<small>by Wits-Epsilon</small>
 				</a>
 			</div>
@@ -35,19 +35,19 @@
 
 	<div class="container-fluid">
 
-		<div data-bind="page: {id: 'test', title: 'Test Page', sourceOnShow: 'views/test.html .content', withOnShow: getVM('test')}">
+		<div class="row" data-bind="page: {id: 'test', title: 'Test Page', sourceOnShow: 'views/test.html', withOnShow: getVM('test')}">
 		</div>
 
-		<div data-bind="page: {id: 'publicationDetails', params: ['pubId'], title: 'Publication Details', sourceOnShow: 'views/publicationDetails.html .content', withOnShow: getVM('publicationDetails')}">
+		<div class="row" data-bind="page: {id: 'publicationDetails', params: ['pubId'], title: 'Publication Details', sourceOnShow: 'views/publicationDetails.html', withOnShow: getVM('publicationDetails')}">
 		</div>
 
-		<div data-bind="page: {id: 'publicationUpload', title: 'Publication Upload', sourceOnShow: 'views/publicationUpload.html .content', withOnShow: getVM('publicationUpload')}">
+		<div class="row" data-bind="page: {id: 'publicationUpload', title: 'Publication Upload', sourceOnShow: 'views/publicationUpload.html .content', withOnShow: getVM('publicationUpload')}">
 		</div>
 
-		<div data-bind="page: {role: 'start', id: 'documents', title: 'All publications', sourceOnShow: 'views/documents.html .content', withOnShow: getVM('documents')}">
+		<div class="row" data-bind="page: {role: 'start', id: 'documents', title: 'All publications', sourceOnShow: 'views/documents.html', withOnShow: getVM('documents')}">
 		</div>
 
-		<div data-bind="page: {id: 'landing', title: 'Landing Page', sourceOnShow: 'views/landing.html .content', withOnShow: getVM('landing')}"></div>
+		<div class="row" data-bind="page: {id: 'landing', title: 'Landing Page', sourceOnShow: 'views/landing.html', withOnShow: getVM('landing')}"></div>
 
 	</div>
 
