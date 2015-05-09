@@ -4,12 +4,7 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.pubId = ko.observable();
 	vm.statusMsg = ko.observable('');
 	vm.pdfUrl = ko.observable('');
-
-	$('a#downloadPdf').click(function(e) {
-		e.preventDefault();
-		window.location.href = pdfUrl;
-	});
-
+	
 	vm.pubId.subscribe(function(newVal) {
 		vm.publication(null);
 		vm.statusMsg('Loading Publication.');
