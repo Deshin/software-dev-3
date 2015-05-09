@@ -8,23 +8,29 @@
     <div data-bind="ifnot: Title">
       <h1>Upload a form</h1>
     </div>
-    <form data-bind="submit: submitPublication">
-      <div class="row col-md-12">
-        <label for="publicationTitle" class="col-md-2">Title:</label>
-        <input id="publicationTitle" data-bind="textInput: Title" class="col-md-10"/>
-      </div>
-      <div class="row col-md-12">
-        <label for="publicationAbstract" class="col-md-2">Abstract:</label>
-        <textarea rows="4" id="publicationAbstract" data-bind="textInput: Abstract" class="col-md-10"/>
-      </div>
-      <div class="row col-md-12">
-        <label for="publicationAuthors" class="col-md-2">Authors:</label>
-        <input id="publicationAuthors" data-bind="textInput: Authors" class="col-md-10"/>
-      </div>
-      <div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </form>
+    <div>
+      <form id="uploadPublication" data-bind="submit: submitPublication">
+        <div class="row col-md-12">
+          <label for="publicationTitle" class="col-md-2">Title:</label>
+          <input id="publicationTitle" data-bind="textInput: Title" class="col-md-10"/>
+        </div>
+        <div class="row col-md-12">
+          <label for="publicationAbstract" class="col-md-2">Abstract:</label>
+          <textarea rows="4" id="publicationAbstract" data-bind="textInput: Abstract" class="col-md-10"/>
+        </div>
+        <div class="row col-md-12">
+          <label for="publicationAuthors" class="col-md-2">Authors:</label>
+          <input id="publicationAuthors" data-bind="textInput: Authors" class="col-md-10"/>
+        </div>
+        <div class="row col-md-12">
+          <label for="publicationCategory" class="col-md-2">Category:</label>
+          <select id="publicationCategory" data-bind="options: categoryList, textInput: Category" class="col-md-10"/>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
   </div>
 </body>
 </html>
