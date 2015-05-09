@@ -4,7 +4,7 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.pubId = ko.observable();
 	vm.statusMsg = ko.observable('');
 	vm.pdfUrl = ko.observable('');
-	
+
 	vm.pubId.subscribe(function(newVal) {
 		vm.publication(null);
 		vm.statusMsg('Loading Publication.');
@@ -19,6 +19,7 @@ define(["jquery", "knockout"], function($, ko) {
 			}
 			data.Authors = authors;
 			vm.publication(data);
+			console.log(data);
 			vm.pdfUrl("files/" + vm.publication().ScanPath.replace(/\\/g, "/"));
 			vm.statusMsg("Success!");
 		}).fail(function(jqxhr) {
