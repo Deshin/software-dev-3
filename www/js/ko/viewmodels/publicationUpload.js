@@ -8,7 +8,13 @@ define(["jquery", "knockout"], function($, ko) {
 
 	$('#uploadPublication').validate({
 		rules: publicationRules(),
-		messages: publicationMessages()
+		messages: publicationMessages(),
+		errorPlacement: function(error, element) {
+			error.appendTo(element.parent());
+		},
+		onfocusout: false,
+		errorElement: "span",
+		errorClass: "text-danger"
 	});
 
 	init();
@@ -16,9 +22,10 @@ define(["jquery", "knockout"], function($, ko) {
 	return vm;
 
 	function submitPublication(form) {
-		console.log($('#uploadPublication').valid());
-		vmToJson();
-		console.log(publication);
+		if($('#uploadPublication').valid()) {
+			vmToJson();
+			console.log(publication);
+		}
 	}
 
 	function init() {
@@ -38,13 +45,27 @@ define(["jquery", "knockout"], function($, ko) {
 
 	function publicationRules() {
 		return {
-			publicationTitle: "required"
+			publicationTitle: {
+				required: true
+			},
+			publicationAbstract: {
+				required: true
+			},
+			publicationAuthors: {
+				required: true
+			},
+			publicationCategory: {
+				required: true
+			}
 		};
 	}
 
 	function publicationMessages() {
 		return {
-			publicationTitle: "Please enter a valid title."
+			publicationTitle: "Please enter a valid Title.",
+			publicationAbstract: "Please enter a valid Abstract.",
+			publicationAuthors: "Please enter a valid Author(s).",
+			publicationCategory: "Please enter a valid Category."
 		};
 	}
 

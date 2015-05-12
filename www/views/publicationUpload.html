@@ -9,26 +9,35 @@
 	</div>
 	<div>
 		<form id="uploadPublication" data-bind="submit: submitPublication" novalidate>
-			<div class="col-md-12">
+			<div class="form-group col-md-12">
 				<label for="publicationTitle" class="col-md-2">Title:</label>
-				<input type="text" name="publicationTitle" id="publicationTitle" data-bind="textInput: formVM.Title" class="col-md-10"/>
+				<div class="col-md-10">
+					<input class="form-control col-md-12" type="text" name="publicationTitle" id="publicationTitle" data-bind="textInput: formVM.Title" />
+				</div>
 			</div>
-			<div class="col-md-12">
+			<div class="form-group col-md-12">
 				<label for="publicationAbstract" class="col-md-2">Abstract:</label>
-				<textarea rows="4" id="publicationAbstract" data-bind="textInput: formVM.Abstract" class="col-md-10"/>
+				<div class="col-md-10">
+					<textarea rows="4" name="publicationAbstract" id="publicationAbstract" data-bind="textInput: formVM.Abstract" class="form-control col-md-12"/>
+				</div>
 			</div>
-			<div class="col-md-12">
+			<div class="form-group col-md-12">
 				<label for="publicationAuthors" class="col-md-2">Authors:</label>
-				<input id="publicationAuthors" data-bind="textInput: formVM.Authors" class="col-md-10"/>
+				<div class="col-md-10">
+					<input name="publicationAuthors" id="publicationAuthors" data-bind="textInput: formVM.Authors" class="form-control col-md-12"/>
+				</div>
 			</div>
-			<div class="col-md-12">
+			<div class="form-group col-md-12">
 				<label for="publicationCategory" class="col-md-2">Category:</label>
-				<select id="publicationCategory" data-bind="options: categoryList, textInput: formVM.Category" class="col-md-10"/>
+				<div class="col-md-10">
+					<select name="publicationCategory" id="publicationCategory"
+									data-bind="options: categoryList, textInput: formVM.Category" class="form-control col-md-12"/>
+				</div>
 			</div>
 			<br/>
 			<div class="col-md-12">
-				<div class="pull-right">
-					<button type="submit" class="btn btn-primary">Submit</button>
+				<div class="col-md-12">
+					<button class="col-md-1 col-md-offset-11 btn btn-primary" type="submit">Submit</button>
 				</div>
 			</div>
 		</form>
