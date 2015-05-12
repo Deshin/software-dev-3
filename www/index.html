@@ -26,10 +26,16 @@
 					<small>by Wits-Epsilon</small>
 				</a>
 			</div>
-			<div class="navbar-right navbar-nav">
-				<input type="text" placeholder="Search">
-				<button type="submit" class="btn btn-primary navbar-btn">Search</button>
-			</div>
+<!-- 			<div class="navbar-right navbar-nav">
+				<input type="text" value="{{search}}" placeholder="Search">
+				<button type="submit" id="nav-btn" class="btn btn-primary navbar-btn">Search</button>
+			</div> -->
+			<form id="nav-search-input-group" class="input-group navbar-right" submit="{{onSearchClick}}">
+				<input type="text" class="form-control" placeholder="Search">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+				</span>
+			</form>
 		</div>
 	</nav>
 
@@ -44,7 +50,7 @@
 		<div class="row" data-bind="page: {id: 'publicationUpload', title: 'Publication Upload', sourceOnShow: 'views/publicationUpload.html', withOnShow: getVM('publicationUpload')}">
 		</div>
 
-		<div class="row" data-bind="page: {role: 'start', id: 'publications', title: 'All publications', sourceOnShow: 'views/publications.html', withOnShow: getVM('publications')}">
+		<div class="row" data-bind="page: {role: 'start', id: 'publications', title: 'All publications', params:{'search' : ''}, sourceOnShow: 'views/publications.html', withOnShow: getVM('publications')}">
 		</div>
 
 		<div class="row" data-bind="page: {id: 'landing', title: 'Landing Page', sourceOnShow: 'views/landing.html', withOnShow: getVM('landing')}"></div>

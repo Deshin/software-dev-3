@@ -12,8 +12,11 @@ requirejs.config({
 requirejs(['jquery', 'knockout', 'kopunches', 'pager'], function($, ko, kopunches, pager) {
 	function RootViewModel() {
 		var self = this;
-		self.user = ko.observable("User");
-
+		self.search = ko.observable("");
+		self.onSearchClick = function() {
+			if (self.search() === "") {window.location.assign("/");};
+			window.location.assign("/#!/publications?search="+encodeURIComponent(self.search()));
+		}
 		self.getVM = function(path) {
 			return function(callback) {
 				requirejs(['/js/ko/viewmodels/'+path+'.js'], function(mod) {

@@ -83,3 +83,16 @@ body {
 .main .page-header {
   margin-top: 0;
 }
+
+#nav-search-input-group {
+  width: 300px;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  margin-right: 10px;
+}
+
+input[type="text"], textarea {
+outline: none;
+box-shadow:none !important;
+border:1px solid #ccc !important;
+}
