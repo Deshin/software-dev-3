@@ -8,22 +8,22 @@
 		<h1>Upload a form</h1>
 	</div>
 	<div>
-		<form id="uploadPublication" data-bind="submit: submitPublication">
+		<form id="uploadPublication" data-bind="submit: submitPublication" novalidate>
 			<div class="col-md-12">
 				<label for="publicationTitle" class="col-md-2">Title:</label>
-				<input id="publicationTitle" data-bind="textInput: Title" class="col-md-10"/>
+				<input type="text" name="publicationTitle" id="publicationTitle" data-bind="textInput: formVM.Title" class="col-md-10"/>
 			</div>
 			<div class="col-md-12">
 				<label for="publicationAbstract" class="col-md-2">Abstract:</label>
-				<textarea rows="4" id="publicationAbstract" data-bind="textInput: Abstract" class="col-md-10"/>
+				<textarea rows="4" id="publicationAbstract" data-bind="textInput: formVM.Abstract" class="col-md-10"/>
 			</div>
 			<div class="col-md-12">
 				<label for="publicationAuthors" class="col-md-2">Authors:</label>
-				<input id="publicationAuthors" data-bind="textInput: Authors" class="col-md-10"/>
+				<input id="publicationAuthors" data-bind="textInput: formVM.Authors" class="col-md-10"/>
 			</div>
 			<div class="col-md-12">
 				<label for="publicationCategory" class="col-md-2">Category:</label>
-				<select id="publicationCategory" data-bind="options: categoryList, textInput: Category" class="col-md-10"/>
+				<select id="publicationCategory" data-bind="options: categoryList, textInput: formVM.Category" class="col-md-10"/>
 			</div>
 			<br/>
 			<div class="col-md-12">
