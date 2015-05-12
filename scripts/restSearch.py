@@ -1,49 +1,11 @@
-def simpleSearch(self, searchTerms):
+def simpleSearch(self, searchTerm):
     # searchTerms is a list of strings
-    return Pubs = self._databaseWrapper.query(
-        """
-        SELECT  Publications.PublicationID, 
-                Publications.Title
-        FROM Publications JOIN Authors
-                ON  Publications.PublicationID=Authors.PublicationID
-        WHERE 
-            Authors.FirstName LIKE ? OR
-            Authors.Surname LIKE ? OR
-            Publications.Title LIKE ?
-
-        UNION
-
-        SELECT  BookPublications.PublicationId, 
-                BookPublications.Title 
-        FROM BookPublications JOIN Authors 
-                ON  BookPublications.PublicationID=Authors.PublicationID
-        WHERE 
-            Authors.FirstName LIKE ? OR
-            Authors.Surname LIKE ?  
-            BookPublications.Title Like ?
-
-        UNION
-
-        SELECT  ConferencePublicationDetail.PublicationId,
-                ConferencePublicationDetail.Title
-        FROM ConferencePublicationDetail JOIN Authors 
-                ON  ConferencePublicationDetail.PublicationID =
-                    Authors.PublicationID 
-        WHERE 
-            Authors.FirstName LIKE ? OR
-            Authors.Surname LIKE ?  
-            ConferencePublicationDetail.Title LIKE ?
-
-        UNION
-        
-        SELECT  JounalPublicationDetail.PublicationId,
-                JounalPublicationDetail.Title
-        FROM JounalPublicationDetail JOIN Authors 
-                ON  JounalPublicationDetail.PublicationID = 
-                    Authors.PublicationID 
-        WHERE 
-            Authors.FirstName LIKE ? OR
-            Authors.Surname LIKE ?  
-            JournalPublicationDetail.Title LIKE ?
-        """)
+    query = "SELECT  Publications.Title, Publications.Category "\
+        "FROM Publications JOIN Authors "\
+                "ON Publications.ID=Authors.PublicationID "\
+        "WHERE "\
+            "Authors.FirstName LIKE ? OR "\
+            "Authors.Surname LIKE ? OR "\
+            "Publications.Title LIKE ?"
+    return self._databaseWrapper.query(query, [searchTerm for i in range(0,3)])
 

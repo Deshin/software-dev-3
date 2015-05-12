@@ -37,8 +37,8 @@ class SqliteWrapper(DatabaseWrapper):
             raise
         
     
-# if __name__=='__main__':
-#     wrapper=SqliteWrapper()
-#     wrapper.connect()
-#     wrapper.query("SELECT * FROM Publications")
-#     wrapper.disconnect()
+#if __name__=='__main__':
+#    wrapper=SqliteWrapper()
+#    wrapper.connect()
+#    print wrapper.query("SELECT Publications.ID, Publications.Title FROM Publications JOIN Authors ON Publications.ID=Authors.PublicationID")
+#    wrapper.disconnect()
