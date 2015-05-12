@@ -18,3 +18,8 @@ class DatabaseWrapper(object):
     def query(self, queryString, value):
         """Search using a query string"""
         return
+    
+    @abc.abstractmethod
+    def commit(self):
+        """Search using a query string"""
+        return
