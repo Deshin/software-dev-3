@@ -1,7 +1,17 @@
 define(["jquery", "knockout"], function($, ko) {
 	var vm = this;
+	vm.search = ko.observable(null);
+	vm.search.subscribe(function(newVal) {
+		if (newVal != "") {
+			rootViewModel.search(newVal);
+			$.getJSON('/api/publications.py?simpleSearch='+vm.search, vm.gotData);
+		} else {
+			$.getJSON('/api/publications.py', vm.gotData);
+		};
+	}, vm, 'change');
 	vm.publications = ko.observableArray([]);
-	$.getJSON('/api/documents.py', function(data) {
+	vm.gotData = function(data) {
+		vm.publications.removeAll();
 		for (var i = 0; i < data.length; i++) {
 			var authors = "";
 			for (var j = 0; j < data[i].Authors.length; j++) {
@@ -14,6 +24,6 @@ define(["jquery", "knockout"], function($, ko) {
 			data[i].link = "#!/publicationDetails?pubId="+data[i].PublicationId.toString();
 			vm.publications.push(data[i]);
 		}
-	});
+	}
 	return vm;
 });
