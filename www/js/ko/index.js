@@ -14,8 +14,11 @@ requirejs(['jquery', 'knockout', 'kopunches', 'pager'], function($, ko, kopunche
 		var self = this;
 		self.search = ko.observable("");
 		self.onSearchClick = function() {
-			if (self.search() === "") {window.location.assign("/");};
-			window.location.assign("/#!/publications?search="+encodeURIComponent(self.search()));
+			if (self.search() == "") {
+				window.location.assign("/");
+			} else {
+				window.location.assign("/#!/publications?search="+encodeURIComponent(self.search()));
+			}	
 		}
 		self.getVM = function(path) {
 			return function(callback) {

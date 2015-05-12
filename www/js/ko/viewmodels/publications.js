@@ -11,6 +11,7 @@ define(["jquery", "knockout"], function($, ko) {
 	}, vm, 'change');
 	vm.publications = ko.observableArray([]);
 	vm.gotData = function(data) {
+		vm.publications.removeAll();
 		for (var i = 0; i < data.length; i++) {
 			var authors = "";
 			for (var j = 0; j < data[i].Authors.length; j++) {
