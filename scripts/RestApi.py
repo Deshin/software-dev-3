@@ -2,7 +2,7 @@
 
 from DatabaseWrapper import DatabaseWrapper      
 import json
-import retrieval
+import restRetrieval
 
 class RestApi:
     def __init__(self, DatabaseWrapper):
