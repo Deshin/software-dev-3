@@ -1,7 +1,7 @@
 define(["jquery", "knockout"], function($, ko) {
 	var vm = this;
 	vm.publications = ko.observableArray([]);
-	$.getJSON('/api/documents.py', function(data) {
+	$.getJSON('/api/publications.py', function(data) {
 		for (var i = 0; i < data.length; i++) {
 			var authors = "";
 			for (var j = 0; j < data[i].Authors.length; j++) {
