@@ -20,6 +20,7 @@ def insertDocument(self, details):
         
     elif details["Category"].lower().startswith("book"):
         result=insertBookSection(self,details)
+    insertAuthors(self,details,1)
     return result
     
         
@@ -39,11 +40,12 @@ def insertConferencePaper(self,details):
 def insertExistingConference(self,details, conferenceID):
     try:     
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"], details["ScanPath"], details["Accreditation"]))
-        publicationID=self.databaseWrapper._cur.lastrowid
+        publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO ConferencePublicationDetail(ConferenceID,PublicationID,Abstract,MotivationForAccreditation,PeerReviewProcess) VALUES(?,?,?,?,?)",(conferenceID,publicationID,details["Abstract"], details["MotivationForAccreditation"], details["PeerReview"]))
-        conferencePublicationDetailID=self.databaseWrapper._cur.lastrowid
+        conferencePublicationDetailID=self._databaseWrapper._cur.lastrowid
         if(details["PathToFile"]!=None and details["DocumentTitle"]!=None):
             self._databaseWrapper.query("INSERT INTO ConferencePublicationPeerReviewDocumentation(ConferencePublicationDetailID,PathToFile,DocumentTitle) VALUES(?,?,?)",(conferencePublicationDetailID,details["PathToFile"],details["DocumentTitle"]))
+        insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
         return 200
@@ -53,7 +55,7 @@ def insertExistingConference(self,details, conferenceID):
 def insertNewConference(self,details):
     try:
        self._databaseWrapper.query("INSERT INTO Conferences(ConferenceTitle, Year, Country) VALUES(?,?,?)",(details["ConferenceTitle"],details["Year"], details["Country"]))
-       conferenceID=self.databaseWrapper._cur.lastrowid
+       conferenceID=self._databaseWrapper._cur.lastrowid
        insertExistingConference(self,details,conferenceID)
        return "200"
     except:
@@ -74,8 +76,9 @@ def insertExistingJournal(self,details,journalID):
         #note: although this is repeated code from conference insertion, it is important
         #that it is repeated here to ensure atomicity of insertions
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"], details["ScanPath"], details["Accreditation"]))
-        publicationID=self.databaseWrapper._cur.lastrowid
+        publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO JournalPublicationDetail(JournalID,PublicationID,Volume,Issue,Abstract) VALUES(?,?,?,?,?)",(journalID, publicationID, details["Volume"], details["Issue"], details["Abstract"]))
+        insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
         return "200"
@@ -85,7 +88,7 @@ def insertExistingJournal(self,details,journalID):
 def insertNewJournal(self,details):
     try:
        self._databaseWrapper.query("INSERT INTO Journals(JournalTitle, ISSN, HIndex,Type) VALUES(?,?,?,?)",(details["JournalTitle"],details["ISSN"], details["HIndex"], details["Type"]))
-       journalID=self.databaseWrapper._cur.lastrowid
+       journalID=self._databaseWrapper._cur.lastrowid
        insertExistingJournal(self,details,journalID)
        return "200"
     except:
@@ -106,8 +109,9 @@ def insertExistingBook(self,details,bookID):
         #note: although this is repeated code from conference insertion, it is important
         #that it is repeated here to ensure atomicity of insertions
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"], details["ScanPath"], details["Accreditation"]))
-        publicationID=self.databaseWrapper._cur.lastrowid
+        publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO BookPublications(PublicationID,Chapter,Abstract, BooksID) VALUES(?,?,?,?)",(publicationID, details["Chapter"], details["Abstract"], bookID))
+        insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
         return "200"
@@ -117,8 +121,16 @@ def insertExistingBook(self,details,bookID):
 def insertNewBook(self,details):
     try:
        self._databaseWrapper.query("INSERT INTO Books(BookTitle, ISBN,Type) VALUES(?,?,?)",(details["BookTitle"],details["ISBN"], details["Type"]))
-       bookID=self.databaseWrapper._cur.lastrowid
+       bookID=self._databaseWrapper._cur.lastrowid
        insertExistingBook(self,details,bookID)
        return "200"
     except:
         return "404",sys.exc_info()[1]    
+    
+def insertAuthors(self, details, publicationID):
+    try:
+        for item in details["Authors"]:
+            self._databaseWrapper.query("INSERT INTO Authors(PublicationID, FirstName, Surname,Initials) VALUES(?,?,?,?)",(publicationID,item["FirstName"], item["Surname"], item["Initials"]))
+        return"200"
+    except:
+        return "404", sys.exc_info()[1]
