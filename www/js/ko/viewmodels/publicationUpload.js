@@ -6,7 +6,7 @@ define(["jquery", "knockout"], function($, ko) {
   vm.categoryList = ko.observableArray(['Journal Article', 'Conference Paper', 'Other']);
 
   init();
-
+	console.log("VM loaded - publicationUpload");
 	return vm;
 
   function submitPublication() {
