@@ -2,7 +2,6 @@
 
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
-import 
 import cgi
 import cgi, os
 import cgitb; cgitb.enable()
