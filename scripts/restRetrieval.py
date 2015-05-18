@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+#this actually incorporates use case g1 and g2
 import json
 
 def getAuthors(self, pubId):

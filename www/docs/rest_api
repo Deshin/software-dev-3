@@ -69,7 +69,7 @@
                 }
             }
         },
-        "/documentDetails": {
+        "/documentDetails.py": {
             "get": {
                 "description": "Gets an array of details for the selected document in the archive\n",
                 "parameters": [
@@ -104,9 +104,17 @@
                                         "type": "string",
                                         "required": true
                                     },
-                                    "PublicationTitle": {
+                                    "ConferenceTitle": {
                                         "type": "string",
-                                        "required": true
+                                        "required": false
+                                    },
+                                    "BookTitle": {
+                                    	"type": "string",
+                                    	"required": false
+                                    },
+                                    "JournalTitle": {
+                                    	"type": "string",
+                                    	"required": false
                                     },
                                     "Volume": {
                                         "type": "integer",
