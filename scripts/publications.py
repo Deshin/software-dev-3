@@ -23,6 +23,4 @@ def main(arg):
 if __name__ == "__main__":
     form = cgi.Fieldstorage()
     search = form.getValue("simpleSearch", None)
-    if search == None
-
     main(search)    
