@@ -96,7 +96,6 @@ def insertExistingJournal(self,details,journalID):
         insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
-        print "commited"
         
         scanpath = r"..www/files/journals/"+details["JournalTitle"]+"/publications"
         if not os.path.exists(scanpath): os.makedirs(scanpath)
