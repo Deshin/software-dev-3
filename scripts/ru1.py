@@ -5,12 +5,8 @@ import sys
 import os
 
 def insertDocument(self, details):
-    details["Accreditation"]="Not Yet Accredited"
+    details["Accreditation"]="Not Yet Accredited"      
     if details["Category"].lower().startswith("conference"):
-        if "PathToFile" not in details:
-            details["PathToFile"]=None
-        if "DocumentTitle" not in details:
-            details["DocumentTitle"]=None
         details["ScanPath"]="conferences/"+details["ConferenceTitle"]+"/publications/"+details["Title"]
         details["TableOfContentsPath"]="conferences/"+details["ConferenceTitle"]+"/TOC/TableOfContents"
         result=insertConferencePaper(self,details)
@@ -50,9 +46,8 @@ def insertExistingConference(self,details, conferenceID):
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"], details["ScanPath"], details["Accreditation"]))
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO ConferencePublicationDetail(ConferenceID,PublicationID,Abstract,MotivationForAccreditation,PeerReviewProcess) VALUES(?,?,?,?,?)",(conferenceID,publicationID,details["Abstract"], details["MotivationForAccreditation"], details["PeerReview"]))
-        conferencePublicationDetailID=self._databaseWrapper._cur.lastrowid
-        if(details["PathToFile"]!=None and details["DocumentTitle"]!=None):
-            self._databaseWrapper.query("INSERT INTO ConferencePublicationPeerReviewDocumentation(ConferencePublicationDetailID,PathToFile,DocumentTitle) VALUES(?,?,?)",(conferencePublicationDetailID,details["PathToFile"],details["DocumentTitle"]))
+        details["PathToFile"]="peerReview/"+str(publicationID)+"/"+details["DocumentTitle"]
+        self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile,DocumentTitle) VALUES(?,?)",(PublicationID,details["PathToFile"]))
         insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
@@ -91,6 +86,8 @@ def insertExistingJournal(self,details,journalID):
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"], details["ScanPath"], details["Accreditation"]))
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO JournalPublicationDetail(JournalID,PublicationID,Volume,Issue,Abstract) VALUES(?,?,?,?,?)",(journalID, publicationID, details["Volume"], details["Issue"], details["Abstract"]))
+        details["PathToFile"]="peerReview/"+str(publicationID)+"/"+details["DocumentTitle"]
+        self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile,DocumentTitle) VALUES(?,?)",(PublicationID,details["PathToFile"]))
         insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
@@ -130,6 +127,8 @@ def insertExistingBook(self,details,bookID):
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO BookPublications(PublicationID,Chapter,Abstract, BooksID) VALUES(?,?,?,?)",(publicationID, details["Chapter"], details["Abstract"], bookID))
         insertAuthors(self,details,publicationID)
+        details["PathToFile"]="peerReview/"+str(publicationID)+"/"+details["DocumentTitle"]
+        self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile,DocumentTitle) VALUES(?,?)",(PublicationID,details["PathToFile"]))
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
         
