@@ -2,8 +2,6 @@
 
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
-import json
-import cgi
 import cgi, os
 import cgitb; cgitb.enable()
 
@@ -23,7 +21,8 @@ def main(details):
 
 if __name__ == "__main__":
     form=cgi.FieldStorage()
-    details=form.getlist('publication')[0]
+    details=form.getlist('publication')
+    details=dict(details)
 
 # try: # Windows needs stdio set for binary mode.
 #     import msvcrt
