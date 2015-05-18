@@ -29,7 +29,7 @@ def insertDocument(self, details):
             details["ScanPath"]="books/"+details["BookTitle"]+"/publications/"+details["Title"]
             details["TableOfContentsPath"]="books/"+details["BookTitle"]+"/TOC/TableOfContents"
     except:
-        return "400"
+        return "400", "Error in initialisation"
     return result
     
         
