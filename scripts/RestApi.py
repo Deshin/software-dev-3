@@ -4,6 +4,7 @@ from DatabaseWrapper import DatabaseWrapper
 import json
 import restRetrieval
 import restSearch
+import ru1
 
 class RestApi:
     def __init__(self, DatabaseWrapper):

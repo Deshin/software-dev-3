@@ -2,8 +2,10 @@
 
 import json
 import sys
+import os
 
 def insertDocument(self, details):
+    details["Accreditation"]="Not Yet Accredited"
     if details["Category"].lower().startswith("conference"):
         if "PathToFile" not in details:
             details["PathToFile"]=None
@@ -26,7 +28,7 @@ def insertDocument(self, details):
     elif details["Category"].lower().startswith("book"):
         result=insertBookSection(self,details)
     details["ScanPath"]="books/"+details["BookTitle"]+"/publications/"+details["Title"]
-    details["TableOfContentsPath"]="books/"+details["bookTitle"]+"/TOC/TableOfContents"
+    details["TableOfContentsPath"]="books/"+details["BookTitle"]+"/TOC/TableOfContents"
     return result
     
         
@@ -44,7 +46,7 @@ def insertConferencePaper(self,details):
     return result
         
 def insertExistingConference(self,details, conferenceID):
-    try:     
+    try:          
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"], details["ScanPath"], details["Accreditation"]))
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO ConferencePublicationDetail(ConferenceID,PublicationID,Abstract,MotivationForAccreditation,PeerReviewProcess) VALUES(?,?,?,?,?)",(conferenceID,publicationID,details["Abstract"], details["MotivationForAccreditation"], details["PeerReview"]))
@@ -54,6 +56,11 @@ def insertExistingConference(self,details, conferenceID):
         insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
+        
+        scanpath = r"..www/files/conferences/"+details["ConferenceTitle"]+"/publications"
+        if not os.path.exists(scanpath): os.makedirs(scanpath)
+        TOCpath = r"..www/files/conferences/"+details["ConferenceTitle"]+"/TOC"
+        if not os.path.exists(TOCpath): os.makedirs(TOCpath)  
         return 200
     except:
         return "400",sys.exc_info()[1]
@@ -78,7 +85,7 @@ def insertJournalPaper(self,details):
     return result
 
 def insertExistingJournal(self,details,journalID):
-    try:
+    try:        
         #note: although this is repeated code from conference insertion, it is important
         #that it is repeated here to ensure atomicity of insertions
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"], details["ScanPath"], details["Accreditation"]))
@@ -87,6 +94,11 @@ def insertExistingJournal(self,details,journalID):
         insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
+        
+        scanpath = r"..www/files/journals/"+details["JournalTitle"]+"/publications"
+        if not os.path.exists(scanpath): os.makedirs(scanpath)
+        TOCpath = r"..www/files/journalss/"+details["JournalTitle"]+"/TOC"
+        if not os.path.exists(TOCpath): os.makedirs(TOCpath)
         return "200"
     except:
         return "400", sys.exc_info()[1]
@@ -111,7 +123,7 @@ def insertBookSection(self,details):
     
     
 def insertExistingBook(self,details,bookID):
-    try:
+    try:        
         #note: although this is repeated code from conference insertion, it is important
         #that it is repeated here to ensure atomicity of insertions
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"], details["ScanPath"], details["Accreditation"]))
@@ -120,6 +132,11 @@ def insertExistingBook(self,details,bookID):
         insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
+        
+        scanpath = r"../www/files/books/"+details["BookTitle"]+"/publications"
+        if not os.path.exists(scanpath): os.makedirs(scanpath)
+        TOCpath = r"..www/files/books/"+details["BookTitle"]+"/TOC"
+        if not os.path.exists(TOCpath): os.makedirs(TOCpath)
         return "200"
     except:
         return "400", sys.exc_info()[1]
