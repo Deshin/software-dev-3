@@ -20,6 +20,7 @@ def main(details):
     else:
         print "Status:200"
         print "Content-Type: text/html"
+        print ""
         print "Success"
 
 if __name__ == "__main__":
