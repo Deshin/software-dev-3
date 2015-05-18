@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import cgi
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
 
@@ -8,7 +8,7 @@ def main(arg):
     rest = RestApi(db)
     if arg == None:
         result = rest.getAllDocuments()
-    else 
+    else:
         result = rest.simpleSearch(arg)
     if result == "404":
         print "Status:404"
@@ -21,6 +21,6 @@ def main(arg):
         print result
 
 if __name__ == "__main__":
-    form = cgi.Fieldstorage()
-    search = form.getValue("simpleSearch", None)
+    form = cgi.FieldStorage()
+    search = form.getvalue("simpleSearch", None)
     main(search)    
