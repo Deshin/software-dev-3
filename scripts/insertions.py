@@ -17,8 +17,11 @@ def main(details):
         print ""
         print "The document could not be added to the database because "
         print result[1]
-    print "Content-Type: text/html"
-    print "Success"
+    else:
+        print "Status:200"
+        print "Content-Type: text/html"
+        print ""
+        print "Success"
 
 if __name__ == "__main__":
     details = json.load(sys.stdin)
