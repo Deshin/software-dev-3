@@ -6,7 +6,7 @@ import os
 
 def insertDocument(self, details):
     details["Accreditation"]="Not Yet Accredited"   
-    details["Type"]="Predatory"   
+    details["Type"]="Unknown"   
     if details["Category"].lower().startswith("conference"):
         details["ScanPath"]="conferences/"+details["ConferenceTitle"]+"/publications/"+details["Title"]
         details["TableOfContentsPath"]="conferences/"+details["ConferenceTitle"]+"/TOC/TableOfContents"
@@ -17,15 +17,15 @@ def insertDocument(self, details):
             details["Volume"]=None
         if "Issue" not in details:
             details["Issue"]=None
-        details["Hindex"]=None
+        details["HIndex"]=None
         details["ScanPath"]="journals/"+details["JournalTitle"]+"/publications/"+details["Title"]
         details["TableOfContentsPath"]="journals/"+details["JournalTitle"]+"/TOC/TableOfContents"
         result=insertJournalPaper(self,details)
         
     elif details["Category"].lower().startswith("book"):
         result=insertBookSection(self,details)
-    details["ScanPath"]="books/"+details["BookTitle"]+"/publications/"+details["Title"]
-    details["TableOfContentsPath"]="books/"+details["BookTitle"]+"/TOC/TableOfContents"
+        details["ScanPath"]="books/"+details["BookTitle"]+"/publications/"+details["Title"]
+        details["TableOfContentsPath"]="books/"+details["BookTitle"]+"/TOC/TableOfContents"
     return result
     
         

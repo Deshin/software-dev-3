@@ -24,6 +24,7 @@ def main(details):
 if __name__ == "__main__":
     form=cgi.FieldStorage()
     details=form.getlist('publication')
+    #print details
 
 # try: # Windows needs stdio set for binary mode.
 #     import msvcrt
@@ -52,16 +53,13 @@ if __name__ == "__main__":
     
     
     
-#     details={"Title": "This document is testing book section insertion",
-#              "Category": "Book section",
-#              "Year": 2015,
-#              "Chapter":3,
-#              "Publisher": "Testing publishers", 
-#              "TableOfContentsPath": "books/arbBook/TOC/TestingInsertion",
-#              "ScanPath": "books/arbBook/Publications/TestingInsertion3",
-#              "Abstract": "It is important to have a document to test adding to the database",
-#              "BookTitle": "PRASA",
-#              "ISBN":1234567,
-#              "Type":"Accredited",
+#     details={"Title": "blah",
+#              "Category": "Journal Aricle",
+#              "JournalTitle": "blah",
+#              "PeerReviewProcess":"blah",
+#              "Year": "2013",
+#              "Publisher": "blah", 
+#              "Abstract": "blah blah blah",
+#              "ISSN":"1234567",
 #              "Authors":[{"FirstName": "Sarah", "Surname": "Ward", "Initials": "S.R"}, {"FirstName": "Anthony", "Surname": "Farquharson", "Initials":"A.J."}]}
     main(details)
