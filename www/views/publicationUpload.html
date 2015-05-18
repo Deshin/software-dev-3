@@ -1,7 +1,7 @@
 <div class="col-sm-3 col-md-2 sidebar">
 	<!-- <ul class="nav nav-sidebar">
-		<li class="active"><a href="#" ><span class="glyphicon glyphicon-download"></span>Temp Button</a></li>
-	</ul> -->
+	<li class="active"><a href="#" ><span class="glyphicon glyphicon-download"></span>Temp Button</a></li>
+</ul> -->
 </div>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 	<div>
@@ -10,30 +10,115 @@
 	<div>
 		<form id="uploadPublication" data-bind="submit: submitPublication" novalidate>
 			<div class="form-group col-md-12">
-				<label for="publicationTitle" class="col-md-2">Title:</label>
+				<label for="publicationCategory" class="col-md-2">Category<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<select name="publicationCategory" id="publicationCategory"
+					data-bind="options: categoryList, textInput: formVM.Category" class="form-control col-md-12"/>
+				</div>
+			</div>
+			<!-- ko if: formVM.Category() === 'Conference Paper'  -->
+			<div class="form-group col-md-12">
+				<label for="publicationConferenceTitle" class="col-md-2">Conference Title<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<input class="form-control col-md-12" type="text" name="publicationConferenceTitle" id="publicationConferenceTitle" data-bind="textInput: formVM.ConferenceTitle" />
+				</div>
+			</div>
+			<!-- /ko -->
+			<!-- ko if: formVM.Category() === 'Journal Article' -->
+			<div class="form-group col-md-12">
+				<label for="publicationJournalTitle" class="col-md-2">Journal Title<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<input class="form-control col-md-12" type="text" name="publicationJournalTitle" id="publicationJournalTitle" data-bind="textInput: formVM.JournalTitle" />
+				</div>
+			</div>
+			<!-- /ko -->
+			<!-- ko if: formVM.Category() === 'Book Chapter' -->
+			<div class="form-group col-md-12">
+				<label for="publicationBookTitle" class="col-md-2">Book Title<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<input class="form-control col-md-12" type="text" name="publicationBookTitle" id="publicationBookTitle" data-bind="textInput: formVM.Title.BookTitle" />
+				</div>
+			</div>
+			<!-- /ko -->
+			<div class="form-group col-md-12">
+				<label for="publicationTitle" class="col-md-2">Title<span class="text-danger">*</span>:</label>
 				<div class="col-md-10">
 					<input class="form-control col-md-12" type="text" name="publicationTitle" id="publicationTitle" data-bind="textInput: formVM.Title" />
 				</div>
 			</div>
 			<div class="form-group col-md-12">
-				<label for="publicationAbstract" class="col-md-2">Abstract:</label>
+				<label for="publicationAbstract" class="col-md-2">Abstract<span class="text-danger">*</span>:</label>
 				<div class="col-md-10">
 					<textarea rows="4" name="publicationAbstract" id="publicationAbstract" data-bind="textInput: formVM.Abstract" class="form-control col-md-12"/>
 				</div>
 			</div>
 			<div class="form-group col-md-12">
-				<label for="publicationAuthors" class="col-md-2">Authors:</label>
+				<label for="publicationAuthors" class="col-md-2">Authors<span class="text-danger">*</span>:</label>
 				<div class="col-md-10">
 					<input name="publicationAuthors" id="publicationAuthors" data-bind="textInput: formVM.Authors" class="form-control col-md-12"/>
 				</div>
 			</div>
+			<!-- ko if: formVM.Category() === 'Journal Article' -->
 			<div class="form-group col-md-12">
-				<label for="publicationCategory" class="col-md-2">Category:</label>
+				<label for="publicationISSN" class="col-md-2">ISSN<span class="text-danger">*</span>:</label>
 				<div class="col-md-10">
-					<select name="publicationCategory" id="publicationCategory"
-									data-bind="options: categoryList, textInput: formVM.Category" class="form-control col-md-12"/>
+					<input class="form-control col-md-12" type="text" name="publicationISSN" id="publicationISSN" data-bind="textInput: formVM.ISSN" />
 				</div>
 			</div>
+			<div class="form-group col-md-12">
+				<label for="publicationVolume" class="col-md-2">Volume:</label>
+				<div class="col-md-10">
+					<input class="form-control col-md-12" type="text" name="publicationVolume" id="publicationVolume" data-bind="textInput: formVM.Volume" />
+				</div>
+			</div>
+			<div class="form-group col-md-12">
+				<label for="publicationIssue" class="col-md-2">Issue:</label>
+				<div class="col-md-10">
+					<input class="form-control col-md-12" type="text" name="publicationIssue" id="publicationIssue" data-bind="textInput: formVM.Issue" />
+				</div>
+			</div>
+			<!-- /ko -->
+			<!-- ko if: formVM.Category() === 'Book Chapter' -->
+			<div class="form-group col-md-12">
+				<label for="publicationISBN" class="col-md-2">ISBN<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<input class="form-control col-md-12" type="text" name="publicationISBN" id="publicationISBN" data-bind="textInput: formVM.ISBN" />
+				</div>
+			</div>
+			<!-- /ko -->
+			<div class="form-group col-md-12">
+				<label for="publicationPublisher" class="col-md-2">Publisher<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<input class="form-control col-md-12" type="text" name="publicationPublisher" id="publicationPublisher" data-bind="textInput: formVM.Publisher" />
+				</div>
+			</div>
+			<div class="form-group col-md-12">
+				<label for="publicationYear" class="col-md-2">Year<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<input class="form-control col-md-12" type="text" name="publicationYear" id="publicationYear" data-bind="textInput: formVM.Year" />
+				</div>
+			</div>
+			<!-- ko if: formVM.Category() === 'Conference Paper' -->
+			<div class="form-group col-md-12">
+				<label for="publicationCountry" class="col-md-2">Country<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<input class="form-control col-md-12" type="text" name="publicationCountry" id="publicationCountry" data-bind="textInput: formVM.Country" />
+				</div>
+			</div>
+			<div class="form-group col-md-12">
+				<label for="publicationMotivation" class="col-md-2">Motivation for Accreditation<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<textarea rows="4" name="publicationMotivation" id="publicationMotivation" data-bind="textInput: formVM.MotivationForAccreditation" class="form-control col-md-12"/>
+				</div>
+			</div>
+			<!-- /ko -->
+			<div class="form-group col-md-12">
+				<label for="publicationPeerReview" class="col-md-2">Peer Review Process<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<textarea rows="4" name="publicationPeerReview" id="publicationPeerReview" data-bind="textInput: formVM.PeerReviewProcess" class="form-control col-md-12"/>
+				</div>
+			</div>
+			
 			<br/>
 			<div class="col-md-12">
 				<div class="col-md-12">
