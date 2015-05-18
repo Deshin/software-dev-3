@@ -4,6 +4,7 @@ from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
 import cgi, os
 import sys
+import json
 import cgitb; cgitb.enable()
 
 def main(details):
