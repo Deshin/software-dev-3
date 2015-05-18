@@ -3,6 +3,7 @@
 from DatabaseWrapper import DatabaseWrapper      
 import json
 import restRetrieval
+import restSearch
 
 class RestApi:
     def __init__(self, DatabaseWrapper):
@@ -27,6 +28,9 @@ class RestApi:
         
     def insertDocument(self, details):
         return ru1.insertDocument(self, details)
+
+    def simpleSearch(self, searchTerms):
+        return restSearch.simpleSearch(self, searchTerms)
 
 
         
