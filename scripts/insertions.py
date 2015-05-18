@@ -12,7 +12,7 @@ def main(details):
     rest = RestApi(db)
     result= rest.insertDocument(details)
     if result[0]=="400":
-        print "Status:404"
+        print "Status:400"
         print "Content-Type: text/html"
         print ""
         print "The document could not be added to the database"
@@ -23,9 +23,7 @@ def main(details):
 
 if __name__ == "__main__":
     form=cgi.FieldStorage()
-    details=form.getlist('publication')
-    details=json.dumps(details)
-    print details
+    details=form.getlist('publication')[0]
 
 # try: # Windows needs stdio set for binary mode.
 #     import msvcrt
