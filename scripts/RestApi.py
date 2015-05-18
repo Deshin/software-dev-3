@@ -15,16 +15,16 @@ class RestApi:
         return self._databaseWrapper
 
     def getAuthors(self, pubId):
-        return retrieval.getAuthors(self, pubId)
+        return restRetrieval.getAuthors(self, pubId)
 
     def getAllAuthors(self):
-        return retrieval.getAllAuthors(self)
+        return restRetrieval.getAllAuthors(self)
         
     def getAllDocuments(self):
-        return retrieval.getAllDocuments(self)
+        return restRetrieval.getAllDocuments(self)
 
     def getDocumentDetails(self, id):
-        return retrieval.getDocumentDetails(self, id)
+        return restRetrieval.getDocumentDetails(self, id)
         
     def insertDocument(self, details):
         return ru1.insertDocument(self, details)
