@@ -5,31 +5,29 @@ import sys
 import os
 
 def insertDocument(self, details):
-    try:
-        details["Accreditation"]="Not Yet Accredited"   
-        details["Type"]="Unknown"   
-    
-        if details["Category"].lower().startswith("conference"):
-            details["ScanPath"]="conferences/"+details["ConferenceTitle"]+"/publications/"+details["Title"]
-            details["TableOfContentsPath"]="conferences/"+details["ConferenceTitle"]+"/TOC/TableOfContents"
-            result=insertConferencePaper(self,details)
-            
-        elif details["Category"].lower().startswith("journal"):
-            if "Volume" not in details:
-                details["Volume"]=None
-            if "Issue" not in details:
-                details["Issue"]=None
-            details["HIndex"]=None
-            details["ScanPath"]="journals/"+details["JournalTitle"]+"/publications/"+details["Title"]
-            details["TableOfContentsPath"]="journals/"+details["JournalTitle"]+"/TOC/TableOfContents"
-            result=insertJournalPaper(self,details)
-            
-        elif details["Category"].lower().startswith("book"):
-            result=insertBookSection(self,details)
-            details["ScanPath"]="books/"+details["BookTitle"]+"/publications/"+details["Title"]
-            details["TableOfContentsPath"]="books/"+details["BookTitle"]+"/TOC/TableOfContents"
-    except:
-        return "400", "Error in initialisation"
+    details["Accreditation"]="Not Yet Accredited"   
+    details["Type"]="Unknown"   
+
+    if details["Category"].lower().startswith("conference"):
+        details["ScanPath"]="conferences/"+details["ConferenceTitle"]+"/publications/"+details["Title"]
+        details["TableOfContentsPath"]="conferences/"+details["ConferenceTitle"]+"/TOC/TableOfContents"
+        result=insertConferencePaper(self,details)
+        
+    elif details["Category"].lower().startswith("journal"):
+        if "Volume" not in details:
+            details["Volume"]=None
+        if "Issue" not in details:
+            details["Issue"]=None
+        details["HIndex"]=None
+        details["ScanPath"]="journals/"+details["JournalTitle"]+"/publications/"+details["Title"]
+        details["TableOfContentsPath"]="journals/"+details["JournalTitle"]+"/TOC/TableOfContents"
+        result=insertJournalPaper(self,details)
+        
+    elif details["Category"].lower().startswith("book"):
+        result=insertBookSection(self,details)
+        details["ScanPath"]="books/"+details["BookTitle"]+"/publications/"+details["Title"]
+        details["TableOfContentsPath"]="books/"+details["BookTitle"]+"/TOC/TableOfContents"
+
     return result
     
         
@@ -56,6 +54,7 @@ def insertExistingConference(self,details, conferenceID):
         insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
+        print "commited"
         
         scanpath = r"..www/files/conferences/"+details["ConferenceTitle"]+"/publications"
         if not os.path.exists(scanpath): os.makedirs(scanpath)
@@ -86,17 +85,18 @@ def insertJournalPaper(self,details):
 
 def insertExistingJournal(self,details,journalID):
     try:        
+        
         #note: although this is repeated code from conference insertion, it is important
         #that it is repeated here to ensure atomicity of insertions
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"], details["ScanPath"], details["Accreditation"]))
         publicationID=self._databaseWrapper._cur.lastrowid
-        print details
         self._databaseWrapper.query("INSERT INTO JournalPublicationDetail(JournalID,PublicationID,Volume,Issue,Abstract) VALUES(?,?,?,?,?)",(journalID, publicationID, details["Volume"], details["Issue"], details["Abstract"]))
-        details["PathToFile"]="peerReview/"+str(publicationID)+"/"+details["DocumentTitle"]
+        #details["PathToFile"]="peerReview/"+str(publicationID)+"/"+details["DocumentTitle"]
         #self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile,DocumentTitle) VALUES(?,?)",(PublicationID,details["PathToFile"]))
         insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
+        print "commited"
         
         scanpath = r"..www/files/journals/"+details["JournalTitle"]+"/publications"
         if not os.path.exists(scanpath): os.makedirs(scanpath)
@@ -137,6 +137,7 @@ def insertExistingBook(self,details,bookID):
         self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile,DocumentTitle) VALUES(?,?)",(PublicationID,details["PathToFile"]))
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
+        print "Commited"
         
         scanpath = r"../www/files/books/"+details["BookTitle"]+"/publications"
         if not os.path.exists(scanpath): os.makedirs(scanpath)

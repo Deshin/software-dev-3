@@ -51,6 +51,7 @@ if __name__ == "__main__":
     
     
 #     details={"Title": "blah",
+#              "Abstract": "blah",
 #              "Category": "Journal Aricle",
 #              "JournalTitle": "blah",
 #              "PeerReviewProcess":"blah",
