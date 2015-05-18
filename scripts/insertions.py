@@ -2,6 +2,7 @@
 
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
+import 
 import cgi
 import cgi, os
 import cgitb; cgitb.enable()
@@ -11,7 +12,7 @@ def main(details):
     rest = RestApi(db)
     result= rest.insertDocument(details)
     if result[0]=="400":
-        print "Status:400"
+        print "Status:404"
         print "Content-Type: text/html"
         print ""
         print "The document could not be added to the database"
@@ -24,7 +25,8 @@ def main(details):
 if __name__ == "__main__":
     form=cgi.FieldStorage()
     details=form.getlist('publication')
-    #print details
+    details=json.dumps(details)
+    print details
 
 # try: # Windows needs stdio set for binary mode.
 #     import msvcrt
@@ -59,7 +61,6 @@ if __name__ == "__main__":
 #              "PeerReviewProcess":"blah",
 #              "Year": "2013",
 #              "Publisher": "blah", 
-#              "Abstract": "blah blah blah",
 #              "ISSN":"1234567",
 #              "Authors":[{"FirstName": "Sarah", "Surname": "Ward", "Initials": "S.R"}, {"FirstName": "Anthony", "Surname": "Farquharson", "Initials":"A.J."}]}
     main(details)
