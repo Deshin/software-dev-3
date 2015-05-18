@@ -4,7 +4,7 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.search.subscribe(function(newVal) {
 		if (newVal != "") {
 			rootViewModel.search(newVal);
-			$.getJSON('/api/publications.py?simpleSearch='+vm.search, vm.gotData);
+			$.getJSON('/api/publications.py?simpleSearch='+vm.search(), vm.gotData);
 		} else {
 			$.getJSON('/api/publications.py', vm.gotData);
 		};
