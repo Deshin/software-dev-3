@@ -16,7 +16,6 @@ def main(details):
         print "Content-Type: text/html"
         print ""
         print "The document could not be added to the database"
-        print result[1]
     else:
         print "Status:200"
         print "Content-Type: text/html"
