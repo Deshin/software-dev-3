@@ -5,27 +5,31 @@ import sys
 import os
 
 def insertDocument(self, details):
-    details["Accreditation"]="Not Yet Accredited"   
-    details["Type"]="Unknown"   
-    if details["Category"].lower().startswith("conference"):
-        details["ScanPath"]="conferences/"+details["ConferenceTitle"]+"/publications/"+details["Title"]
-        details["TableOfContentsPath"]="conferences/"+details["ConferenceTitle"]+"/TOC/TableOfContents"
-        result=insertConferencePaper(self,details)
-        
-    elif details["Category"].lower().startswith("journal"):
-        if "Volume" not in details:
-            details["Volume"]=None
-        if "Issue" not in details:
-            details["Issue"]=None
-        details["HIndex"]=None
-        details["ScanPath"]="journals/"+details["JournalTitle"]+"/publications/"+details["Title"]
-        details["TableOfContentsPath"]="journals/"+details["JournalTitle"]+"/TOC/TableOfContents"
-        result=insertJournalPaper(self,details)
-        
-    elif details["Category"].lower().startswith("book"):
-        result=insertBookSection(self,details)
-        details["ScanPath"]="books/"+details["BookTitle"]+"/publications/"+details["Title"]
-        details["TableOfContentsPath"]="books/"+details["BookTitle"]+"/TOC/TableOfContents"
+    try:
+        details["Accreditation"]="Not Yet Accredited"   
+        details["Type"]="Unknown"   
+    
+        if details["Category"].lower().startswith("conference"):
+            details["ScanPath"]="conferences/"+details["ConferenceTitle"]+"/publications/"+details["Title"]
+            details["TableOfContentsPath"]="conferences/"+details["ConferenceTitle"]+"/TOC/TableOfContents"
+            result=insertConferencePaper(self,details)
+            
+        elif details["Category"].lower().startswith("journal"):
+            if "Volume" not in details:
+                details["Volume"]=None
+            if "Issue" not in details:
+                details["Issue"]=None
+            details["HIndex"]=None
+            details["ScanPath"]="journals/"+details["JournalTitle"]+"/publications/"+details["Title"]
+            details["TableOfContentsPath"]="journals/"+details["JournalTitle"]+"/TOC/TableOfContents"
+            result=insertJournalPaper(self,details)
+            
+        elif details["Category"].lower().startswith("book"):
+            result=insertBookSection(self,details)
+            details["ScanPath"]="books/"+details["BookTitle"]+"/publications/"+details["Title"]
+            details["TableOfContentsPath"]="books/"+details["BookTitle"]+"/TOC/TableOfContents"
+    except:
+        return "400"
     return result
     
         
