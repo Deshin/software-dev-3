@@ -47,7 +47,7 @@ def getAllDocuments(self):
 
 def getDocumentDetails(self, id):
     try:
-        details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id=?", (id))
+        details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id=(?)", [id])
         columnNames = [i[0] for i in self._databaseWrapper._cur.description]
         data=dict(zip(columnNames, details[0]))
         authors = self.getAuthors(id)
@@ -96,8 +96,8 @@ def getDocumentDetails(self, id):
             
             bookDetails=self._databaseWrapper.query("SELECT * FROM Books WHERE ID="+str(data["BooksID"]))
             columnNames = [i[0] for i in self._databaseWrapper._cur.description]
-            journalDetails=dict(zip(columnNames, journalDetails[0]))
-            data=dict(data, **journalDetails)
+            bookDetails=dict(zip(columnNames, bookDetails[0]))
+            data=dict(data, **bookDetails)
             
             peerReview=self._databaseWrapper.query("SELECT * FROM PeerReviewDocumentation WHERE PublicationID="+str(id))
             columnNames = [i[0] for i in self._databaseWrapper._cur.description]
