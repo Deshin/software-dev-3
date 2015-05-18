@@ -3,6 +3,7 @@
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
 import cgi, os
+import sys
 import cgitb; cgitb.enable()
 
 def main(details):
@@ -20,9 +21,7 @@ def main(details):
         print "Success"
 
 if __name__ == "__main__":
-    form=cgi.FieldStorage()
-    details=form.getlist('publication')
-    details=dict(details)
+    details = json.load(sys.stdin)
 
 # try: # Windows needs stdio set for binary mode.
 #     import msvcrt
