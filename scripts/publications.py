@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import cgi
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
@@ -13,10 +14,12 @@ def main(arg):
     if result == "404":
         print "Status:404"
         print "Content-Type: text/html"
+        print
         print ""
         print "404 - No documents were found."
     else:
         print "Content-Type: application/json"
+        print
         print ""
         print result
 

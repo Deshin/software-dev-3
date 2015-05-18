@@ -9,6 +9,8 @@ def insertDocument(self, details):
             details["PathToFile"]=None
         if "DocumentTitle" not in details:
             details["DocumentTitle"]=None
+        details["ScanPath"]="conferences/"+details["ConferenceTitle"]+"/publications/"+details["Title"]
+        details["TableOfContentsPath"]="conferences/"+details["ConferenceTitle"]+"/TOC/TableOfContents"
         result=insertConferencePaper(self,details)
         
     elif details["Category"].lower().startswith("journal"):
@@ -16,11 +18,15 @@ def insertDocument(self, details):
             details["Volume"]=None
         if "Issue" not in details:
             details["Issue"]=None
+        details["Hindex"]=None
+        details["ScanPath"]="journals/"+details["JournalTitle"]+"/publications/"+details["Title"]
+        details["TableOfContentsPath"]="journals/"+details["JournalTitle"]+"/TOC/TableOfContents"
         result=insertJournalPaper(self,details)
         
     elif details["Category"].lower().startswith("book"):
         result=insertBookSection(self,details)
-    insertAuthors(self,details,1)
+    details["ScanPath"]="books/"+details["BookTitle"]+"/publications/"+details["Title"]
+    details["TableOfContentsPath"]="books/"+details["bookTitle"]+"/TOC/TableOfContents"
     return result
     
         
