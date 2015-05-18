@@ -87,7 +87,7 @@ def insertExistingJournal(self,details,journalID):
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO JournalPublicationDetail(JournalID,PublicationID,Volume,Issue,Abstract) VALUES(?,?,?,?,?)",(journalID, publicationID, details["Volume"], details["Issue"], details["Abstract"]))
         details["PathToFile"]="peerReview/"+str(publicationID)+"/"+details["DocumentTitle"]
-        self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile,DocumentTitle) VALUES(?,?)",(PublicationID,details["PathToFile"]))
+        #self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile,DocumentTitle) VALUES(?,?)",(PublicationID,details["PathToFile"]))
         insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()

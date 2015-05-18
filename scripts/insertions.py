@@ -3,6 +3,8 @@
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
 import cgi
+import cgi, os
+import cgitb; cgitb.enable()
 
 def main(details):
     db = SqliteWrapper()
@@ -22,16 +24,44 @@ def main(details):
 if __name__ == "__main__":
     form=cgi.FieldStorage()
     details=form.getlist('publication')
-    details={"Title": "This document is testing book section insertion",
-             "Category": "Book section",
-             "Year": 2015,
-             "Chapter":3,
-             "Publisher": "Testing publishers", 
-             "TableOfContentsPath": "books/arbBook/TOC/TestingInsertion",
-             "ScanPath": "books/arbBook/Publications/TestingInsertion3",
-             "Abstract": "It is important to have a document to test adding to the database",
-             "BookTitle": "PRASA",
-             "ISBN":1234567,
-             "Type":"Accredited",
-             "Authors":[{"FirstName": "Sarah", "Surname": "Ward", "Initials": "S.R"}, {"FirstName": "Anthony", "Surname": "Farquharson", "Initials":"A.J."}]}
+
+# try: # Windows needs stdio set for binary mode.
+#     import msvcrt
+#     msvcrt.setmode (0, os.O_BINARY) # stdin  = 0
+#     msvcrt.setmode (1, os.O_BINARY) # stdout = 1
+# except ImportError:
+#     pass
+# 
+# form = cgi.FieldStorage()
+# 
+# # A nested FieldStorage instance holds the file
+# fileitem = form['file']
+# 
+# # Test if the file was uploaded
+# if fileitem.filename:
+#    
+#    # strip leading path from file name to avoid directory traversal attacks
+#    fn = os.path.basename(fileitem.filename)
+#    open('files/' + fn, 'wb').write(fileitem.file.read())
+#    message = 'The file "' + fn + '" was uploaded successfully'
+#    
+# else:
+#    message = 'No file was uploaded'
+    
+    
+    
+    
+    
+#     details={"Title": "This document is testing book section insertion",
+#              "Category": "Book section",
+#              "Year": 2015,
+#              "Chapter":3,
+#              "Publisher": "Testing publishers", 
+#              "TableOfContentsPath": "books/arbBook/TOC/TestingInsertion",
+#              "ScanPath": "books/arbBook/Publications/TestingInsertion3",
+#              "Abstract": "It is important to have a document to test adding to the database",
+#              "BookTitle": "PRASA",
+#              "ISBN":1234567,
+#              "Type":"Accredited",
+#              "Authors":[{"FirstName": "Sarah", "Surname": "Ward", "Initials": "S.R"}, {"FirstName": "Anthony", "Surname": "Farquharson", "Initials":"A.J."}]}
     main(details)
