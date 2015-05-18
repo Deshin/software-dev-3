@@ -88,7 +88,7 @@ define(["jquery", "knockout"], function($, ko) {
 			},
 			publicationISSN: {
 				required: true,
-				number: true,
+				number: true
 			},
 			publicationISBN: {
 				required: true,
@@ -99,7 +99,9 @@ define(["jquery", "knockout"], function($, ko) {
 			},
 			publicationYear: {
 				required: true,
-				number: true
+				number: true,
+				minlength: 4,
+				min: 1000
 			},
 			publicationCountry: {
 				required: true
