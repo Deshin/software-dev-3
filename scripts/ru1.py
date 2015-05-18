@@ -5,7 +5,8 @@ import sys
 import os
 
 def insertDocument(self, details):
-    details["Accreditation"]="Not Yet Accredited"      
+    details["Accreditation"]="Not Yet Accredited"   
+    details["Type"]="Predatory"   
     if details["Category"].lower().startswith("conference"):
         details["ScanPath"]="conferences/"+details["ConferenceTitle"]+"/publications/"+details["Title"]
         details["TableOfContentsPath"]="conferences/"+details["ConferenceTitle"]+"/TOC/TableOfContents"
