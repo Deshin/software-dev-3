@@ -8,8 +8,8 @@ def main(details):
     db = SqliteWrapper()
     rest = RestApi(db)
     result= rest.insertDocument(details)
-    if result[0]=="404":
-        print "Status:404"
+    if result[0]=="400":
+        print "Status:400"
         print "Content-Type: text/html"
         print ""
         print "The document could not be added to the database"

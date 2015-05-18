@@ -50,7 +50,7 @@ def insertExistingConference(self,details, conferenceID):
         self._databaseWrapper.commit()
         return 200
     except:
-        return "404",sys.exc_info()[1]
+        return "400",sys.exc_info()[1]
 
 def insertNewConference(self,details):
     try:
@@ -59,7 +59,7 @@ def insertNewConference(self,details):
        insertExistingConference(self,details,conferenceID)
        return "200"
     except:
-        return "404",sys.exc_info()[1]
+        return "400",sys.exc_info()[1]
  
     
 def insertJournalPaper(self,details):
@@ -83,7 +83,7 @@ def insertExistingJournal(self,details,journalID):
         self._databaseWrapper.commit()
         return "200"
     except:
-        return "404", sys.exc_info()[1]
+        return "400", sys.exc_info()[1]
 
 def insertNewJournal(self,details):
     try:
@@ -92,7 +92,7 @@ def insertNewJournal(self,details):
        insertExistingJournal(self,details,journalID)
        return "200"
     except:
-        return "404",sys.exc_info()[1]
+        return "400",sys.exc_info()[1]
     
 def insertBookSection(self,details):
     existingBook=self._databaseWrapper.query("SELECT * FROM Books WHERE BookTitle=?",[details["BookTitle"]])
@@ -116,7 +116,7 @@ def insertExistingBook(self,details,bookID):
         self._databaseWrapper.commit()
         return "200"
     except:
-        return "404", sys.exc_info()[1]
+        return "400", sys.exc_info()[1]
 
 def insertNewBook(self,details):
     try:
@@ -125,7 +125,7 @@ def insertNewBook(self,details):
        insertExistingBook(self,details,bookID)
        return "200"
     except:
-        return "404",sys.exc_info()[1]    
+        return "400",sys.exc_info()[1]    
     
 def insertAuthors(self, details, publicationID):
     try:
@@ -133,4 +133,4 @@ def insertAuthors(self, details, publicationID):
             self._databaseWrapper.query("INSERT INTO Authors(PublicationID, FirstName, Surname,Initials) VALUES(?,?,?,?)",(publicationID,item["FirstName"], item["Surname"], item["Initials"]))
         return"200"
     except:
-        return "404", sys.exc_info()[1]
+        return "400", sys.exc_info()[1]
