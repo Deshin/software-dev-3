@@ -1,16 +1,7 @@
 define(["jquery", "knockout"], function($, ko) {
 	var vm = this;
-	vm.search = ko.observable(null);
-	vm.search.subscribe(function(newVal) {
-		if (newVal != "") {
-			rootViewModel.search(newVal);
-			$.getJSON('/api/publications.py?simpleSearch='+vm.search(), vm.gotData);
-		} else {
-			$.getJSON('/api/publications.py', vm.gotData);
-		};
-	}, vm, 'change');
-	vm.publications = ko.observableArray([]);
 	vm.gotData = function(data) {
+		console.log(data);
 		vm.publications.removeAll();
 		for (var i = 0; i < data.length; i++) {
 			var authors = "";
@@ -25,5 +16,17 @@ define(["jquery", "knockout"], function($, ko) {
 			vm.publications.push(data[i]);
 		}
 	}
+	vm.search = ko.observable(null);
+	vm.search.subscribe(function(newVal) {
+		if (newVal != "") {
+			console.log("Searching for: ", newVal);
+			rootViewModel.search(newVal);
+			$.getJSON('/api/publications.py?simpleSearch='+vm.search(), vm.gotData);
+		} else {
+			rootViewModel.search("");
+			$.getJSON('/api/publications.py', vm.gotData);
+		};
+	}, vm, 'change');
+	vm.publications = ko.observableArray([]);
 	return vm;
 });
