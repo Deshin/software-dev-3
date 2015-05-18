@@ -25,11 +25,19 @@ define(["jquery", "knockout"], function($, ko) {
 		if($('#uploadPublication').valid()) {
 			vmToJson();
 			console.log(publication);
-			$.post("/api/insertions.py", publication)
-			.success(function() {
-				console.log("Success");
-			}).fail(function () {
-				console.log("Failed");
+			$.ajax({
+				url: "/api/insertions.py",
+				type: "POST",
+				contentType: "application/json",
+				data: JSON.stringify(publication),
+
+				success: function(data) {
+					console.log("Success");
+				},
+
+				error: function (jqXHR) {
+					console.log("Error: " + jqXHR.status + " - " + jqXHR.statusText);
+				},
 			});
 		}
 	}
@@ -50,7 +58,7 @@ define(["jquery", "knockout"], function($, ko) {
 		formVM.Issue = ko.observable("");												// #
 		formVM.Publisher = ko.observable("");										// #
 		formVM.Year = ko.observable("");												// #
-		formVM.ISSN = ko.observable("");												// #
+		formVM.ISSN = ko.observable("");													// #
 		formVM.ISBN = ko.observable("");												// #
 		vm.formVM = formVM;
 	}
@@ -79,16 +87,19 @@ define(["jquery", "knockout"], function($, ko) {
 				required: true
 			},
 			publicationISSN: {
-				required: true
+				required: true,
+				number: true,
 			},
 			publicationISBN: {
-				required: true
+				required: true,
+				number: true
 			},
 			publicationPublisher: {
 				required: true
 			},
 			publicationYear: {
-				required: true
+				required: true,
+				number: true
 			},
 			publicationCountry: {
 				required: true
@@ -98,25 +109,66 @@ define(["jquery", "knockout"], function($, ko) {
 			},
 			publicationMotivation: {
 				required: true
+			},
+			publicationIssue: {
+				number: true
+			},
+			publicationVolume: {
+				number: true
 			}
 		};
 	}
 
 	function publicationMessages() {
 		return {
-			publicationTitle: "Please enter a valid Title.",
-			publicationAbstract: "Please enter a valid Abstract.",
-			publicationAuthors: "Please enter a valid Author(s).",
-			publicationCategory: "Please enter a valid Category.",
-			publicationJournalTitle: "Please enter a valid Journal Title.",
-			publicationConferenceTitle: "Please enter a valid Conference Title.",
-			publicationBookTitle: "Please enter a valid Book Title.",
-			publicationISSN: "Please enter a valid ISSN.",
-			publicationISBN: "Please enter a valid ISBN.",
-			publicationPublisher: "Please enter a valid Publisher.",
-			publicationYear: "Please enter a valid Year.",
-			publicationCountry: "Please enter a valid Country.",
-			publicationPeerReview: "Please enter the peer review process for this Conference."
+			publicationTitle: {
+				required: "Please enter a valid Title."
+			},
+			publicationAbstract: {
+				required: "Please enter a valid Abstract."
+			},
+			publicationAuthors: {
+				required: "Please enter a valid Author(s)."
+			},
+			publicationCategory: {
+				required: "Please enter a valid Category."
+			},
+			publicationJournalTitle: {
+				required: "Please enter a valid Journal Title."
+			},
+			publicationConferenceTitle: {
+				required: "Please enter a valid Conference Title."
+			},
+			publicationBookTitle: {
+				required: "Please enter a valid Book Title."
+			},
+			publicationISSN: {
+				required: "Please enter a valid ISSN.",
+				number: "The ISSN must be a number."
+			},
+			publicationISBN:{
+				required:  "Please enter a valid ISBN.",
+				number: "The ISBN must be a number."
+			},
+			publicationPublisher: {
+				required: "Please enter a valid Publisher."
+			},
+			publicationYear: {
+				required: "Please enter a valid Year.",
+				number: "The Year must be a number."
+			},
+			publicationCountry: {
+				required: "Please enter a valid Country."
+			},
+			publicationPeerReview: {
+				required: "Please enter the peer review process for this Conference."
+			},
+			publicationVolume: {
+				number: "The Volume must be a number."
+			},
+			publicationIssue: {
+				number: "The Issue must be a number."
+			}
 		};
 	}
 
