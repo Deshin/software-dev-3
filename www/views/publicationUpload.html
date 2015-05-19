@@ -118,6 +118,13 @@
 					<textarea rows="4" name="publicationPeerReview" id="publicationPeerReview" data-bind="textInput: formVM.PeerReviewProcess" class="form-control col-md-12"/>
 				</div>
 			</div>
+			<div class="form-group col-md-12">
+				<label for="publicationFile" class="col-md-2">Publication<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<input class="btn btn-success col-md-12" type="file"
+							data-bind="fileInput: fileVM.PublicationFile" accept="application/pdf">
+				</div>
+			</div>
 			<br/>
 			<div class="col-md-12">
 				<div class="col-md-12">

@@ -4,7 +4,6 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 	vm.submitPublication = submitPublication;
 	var publication = {};
 	vm.categoryList = ko.observableArray(['', 'Journal Article', 'Conference Paper', 'Book Chapter']);
-	var formVM = {};
 
 	$('#uploadPublication').validate({
 		rules: publicationRules(),
@@ -43,6 +42,7 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 	}
 
 	function init() {
+		var formVM = {};
 		formVM.Title = ko.observable("");												// #
 		formVM.CategoryTitle = ko.observable("");								// #
 		formVM.Abstract = ko.observable("");										// #
@@ -59,6 +59,12 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 		formVM.ISSN = ko.observable("");													// #
 		formVM.ISBN = ko.observable("");												// #
 		vm.formVM = formVM;
+
+		var fileVM = {};
+		fileVM.PublicationFile = ko.observable({
+			dataURL: ko.observable(),
+		});
+		vm.fileVM = fileVM;
 	}
 
 	function publicationRules() {
@@ -173,24 +179,33 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 	}
 
 	function vmToJson() {
-		for (var id in formVM) {
-			if(formVM[id]()) {
+		for (var id in vm.formVM) {
+			if(vm.formVM[id]()) {
 				if(id === 'Authors') {
 					publication[id] = [{Initials: 'SR', FirstName: 'Sarah', Surname: 'Chen'}];
 				} else if(id === 'CategoryTitle') {
-					if(formVM.Category() === 'Journal Article') {
-						publication.JournalTitle = formVM[id]();
-					} else if (formVM.Category() === 'Conference Paper') {
-						publication.ConferenceTitle = formVM[id]();
-					} else if (formVM.Category() === 'Book Chapter') {
-						publication.BookTitle = formVM[id]();
+					if(vm.formVM.Category() === 'Journal Article') {
+						publication.JournalTitle = vm.formVM[id]();
+					} else if (vm.formVM.Category() === 'Conference Paper') {
+						publication.ConferenceTitle = vm.formVM[id]();
+					} else if (vm.formVM.Category() === 'Book Chapter') {
+						publication.BookTitle = vm.formVM[id]();
 					}
 				} else {
-					publication[id] = formVM[id]();
+					publication[id] = vm.formVM[id]();
 				}
 			} else {
 				delete publication[id];
 			}
+		}
+
+		for (var fileId in vm.fileVM) {
+			publication[fileId] = {
+				data: "",
+				file: {}
+			};
+			publication[fileId].data = vm.fileVM[fileId]().dataURL();
+			publication[fileId].file = vm.fileVM[fileId]().file();
 		}
 	}
 
