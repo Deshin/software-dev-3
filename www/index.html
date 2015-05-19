@@ -50,7 +50,7 @@
 		<div class="row" data-bind="page: {id: 'publicationUpload', title: 'Publication Upload', sourceOnShow: 'views/publicationUpload.html', withOnShow: getVM('publicationUpload')}">
 		</div>
 
-		<div class="row" data-bind="page: {role: 'start', id: 'publications', title: 'All publications', params:{'search' : '', 'page': 1, 'pageSize':20}, sourceOnShow: 'views/publications.html', withOnShow: getVM('publications')}">
+		<div class="row" data-bind="page: {role: 'start', id: 'publications', title: 'All publications', params:{'search' : '', 'page': 1, 'pageSize':20, sort: 'ASC', sortBy: 'Title'}, sourceOnShow: 'views/publications.html', withOnShow: getVM('publications')}">
 		</div>
 
 		<div class="row" data-bind="page: {id: 'landing', title: 'Landing Page', sourceOnShow: 'views/landing.html', withOnShow: getVM('landing')}"></div>

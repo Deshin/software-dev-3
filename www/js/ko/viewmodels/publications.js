@@ -24,10 +24,10 @@ define(["jquery", "knockout"], function($, ko) {
 	};
 	vm.search = ko.observable(null);
 	vm.updateList = function(newVal) {
-		if (vm.page() === null || vm.pageSize() === null || vm.search() === null) {
+		if (vm.page() === null || vm.pageSize() === null || vm.search() === null || vm.sort() === null || vm.sortBy() === null) {
 			return;
 		}
-		var getUrl = '/api/publications.py?skip='+vm.skip().toString()+'&length='+vm.pageSize().toString();
+		var getUrl = '/api/publications.py?skip='+vm.skip().toString()+'&length='+vm.pageSize().toString()+'&sortBy='+vm.sortBy()+'&sort='+vm.sort();
 		if (vm.search() !== ""){
 			rootViewModel.search(vm.search());
 			getUrl += '&simpleSearch='+vm.search();
@@ -40,6 +40,7 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.page.subscribe(updateList, vm, 'change');
 	vm.pageSize.subscribe(updateList, vm, 'change');
 	vm.sortBy.subscribe(updateList, vm, 'change');
+	vm.sort.subscribe(updateList, vm, 'change');
 	vm.publications = ko.observableArray([]);
 	vm.next = function() {
 		vm.page(vm.page()+1);
@@ -51,9 +52,16 @@ define(["jquery", "knockout"], function($, ko) {
 		vm.page(1);
 	};
 	vm.sorting = function(item){
-		vm.sortBy(item);
-		vm.sort("ASC");
-		
+		if (vm.sortBy() === item) {
+			if (vm.sort() === "ASC") {
+				vm.sort("DESC");
+			} else{
+				vm.sort("ASC");
+			}
+		} else{
+			vm.sortBy(item);
+			vm.sort("ASC");
+		}
 	};
 	return vm;
 });
