@@ -121,15 +121,35 @@
 			<div class="form-group col-md-12">
 				<label for="publicationFile" class="col-md-2">Publication<span class="text-danger">*</span>:</label>
 				<div class="col-md-10">
-					<input class="col-md-12" type="file"
-							name="publicationFile" id="publicationFile" data-bind="fileInput: fileVM.PublicationFile">
+					<span class="col-md-8">
+						<!-- ko if: fileVM.PublicationFile().base64String() -->
+						<pre class="form-control" data-bind="text: fileVM.PublicationFile().file().name"></pre>
+						<!-- /ko -->
+						<!-- ko ifnot: fileVM.PublicationFile().base64String() -->
+						<pre class="form-control">No files selected</pre>
+						<!-- /ko -->
+					</span>
+					<button class="col-md-4 btn btn-success btn-file">
+						<input type="file" name="publicationFile" id="publicationFile" data-bind="fileInput: fileVM.PublicationFile">
+						Upload
+					</button>
 				</div>
 			</div>
 			<div class="form-group col-md-12">
 				<label for="publicationToc" class="col-md-2">Table of Contents<span class="text-danger">*</span>:</label>
 				<div class="col-md-10">
-					<input class="col-md-12" type="file"
-							name="publicationToc" id="publicationToc" data-bind="fileInput: fileVM.PublicationToc">
+					<span class="col-md-8">
+						<!-- ko if: fileVM.PublicationToc().base64String() -->
+						<pre class="form-control" data-bind="text: fileVM.PublicationToc().file().name"></pre>
+						<!-- /ko -->
+						<!-- ko ifnot: fileVM.PublicationToc().base64String() -->
+						<pre class="form-control">No files selected</pre>
+						<!-- /ko -->
+					</span>
+					<button class="col-md-4 btn btn-success btn-file">
+						<input type="file" name="publicationToc" id="publicationToc" data-bind="fileInput: fileVM.PublicationToc">
+						Upload
+					</button>
 				</div>
 			</div>
 			<div class="form-group col-md-12">
@@ -137,15 +157,15 @@
 				<div class="col-md-10">
 					<span class="col-md-8">
 						<!-- ko if: fileVM.SupportingDocumentation().base64String() -->
-						<input class="form-control" disabled data-bind="text: fileVM.SupportingDocumentation().file().name"/>
+						<pre class="form-control" data-bind="text: fileVM.SupportingDocumentationFiles"></pre>
 						<!-- /ko -->
 						<!-- ko ifnot: fileVM.SupportingDocumentation().base64String() -->
-						<input class="form-control" disabled />
+						<pre class="form-control">No files selected</pre>
 						<!-- /ko -->
 					</span>
 					<button class="col-md-4 btn btn-success btn-file">
 						<input type="file" name="SupportingDocumentation" id="SupportingDocumentation"
-								data-bind="fileInput: fileVM.SupportingDocumentation" />
+						data-bind="fileInput: fileVM.SupportingDocumentation" multiple/>
 						Upload
 					</button>
 				</div>

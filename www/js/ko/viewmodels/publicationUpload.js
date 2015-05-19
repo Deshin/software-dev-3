@@ -70,6 +70,12 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 		fileVM.SupportingDocumentation = ko.observable({
 			base64String: ko.observable()
 		});
+		fileVM.SupportingDocumentationFiles = ko.observable("");
+		fileVM.SupportingDocumentation().base64String.subscribe(function(newVal) {
+			vm.fileVM.SupportingDocumentationFiles(vm.fileVM.SupportingDocumentation().file().name);
+			console.log(vm.fileVM.SupportingDocumentationFiles());
+
+		});
 
 		vm.fileVM = fileVM;
 }
