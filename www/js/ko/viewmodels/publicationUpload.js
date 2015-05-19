@@ -4,6 +4,8 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 	vm.submitPublication = submitPublication;
 	var publication = {};
 	vm.categoryList = ko.observableArray(['', 'Journal Article', 'Conference Paper', 'Book Chapter']);
+	vm.clearSupportingDoc = clearSupportingDoc;
+	var SupportingDocs = [];
 
 	$('#uploadPublication').validate({
 		rules: publicationRules(),
@@ -67,12 +69,31 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 		fileVM.PublicationToc = ko.observable({
 			base64String: ko.observable()
 		});
-		fileVM.SupportingDocumentation = ko.observable({
+
+		vm.SupportingDocumentation = ko.observable({
 			base64String: ko.observable()
 		});
 
+		vm.SupportingDocumentationFiles = ko.observable("");
+		vm.SupportingDocumentation().base64String.subscribe(function(newVal) {
+			if(vm.SupportingDocumentationFiles()) {
+				vm.SupportingDocumentationFiles(vm.SupportingDocumentationFiles() + ", " + vm.SupportingDocumentation().file().name);
+			} else {
+				vm.SupportingDocumentationFiles(vm.SupportingDocumentation().file().name);
+			}
+			SupportingDocs.push({
+				data: vm.SupportingDocumentation().base64String(),
+				file: vm.SupportingDocumentation().file()
+			});
+		});
+
 		vm.fileVM = fileVM;
-}
+	}
+
+	function clearSupportingDoc() {
+		vm.SupportingDocumentationFiles("");
+		SupportingDocs = [];
+	}
 
 	function publicationRules() {
 		return {
@@ -226,6 +247,8 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 			publication[fileId].data = vm.fileVM[fileId]().base64String();
 			publication[fileId].file = vm.fileVM[fileId]().file();
 		}
+
+		publication.SupportingDocumentation = SupportingDocs;
 	}
 
 });

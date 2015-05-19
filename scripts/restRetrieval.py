@@ -25,8 +25,8 @@ def getAllAuthors(self):
                      "Initials" : auths[j][4]})
     return auth      
 
-def getAllDocuments(self):
-    pubs = self._databaseWrapper.query("SELECT * FROM Publications")
+def getAllDocuments(self, skip, length):
+    pubs = self._databaseWrapper.query("SELECT * FROM Publications LIMIT ? OFFSET ? ", (length, skip))
 
     if pubs == []:
         return "404"
