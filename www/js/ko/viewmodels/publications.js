@@ -2,7 +2,7 @@ define(["jquery", "knockout"], function($, ko) {
 	var vm = this;
 	vm.pageSize = ko.observable(null);
 	vm.page = ko.observable(null);
-	vm.skip = ko.pureComputed(function() {
+	vm.skip = ko.computed(function() {
 		return (vm.page()-1)*vm.pageSize();
 	});
 	vm.gotData = function(data) {
@@ -38,5 +38,14 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.page.subscribe(updateList, vm, 'change');
 	vm.pageSize.subscribe(updateList, vm, 'change');
 	vm.publications = ko.observableArray([]);
+	vm.next = function() {
+		vm.page(vm.page()+1);
+	}
+	vm.previous = function() {
+		vm.page(vm.page()-1);
+	}
+	vm.first = function() {
+		vm.page(1);
+	}
 	return vm;
 });

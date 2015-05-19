@@ -18,3 +18,12 @@
 		</tr>
 	</tbody>
 </table>
+<nav>
+  <ul class="pager">
+  	<!-- ko ifnot : page() == 1 -->
+  	<li class="previous"><a href="#" click="{{first}}"><span aria-hidden="true">&larr;</span>First</a></li>
+    <li class="previous"><a href="#" click="{{previous}}"><span aria-hidden="true">&larr;</span>Previous</a></li>
+    <!-- /ko -->
+    <li class="next"><a href="#" click="{{next}}">Next<span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav>
