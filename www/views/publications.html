@@ -1,10 +1,10 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Title</th>
-			<th>Category</th>
-			<th>Year</th>
-			<th>Publisher</th>
+			<th><a href="#" click="{{sorting("Title")}}"></a>Title</th>
+			<th><a href="#" click="{{sorting("Category")}}">Category</th>
+			<th><a href="#" click="{{sorting("Year")}}">Year</th>
+			<th><a href="#" click="{{sorting("Publisher")}}">Publisher</th>
 			<th>Authors</th>
 		</tr>
 	</thead>
@@ -25,5 +25,6 @@
     <li class="previous"><a href="#" click="{{previous}}"><span aria-hidden="true">&larr;</span>Previous</a></li>
     <!-- /ko -->
     <li class="next"><a href="#" click="{{next}}">Next<span aria-hidden="true">&rarr;</span></a></li>
+	
   </ul>
 </nav>

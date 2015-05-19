@@ -2,6 +2,8 @@ define(["jquery", "knockout"], function($, ko) {
 	var vm = this;
 	vm.pageSize = ko.observable(null);
 	vm.page = ko.observable(null);
+	vm.sortBy=ko.observable(null);
+	vm.sort=ko.observable(null);
 	vm.skip = ko.computed(function() {
 		return (vm.page()-1)*vm.pageSize();
 	});
@@ -19,33 +21,39 @@ define(["jquery", "knockout"], function($, ko) {
 			data[i].link = "#!/publicationDetails?pubId="+data[i].PublicationId.toString();
 			vm.publications.push(data[i]);
 		}
-	}
+	};
 	vm.search = ko.observable(null);
 	vm.updateList = function(newVal) {
 		if (vm.page() === null || vm.pageSize() === null || vm.search() === null) {
 			return;
-		};
+		}
 		var getUrl = '/api/publications.py?skip='+vm.skip().toString()+'&length='+vm.pageSize().toString();
-		if (vm.search() != "") {
+		if (vm.search() !== ""){
 			rootViewModel.search(vm.search());
 			getUrl += '&simpleSearch='+vm.search();
 		} else {
-			rootViewModel.search("");	
-		};
+			rootViewModel.search("");
+		}
 		$.getJSON(getUrl, vm.gotData);
 	};
 	vm.search.subscribe(updateList, vm, 'change');
 	vm.page.subscribe(updateList, vm, 'change');
 	vm.pageSize.subscribe(updateList, vm, 'change');
+	vm.sortBy.subscribe(updateList, vm, 'change');
 	vm.publications = ko.observableArray([]);
 	vm.next = function() {
 		vm.page(vm.page()+1);
-	}
+	};
 	vm.previous = function() {
 		vm.page(vm.page()-1);
-	}
+	};
 	vm.first = function() {
 		vm.page(1);
-	}
+	};
+	vm.sorting = function(item){
+		vm.sortBy(item);
+		vm.sort("ASC");
+		
+	};
 	return vm;
 });

@@ -5,6 +5,7 @@ from SqliteWrapper import SqliteWrapper
 import cgi, os
 import sys
 import json
+import base64
 
 
 def main(details):
@@ -25,10 +26,7 @@ def main(details):
 
 if __name__ == "__main__":
     details = json.load(sys.stdin)
-        
-        
-        
-        
+              
     
 #     details={"Title": "blah",
 #              "Abstract": "blah",
