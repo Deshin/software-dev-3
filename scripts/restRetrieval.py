@@ -63,7 +63,6 @@ def getDocumentDetails(self, id):
             data=dict(data,**journalPubDetails)
             
             journalDetails=self._databaseWrapper.query("SELECT * FROM Journals WHERE ID=(?)",[str(data["JournalID"])])
-            print journalDetails
             columnNames = [i[0] for i in self._databaseWrapper._cur.description]
             journalDetails=dict(zip(columnNames, journalDetails[0]))
             data=dict(data, **journalDetails)
