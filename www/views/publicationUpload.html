@@ -121,8 +121,33 @@
 			<div class="form-group col-md-12">
 				<label for="publicationFile" class="col-md-2">Publication<span class="text-danger">*</span>:</label>
 				<div class="col-md-10">
-					<input class="btn btn-success col-md-12" type="file"
+					<input class="col-md-12" type="file"
 							name="publicationFile" id="publicationFile" data-bind="fileInput: fileVM.PublicationFile">
+				</div>
+			</div>
+			<div class="form-group col-md-12">
+				<label for="publicationToc" class="col-md-2">Table of Contents<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<input class="col-md-12" type="file"
+							name="publicationToc" id="publicationToc" data-bind="fileInput: fileVM.PublicationToc">
+				</div>
+			</div>
+			<div class="form-group col-md-12">
+				<label for="SupportingDocumentation" class="col-md-2">Supporting Documentation<span class="text-danger">*</span>:</label>
+				<div class="col-md-10">
+					<span class="col-md-8">
+						<!-- ko if: fileVM.SupportingDocumentation().base64String() -->
+						<input class="form-control" disabled data-bind="text: fileVM.SupportingDocumentation().file().name"/>
+						<!-- /ko -->
+						<!-- ko ifnot: fileVM.SupportingDocumentation().base64String() -->
+						<input class="form-control" disabled />
+						<!-- /ko -->
+					</span>
+					<button class="col-md-4 btn btn-success btn-file">
+						<input type="file" name="SupportingDocumentation" id="SupportingDocumentation"
+								data-bind="fileInput: fileVM.SupportingDocumentation" />
+						Upload
+					</button>
 				</div>
 			</div>
 			<br/>

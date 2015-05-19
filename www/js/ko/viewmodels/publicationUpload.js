@@ -56,16 +56,23 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 		formVM.Issue = ko.observable("");												// #
 		formVM.Publisher = ko.observable("");										// #
 		formVM.Year = ko.observable("");												// #
-		formVM.ISSN = ko.observable("");													// #
+		formVM.ISSN = ko.observable("");												// #
 		formVM.ISBN = ko.observable("");												// #
 		vm.formVM = formVM;
 
 		var fileVM = {};
 		fileVM.PublicationFile = ko.observable({
-			dataURL: ko.observable(),
+			base64String: ko.observable()
 		});
+		fileVM.PublicationToc = ko.observable({
+			base64String: ko.observable()
+		});
+		fileVM.SupportingDocumentation = ko.observable({
+			base64String: ko.observable()
+		});
+
 		vm.fileVM = fileVM;
-	}
+}
 
 	function publicationRules() {
 		return {
@@ -124,6 +131,9 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 			},
 			publicationFile: {
 				required: true
+			},
+			publicationToc: {
+				required: true
 			}
 		};
 	}
@@ -180,6 +190,9 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 			},
 			publicationFile: {
 				required: "Please upload a value publication file."
+			},
+			publicationToc: {
+				required: "Please upload a value table of contents file."
 			}
 		};
 	}
@@ -210,7 +223,7 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 				data: "",
 				file: {}
 			};
-			publication[fileId].data = vm.fileVM[fileId]().dataURL();
+			publication[fileId].data = vm.fileVM[fileId]().base64String();
 			publication[fileId].file = vm.fileVM[fileId]().file();
 		}
 	}
