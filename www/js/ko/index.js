@@ -6,11 +6,12 @@ requirejs.config({
     jqueryvalidate: 'jquery.validate.min',
     knockout: 'knockout-3.3.0',
     kopunches: 'knockout.punches.min',
+    kofilebind: 'knockout-file-bindings',
     pager: 'pager.min'
   }
 });
 
-requirejs(['jquery', 'knockout', 'kopunches', 'pager', 'jqueryvalidate'], function($, ko, kopunches, pager, $valid) {
+requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvalidate'], function($, ko, kopunches, kofilebind, pager, $valid) {
   function RootViewModel() {
     var self = this;
     self.search = ko.observable("");

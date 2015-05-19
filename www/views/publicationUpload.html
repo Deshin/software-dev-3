@@ -20,7 +20,7 @@
 			<div class="form-group col-md-12">
 				<label for="publicationConferenceTitle" class="col-md-2">Conference Title<span class="text-danger">*</span>:</label>
 				<div class="col-md-10">
-					<input class="form-control col-md-12" type="text" name="publicationConferenceTitle" id="publicationConferenceTitle" data-bind="textInput: formVM.ConferenceTitle" />
+					<input class="form-control col-md-12" type="text" name="publicationConferenceTitle" id="publicationConferenceTitle" data-bind="textInput: formVM.CategoryTitle" />
 				</div>
 			</div>
 			<!-- /ko -->
@@ -28,7 +28,7 @@
 			<div class="form-group col-md-12">
 				<label for="publicationJournalTitle" class="col-md-2">Journal Title<span class="text-danger">*</span>:</label>
 				<div class="col-md-10">
-					<input class="form-control col-md-12" type="text" name="publicationJournalTitle" id="publicationJournalTitle" data-bind="textInput: formVM.JournalTitle" />
+					<input class="form-control col-md-12" type="text" name="publicationJournalTitle" id="publicationJournalTitle" data-bind="textInput: formVM.CategoryTitle" />
 				</div>
 			</div>
 			<!-- /ko -->
@@ -36,7 +36,7 @@
 			<div class="form-group col-md-12">
 				<label for="publicationBookTitle" class="col-md-2">Book Title<span class="text-danger">*</span>:</label>
 				<div class="col-md-10">
-					<input class="form-control col-md-12" type="text" name="publicationBookTitle" id="publicationBookTitle" data-bind="textInput: formVM.Title.BookTitle" />
+					<input class="form-control col-md-12" type="text" name="publicationBookTitle" id="publicationBookTitle" data-bind="textInput: formVM.CategoryTitle" />
 				</div>
 			</div>
 			<!-- /ko -->
@@ -118,7 +118,6 @@
 					<textarea rows="4" name="publicationPeerReview" id="publicationPeerReview" data-bind="textInput: formVM.PeerReviewProcess" class="form-control col-md-12"/>
 				</div>
 			</div>
-
 			<br/>
 			<div class="col-md-12">
 				<div class="col-md-12">

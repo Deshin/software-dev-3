@@ -1,9 +1,9 @@
-define(["jquery", "knockout"], function($, ko) {
+define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $valid, ko, kofilebind) {
 	var vm = this;
 
 	vm.submitPublication = submitPublication;
 	var publication = {};
-	vm.categoryList = ko.observableArray(['Journal Article', 'Conference Paper', 'Book Chapter']);
+	vm.categoryList = ko.observableArray(['', 'Journal Article', 'Conference Paper', 'Book Chapter']);
 	var formVM = {};
 
 	$('#uploadPublication').validate({
@@ -44,9 +44,7 @@ define(["jquery", "knockout"], function($, ko) {
 
 	function init() {
 		formVM.Title = ko.observable("");												// #
-		formVM.BookTitle = ko.observable("");										// #
-		formVM.JournalTitle = ko.observable("");								// #
-		formVM.ConferenceTitle = ko.observable("");							// #
+		formVM.CategoryTitle = ko.observable("");								// #
 		formVM.Abstract = ko.observable("");										// #
 		formVM.Authors = ko.observable("");											// # - Form to object.
 		formVM.Category = ko.observable("");										// #
@@ -179,6 +177,14 @@ define(["jquery", "knockout"], function($, ko) {
 			if(formVM[id]()) {
 				if(id === 'Authors') {
 					publication[id] = [{Initials: 'SR', FirstName: 'Sarah', Surname: 'Chen'}];
+				} else if(id === 'CategoryTitle') {
+					if(formVM.Category() === 'Journal Article') {
+						publication.JournalTitle = formVM[id]();
+					} else if (formVM.Category() === 'Conference Paper') {
+						publication.ConferenceTitle = formVM[id]();
+					} else if (formVM.Category() === 'Book Chapter') {
+						publication.BookTitle = formVM[id]();
+					}
 				} else {
 					publication[id] = formVM[id]();
 				}
