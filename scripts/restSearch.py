@@ -1,6 +1,6 @@
 import json
 
-def simpleSearch(self, searchTerm):
+def simpleSearch(self, searchTerm, skip, length):
     # searchTerms is a list of strings
     query = "SELECT  Publications.* "\
         "FROM Publications JOIN Authors ON Authors.PublicationID=Publications.ID "\
@@ -8,8 +8,9 @@ def simpleSearch(self, searchTerm):
         "Authors.FirstName LIKE ? OR "\
         "Authors.Surname Like ? OR "\
         "Publications.Title LIKE ? "\
-        "GROUP BY Publications.Title "
-    pubs = self._databaseWrapper.query(query, ('%'+searchTerm+'%','%'+searchTerm+'%','%'+searchTerm+'%'))
+        "GROUP BY Publications.Title "\
+        "LIMIT ? OFFSET ? "
+    pubs = self._databaseWrapper.query(query, ('%'+searchTerm+'%','%'+searchTerm+'%','%'+searchTerm+'%', length, skip))
     if pubs == []:
         return "200"
     data = []

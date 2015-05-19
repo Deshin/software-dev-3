@@ -4,13 +4,13 @@ import cgi
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
 
-def main(arg):
+def main(simpleSearch, skip, length):
     db = SqliteWrapper()
     rest = RestApi(db)
-    if arg == None:
-        result = rest.getAllDocuments()
+    if simpleSearch == None:
+        result = rest.getAllDocuments(skip, length)
     else:
-        result = rest.simpleSearch(arg)
+        result = rest.simpleSearch(simpleSearch, skip, length)
     if result == "404":
         print "Status:404"
         print "Content-Type: text/html"
@@ -25,5 +25,7 @@ def main(arg):
 
 if __name__ == "__main__":
     form = cgi.FieldStorage()
-    search = form.getvalue("simpleSearch", None)
-    main(search)    
+    simpleSearch = form.getvalue("simpleSearch", None)
+    skip = form.getvalue("skip", None)
+    length = form.getvalue("length", None)
+    main(simpleSearch, skip, length)    
