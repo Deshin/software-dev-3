@@ -112,3 +112,6 @@ def getDocumentDetails(self, id):
             return data
     except:
         return "404"
+    
+def getLoginCredentials(self,username,hash):
+    result="Hi"

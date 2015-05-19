@@ -26,6 +26,9 @@ class RestApi:
 
     def getDocumentDetails(self, id):
         return restRetrieval.getDocumentDetails(self, id)
+    
+    def getLoginCredentials(self,username,hash):
+        return restRetrieval.getLoginCredentials(self,username,hash)
         
     def insertDocument(self, details):
         return ru1.insertDocument(self, details)
@@ -35,6 +38,7 @@ class RestApi:
    
     def sortDocuments(self,sortBy, sort):
         return restSearch.sortDocuments(self, sortBy, sort)
+    
 
 
         
