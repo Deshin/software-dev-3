@@ -5,8 +5,14 @@ from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
 
 def main(username,hash):
-    
-    result="401"
+    db = SqliteWrapper()
+    rest = RestApi(db)
+    if result=="401":
+        result="401"
+    else:
+        result=rest.getLoginCredentials(username)
+        if result!=hash:
+            result="401"
     if result == "401":
         print "Status:401"
         print "Content-Type: text/html"

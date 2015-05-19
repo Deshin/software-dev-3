@@ -27,8 +27,8 @@ class RestApi:
     def getDocumentDetails(self, id):
         return restRetrieval.getDocumentDetails(self, id)
     
-    def getLoginCredentials(self,username,hash):
-        return restRetrieval.getLoginCredentials(self,username,hash)
+    def getLoginCredentials(self,username):
+        return restRetrieval.getLoginCredentials(self,username)
         
     def insertDocument(self, details):
         return ru1.insertDocument(self, details)
