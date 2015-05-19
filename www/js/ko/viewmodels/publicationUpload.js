@@ -121,6 +121,9 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 			},
 			publicationVolume: {
 				number: true
+			},
+			publicationFile: {
+				required: true
 			}
 		};
 	}
@@ -174,6 +177,9 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 			},
 			publicationIssue: {
 				number: "The Issue must be a number."
+			},
+			publicationFile: {
+				required: "Please upload a value publication file."
 			}
 		};
 	}
