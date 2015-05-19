@@ -84,7 +84,7 @@ body {
   margin-top: 0;
 }
 
-#nav-search-input-group {
+.nav-search-input-group {
   width: 300px;
   margin-top: 8px;
   margin-bottom: 5px;
