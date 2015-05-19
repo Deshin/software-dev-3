@@ -19,19 +19,19 @@ define(["jquery", "knockout"], function($, ko) {
 			data[i].link = "#!/publicationDetails?pubId="+data[i].PublicationId.toString();
 			vm.publications.push(data[i]);
 		}
-	}
+	};
 	vm.search = ko.observable(null);
 	vm.updateList = function(newVal) {
 		if (vm.page() === null || vm.pageSize() === null || vm.search() === null) {
 			return;
-		};
+		}
 		var getUrl = '/api/publications.py?skip='+vm.skip().toString()+'&length='+vm.pageSize().toString();
-		if (vm.search() != "") {
+		if (vm.search() !== ""){
 			rootViewModel.search(vm.search());
 			getUrl += '&simpleSearch='+vm.search();
 		} else {
-			rootViewModel.search("");	
-		};
+			rootViewModel.search("");
+		}
 		$.getJSON(getUrl, vm.gotData);
 	};
 	vm.search.subscribe(updateList, vm, 'change');
@@ -40,12 +40,12 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.publications = ko.observableArray([]);
 	vm.next = function() {
 		vm.page(vm.page()+1);
-	}
+	};
 	vm.previous = function() {
 		vm.page(vm.page()-1);
-	}
+	};
 	vm.first = function() {
 		vm.page(1);
-	}
+	};
 	return vm;
 });
