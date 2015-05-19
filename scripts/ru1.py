@@ -64,12 +64,9 @@ def insertExistingConference(self,details, conferenceID):
         if not os.path.exists("../www/"+details['PeerReviewPath']): os.makedirs("../www/"+details['PeerReviewPath'])
         for suppDoc in details["SupportingDocumentation"]:
             PathToFile=details["PeerReviewPath"]+suppDoc['file']['name'].replace(' ', '_')
-            self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile) VALUES(?,?,?)",(PublicationID,PathToFile))
+            self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile, DocumentTitle) VALUES(?,?,?)",(PublicationID,PathToFile,suppDoc['file']['name'].replace(' ', '_'))
             peerreviewdocfile = open ("../www/"+PathToFile, "wb+")
             peerreviewdocfile.write(suppDoc["data"])
-
-        details["PathToFile"]="peerReview/"+str(publicationID)+"/"+details["DocumentTitle"]
-        self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile,DocumentTitle) VALUES(?,?)",(PublicationID,details["PathToFile"]))
         insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()
@@ -115,7 +112,7 @@ def insertExistingJournal(self,details,journalID):
         if not os.path.exists("../www/"+details['PeerReviewPath']): os.makedirs("../www/"+details['PeerReviewPath'])
         for suppDoc in details["SupportingDocumentation"]:
             PathToFile=details["PeerReviewPath"]+suppDoc['file']['name'].replace(' ', '_')
-            self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile) VALUES(?,?,?)",(PublicationID,PathToFile))
+            self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile, DocumentTitle) VALUES(?,?,?)",(PublicationID,PathToFile,suppDoc['file']['name'].replace(' ', '_'))
             peerreviewdocfile = open ("../www/"+PathToFile, "wb+")
             peerreviewdocfile.write(suppDoc["data"])
         insertAuthors(self,details,publicationID)
@@ -167,7 +164,7 @@ def insertExistingBook(self,details,bookID):
         if not os.path.exists("../www/"+details['PeerReviewPath']): os.makedirs("../www/"+details['PeerReviewPath'])
         for suppDoc in details["SupportingDocumentation"]:
             PathToFile=details["PeerReviewPath"]+suppDoc['file']['name'].replace(' ', '_')
-            self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile) VALUES(?,?,?)",(PublicationID,PathToFile))
+            self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile, DocumentTitle) VALUES(?,?,?)",(PublicationID,PathToFile,suppDoc['file']['name'].replace(' ', '_'))
             peerreviewdocfile = open ("../www/"+PathToFile, "wb+")
             peerreviewdocfile.write(suppDoc["data"])
         #this commit must be at the end to make the process atomic
