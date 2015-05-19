@@ -3,11 +3,11 @@ import json
 def simpleSearch(self, searchTerm):
     # searchTerms is a list of strings
     query = "SELECT  Publications.* "\
-        "FROM Publications JOIN Authors "\
+        "FROM Publications JOIN Authors ON Authors.PublicationID=Publications.ID "\
         "WHERE "\
         "Authors.FirstName LIKE ? OR "\
-        "Authors.Surname LIKE ? OR "\
-        "Publications.Title Like ? "\
+        "Authors.Surname Like ? "\
+        "Publications.Title LIKE ? "\
         "GROUP BY Publications.Title "
     pubs = self._databaseWrapper.query(query, ('%'+searchTerm+'%','%'+searchTerm+'%','%'+searchTerm+'%'))
     if pubs == []:
