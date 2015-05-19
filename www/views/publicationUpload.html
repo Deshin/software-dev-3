@@ -53,9 +53,24 @@
 				</div>
 			</div>
 			<div class="form-group col-md-12">
-				<label for="publicationAuthors" class="col-md-2">Authors<span class="text-danger">*</span>:</label>
-				<div class="col-md-10">
-					<input name="publicationAuthors" id="publicationAuthors" data-bind="textInput: formVM.Authors" class="form-control col-md-12"/>
+				<label for="publicationAuthorsInitials" class="col-md-2">Authors<span class="text-danger">*</span>:</label>
+				<div class="col-md-8">
+					<pre name="publicationAuthors" id="publicationAuthors" class="col-md-12 form-control" data-bind="text: AuthorString"></pre>
+				</div>
+				<div class="col-md-2">
+					<button class="btn btn-danger col-md-12" data-bind="click: clearAuthors">Clear</button>
+				</div>
+				<div class="col-md-2 col-md-offset-2">
+					<input name="publicationAuthorsInitials" placeholder="Initials" id="publicationAuthorsInitials" data-bind="textInput: AuthorInitials" class="form-control"/>
+				</div>
+				<div class="col-md-3">
+					<input name="publicationAuthorsFirstName" placeholder="First Name" id="publicationAuthorsFirstName" data-bind="textInput: AuthorFirstName" class="form-control"/>
+				</div>
+				<div class="col-md-3">
+					<input name="publicationAuthorsSurname" placeholder="Surname" id="publicationAuthorsSurname" data-bind="textInput: AuthorSurname" class="form-control"/>
+				</div>
+				<div class="col-md-2">
+					<button class="btn btn-success col-md-12" data-bind="click: addAuthor"><span class="glyphicon glyphicon-plus"></span></button>
 				</div>
 			</div>
 			<!-- ko if: formVM.Category() === 'Journal Article' -->

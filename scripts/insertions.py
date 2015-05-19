@@ -26,14 +26,7 @@ def main(details):
 
 if __name__ == "__main__":
     details = json.load(sys.stdin)
-    fileitem=details["PublicationFile"]["data"]
-    fileitem=base64.b64decode(fileitem)
-    newFile = open ("somefile" + ".pdf", "wb")
-    newFile.write(fileitem)
-        
-        
-        
-        
+              
     
 #     details={"Title": "blah",
 #              "Abstract": "blah",
