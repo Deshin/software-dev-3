@@ -30,7 +30,7 @@ def sortDocuments(self, sortBy, sort):
     
     if sortBy in validSortBy and sort in validSort:
         if sortBy!="Title":
-            sortString=" ORDER By "+sortBy+" "+sort+ " ,Title ASC"
-        sortString=" ORDER BY "+sortBy+" "+sort+" "
+            sortString=" ORDER By "+sortBy+" COLLATE NOCASE "+sort+ " ,Title COLLATE NOCASE ASC "
+        sortString=" ORDER BY "+sortBy+" COLLATE NOCASE "+sort+" "
         
     return sortString
