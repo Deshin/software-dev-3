@@ -62,15 +62,16 @@ def getDocumentDetails(self, id):
             journalPubDetails=dict(zip(columnNames, journalPubDetails[0]))
             data=dict(data,**journalPubDetails)
             
-            journalDetails=self._databaseWrapper.query("SELECT * FROM Journals WHERE ID=(?)",[str(data["PublicationID"])])
+            journalDetails=self._databaseWrapper.query("SELECT * FROM Journals WHERE ID=(?)",[str(data["JournalID"])])
+            print journalDetails
             columnNames = [i[0] for i in self._databaseWrapper._cur.description]
             journalDetails=dict(zip(columnNames, journalDetails[0]))
             data=dict(data, **journalDetails)
             
-            peerReview=self._databaseWrapper.query("SELECT * FROM PeerReviewDocumentation WHERE PublicationID=(?)",[str(id)])
-            columnNames = [i[0] for i in self._databaseWrapper._cur.description]
-            peerReview=dict(zip(columnNames, peerReview[0]))
-            data=dict(data, **peerReview)
+            #peerReview=self._databaseWrapper.query("SELECT * FROM PeerReviewDocumentation WHERE PublicationID=(?)",[str(id)])
+            #columnNames = [i[0] for i in self._databaseWrapper._cur.description]
+            #peerReview=dict(zip(columnNames, peerReview[0]))
+            #data=dict(data, **peerReview)
             
         elif category.startswith("conference"):
             conferencePubDetails=self._databaseWrapper.query("SELECT * FROM ConferencePublicationDetail WHERE PublicationID=(?)",[str(data["ID"])])
@@ -83,10 +84,10 @@ def getDocumentDetails(self, id):
             conferenceDetails=dict(zip(columnNames, conferenceDetails[0]))
             data=dict(data, **conferenceDetails)
             
-            peerReview=self._databaseWrapper.query("SELECT * FROM PeerReviewDocumentation WHERE PublicationID=(?)",[str(id)])
-            columnNames = [i[0] for i in self._databaseWrapper._cur.description]
-            peerReview=dict(zip(columnNames, peerReview[0]))
-            data=dict(data, **peerReview)
+            #peerReview=self._databaseWrapper.query("SELECT * FROM PeerReviewDocumentation WHERE PublicationID=(?)",[str(id)])
+            #columnNames = [i[0] for i in self._databaseWrapper._cur.description]
+            #peerReview=dict(zip(columnNames, peerReview[0]))
+            #data=dict(data, **peerReview)
             
         elif category.startswith("book"):
             bookPubDetails=self._databaseWrapper.query("SELECT * FROM BookPublications WHERE PublicationID=(?)",[str(data["ID"])])
@@ -99,10 +100,10 @@ def getDocumentDetails(self, id):
             bookDetails=dict(zip(columnNames, bookDetails[0]))
             data=dict(data, **bookDetails)
             
-            peerReview=self._databaseWrapper.query("SELECT * FROM PeerReviewDocumentation WHERE PublicationID=(?)",[str(id)])
-            columnNames = [i[0] for i in self._databaseWrapper._cur.description]
-            peerReview=dict(zip(columnNames, peerReview[0]))
-            data=dict(data, **peerReview)
+            #peerReview=self._databaseWrapper.query("SELECT * FROM PeerReviewDocumentation WHERE PublicationID=(?)",[str(id)])
+            #columnNames = [i[0] for i in self._databaseWrapper._cur.description]
+            #peerReview=dict(zip(columnNames, peerReview[0]))
+            #data=dict(data, **peerReview)
             
         data=json.dumps(data)
         if data==[]:
