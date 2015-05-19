@@ -3,6 +3,7 @@
 #this actually incorporates use case g1 and g2
 import json
 
+
 def getAuthors(self, pubId):
     auths = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID="+str(pubId))
     auth = []
@@ -25,8 +26,8 @@ def getAllAuthors(self):
                      "Initials" : auths[j][4]})
     return auth      
 
-def getAllDocuments(self, skip, length):
-    pubs = self._databaseWrapper.query("SELECT * FROM Publications LIMIT ? OFFSET ? ", (length, skip))
+def getAllDocuments(self, skip, length, sortBy, sort):
+    pubs = self._databaseWrapper.query("SELECT * FROM Publications "+self.sortDocuments(sortBy, sort) + " LIMIT ? OFFSET ?", (length, skip))
 
     if pubs == []:
         return "404"
