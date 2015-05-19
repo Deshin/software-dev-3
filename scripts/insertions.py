@@ -5,6 +5,7 @@ from SqliteWrapper import SqliteWrapper
 import cgi, os
 import sys
 import json
+import base64
 
 
 def main(details):
@@ -26,6 +27,7 @@ def main(details):
 if __name__ == "__main__":
     details = json.load(sys.stdin)
     fileitem=details["PublicationFile"]["data"]
+    fileitem=base64.b64decode(fileitem)
     newFile = open ("somefile" + ".pdf", "wb")
     newFile.write(fileitem)
         
