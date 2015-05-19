@@ -21,8 +21,8 @@ class RestApi:
     def getAllAuthors(self):
         return restRetrieval.getAllAuthors(self)
         
-    def getAllDocuments(self):
-        return restRetrieval.getAllDocuments(self)
+    def getAllDocuments(self, skip, length):
+        return restRetrieval.getAllDocuments(self, skip, length)
 
     def getDocumentDetails(self, id):
         return restRetrieval.getDocumentDetails(self, id)
@@ -30,8 +30,8 @@ class RestApi:
     def insertDocument(self, details):
         return ru1.insertDocument(self, details)
 
-    def simpleSearch(self, searchTerms):
-        return restSearch.simpleSearch(self, searchTerms)
+    def simpleSearch(self, searchTerms, skip, length):
+        return restSearch.simpleSearch(self, searchTerms, skip, length)
 
 
         
