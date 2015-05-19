@@ -153,21 +153,22 @@
 				</div>
 			</div>
 			<div class="form-group col-md-12">
-				<label for="SupportingDocumentation" class="col-md-2">Supporting Documentation<span class="text-danger">*</span>:</label>
+				<label for="SupportingDocumentation" class="col-md-2">Supporting Documentation:</label>
 				<div class="col-md-10">
 					<span class="col-md-8">
-						<!-- ko if: fileVM.SupportingDocumentation().base64String() -->
-						<pre class="form-control" data-bind="text: fileVM.SupportingDocumentationFiles"></pre>
+						<!-- ko if: SupportingDocumentation().base64String() -->
+						<pre class="form-control" data-bind="text: SupportingDocumentationFiles"></pre>
 						<!-- /ko -->
-						<!-- ko ifnot: fileVM.SupportingDocumentation().base64String() -->
+						<!-- ko ifnot: SupportingDocumentation().base64String() -->
 						<pre class="form-control">No files selected</pre>
 						<!-- /ko -->
 					</span>
-					<button class="col-md-4 btn btn-success btn-file">
+					<button class="col-md-2 btn btn-success btn-file">
 						<input type="file" name="SupportingDocumentation" id="SupportingDocumentation"
-						data-bind="fileInput: fileVM.SupportingDocumentation" multiple/>
+						data-bind="fileInput: SupportingDocumentation"/>
 						Upload
 					</button>
+					<button class="col-md-2 btn btn-danger" data-bind="click: clearSupportingDoc">Clear</button>
 				</div>
 			</div>
 			<br/>
