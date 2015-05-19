@@ -9,16 +9,21 @@ requirejs.config({
     kofilebind: 'knockout-file-bindings',
     pager: 'pager.min',
     bootbox: 'bootbox.min',
-    bootstrap: 'bootstrap.min'
+    bootstrap: 'bootstrap.min',
+    crypto: 'crypto.core',
+    'crypto.SHA': 'sha256'
+  },
+  shim: {
+    'crypto.SHA' : ['crypto']
   }
 });
 
-requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvalidate', 'bootbox', 'bootstrap'], function($, ko, kopunches, kofilebind, pager, $valid, bootbox, bootstrap) {
+requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvalidate', 'bootbox', 'bootstrap', 'crypto.SHA'], function($, ko, kopunches, kofilebind, pager, $valid, bootbox, bootstrap, crypt) {
   function RootViewModel() {
     var self = this;
     self.search = ko.observable("");
-    self.username = ko.observable("");
-    self.password = ko.observable("");
+    self.loginState = ko.observable('UnregisteredUser');
+
     self.onSearchClick = function() {
       if (self.search() === "") {
         window.location.assign("/");
@@ -46,7 +51,9 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
         }
       });
       $('#loginModal').load('views/loginModal.html');
-
+    };
+    self.logout = function() {
+      self.loginState('UnregisteredUser');
     };
     self.getVM = function(path) {
       return function(callback) {
@@ -69,12 +76,31 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
 
   pager.start();
 
-  function loginUser() {
+  function loginUser(result) {
     var username = $('#username').val();
-    var password = $('#password').val();
+    var password = CryptoJS.SHA256($('#password').val());
     if(username && password) {
-      console.log(username);
-      console.log(username);
+
+      var loginObject = {
+        username: username,
+        hash: password.toString()
+      };
+
+      // $.ajax({
+      //   url: "/api/login.py",
+      //   type: "POST",
+      //   contentType: "application/json",
+      //   data: JSON.stringify(loginObject),
+      //
+      //   success: function(data) {
+      //     rootViewModel.loginState('RegisteredUser');
+      //   },
+      //
+      //   error: function (jqXHR) {
+      //     console.log("Error: " + jqXHR.status + " - " + jqXHR.statusText);
+      //   },
+      // });
+      rootViewModel.loginState('RegisteredUser');
     }
 
   }

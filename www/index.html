@@ -26,11 +26,7 @@
 					<small>by Wits-Epsilon</small>
 				</a>
 			</div>
-<!-- 			<div class="navbar-right navbar-nav">
-				<input type="text" value="{{search}}" placeholder="Search">
-				<button type="submit" id="nav-btn" class="btn btn-primary navbar-btn">Search</button>
-			</div> -->
-			<form id="nav-search-input-group" class="input-group navbar-right" submit="{{onSearchClick}}">
+			<form class="input-group navbar-right nav-search-input-group" submit="{{onSearchClick}}">
 				<input type="text" class="form-control" placeholder="Search" textInput="{{search}}">
 				<span class="input-group-btn">
 					<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
@@ -40,20 +36,38 @@
 	</nav>
 
 	<div class="container-fluid">
+		<div class="col-md-10">
+			<div class="row" data-bind="page: {id: 'test', title: 'Test Page', sourceOnShow: 'views/test.html', withOnShow: getVM('test')}">
+			</div>
 
-		<div class="row" data-bind="page: {id: 'test', title: 'Test Page', sourceOnShow: 'views/test.html', withOnShow: getVM('test')}">
+			<div class="row" data-bind="page: {id: 'publicationDetails', params: ['pubId'], title: 'Publication Details', sourceOnShow: 'views/publicationDetails.html', withOnShow: getVM('publicationDetails')}">
+			</div>
+			<!-- ko if: loginState() === 'RegisteredUser' -->
+			<div class="row" data-bind="page: {id: 'publicationUpload', title: 'Publication Upload', sourceOnShow: 'views/publicationUpload.html', withOnShow: getVM('publicationUpload')}">
+			</div>
+			<!-- /ko -->
+			<div class="row" data-bind="page: {role: 'start', id: 'publications', title: 'All publications', params:{'search' : '', 'page': 1, 'pageSize':20, sort: 'ASC', sortBy: 'Title'}, sourceOnShow: 'views/publications.html', withOnShow: getVM('publications')}">
+			</div>
+
+			<div class="row" data-bind="page: {id: 'landing', title: 'Landing Page', sourceOnShow: 'views/landing.html', withOnShow: getVM('landing')}"></div>
+
 		</div>
 
-		<div class="row" data-bind="page: {id: 'publicationDetails', params: ['pubId'], title: 'Publication Details', sourceOnShow: 'views/publicationDetails.html', withOnShow: getVM('publicationDetails')}">
+		<div class="col-md-2 col-md-offset-10 sidebar">
+			<ul class="nav nav-sidebar">
+				<!-- ko if: loginState() === 'UnregisteredUser' -->
+				<li class="active"><a href="#" data-bind="click: loginModal" >Login</a></li>
+				<!-- /ko -->
+				<!-- ko if: loginState() === 'RegisteredUser'  -->
+				<li class="active"><a href="#" data-bind="click: logout" >Logout</a></li>
+				<!-- /ko -->
+			</ul>
+			<!-- ko if: loginState() === 'RegisteredUser' -->
+			<ul class="nav nav-sidebar">
+				<li class="active"><a href="#!/publicationUpload">Upload</a></li>
+			</ul>
+			<!-- /ko -->
 		</div>
-
-		<div class="row" data-bind="page: {id: 'publicationUpload', title: 'Publication Upload', sourceOnShow: 'views/publicationUpload.html', withOnShow: getVM('publicationUpload')}">
-		</div>
-
-		<div class="row" data-bind="page: {role: 'start', id: 'publications', title: 'All publications', params:{'search' : '', 'page': 1, 'pageSize':20, sort: 'ASC', sortBy: 'Title'}, sourceOnShow: 'views/publications.html', withOnShow: getVM('publications')}">
-		</div>
-
-		<div class="row" data-bind="page: {id: 'landing', title: 'Landing Page', sourceOnShow: 'views/landing.html', withOnShow: getVM('landing')}"></div>
 
 	</div>
 
