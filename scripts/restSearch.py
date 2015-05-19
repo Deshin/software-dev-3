@@ -8,7 +8,7 @@ def simpleSearch(self, searchTerm):
         "Publications.Title LIKE ?"
     pubs = self._databaseWrapper.query(query, ('%'+searchTerm+'%',))
     if pubs == []:
-        return "404"
+        return "200"
     data = []
     for i in range(0,len(pubs)):
         auths = self._databaseWrapper.query("SELECT * FROM Authors WHERE (FirstName LIKE ? OR Surname LIKE ?) AND PublicationID="+str(pubs[i][0]), [('%'+searchTerm+'%') for k in range(0,2)])
