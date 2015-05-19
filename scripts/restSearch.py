@@ -6,9 +6,10 @@ def simpleSearch(self, searchTerm):
         "FROM Publications JOIN Authors "\
         "WHERE "\
         "Authors.FirstName LIKE ? OR "\
+        "Authors.Surname LIKE ? OR "\
         "Publications.Title Like ? "\
         "GROUP BY Publications.Title "
-    pubs = self._databaseWrapper.query(query, ('%'+searchTerm+'%','%'+searchTerm+'%'))
+    pubs = self._databaseWrapper.query(query, ('%'+searchTerm+'%','%'+searchTerm+'%','%'+searchTerm+'%'))
     if pubs == []:
         return "200"
     data = []
