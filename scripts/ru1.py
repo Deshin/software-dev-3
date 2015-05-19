@@ -53,20 +53,20 @@ def insertConferencePaper(self,details):
         
 def insertExistingConference(self,details, conferenceID):
     try:          
-        if not os.path.exists("../www/"+details['ScanPath']): os.makedirs("../www/"+details['ScanPath'])
-        scanfile = open("../www/"+details['ScanPath']+details["ScanFileName"], "wb+")
+        if not os.path.exists("../www/files/"+details['ScanPath']): os.makedirs("../www/files/"+details['ScanPath'])
+        scanfile = open("../www/files/"+details['ScanPath']+details["ScanFileName"], "wb+")
         scanfile.write(base64.b64decode(details["PublicationFile"]["data"]))
-        if not os.path.exists("../www/"+details["TableOfContentsPath"]): os.makedirs("../www/"+details["TableOfContentsPath"])
-        tocfile =  open("../www/"+details['TableOfContentsPath']+"TOC.pdf", "wb+")
+        if not os.path.exists("../www/files/"+details["TableOfContentsPath"]): os.makedirs("../www/files/"+details["TableOfContentsPath"])
+        tocfile =  open("../www/files/"+details['TableOfContentsPath']+"TOC.pdf", "wb+")
         tocfile.write(base64.b64decode(details["PublicationToc"]["data"]))
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"]+'TOC.pdf', details["ScanPath"]+details["ScanFileName"], details["Accreditation"]))
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO ConferencePublicationDetail(ConferenceID,PublicationID,Abstract,MotivationForAccreditation,PeerReviewProcess) VALUES(?,?,?,?,?)",(conferenceID,publicationID,details["Abstract"], details["MotivationForAccreditation"], details["PeerReview"]))
-        if not os.path.exists("../www/"+details['PeerReviewPath']): os.makedirs("../www/"+details['PeerReviewPath'])
+        if not os.path.exists("../www/files/"+details['PeerReviewPath']): os.makedirs("../www/files/"+details['PeerReviewPath'])
         for suppDoc in details["SupportingDocumentation"]:
             PathToFile=details["PeerReviewPath"]+suppDoc['file']['name'].replace(' ', '_')
             self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile, DocumentTitle) VALUES(?,?,?)",(PublicationID,PathToFile,suppDoc['file']['name'].replace(' ', '_')))
-            peerreviewdocfile=open("../www/"+PathToFile, "wb+")
+            peerreviewdocfile=open("../www/files/"+PathToFile, "wb+")
             peerreviewdocfile.write(base64.b64decode(suppDoc["data"]))
         insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
@@ -99,22 +99,22 @@ def insertExistingJournal(self,details,journalID):
         
         #note: although this is repeated code from conference insertion, it is important
         #that it is repeated here to ensure atomicity of insertions
-        if not os.path.exists("../www/"+details['ScanPath']): os.makedirs("../www/"+details['ScanPath'])
-        scanfile = open("../www/"+details['ScanPath']+details["ScanFileName"], "wb+")
+        if not os.path.exists("../www/files/"+details['ScanPath']): os.makedirs("../www/files/"+details['ScanPath'])
+        scanfile = open("../www/files/"+details['ScanPath']+details["ScanFileName"], "wb+")
         scanfile.write(base64.b64decode(details["PublicationFile"]["data"]))
-        if not os.path.exists("../www/"+details["TableOfContentsPath"]): os.makedirs("../www/"+details["TableOfContentsPath"])
-        tocfile =  open("../www/"+details['TableOfContentsPath']+"TOC.pdf", "wb+")
+        if not os.path.exists("../www/files/"+details["TableOfContentsPath"]): os.makedirs("../www/files/"+details["TableOfContentsPath"])
+        tocfile =  open("../www/files/"+details['TableOfContentsPath']+"TOC.pdf", "wb+")
         tocfile.write(base64.b64decode(details["PublicationToc"]["data"]))
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"]+'TOC.pdf', details["ScanPath"]+details["ScanFileName"], details["Accreditation"]))
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO JournalPublicationDetail(JournalID,PublicationID,Volume,Issue,Abstract) VALUES(?,?,?,?,?)",(journalID, publicationID, details["Volume"], details["Issue"], details["Abstract"]))
         #details["PathToFile"]="peerReview/"+str(publicationID)+"/"+details["DocumentTitle"]
         #self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile,DocumentTitle) VALUES(?,?)",(PublicationID,details["PathToFile"]))
-        if not os.path.exists("../www/"+details['PeerReviewPath']): os.makedirs("../www/"+details['PeerReviewPath'])
+        if not os.path.exists("../www/files/"+details['PeerReviewPath']): os.makedirs("../www/files/"+details['PeerReviewPath'])
         for suppDoc in details["SupportingDocumentation"]:
             PathToFile=details["PeerReviewPath"]+suppDoc['file']['name'].replace(' ', '_')
             self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile, DocumentTitle) VALUES(?,?,?)",(PublicationID,PathToFile,suppDoc['file']['name'].replace(' ', '_')))
-            peerreviewdocfile=open("../www/"+PathToFile, "wb+")
+            peerreviewdocfile=open("../www/files/"+PathToFile, "wb+")
             peerreviewdocfile.write(base64.b64decode(suppDoc["data"]))
         insertAuthors(self,details,publicationID)
         #this commit must be at the end to make the process atomic
@@ -146,21 +146,21 @@ def insertExistingBook(self,details,bookID):
     try:        
         #note: although this is repeated code from conference insertion, it is important
         #that it is repeated here to ensure atomicity of insertions
-        if not os.path.exists("../www/"+details['ScanPath']): os.makedirs("../www/"+details['ScanPath'])
-        scanfile = open("../www/"+details['ScanPath']+details["ScanFileName"], "wb+")
+        if not os.path.exists("../www/files/"+details['ScanPath']): os.makedirs("../www/files/"+details['ScanPath'])
+        scanfile = open("../www/files/"+details['ScanPath']+details["ScanFileName"], "wb+")
         scanfile.write(base64.b64decode(details["PublicationFile"]["data"]))
-        if not os.path.exists("../www/"+details["TableOfContentsPath"]): os.makedirs("../www/"+details["TableOfContentsPath"])
-        tocfile =  open("../www/"+details['TableOfContentsPath']+"TOC.pdf", "wb+")
+        if not os.path.exists("../www/files/"+details["TableOfContentsPath"]): os.makedirs("../www/files/"+details["TableOfContentsPath"])
+        tocfile =  open("../www/files/"+details['TableOfContentsPath']+"TOC.pdf", "wb+")
         tocfile.write(base64.b64decode(details["PublicationToc"]["data"]))
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"]+'TOC.pdf', details["ScanPath"]+details["ScanFileName"], details["Accreditation"]))
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO BookPublications(PublicationID,Chapter,Abstract, BooksID) VALUES(?,?,?,?)",(publicationID, details["Chapter"], details["Abstract"], bookID))
         insertAuthors(self,details,publicationID)
-        if not os.path.exists("../www/"+details['PeerReviewPath']): os.makedirs("../www/"+details['PeerReviewPath'])
+        if not os.path.exists("../www/files/"+details['PeerReviewPath']): os.makedirs("../www/files/"+details['PeerReviewPath'])
         for suppDoc in details["SupportingDocumentation"]:
             PathToFile=details["PeerReviewPath"]+suppDoc['file']['name'].replace(' ', '_')
             self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile, DocumentTitle) VALUES(?,?,?)",(PublicationID,PathToFile,suppDoc['file']['name'].replace(' ', '_')))
-            peerreviewdocfile=open("../www/"+PathToFile, "wb+")
+            peerreviewdocfile=open("../www/files/"+PathToFile, "wb+")
             peerreviewdocfile.write(base64.b64decode(suppDoc["data"]))
         #this commit must be at the end to make the process atomic
         self._databaseWrapper.commit()

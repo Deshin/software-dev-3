@@ -25,9 +25,6 @@ def main(details):
 
 if __name__ == "__main__":
     details = json.load(sys.stdin)
-    fileitem=details["PublicationFile"]["data"]
-    newFile = open ("somefile" + ".pdf", "wb")
-    newFile.write(fileitem)
         
         
         
