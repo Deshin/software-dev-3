@@ -63,6 +63,7 @@ def insertExistingConference(self,details, conferenceID):
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO ConferencePublicationDetail(ConferenceID,PublicationID,Abstract,MotivationForAccreditation,PeerReviewProcess) VALUES(?,?,?,?,?)",(conferenceID,publicationID,details["Abstract"], details["MotivationForAccreditation"], details["PeerReview"]))
         if not os.path.exists("../www/files/"+details['PeerReviewPath']): os.makedirs("../www/files/"+details['PeerReviewPath'])
+        print details;
         for suppDoc in details["SupportingDocumentation"]:
             PathToFile=details["PeerReviewPath"]+suppDoc['file']['name'].replace(' ', '_')
             self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile, DocumentTitle) VALUES(?,?,?)",(PublicationID,PathToFile,suppDoc['file']['name'].replace(' ', '_')))
