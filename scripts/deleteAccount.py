@@ -12,14 +12,18 @@ def main(username):
         print "Status:400"
         print "Content-Type: text/html"
         print ""
-        print "Account couldnt be added"
+        print "Account couldnt be deleted"
+    elif result=="404":
+        print "Status:404"
+        print "Content-Type: text/html"
+        print ""
+        print "Account does not exists"
     else:
         print "Content-Type: application/json"
         print ""
-        print result    
+        print result
 
 if __name__ == "__main__":
     form = cgi.FieldStorage()
     username = form.getvalue("username", None)
-    
     main(username)

@@ -16,8 +16,10 @@ def deleteAccount(self,username):
     try:
         existingAccount=self._databaseWrapper.query("SELECT * FROM Users WHERE Username=?",[username])
         if existingAccount==[]:
-            return "400"
+            return "404"
         else:
             self._databaseWrapper.query("DELETE FROM Users WHERE Username=?",[username])
-            self._database.commit()
-            return "200"
+            self._databaseWrapper.commit()
+            return "Account Deleted"
+    except:
+        return "400"
