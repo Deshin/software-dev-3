@@ -14,7 +14,7 @@ def main(username):
         print "Status:400"
         print "Content-Type: text/html"
         print ""
-        print "Account couldnt be added"
+        print "Account couldnt be found"
     else:
         print "Content-Type: application/json"
         print ""
