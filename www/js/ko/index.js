@@ -26,7 +26,7 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
 
     self.onSearchClick = function() {
       if (self.search() === "") {
-        window.location.assign("/");
+        window.location.assign("/#!/");
       } else {
         window.location.assign("/#!/publications?search="+encodeURIComponent(self.search()));
       }
@@ -56,7 +56,7 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
     };
     self.logout = function() {
       self.loginState('unregistered');
-      window.location.href("/");
+      window.location.assign("/#!/");
     };
     self.getVM = function(path) {
       return function(callback) {
