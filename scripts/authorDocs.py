@@ -15,11 +15,6 @@ def main(username,skip, length, sortBy, sort):
         print "Content-Type: text/html"
         print ""
         print "Account couldnt be added"
-    elif result=="409":
-        print "Status:409"
-        print"Content-Type: text/html"
-        print ""
-        print "Username is not unique"
     else:
         print "Content-Type: application/json"
         print ""

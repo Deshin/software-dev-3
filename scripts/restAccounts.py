@@ -28,7 +28,7 @@ def getAllAccountDocs(self,username,skip, length, sortBy, sort):
     try:
         existingAccount=self._databaseWrapper.query("SELECT * FROM Users WHERE Username=?",[username])
         if existingAccount==[]:
-            return "409"
+            return "400"
         else:
             userData={"username":existingAccount[0][1],"firstname":existingAccount[0][4],"surname":existingAccount[0][5], "initials":existingAccount[0][6]}
             authorPubs=self.databaseWrapper.query("SELECT * FROM Authors WHERE FirstName=? AND Surname=? AND Initials=?",[userData["firstname"],userData["surname"],userData["initials"]])
