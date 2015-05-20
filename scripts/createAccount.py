@@ -32,5 +32,4 @@ if __name__ == "__main__":
     firstName=form.getvalue("firstName", None)
     surname=form.getvalue("surname", None)
     initials=form.getvalue("initials",None)
-    
     main(username, password, permission, firstName, surname, initials)
