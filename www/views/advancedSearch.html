@@ -1,0 +1,18 @@
+<div class="main">
+	<div class="form-group">
+		{{#foreach: searches}}
+		<div class="col-md-2"><select class="form-control" options="{{fields}}" value="{{field}}"></select></div>
+		<div class="col-md-2"><select class="form-control" options="{{operators}}" value="{{operator}}"></select></div>
+		<div class="col-md-6"><input class="form-control" value="{{value}}"/></div>
+		{{#ifnot $index}}
+		<div class="col-md-2"><button class="form-control btn btn-success" click="{{addSearch}}">+</button></div>
+		{{/ifnot}}
+		{{#if ($index)}}
+		<div class="col-md-2"><button class="form-control btn btn-danger" click="{{removeSearch.bind($data, $index)}}">-</button></div>
+		{{/if}}
+		{{/foreach}}
+	</div>
+	<div class="form-group">
+		<a class="btn btn-primary pull-right" href="{{searchHref}}">Search</a>
+	</div>
+</div>

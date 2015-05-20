@@ -1,5 +1,6 @@
 define(["jquery", "knockout"], function($, ko) {
 	var vm = this;
+	vm.search = ko.observable(null);
 	vm.pageSize = ko.observable(null);
 	vm.page = ko.observable(null);
 	vm.sortBy=ko.observable(null);
@@ -22,15 +23,19 @@ define(["jquery", "knockout"], function($, ko) {
 			vm.publications.push(data[i]);
 		}
 	};
-	vm.search = ko.observable(null);
 	vm.updateList = function(newVal) {
 		if (vm.page() === null || vm.pageSize() === null || vm.search() === null || vm.sort() === null || vm.sortBy() === null) {
 			return;
 		}
 		var getUrl = '/api/publications.py?skip='+vm.skip().toString()+'&length='+vm.pageSize().toString()+'&sortBy='+vm.sortBy()+'&sort='+vm.sort();
 		if (vm.search() !== ""){
-			rootViewModel.search(vm.search());
-			getUrl += '&simpleSearch='+vm.search();
+			if (vm.search().charAt(0) === "[") {
+				rootViewModel.search("");
+				getUrl += '&advancedSearch='+vm.search();
+			} else {
+				rootViewModel.search(vm.search());
+				getUrl += '&simpleSearch='+vm.search();
+			};
 		} else {
 			rootViewModel.search("");
 		}
@@ -49,7 +54,7 @@ define(["jquery", "knockout"], function($, ko) {
 		vm.page(vm.page()-1);
 	};
 	vm.first = function() {
-		vm.page(1);
+		vm.page(1);	
 	};
 	vm.sorting = function(item){
 		if (vm.sortBy() === item) {
