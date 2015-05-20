@@ -75,7 +75,7 @@ class RestApi:
 
     def accreditPublication(self, publicationID) :
         """see :func:`restInsertion.insertPublicationAccreditation` for more info"""
-        return restInsertion.insertPublicationAcceditation(self, publicationID)
+        return restInsertion.insertPublicationAccreditation(self, publicationID)
     
     def updateAccredited(self, accreditedCSV):
         """see :func:`restAccounts.updateAccredited` for more info"""
