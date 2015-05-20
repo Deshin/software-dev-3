@@ -9,7 +9,8 @@ dbCols = {  "Title":"Publications.Title",
             "Publication Title":"Publications.Title ",
             "Journal Title":"Journals.JournalTitle ",
             "Accreditation":"Publications.Accreditation",
-            "Initials":"Authors.Initials"
+            "Initials":"Authors.Initials",
+            "Year":"Publications.Year"
             } 
 
 def simpleSearch(self, searchTerm, skip, length, sortBy, sort):
@@ -79,8 +80,6 @@ def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
     queryValues.append(length)
     queryValues.append(skip)
 
-    qv = [queryValues[0].encode("unicode_escape"), queryValues[1], queryValues[2]]
-
     pubs = self._databaseWrapper.query(query, queryValues)
     data = []
     for i in range(0,len(pubs)):
@@ -120,7 +119,7 @@ def decorateAdvancedSearchTerms(terms):
         if entry["operator"] == "contains" :
             entry["value"] = "%" + entry["value"] + "%"
         else :
-            entry["value"] = "" + entry["value"] + " "
+            entry["value"] = entry["value"] 
     return oldEntries
 
 def getSQLQueryAndValues(terms):

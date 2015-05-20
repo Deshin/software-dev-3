@@ -13,19 +13,19 @@
     </div>
   </div>
 </form>
-<!-- ko if: userDetails().username -->
+<!-- ko if: firstname() -->
 <div class="col-md-12 well">
   <div class="col-md-3">
     <strong>First Name:</strong>
-    <div data-bind="text: userDetails().firstname"></div>
+    <div data-bind="text: firstname"></div>
   </div>
   <div class="col-md-3">
     <strong>Surname:</strong>
-    <div data-bind="text: userDetails().surname"></div>
+    <div data-bind="text: surname"></div>
   </div>
   <div class="col-md-3">
     <strong>Intials:</strong>
-    <div data-bind="text: userDetails().initials"></div>
+    <div data-bind="text: initials"></div>
   </div>
   <div class="col-md-3">
     <button class="btn btn-danger col-md-12">Remove</button>
@@ -34,10 +34,10 @@
 <table class="col-md-12 table table-hover">
 	<thead>
 		<tr>
-			<th click="{{sorting.bind($data, 'Title')}}">Title</th>
-			<th click="{{sorting.bind($data, 'Category')}}">Category</th>
-			<th click="{{sorting.bind($data, 'Year')}}">Year</th>
-			<th click="{{sorting.bind($data, 'Publisher')}}">Publisher</th>
+			<th click="{{sorting.bind($data, 'Title')}}"><a href="#">Title</a></th>
+			<th click="{{sorting.bind($data, 'Category')}}"><a href="#">Category</a></th>
+			<th click="{{sorting.bind($data, 'Year')}}"><a href="#">Year</a></th>
+			<th click="{{sorting.bind($data, 'Publisher')}}"><a href="#">Publisher</a></th>
 			<th>Authors</th>
 		</tr>
 	</thead>
