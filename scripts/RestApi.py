@@ -56,7 +56,7 @@ class RestApi:
         return restSearch.getAdvancedSearchFields()
     
     def getCSVFormats(self):
-        return restInsertion.getCSVFormats()
+        return restInsertion.getCSVFormats(self)
 
     def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
         return restSearch.advancedSearch(self, searchTerms, skip, length, sortBy, sort) 
