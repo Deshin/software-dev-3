@@ -350,7 +350,6 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 
 			publication.SupportingDocumentation = SupportingDocs;
 			publication.Authors = Authors;
-			console.log(publication);
 			return publication;
 		}
 

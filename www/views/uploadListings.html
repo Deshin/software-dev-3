@@ -4,7 +4,15 @@
 		<div class="row form-group">
 			<div class="col-md-4"><select class="form-control" options="{{types}}" value="{{type}}"></select></div>
 			<div class="col-md-2"><select class="form-control" options="{{formats}}" value="{{format}}"></select></div>
-			<div class="col-md-4"><button class="form-control btn btn-warning">{{name}}</button></div>
+			<div class="col-md-4"><button class="form-control btn btn-warning btn-file">
+				<input type="file" data-bind="fileInput: fileData"/>
+				<!-- ko if: fileData().file -->
+				{{fileData().file().name}}
+				<!-- /ko -->
+				<!-- ko ifnot: fileData().file -->
+				Select a file..
+				<!-- /ko -->
+				</button></div>
 			{{#ifnot $index}}
 			<div class="col-md-2"><button class="form-control btn btn-success" click="{{addListing}}">+</button></div>
 			{{/ifnot}}
