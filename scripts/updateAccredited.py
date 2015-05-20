@@ -27,14 +27,4 @@ def main(details):
 if __name__ == "__main__":
     details = json.load(sys.stdin)
               
-    
-#     details={"Title": "blah",
-#              "Abstract": "blah",
-#              "Category": "Journal Aricle",
-#              "JournalTitle": "blah",
-#              "PeerReviewProcess":"blah",
-#              "Year": "2013",
-#              "Publisher": "blah", 
-#              "ISSN":"1234567",
-#              "Authors":[{"FirstName": "Sarah", "Surname": "Ward", "Initials": "S.R"}, {"FirstName": "Anthony", "Surname": "Farquharson", "Initials":"A.J."}]}
     main(details)

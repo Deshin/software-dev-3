@@ -10,7 +10,7 @@ def main():
     print "Content-Type: application/json"
     print
     print ""
-    print rest.getAdvancedSearchFields()
+    print rest.getCSVFormats()
 
 if __name__ == "__main__":
     main()

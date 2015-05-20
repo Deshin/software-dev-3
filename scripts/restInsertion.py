@@ -196,3 +196,8 @@ def insertPublicationAccreditation(self, publicationID, isAcreddited):
     else:
         accreditation = "Not Accredited"
     self._databaseWrapper.query(query, [accreditation, publicationID])
+    
+def getCSVFormats(self):
+    validFormats=["DHET","ISI", "IBSS", "Predatory", "HIndex"]
+    validFormats=json.dumps(validFormats)
+    return validFormats
