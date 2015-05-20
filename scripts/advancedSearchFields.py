@@ -11,6 +11,5 @@ def main():
     print ""
     print rest.getAdvancedSearchFields()
 
-
 if __name__ == "__main__":
     main()

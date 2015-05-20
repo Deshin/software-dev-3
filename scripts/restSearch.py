@@ -1,5 +1,5 @@
 import json
-import String
+import string
 
 dbCols = {  "Title":"Publications.Title",
             "Author":"Authors.FirstName OR Authors.Surname ",
