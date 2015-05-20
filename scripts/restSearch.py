@@ -47,6 +47,6 @@ def sortDocuments(self, sortBy, sort):
 
 def getAdvancedSearchFields():
     fields = []
-    for a in dbCols.keys()
+    for a in dbCols.keys():
         fields.append(a)
     return json.dumps(fields)
