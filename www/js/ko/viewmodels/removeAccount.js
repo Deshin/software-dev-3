@@ -110,6 +110,14 @@ define(["jquery", "knockout"], function($, ko) {
     }
   };
 
+  vm.sortIcon = ko.computed(function() {
+    if (vm.sort() === "ASC") {
+      return "glyphicon glyphicon-triangle-top";
+    } else{
+      return "glyphicon glyphicon-triangle-bottom";
+    };
+  });
+
 	return vm;
 
   function findAccount() {

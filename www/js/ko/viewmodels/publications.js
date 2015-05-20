@@ -10,9 +10,9 @@ define(["jquery", "knockout"], function($, ko) {
 	});
 	vm.sortIcon = ko.computed(function() {
 		if (vm.sort() === "ASC") {
-			return "glyphicon glyphicon-hand-up";
+			return "glyphicon glyphicon-triangle-top";
 		} else{
-			return "glyphicon glyphicon-hand-down";
+			return "glyphicon glyphicon-triangle-bottom";
 		};
 	});
 	vm.gotData = function(data) {
