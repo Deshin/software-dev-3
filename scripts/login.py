@@ -13,6 +13,9 @@ def main(username,hash):
     else:
         if result[0]!=hash:
             result="401"
+        else:
+            result[0]="200"
+            result[1]={"permission":result[1]}
     if result == "401":
         print "Status:401"
         print "Content-Type: text/html"
