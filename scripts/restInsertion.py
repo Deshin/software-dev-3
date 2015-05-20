@@ -53,6 +53,7 @@ def insertConferencePaper(self,details):
         
 def insertExistingConference(self,details, conferenceID):
     try:          
+        
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"]+'TOC.pdf', details["ScanPath"]+details["ScanFileName"], details["Accreditation"]))
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO ConferencePublicationDetail(ConferenceID,PublicationID,Abstract,MotivationForAccreditation,PeerReviewProcess) VALUES(?,?,?,?,?)",(conferenceID,publicationID,details["Abstract"], details["MotivationForAccreditation"], details["PeerReview"]))
@@ -97,12 +98,11 @@ def insertJournalPaper(self,details):
 
 def insertExistingJournal(self,details,journalID):
     try:        
-        
+        journal=self._databaseWrapper.query("SELECT * FROM Journals WHERE ID=?",[journalID])
+        status=journal[0][4]
         #note: although this is repeated code from conference insertion, it is important
-        #that it is repeated here to ensure atomicity of insertions        
-        journal=self._databaseWrapper.query("SELECT from Journals WHERE ID=?",journalID)
-        print journal
-        self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"]+'TOC.pdf', details["ScanPath"]+details["ScanFileName"], details["Accreditation"]))
+        #that it is repeated here to ensure atomicity of insertions
+        self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"]+'TOC.pdf', details["ScanPath"]+details["ScanFileName"], str(status)))
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO JournalPublicationDetail(JournalID,PublicationID,Volume,Issue,Abstract) VALUES(?,?,?,?,?)",(journalID, publicationID, details["Volume"], details["Issue"], details["Abstract"]))
         if not os.path.exists("../www/files/"+details['PeerReviewPath']): os.makedirs("../www/files/"+details['PeerReviewPath'])
@@ -112,6 +112,7 @@ def insertExistingJournal(self,details,journalID):
             peerreviewdocfile=open("../www/files/"+PathToFile, "wb+")
             peerreviewdocfile.write(base64.b64decode(suppDoc["data"]))
         insertAuthors(self,details,publicationID)
+        
         if not os.path.exists("../www/files/"+details['ScanPath']): os.makedirs("../www/files/"+details['ScanPath'])
         scanfile = open("../www/files/"+details['ScanPath']+details["ScanFileName"], "wb+")
         scanfile.write(base64.b64decode(details["PublicationFile"]["data"]))
@@ -147,7 +148,7 @@ def insertExistingBook(self,details,bookID):
     try:        
         #note: although this is repeated code from conference insertion, it is important
         #that it is repeated here to ensure atomicity of insertions
-
+        
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"]+'TOC.pdf', details["ScanPath"]+details["ScanFileName"], details["Accreditation"]))
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO BookPublications(PublicationID,Chapter,Abstract, BooksID) VALUES(?,?,?,?)",(publicationID, details["Chapter"], details["Abstract"], bookID))
