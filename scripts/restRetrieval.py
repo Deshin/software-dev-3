@@ -120,7 +120,7 @@ def getLoginCredentials(self,username):
         loginDetails=dict(zip(columnNames, loginDetails[0]))
         data=dict(data, **loginDetails)
         data=json.dumps(data)
-        return data["Password"]
+        return data["Password"], data["Permission"]
     except:
         return "401"
     

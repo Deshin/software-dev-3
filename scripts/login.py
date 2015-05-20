@@ -23,6 +23,7 @@ def main(username,hash):
         print "Content-Type: application/json"
         print
         print ""
+        print result[1]
         
         
 if __name__ == "__main__":
