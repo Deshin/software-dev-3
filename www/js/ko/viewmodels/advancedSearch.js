@@ -24,7 +24,7 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.searchHref = ko.computed(function() {
 		var srchs = [];
 		for (var i = 0; i < vm.searches().length; i++) {
-			if (vm.searches()[i].value) {
+			if (vm.searches()[i].value()) {
 				var newVal = {
 					field: vm.searches()[i].field(),
 					value: vm.searches()[i].value(),
