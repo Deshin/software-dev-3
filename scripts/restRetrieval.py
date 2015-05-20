@@ -118,7 +118,7 @@ def getLoginCredentials(self,username):
         loginDetails=self._databaseWrapper.query("SELECT * FROM Users WHERE Username=(?)",[username])
         columnNames = [i[0] for i in self._databaseWrapper._cur.description]
         loginDetails=dict(zip(columnNames, loginDetails[0]))
-        return loginDetails["Password"],loginDetails["Permission"]
+        return loginDetails
     except:
         return "401"
     

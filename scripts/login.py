@@ -11,7 +11,7 @@ def main(username,hash):
     if result=="401":
         result="401"
     else:
-        if result[0]!=hash:
+        if result["Password"]!=hash:
             result="401"
     if result == "401":
         print "Status:401"
