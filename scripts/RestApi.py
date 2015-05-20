@@ -8,7 +8,7 @@ import restInsertion
 import restAccounts
 
 class RestApi:
-    """ RestApi is the central class used for the REST API, all REST enpoints pass through this class. The functions used in those endpoints are documented in their respective files. """
+    """ RestApi is the central class used for the REST API, all REST enpoints pass through this class. The functions in this class are simply references to other functions which are documented in their respective modules. See the appropriate links below fro mode details. """
     
     def __init__(self, DatabaseWrapper):
         self._databaseWrapper = DatabaseWrapper
@@ -55,6 +55,7 @@ class RestApi:
         return restRetrieval.getLoginCredentials(self,username)
         
     def insertDocument(self, details):
+        """see :func:`restInsertion.insertDocument` for more info"""
         return restInsertion.insertDocument(self, details)
 
     def simpleSearch(self, searchTerms, skip, length, sortBy, sort):
@@ -73,15 +74,19 @@ class RestApi:
         return restSearch.advancedSearch(self, searchTerms, skip, length, sortBy, sort) 
 
     def accreditPublication(self, publicationID) :
+        """see :func:`restInsertion.insertPublicationAccreditation` for more info"""
         return restInsertion.insertPublicationAcceditation(self, publicationID)
     
     def updateAccredited(self, accreditedCSV):
+        """see :func:`restAccounts.updateAccredited` for more info"""
         return restAccounts.updateAccredited(self, accreditedCSV)
     
     def updatePredatory(self, predatoryCSV):
+        """see :func:`restAccounts.updatePredatory` for more info"""
         return restAccounts.updatePredatory(self,predatoryCSV)
     
     def updateHIndex(self,HIndexCSV):
+        """see :func:`restAccounts.updateHIndex` for more info"""
         return restAccounts.updateHIndex(self,HIndexCSV)
 
 

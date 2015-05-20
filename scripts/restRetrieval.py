@@ -9,8 +9,8 @@ def getAuthors(self, pubId):
 
     :param pubId: Integer publication ID number which uniquely identifies a publication in the database.
 
-    :return A dictionary containing all the information regarding a certain author.
-    :rtype A Dict object"""
+    :return: An array of dictionaries containing all the information regarding a certain author.
+    :rtype: An array of Dict objects"""
     auths = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID="+str(pubId))
     auth = []
     for j in range(0, len(auths)):
@@ -22,6 +22,10 @@ def getAuthors(self, pubId):
     return auth   
 
 def getAllAuthors(self):
+    """ Returns information on all the authors in the database.
+
+    :return: An array of dictionaries containing author details for all authors
+    :rtype: An array of Dict objects """
     auths = self._databaseWrapper.query("SELECT * FROM Authors")
     auth = []
     for j in range(0, len(auths)):
@@ -33,6 +37,11 @@ def getAllAuthors(self):
     return auth    
 
 def getExtraDocuments(self, pubId):  
+    """ Find information on all the extra documents associated with a publication.
+
+    :param pubId: An integer which uniquely identifies a publication in the database
+    :return: An array of dictionaries containing document information for all the documents associated with a publication.
+    :rtype: An array of Dict objects. """
     peerReview=self._databaseWrapper.query("SELECT * FROM PeerReviewDocumentation WHERE PublicationID=(?)",[str(pubId)])
     docs=[]
     for j in range(0,len(peerReview)):
@@ -43,6 +52,16 @@ def getExtraDocuments(self, pubId):
     return docs
 
 def getAllDocuments(self, skip, length, sortBy, sort):
+    """ Finds information on all the documents listend in the database.
+
+    :param skip: Integer, represents the first entry to return -1. Used for pagination.
+    :param length: Integer, defines how many entries to return. Used for pagination.
+    :param sortBy: A string representing a field name to sort the results by.
+    :param sort: A string, "ASC" or "DESC" which signifies "ascending or descending". This determines in which order to sorth the returned document details.
+
+    :return: A json array containing json objects that hold document details. The array contains `length` number of elements.
+    :rtype: A stringified json array of objects"""
+
     pubs = self._databaseWrapper.query("SELECT * FROM Publications "+self.sortDocuments(sortBy, sort) + " LIMIT ? OFFSET ?", (length, skip))
 
     if pubs == []:
@@ -63,6 +82,12 @@ def getAllDocuments(self, skip, length, sortBy, sort):
 
 
 def getDocumentDetails(self, id):
+    """ Finds the details for the specified document
+
+    :param id: The Publication ID integer that uniquely identifies a publication in the database.
+
+    :return: A stringified json object containing the details for the specified publication.
+    :rtype: A String, representing a json object"""
     try:
         details = self._databaseWrapper.query("SELECT * FROM Publications WHERE Id=(?)", [id])
         columnNames = [i[0] for i in self._databaseWrapper._cur.description]
@@ -120,6 +145,11 @@ def getDocumentDetails(self, id):
         return "404"
     
 def getLoginCredentials(self,username):
+    """ Finds the login credentials for a certain user
+
+    :param username: A string that uniquely identifies a certain user account in the database.
+    :return: A dictionary containing the permission level and hashed password of the specified user account.
+    :rtype: A Dict object."""
     try:
         loginDetails=self._databaseWrapper.query("SELECT * FROM Users WHERE Username=(?)",[username])
         data={"Password":loginDetails[0][3].encode("unicode-escape"),
