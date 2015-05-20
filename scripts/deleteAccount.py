@@ -18,8 +18,13 @@ def main(username):
         print "Content-Type: text/html"
         print ""
         print "Account does not exists"
+    elif result=="403":
+        print "Status:403"
+        print "Content-Type: text/html"
+        print ""
+        print "Admin account cannot be deleted!"
     else:
-        print "Content-Type: application/json"
+        print "Content-Type: text/html"
         print ""
         print result
 

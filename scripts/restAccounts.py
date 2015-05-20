@@ -20,9 +20,12 @@ def deleteAccount(self,username):
         if existingAccount==[]:
             return "404"
         else:
-            self._databaseWrapper.query("DELETE FROM Users WHERE Username=?",[username])
-            self._databaseWrapper.commit()
-            return "Account Deleted"
+            if existingAccount[0][2]=="admin":
+                return "403"
+            else:
+                self._databaseWrapper.query("DELETE FROM Users WHERE Username=?",[username])
+                self._databaseWrapper.commit()
+                return "Account Deleted"
     except:
         return "400"
     
@@ -32,7 +35,7 @@ def getAllAccountDocs(self,username):
         if existingAccount==[]:
             return "400"
         else:
-            result={"username":existingAccount[0][1], "firstname":existingAccount[0][4], "surname":existingAccount[0][5], "initials":existingAccount[0][6]}
+            result={"username":existingAccount[0][1], "firstname":existingAccount[0][4], "surname":existingAccount[0][5], "initials":existingAccount[0][6], "permission":existingAccount[0][2]}
             result=json.dumps(result)
             return result
     except:
