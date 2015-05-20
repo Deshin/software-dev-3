@@ -46,6 +46,10 @@
 			<div class="row" data-bind="page: {id: 'publicationUpload', title: 'Publication Upload', sourceOnShow: 'views/publicationUpload.html', withOnShow: getVM('publicationUpload')}">
 			</div>
 			<!-- /ko -->
+
+			<div class="row" data-bind="page: {id: 'createAccount', title: 'Create Account', sourceOnShow: 'views/createAccount.html', withOnShow: getVM('createAccount')}">
+			</div>
+
 			<div class="row" data-bind="page: {role: 'start', id: 'publications', title: 'All publications', params:{'search' : '', 'page': 1, 'pageSize':20, sort: 'ASC', sortBy: 'Title'}, sourceOnShow: 'views/publications.html', withOnShow: getVM('publications')}">
 			</div>
 

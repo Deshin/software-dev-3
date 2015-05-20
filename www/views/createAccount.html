@@ -1,0 +1,46 @@
+<div>
+  <h1>Create an Account</h1>
+</div>
+<form id="createAccount" data-bind="submit: createAccount" novalidate>
+  <div class="form-group col-md-12">
+    <label for="username" class="col-md-2">Username:</label>
+    <div class="col-md-10">
+      <input class="form-control col-md-12" type="text" name="username" id="username" data-bind="textInput: form.username" />
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <label for="password" class="col-md-2">Password:</label>
+    <div class="col-md-10">
+      <input class="form-control col-md-12" type="password" name="password" id="password" data-bind="textInput: password" />
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <label for="retypePassword" class="col-md-2">Retype Password:</label>
+    <div class="col-md-10">
+      <input class="form-control col-md-12" type="password" name="retypePassword" id="retypePassword" data-bind="textInput: retypePassword" />
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <label for="clientName" class="col-md-2">Name:</label>
+    <div class="col-md-10">
+      <input class="form-control col-md-12" type="text" name="clientName" id="clientName" data-bind="textInput: form.name" />
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <label for="surname" class="col-md-2">Surname:</label>
+    <div class="col-md-10">
+      <input class="form-control col-md-12" type="text" name="surname" id="surname" data-bind="textInput: form.surname" />
+    </div>
+  </div>
+  <div class="form-group col-md-12">
+    <label for="initials" class="col-md-2">Initials:</label>
+    <div class="col-md-10">
+      <input class="form-control col-md-12" type="text" name="initials" id="initials" data-bind="textInput: form.initials" />
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="col-md-12">
+      <button class="col-md-1 col-md-offset-11 btn btn-primary" id="submitAccount" type="submit">Create</button>
+    </div>
+  </div>
+</form>
