@@ -16,6 +16,7 @@ define(["jquery", "knockout"], function($, ko) {
 		};
 	});
 	vm.gotData = function(data) {
+		console.log("Got: ",data);
 		vm.publications.removeAll();
 		for (var i = 0; i < data.length; i++) {
 			var authors = "";

@@ -4,7 +4,8 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.pubId = ko.observable();
 	vm.statusMsg = ko.observable('');
 	vm.pdfUrl = ko.observable('');
-
+	vm.tocUrl = ko.observable('');
+	vm.suppDocs = ko.observableArray([]);
 	vm.pubId.subscribe(function(newVal) {
 		vm.publication(null);
 		vm.statusMsg('Loading Publication.');
@@ -20,7 +21,15 @@ define(["jquery", "knockout"], function($, ko) {
 			}
 			data.Authors = authors;
 			vm.publication(data);
-			vm.pdfUrl("files/" + vm.publication().ScanPath.replace(/\\/g, "/"));
+			vm.pdfUrl("files/" + vm.publication().ScanPath);
+			vm.tocUrl("files/" + vm.publication().TableOfContentsPath);
+			for (var i = 0; i < vm.publication().PeerReviewDocumentation.length; i++) {
+				var fileDetail = {
+					name: vm.publication().PeerReviewDocumentation[i].DocumentTitle,
+					path: vm.publication().PeerReviewDocumentation[i].PathToFile
+				}
+				vm.suppDocs.push(fileDetail);
+			};
 			vm.statusMsg("Success!");
 		}).fail(function(jqxhr) {
 			vm.statusMsg("Error " + jqxhr.status + " - " + jqxhr.statusText);
