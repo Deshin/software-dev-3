@@ -28,7 +28,7 @@ if __name__ == "__main__":
     form = cgi.FieldStorage()
     username = form.getvalue("username", None)
     password = form.getvalue("password", None)
-    permission = form.getvalue("permission", None)
+    permission = "registered"
     firstName=form.getvalue("firstName", None)
     surname=form.getvalue("surname", None)
     initials=form.getvalue("initials",None)
