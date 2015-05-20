@@ -50,10 +50,10 @@ def getAllAccountDocs(self,username,skip, length, sortBy, sort):
                                  "Year" : pubs[i][3], 
                                  "Publisher" :pubs[i][4],
                                  "Authors" : auth})
-                    documentDetails.append(data)
+                    documentDetails.append(data[0])
                 result={"userDetails":userData, "documentDetails":documentDetails}
                 result=json.dumps(result)
-                return result
+            return result
     except:
         return"404"
 
