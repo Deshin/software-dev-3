@@ -45,6 +45,9 @@ class RestApi:
    
     def sortDocuments(self,sortBy, sort):
         return restSearch.sortDocuments(self, sortBy, sort)
+
+    def getAdvancedSearchFields(self):
+        return restSeatch.advancedSearchFields()
     
 
 
