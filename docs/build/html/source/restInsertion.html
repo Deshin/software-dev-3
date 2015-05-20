@@ -58,62 +58,205 @@
 <dl class="function">
 <dt id="restInsertion.insertAuthors">
 <code class="descclassname">restInsertion.</code><code class="descname">insertAuthors</code><span class="sig-paren">(</span><em>self</em>, <em>details</em>, <em>publicationID</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertAuthors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inserts all the authors tied to a particular publication.
+Inserts new authors based on the details entered on the submission form.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>details</strong> &#8211; json object containing all details relating to the inserted publication.</li>
+<li><strong>publicationID</strong> &#8211; the id of the publication to which the authors need to be linked.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restInsertion.insertBookSection">
 <code class="descclassname">restInsertion.</code><code class="descname">insertBookSection</code><span class="sig-paren">(</span><em>self</em>, <em>details</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertBookSection" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inserts a new publication with the category &#8220;Book&#8221;
+Inserts a new book section into the database using the details entered on the submission form.
+Checks if the book that the book section belongs to already exists and calls the appropriate function (insertExistingBook or insertNewBook)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>details</strong> &#8211; json object containing all details relating to a new conference paper</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restInsertion.insertConferencePaper">
 <code class="descclassname">restInsertion.</code><code class="descname">insertConferencePaper</code><span class="sig-paren">(</span><em>self</em>, <em>details</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertConferencePaper" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inserts a new publication with the category &#8220;Conference&#8221;
+Inserts a new conference paper into the database using the details entered on the submission form.
+Checks if the conference that the paper belongs to already exists and calls the appropriate function (insertExistingConference or insertNewConference)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>details</strong> &#8211; json object containing all details relating to a new conference paper</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restInsertion.insertDocument">
 <code class="descclassname">restInsertion.</code><code class="descname">insertDocument</code><span class="sig-paren">(</span><em>self</em>, <em>details</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertDocument" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inserts a new publication into the database based on the details entered on the submission form.
+Creates a database entry representing the new publication. New publications can only be added by Registered users (lecturers) and Administrators</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>details</strong> &#8211; json object containing fields based on the category of publication being added (i.e. conference, journal, or book section)</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restInsertion.insertExistingBook">
 <code class="descclassname">restInsertion.</code><code class="descname">insertExistingBook</code><span class="sig-paren">(</span><em>self</em>, <em>details</em>, <em>bookID</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertExistingBook" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inserts a new publication with the category &#8220;Book&#8221; that belongs to an existing book.
+Inserts a new jbook section into the database using the details entered on the submission form.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>details</strong> &#8211; json object containing all details relating to a new book section</li>
+<li><strong>bookID</strong> &#8211; the id (primary key) of the book to which the section will be added</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restInsertion.insertExistingConference">
 <code class="descclassname">restInsertion.</code><code class="descname">insertExistingConference</code><span class="sig-paren">(</span><em>self</em>, <em>details</em>, <em>conferenceID</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertExistingConference" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inserts a new publication with the category &#8220;Conference&#8221; that belongs to an existing conference.
+Inserts a new conference paper into the database using the details entered on the submission form.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>details</strong> &#8211; json object containing all details relating to a new conference paper</li>
+<li><strong>conferenceID</strong> &#8211; the id (primary key) of the conference to which the paper will be added</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restInsertion.insertExistingJournal">
 <code class="descclassname">restInsertion.</code><code class="descname">insertExistingJournal</code><span class="sig-paren">(</span><em>self</em>, <em>details</em>, <em>journalID</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertExistingJournal" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inserts a new publication with the category &#8220;Journal&#8221; that belongs to an existing journal.
+Inserts a new journal article into the database using the details entered on the submission form.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>details</strong> &#8211; json object containing all details relating to a new journal article</li>
+<li><strong>journalID</strong> &#8211; the id (primary key) of the journal to which the paper will be added</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restInsertion.insertJournalPaper">
 <code class="descclassname">restInsertion.</code><code class="descname">insertJournalPaper</code><span class="sig-paren">(</span><em>self</em>, <em>details</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertJournalPaper" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inserts a new publication with the category &#8220;Journal&#8221;
+Inserts a new journal article into the database using the details entered on the submission form.
+Checks if the journal that the article belongs to already exists and calls the appropriate function (insertExistingJournal or insertNewJournal)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>details</strong> &#8211; json object containing all details relating to a new conference paper</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restInsertion.insertNewBook">
 <code class="descclassname">restInsertion.</code><code class="descname">insertNewBook</code><span class="sig-paren">(</span><em>self</em>, <em>details</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertNewBook" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inserts a new publication with the category &#8220;Book&#8221; where the book the book section belongs to does not exist.
+Inserts a new book into the database using the details entered on the submission form. Then calls insertExistingBook to add the actual book section since the book now exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>details</strong> &#8211; json object containing all details relating to a new book section</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restInsertion.insertNewConference">
 <code class="descclassname">restInsertion.</code><code class="descname">insertNewConference</code><span class="sig-paren">(</span><em>self</em>, <em>details</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertNewConference" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inserts a new publication with the category &#8220;Conference&#8221; where the conference the paper belongs to does not exist.
+Inserts a new conference into the database using the details entered on the submission form. Then calls insertExistingConference to add the actual conference paper since the conference now exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>details</strong> &#8211; json object containing all details relating to a new conference paper</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restInsertion.insertNewJournal">
 <code class="descclassname">restInsertion.</code><code class="descname">insertNewJournal</code><span class="sig-paren">(</span><em>self</em>, <em>details</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertNewJournal" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Inserts a new publication with the category &#8220;Journal&#8221; where the journal the paper belongs to does not exist.
+Inserts a new journal into the database using the details entered on the submission form. Then calls insertExistingJournal to add the actual journal article since the journal now exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>details</strong> &#8211; json object containing all details relating to a new journal article</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restInsertion.insertPublicationAccreditation">
 <code class="descclassname">restInsertion.</code><code class="descname">insertPublicationAccreditation</code><span class="sig-paren">(</span><em>self</em>, <em>publicationID</em>, <em>isAcreddited</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertPublicationAccreditation" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Changes the accreditation status of a document in the database.
+Changes the accreditation of a document that is already in the database to either &#8220;Accredited&#8221; or &#8220;Not Accredited&#8221;</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>publicationID</strong> &#8211; the ID (primary key) of the publication that needs to be updated</li>
+<li><strong>isAccredited</strong> &#8211; boolean determining if a publication should be accredited or not</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 
