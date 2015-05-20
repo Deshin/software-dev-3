@@ -8,7 +8,8 @@ dbCols = {  "Title":"Publications.Title",
             "Conference Title":"Conferences.ConferenceTitle ",
             "Publication Title":"Publications.Title ",
             "Journal Title":"Journals.JournalTitle ",
-            "Accreditation":"Publications.Accreditation"
+            "Accreditation":"Publications.Accreditation",
+            "Initials":"Authors.Initials"
             } 
 
 def simpleSearch(self, searchTerm, skip, length, sortBy, sort):
