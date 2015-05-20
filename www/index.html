@@ -55,14 +55,14 @@
 
 		<div class="col-md-2 col-md-offset-10 col-sm-3 col-sm-offset-9 sidebar">
 			<ul class="nav nav-sidebar">
-				<!-- ko if: loginState() === 'UnregisteredUser' -->
+				<!-- ko if: loginState() === 'unregistered' -->
 				<li class="active"><a href="#" data-bind="click: loginModal" >Login</a></li>
 				<!-- /ko -->
-				<!-- ko if: loginState() === 'RegisteredUser'  -->
+				<!-- ko if: loginState() === 'registered'  -->
 				<li class="active"><a href="#" data-bind="click: logout" >Logout</a></li>
 				<!-- /ko -->
 			</ul>
-			<!-- ko if: loginState() === 'RegisteredUser' -->
+			<!-- ko if: loginState() === 'registered' -->
 			<ul class="nav nav-sidebar">
 				<li class="active"><a href="#!/publicationUpload">Upload</a></li>
 			</ul>
