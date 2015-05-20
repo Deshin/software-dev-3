@@ -36,6 +36,7 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 
 				success: function(data) {
 					$('#submitPublication').html('Success!');
+					clearForm();
 					setTimeout(function() {
 						$('#submitPublication').html('Submit');
 						window.location.href = "/#!/";
@@ -72,20 +73,58 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 
 		function init() {
 			var formVM = {};
-			formVM.Title = ko.observable("");
-			formVM.CategoryTitle = ko.observable("");
-			formVM.Abstract = ko.observable("");
-			formVM.Category = ko.observable("");
-			formVM.Country = ko.observable("");
-			formVM.DocumentTitle = ko.observable("");
-			formVM.MotivationForAccreditation = ko.observable("");
-			formVM.PeerReviewProcess = ko.observable("");
-			formVM.Volume = ko.observable("");
-			formVM.Issue = ko.observable("");
-			formVM.Publisher = ko.observable("");
-			formVM.Year = ko.observable("");
-			formVM.ISSN = ko.observable("");
-			formVM.ISBN = ko.observable("");
+			formVM.Title = {
+				sanatize: false,
+				value: ko.observable("")
+			};
+			formVM.CategoryTitle = {
+				sanatize: false,
+				value: ko.observable("")
+			};
+			formVM.Abstract = {
+				sanatize: false,
+				value: ko.observable("")
+			};
+			formVM.Category = {
+				sanatize: false,
+				value: ko.observable("")
+			};
+			formVM.Country = {
+				sanatize: false,
+				value: ko.observable("")
+			};
+			formVM.MotivationForAccreditation = {
+				sanatize: false,
+				value: ko.observable("")
+			};
+			formVM.PeerReviewProcess = {
+				sanatize: false,
+				value: ko.observable("")
+			};
+			formVM.Volume = {
+				sanatize: true,
+				value: ko.observable("")
+			};
+			formVM.Issue = {
+				sanatize: true,
+				value: ko.observable("")
+			};
+			formVM.Publisher = {
+				sanatize: false,
+				value: ko.observable("")
+			};
+			formVM.Year = {
+				sanatize: true,
+				value: ko.observable("")
+			};
+			formVM.ISSN = {
+				sanatize: true,
+				value: ko.observable("")
+			};
+			formVM.ISBN = {
+				sanatize: true,
+				value: ko.observable("")
+			};
 			vm.formVM = formVM;
 
 			vm.AuthorInitials = ko.observable("");
@@ -128,13 +167,16 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 		}
 
 		function addAuthor() {
+			var initial = vm.AuthorInitials().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/ /g, "");
+			var firstname = vm.AuthorFirstName().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/ /g, "");
+			var surname = vm.AuthorSurname().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/ /g, "");
 			if(vm.AuthorInitials() && vm.AuthorSurname() && vm.AuthorFirstName()) {
 				Authors.push({
-					Initials: vm.AuthorInitials(),
-					Surname: vm.AuthorSurname(),
-					FirstName: vm.AuthorFirstName()
+					Initials: initial,
+					Surname: surname,
+					FirstName: firstname
 				});
-				var authorString = vm.AuthorFirstName() + " " + vm.AuthorSurname() + ", " + vm.AuthorInitials();
+				var authorString = firstname + " " + surname + ", " + initial;
 				if(vm.AuthorString()) {
 					vm.AuthorString(vm.AuthorString() + "; " + authorString);
 				} else {
@@ -151,6 +193,9 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 		function clearAuthors() {
 			Authors = [];
 			vm.AuthorString("");
+			vm.AuthorFirstName("");
+			vm.AuthorSurname("");
+			vm.AuthorInitials("");
 		}
 
 		function publicationRules() {
@@ -273,17 +318,21 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 		function vmToJson() {
 			var publication = {};
 			for (var id in vm.formVM) {
-				if(vm.formVM[id]()) {
+				if(vm.formVM[id].value()) {
 					if(id === 'CategoryTitle') {
-						if(vm.formVM.Category() === 'Journal Article') {
-							publication.JournalTitle = vm.formVM[id]();
-						} else if (vm.formVM.Category() === 'Conference Paper') {
-							publication.ConferenceTitle = vm.formVM[id]();
-						} else if (vm.formVM.Category() === 'Book Chapter') {
-							publication.BookTitle = vm.formVM[id]();
+						if(vm.formVM.Category.value() === 'Journal Article') {
+							publication.JournalTitle = vm.formVM[id].value();
+						} else if (vm.formVM.Category.value() === 'Conference Paper') {
+							publication.ConferenceTitle = vm.formVM[id].value();
+						} else if (vm.formVM.Category.value() === 'Book Chapter') {
+							publication.BookTitle = vm.formVM[id].value();
 						}
 					} else {
-						publication[id] = vm.formVM[id]();
+						if(vm.formVM[id].sanatize) {
+							publication[id] = vm.formVM[id].value().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/ /g, "");
+						} else {
+							publication[id] = vm.formVM[id].value();
+						}
 					}
 				} else {
 					delete publication[id];
@@ -301,8 +350,27 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 
 			publication.SupportingDocumentation = SupportingDocs;
 			publication.Authors = Authors;
-
+			console.log(publication);
 			return publication;
+		}
+
+		function clearForm() {
+			for (var id in vm.formVM) {
+				if(vm.formVM[id].value()) {
+					vm.formVM[id].value("");
+				}
+			}
+
+			clearAuthors();
+			clearSupportingDoc();
+
+			fileVM.PublicationFile({
+				base64String: ko.observable()
+			});
+			fileVM.PublicationToc({
+				base64String: ko.observable()
+			});
+
 		}
 
 	});
