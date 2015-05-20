@@ -20,9 +20,12 @@ def deleteAccount(self,username):
         if existingAccount==[]:
             return "404"
         else:
-            self._databaseWrapper.query("DELETE FROM Users WHERE Username=?",[username])
-            self._databaseWrapper.commit()
-            return "Account Deleted"
+            if existingAccount[0][2]=="admin":
+                return "403"
+            else:
+                self._databaseWrapper.query("DELETE FROM Users WHERE Username=?",[username])
+                self._databaseWrapper.commit()
+                return "Account Deleted"
     except:
         return "400"
     
