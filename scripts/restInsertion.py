@@ -4,9 +4,8 @@ import json
 import sys
 import os
 import base64
-
 def insertDocument(self, details):
-    details["Accreditation"]="Not Yet Accredited"   
+    details["Accreditation"]="Not Evaluated"   
     details["Type"]="Unknown"   
 
     if details["Category"].lower().startswith("conference"):
