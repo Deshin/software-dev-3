@@ -1,5 +1,15 @@
 import json
 
+dbCols = {  "title":"Publications.Title",
+            "author":"Authors.FirstName OR Authors.Surname",
+            "surname":"Authors.Surname",
+            "bookTitle":"Books.BookTitle",
+            "conferenceTitle":"Conferences.ConferenceTitle",
+            "publicationTitle":"Publications.Title",
+            "journalTitle":"Journals.JournalTitle",
+            "abstract":""
+            } 
+
 def simpleSearch(self, searchTerm, skip, length, sortBy, sort):
     # searchTerms is a list of strings
     query = "SELECT  Publications.* "\
@@ -34,3 +44,9 @@ def sortDocuments(self, sortBy, sort):
         sortString=" ORDER BY "+sortBy+" COLLATE NOCASE "+sort+" "
         
     return sortString
+
+def getAdvancedSearchFields():
+    keys = []
+    for key in dbCols.keys()
+        keys.append(key)
+    return json.dumps(keys)
