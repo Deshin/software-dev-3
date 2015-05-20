@@ -5,6 +5,7 @@ import json
 import restRetrieval
 import restSearch
 import restInsertion
+import restAccounts
 
 class RestApi:
     def __init__(self, DatabaseWrapper):
