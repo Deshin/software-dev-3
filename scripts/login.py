@@ -7,11 +7,11 @@ from SqliteWrapper import SqliteWrapper
 def main(username,hash):
     db = SqliteWrapper()
     rest = RestApi(db)
+    result=rest.getLoginCredentials(username)
     if result=="401":
         result="401"
     else:
-        result=rest.getLoginCredentials(username)
-        if result!=hash:
+        if result[0]!=hash:
             result="401"
     if result == "401":
         print "Status:401"
