@@ -21,9 +21,8 @@ def main(username, password, permission, firstName, surname, initials):
         print ""
         print "Username is not unique"
     else:
-        print "Content-Type: application/json"
+        print "Content-Type: text/htlm"
         print ""
-        print result    
 
 if __name__ == "__main__":
     form = cgi.FieldStorage()

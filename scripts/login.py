@@ -31,5 +31,4 @@ if __name__ == "__main__":
     form = cgi.FieldStorage()
     username = form.getvalue("username", None)
     hash = form.getvalue("hash", None)
-    username="ELEN4010"
     main(username,hash)  
