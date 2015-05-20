@@ -50,7 +50,7 @@ class RestApi:
         return restSeatch.advancedSearchFields()
 
     def advancedSearch(self, searchTerms, skip, length, limit, offset):
-        return restSearch.advancedSearch(self, searchTerms, skip, length, limit, offset) 
+        return restSearch.advancedSearch(self, searchTerms, skip, length, sortBy, sort) 
     
 
 

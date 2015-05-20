@@ -1,4 +1,5 @@
 import json
+import String
 
 dbCols = {  "Title":"Publications.Title",
             "Author":"Authors.FirstName OR Authors.Surname ",
@@ -52,7 +53,7 @@ def getAdvancedSearchFields():
     return json.dumps(fields)
 
 
-def advancedSearch(searchTerms, skip, length, limit, offset):
+def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
     query = "SELECT Publications.* "\
         "FROM Publications "\
         "LEFT JOIN Authors ON Authors.PublicationID=Publications.ID "\
@@ -69,11 +70,13 @@ def advancedSearch(searchTerms, skip, length, limit, offset):
     terms = decorateAdvancedSearchTerms(terms)
     (queryPart, queryValues) = getSQLQueryAndValues(terms)
 
+#   TODO: add sortby, sort fields
+
     query += queryPart
     query += "GROUP BY Publications.Title "\
       "LIMIT ? OFFSET ? "   
-    queryValues.append(limit)
-    queryValues.append(offset)
+    queryValues.append(length)
+    queryValues.append(skip)
 
     pubs = self._databaseWrapper.query(query, queryValues)
     result = addAuthors(self, pubs)
