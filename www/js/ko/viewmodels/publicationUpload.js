@@ -27,7 +27,7 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 	function submitPublication(form) {
 		if($('#uploadPublication').valid() && vm.AuthorString()) {
 			var uploadPublication = vmToJson();
-			console.log(uploadPublication);
+			$('#submitPublication').html('Submitting');
 			$.ajax({
 				url: "/api/insertions.py",
 				type: "POST",
@@ -35,11 +35,26 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind"], function($, $vali
 				data: JSON.stringify(uploadPublication),
 
 				success: function(data) {
-					console.log("Success");
+					$('#submitPublication').html('Success!');
+					setTimeout(function() {
+						$('#submitPublication').html('Submit');
+						window.location.href = "/";
+					}, 2000);
 				},
 
 				error: function (jqXHR) {
-					console.log("Error: " + jqXHR.status + " - " + jqXHR.statusText);
+					$('#submitPublication').html('Error (' + jqXHR.status + ')');
+					if($('#submitPublication').hasClass('btn-primary')) {
+						$('#submitPublication').removeClass('btn-primary');
+						$('#submitPublication').addClass('btn-danger');
+					}
+					setTimeout(function() {
+						$('#submitPublication').html('Submit');
+						if($('#submitPublication').hasClass('btn-danger')) {
+							$('#submitPublication').removeClass('btn-danger');
+							$('#submitPublication').addClass('btn-primary');
+						}
+					}, 2000);
 				},
 			});
 		} else if(!vm.AuthorString()) {

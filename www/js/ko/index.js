@@ -56,7 +56,7 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
     };
     self.logout = function() {
       self.loginState('unregistered');
-      window.location.replace("/");
+      window.location.href("/");
     };
     self.getVM = function(path) {
       return function(callback) {
@@ -90,8 +90,8 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
       };
 
       $.get('/api/login.py', loginObject)
-        .success(function(data) {
-          rootViewModel.loginState(data.permission);
+        .done(function(data) {
+          rootViewModel.loginState(data.Permission);
         })
         .error(function (jqXHR) {
           rootViewModel.loginState('unregistered');
