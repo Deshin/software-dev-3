@@ -7,7 +7,7 @@ dbCols = {  "title":"Publications.Title",
             "conferenceTitle":"Conferences.ConferenceTitle",
             "publicationTitle":"Publications.Title",
             "journalTitle":"Journals.JournalTitle",
-            "abstract":""
+            "abstract":"fdas"
             } 
 
 def simpleSearch(self, searchTerm, skip, length, sortBy, sort):
@@ -46,7 +46,7 @@ def sortDocuments(self, sortBy, sort):
     return sortString
 
 def getAdvancedSearchFields():
-    keys = []
-    for key in dbCols.keys()
-        keys.append(key)
-    return json.dumps(keys)
+    fields = []
+    for a in dbCols.keys()
+        fields.append(a)
+    return json.dumps(fields)
