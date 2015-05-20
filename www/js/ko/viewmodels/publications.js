@@ -16,7 +16,6 @@ define(["jquery", "knockout"], function($, ko) {
 		};
 	});
 	vm.gotData = function(data) {
-		console.log("Got: ",data);
 		vm.publications.removeAll();
 		for (var i = 0; i < data.length; i++) {
 			var authors = "";
@@ -62,7 +61,7 @@ define(["jquery", "knockout"], function($, ko) {
 		vm.page(vm.page()-1);
 	};
 	vm.first = function() {
-		vm.page(1);	
+		vm.page(1);
 	};
 	vm.sorting = function(item){
 		if (vm.sortBy() === item) {
