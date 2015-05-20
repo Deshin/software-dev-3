@@ -13,13 +13,6 @@ def main(simpleSearch, advancedSearch, skip, length, sortBy, sort):
         result = rest.simpleSearch(simpleSearch, skip, length, sortBy, sort)
     elif advancedSearch != None:
         result = rest.advancedSearch(advancedSearch, skip, length, sortBy, sort)
-#    if result == "404":
-#        print "Status:404"
-#        print "Content-Type: text/html"
-#        print
-#        print ""
-#        print "404 - No documents were found."
-#        else:
     print "Content-Type: application/json"
     print
     print ""
@@ -36,6 +29,6 @@ if __name__ == "__main__":
     main(simpleSearch, advancedSearch, skip, length, sortBy, sort)    
 
 #if __name__ == "__main__":
-#    advS = [{"field":"Surname","value":"Ward","operator":"contains"},{"field":"First Name","value":"Sarah","operator":"contains"}]
+#    advS = [{"field":"Conference Title","value":"a","operator":"contains"}]
 #    main(None, json.dumps(advS), 0, 20, None, None)
 
