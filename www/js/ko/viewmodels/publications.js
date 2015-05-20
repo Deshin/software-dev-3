@@ -8,6 +8,13 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.skip = ko.computed(function() {
 		return (vm.page()-1)*vm.pageSize();
 	});
+	vm.sortIcon = ko.computed(function() {
+		if (vm.sort() === "ASC") {
+			return "glyphicon glyphicon-hand-up";
+		} else{
+			return "glyphicon glyphicon-hand-down";
+		};
+	});
 	vm.gotData = function(data) {
 		vm.publications.removeAll();
 		for (var i = 0; i < data.length; i++) {

@@ -10,6 +10,7 @@ define(["jquery", "knockout"], function($, ko) {
 		vm.statusMsg('Loading Publication.');
 		$.getJSON('/api/publicationDetails.py?id=' + newVal)
 		.done(function(data) {
+			console.log(data);
 			var authors = "";
 			for (var j = 0; j < data.Authors.length; j++) {
 				authors += data.Authors[j].Initials + " " + data.Authors[j].Surname;
