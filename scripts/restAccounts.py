@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import json
+
 def createAccount(self,username, password, permission, firstName, surname, initials):
     try:
         existingAccount=self._databaseWrapper.query("SELECT * FROM Users WHERE Username=?",[username])
@@ -50,6 +52,7 @@ def getAllAccountDocs(self,username,skip, length, sortBy, sort):
                                  "Authors" : auth})
                     documentDetails.append(data)
                 result={"userDetails":userData, "documentDetails":documentDetails}
+                result=json.dumps(result)
                 return result
     except:
         return"404"
