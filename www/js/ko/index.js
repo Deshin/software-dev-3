@@ -33,7 +33,7 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
     };
     self.loginModal = function() {
       bootbox.dialog({
-        message: '<form id="loginModal" data-bind="submit: loginUser"></form>',
+        message: '<form id="loginModal" submit="" data-bind="submit: loginUser"></form>',
         title: "Login",
         show: true,
         backdrop: true,
