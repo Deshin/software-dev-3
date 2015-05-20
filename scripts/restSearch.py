@@ -24,14 +24,7 @@ def simpleSearch(self, searchTerm, skip, length, sortBy, sort):
         "GROUP BY Publications.Title "+sortDocuments(self,sortBy, sort)+\
         "LIMIT ? OFFSET ? "
     pubs = self._databaseWrapper.query(query, ('%'+searchTerm+'%','%'+searchTerm+'%','%'+searchTerm+'%', length, skip))
-    data = []
-    for i in range(0,len(pubs)):
-        auths = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID=? ", (str(pubs[i][0]),))
-        auth = []
-        for j in range(0, len(auths)):
-            auth.append({"ID":auths[j][0], "PublicationID":auths[j][1], "First Name" : auths[j][2], "Surname" : auths[j][3],  "Initials" : auths[j][4]})
-        data.append({"PublicationId" : pubs[i][0], "Title" : pubs[i][1], "Category" : pubs[i][2], "Year" : pubs[i][3], "Publisher" :pubs[i][4], "Authors" : auth})
-    return json.dumps(data)
+    return json.dumps(addAuthors(self,pubs))
 
 def sortDocuments(self, sortBy, sort):
     validSortBy=["Title", "Category", "Year", "Publisher"]
@@ -66,12 +59,10 @@ def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
         "WHERE "
     
     terms = json.loads(searchTerms) 
-    terms = splitAdvancedSearchTerms(terms)
+#   terms = splitAdvancedSearchTerms(terms)
     terms = updateAdvancedSearchTermsFields(terms, dbCols)
     terms = decorateAdvancedSearchTerms(terms)
     (queryPart, queryValues) = getSQLQueryAndValues(terms)
-
-#   TODO: add sortby, sort fields
 
     query += queryPart
     query += "GROUP BY Publications.Title "
@@ -80,15 +71,15 @@ def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
     queryValues.append(length)
     queryValues.append(skip)
 
+#    print 
+#    print query
+#    print
+#    print queryValues
+#    print 
+
     pubs = self._databaseWrapper.query(query, queryValues)
     data = []
-    for i in range(0,len(pubs)):
-        auths = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID=? ", (str(pubs[i][0]),))
-        auth = []
-        for j in range(0, len(auths)):
-            auth.append({"ID":auths[j][0], "PublicationID":auths[j][1], "First Name" : auths[j][2], "Surname" : auths[j][3],  "Initials" : auths[j][4]})
-        data.append({"PublicationId" : pubs[i][0], "Title" : pubs[i][1], "Category" : pubs[i][2], "Year" : pubs[i][3], "Publisher" :pubs[i][4], "Authors" : auth})
-    return json.dumps(data)
+    return json.dumps(addAuthors(self,pubs))
 
 def splitAdvancedSearchTerms(terms):
     oldEntries = terms

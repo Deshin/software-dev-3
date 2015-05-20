@@ -29,6 +29,6 @@ if __name__ == "__main__":
     main(simpleSearch, advancedSearch, skip, length, sortBy, sort)    
 
 #if __name__ == "__main__":
-#    advS = [{"field":"Conference Title","value":"a","operator":"contains"}]
+#    advS = [{"field":"Accreditation","value":"Not Yet Accredited","operator":"equals"}]
 #    main(None, json.dumps(advS), 0, 20, None, None)
 
