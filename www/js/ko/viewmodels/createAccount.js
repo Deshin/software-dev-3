@@ -50,10 +50,9 @@ define(["jquery", "knockout", "crypto.SHA"], function($, ko, crypto) {
       submitForm.password = CryptoJS.SHA256(vm.password()).toString();
       $.post('/api/createAccount.py', submitForm)
         .done(function(data) {
-          console.log('DONE!');
+          // Program redirect.
         })
         .error(function (jqXHR) {
-
           console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
         });
     } else if(vm.password() !== vm.retypePassword()) {

@@ -3,11 +3,13 @@ define(["jquery", "knockout"], function($, ko) {
 
   vm.findAccount = findAccount;
   vm.removeAccount = removeAccount;
-  vm.username = ko.observable("");
   vm.sortBy=ko.observable(null);
 	vm.sort=ko.observable(null);
 
-  vm.userDetails = ko.observable({});
+  vm.username = ko.observable('');
+	vm.firstname = ko.observable('');
+	vm.surname = ko.observable('');
+	vm.initials = ko.observable('');
   vm.publications = ko.observableArray([]);
 
   $('#searchAccount').validate({
@@ -32,18 +34,16 @@ define(["jquery", "knockout"], function($, ko) {
 
   vm.gotData = function(data) {
     vm.publications.removeAll();
-    vm.userDetails(data.userDetails);
-    console.log(data);
-    for (var i = 0; i < data.documentDetails.length; i++) {
+    for (var i = 0; i < data.length; i++) {
       var authors = "";
-      for (var j = 0; j < data.documentDetails[i].Authors.length; j++) {
-        authors += data.documentDetails[i].Authors[j].Initials + " " + data.documentDetails[i].Authors[j].Surname;
-        if(j != data.documentDetails[i].Authors.length - 1) {
+      for (var j = 0; j < data[i].Authors.length; j++) {
+        authors += data[i].Authors[j].Initials + " " + data[i].Authors[j].Surname;
+        if(j != data[i].Authors.length - 1) {
           authors += ", ";
         }
       }
-      data.documentDetails[i].Authors = authors;
-      vm.publications.push(data.documentDetails[i]);
+      data[i].Authors = authors;
+      vm.publications.push(data[i]);
     }
   };
 
@@ -51,13 +51,30 @@ define(["jquery", "knockout"], function($, ko) {
     if (vm.page() === null || vm.pageSize() === null || vm.sort() === null || vm.sortBy() === null) {
       return;
     }
-    var getUrl = '/api/authorDocs.py';
+    var getUrl = '/api/publications.py';
+		var advSearch = [
+			{
+				field: 'First Name',
+				value: vm.firstname(),
+				operator: 'equals'
+			},
+			{
+				field: 'Surname',
+				value: vm.surname(),
+				operator: 'equals'
+			},
+			{
+				field: 'Initials',
+				value: vm.initials(),
+				operator: 'equals'
+			},
+		];
     var query = {
-      username: vm.username,
       skip: vm.skip().toString(),
       length: vm.pageSize().toString(),
       sortBy: vm.sortBy(),
-      sort: vm.sort()
+      sort: vm.sort(),
+			advancedSearch: JSON.stringify(advSearch)
     };
     $.getJSON(getUrl, query)
     .done(vm.gotData)
@@ -97,6 +114,12 @@ define(["jquery", "knockout"], function($, ko) {
 
   function findAccount() {
     if($('#searchAccount').valid()) {
+			vm.publications([]);
+
+			vm.firstname('');
+			vm.surname('');
+			vm.initials('');
+
       vm.page(1);
       vm.pageSize(20);
       vm.sort('ASC');
@@ -107,7 +130,17 @@ define(["jquery", "knockout"], function($, ko) {
       vm.sortBy.subscribe(updateList, vm, 'change');
       vm.sort.subscribe(updateList, vm, 'change');
 
-      updateList();
+			$.getJSON('/api/authorDocs.py', {username: vm.username})
+				.done(function(data) {
+					vm.firstname(data.firstname);
+					vm.surname(data.surname);
+					vm.initials(data.initials);
+
+					updateList();
+				})
+				.fail(function(jqXHR) {
+					console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
+				});
     }
   }
 
