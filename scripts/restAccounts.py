@@ -27,7 +27,6 @@ def deleteAccount(self,username):
 def getAllAccountDocs(self,username,skip, length, sortBy, sort):
     try:
         existingAccount=self._databaseWrapper.query("SELECT * FROM Users WHERE Username=?",[username])
-        print existingAccount
         if existingAccount==[]:
             return "409"
         else:
