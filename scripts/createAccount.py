@@ -23,7 +23,6 @@ def main(username, password, permission, firstName, surname, initials):
     else:
         print "Content-Type: application/json"
         print ""
-        print result    
 
 if __name__ == "__main__":
     form = cgi.FieldStorage()
