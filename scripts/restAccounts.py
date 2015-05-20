@@ -5,5 +5,5 @@ def createAccount(self,username, password, permission, firstName, surname, initi
     if existingAccount!=[]:
         return "Account already exists!"
     else:
-        print "Hi"
+        self._databaseWrapper("INSERT")
         

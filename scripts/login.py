@@ -13,9 +13,6 @@ def main(username,hash):
     else:
         if result[0]!=hash:
             result="401"
-        else:
-            result[0]="200"
-            result[1]={"permission":result[1]}
     if result == "401":
         print "Status:401"
         print "Content-Type: text/html"
@@ -26,11 +23,13 @@ def main(username,hash):
         print "Content-Type: application/json"
         print
         print ""
-        print result[1]
+        print result
         
         
 if __name__ == "__main__":
     form = cgi.FieldStorage()
-    username = form.getvalue("username", None)
-    hash = form.getvalue("hash", None)
-    main(username,hash)  
+#    username = form.getvalue("username", None)
+#    hash = form.getvalue("hash", None)
+    username="ELEN4010"
+    password="f53f5a42cad02d80e8db99e87a2f176d09f6dfdf8da5ff5a21a78e74e16734df"
+    main(username,password)  
