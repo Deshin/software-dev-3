@@ -89,15 +89,14 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
         hash: password.toString()
       };
 
-      rootViewModel.loginState('registered');
-      // $.get('/api/login.py', loginObject)
-      //   .done(function(data) {
-      //     rootViewModel.loginState(data.Permission);
-      //   })
-      //   .error(function (jqXHR) {
-      //     rootViewModel.loginState('unregistered');
-      //     console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
-      //   });
+      $.get('/api/login.py', loginObject)
+        .done(function(data) {
+          rootViewModel.loginState(data.Permission);
+        })
+        .error(function (jqXHR) {
+          rootViewModel.loginState('unregistered');
+          console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
+        });
     }
 
   }
