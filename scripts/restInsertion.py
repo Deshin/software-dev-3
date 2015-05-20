@@ -106,6 +106,9 @@ def insertExistingJournal(self,details,journalID):
         if not os.path.exists("../www/files/"+details["TableOfContentsPath"]): os.makedirs("../www/files/"+details["TableOfContentsPath"])
         tocfile =  open("../www/files/"+details['TableOfContentsPath']+"TOC.pdf", "wb+")
         tocfile.write(base64.b64decode(details["PublicationToc"]["data"]))
+        
+        journal=self._databaseWrapper.query("SELECT from Journals WHERE ID=?",journalID)
+        print journal
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"]+'TOC.pdf', details["ScanPath"]+details["ScanFileName"], details["Accreditation"]))
         publicationID=self._databaseWrapper._cur.lastrowid
         self._databaseWrapper.query("INSERT INTO JournalPublicationDetail(JournalID,PublicationID,Volume,Issue,Abstract) VALUES(?,?,?,?,?)",(journalID, publicationID, details["Volume"], details["Issue"], details["Abstract"]))

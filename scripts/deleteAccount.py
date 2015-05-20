@@ -19,7 +19,7 @@ def main(username):
         print ""
         print "Account does not exists"
     else:
-        print "Content-Type: application/json"
+        print "Content-Type: text/html"
         print ""
         print result
 
