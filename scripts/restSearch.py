@@ -55,10 +55,11 @@ def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
         "FROM Publications "\
         "LEFT JOIN Authors ON Authors.PublicationID=Publications.ID "\
         "LEFT JOIN BookPublications ON BookPublications.PublicationID=Publications.ID "\
-        "LEFT JOIN ConferencePublicationDetail "\
-        "ON ConferencePublicationDetail.PublicationID=Publications.ID "\
-        "LEFT JOIN JournalPublicationDetail "\
-        "ON JournalPublicationDetail.PublicationID=Publications.ID "\
+        "LEFT JOIN Books ON Books.ID=Bookpublications.BooksID "\
+        "LEFT JOIN ConferencePublicationDetail ON ConferencePublicationDetail.PublicationID=Publications.ID "\
+        "LEFT JOIN Conferences ON Conferences.ID=ConferencePublicationDetail.ConferenceID "\
+        "LEFT JOIN JournalPublicationDetail ON JournalPublicationDetail.PublicationID=Publications.ID "\
+        "LEFT JOIN Journals ON Journals.ID=JournalPublicationDetail.JournalID "\
         "WHERE "
     
     terms = json.loads(searchTerms) 
@@ -74,6 +75,8 @@ def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
       "LIMIT ? OFFSET ? "   
     queryValues.append(length)
     queryValues.append(skip)
+
+    qv = [queryValues[0].encode("unicode_escape"), queryValues[1], queryValues[2]]
 
     pubs = self._databaseWrapper.query(query, queryValues)
     data = []
@@ -112,7 +115,7 @@ def decorateAdvancedSearchTerms(terms):
     oldEntries = terms;
     for entry in oldEntries:
         if entry["operator"] == "contains" :
-            entry["value"] = "%" + entry["value"] + "% "
+            entry["value"] = "%" + entry["value"] + "%"
         else :
             entry["value"] = "" + entry["value"] + " "
     return oldEntries
