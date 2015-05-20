@@ -40,5 +40,23 @@ def getAllAccountDocs(self,username):
             return result
     except:
         return"404"
+    
+def updateAccredited(self, accreditedCSV):
+    print "Accredited"
+    
+def updateDHET(self,accreditedCSV):
+    print "DHET"
+    
+def updateISI(self,accreditedCSV):
+    print "ISI"
+    
+def updateIBBS(self,accreditedCSV):
+    print "IBBS"
+    
+def updatePredatory(self, predatoryCSV):
+    print "Predatory"
+    
+def updateHIndex(self,HIndexCSV):
+    print "HIndex"
 
         

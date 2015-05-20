@@ -60,6 +60,15 @@ class RestApi:
 
     def accreditPublication(self, publicationID) :
         return restInsertion.insertPublicationAcceditation(self, publicationID)
+    
+    def updateAccredited(self, accreditedCSV):
+        return restAccounts.updateAccredited(self, accreditedCSV)
+    
+    def updatePredatory(self, predatoryCSV):
+        return restAccounts.updatePredatory(self,predatoryCSV)
+    
+    def updateHIndex(self,HIndexCSV):
+        return restAccounts.updateHIndex(self,HIndexCSV)
 
 
         
