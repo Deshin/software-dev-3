@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import json
 import cgi
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
@@ -34,3 +34,8 @@ if __name__ == "__main__":
     sortBy=form.getvalue("sortBy", None)
     sort=form.getvalue("sort", None)
     main(simpleSearch, advancedSearch, skip, length, sortBy, sort)    
+
+#if __name__ == "__main__":
+#    advS = [{"field":"Surname","value":"Ward","operator":"contains"},{"field":"First Name","value":"Sarah","operator":"contains"}]
+#    main(None, json.dumps(advS), 0, 20, None, None)
+

@@ -2,13 +2,12 @@ import json
 import string
 
 dbCols = {  "Title":"Publications.Title",
-            "Author":"Authors.FirstName OR Authors.Surname ",
+            "First Name":"Authors.FirstName",
             "Surname":"Authors.Surname ",
             "Book Title":"Books.BookTitle ",
             "Conference Title":"Conferences.ConferenceTitle ",
             "Publication Title":"Publications.Title ",
             "Journal Title":"Journals.JournalTitle ",
-            "Abstract":"BookPublications.Abstract OR ConferencePublicationDetail.Abstract OR JournalPublicationDetail.Abstract " 
             } 
 
 def simpleSearch(self, searchTerm, skip, length, sortBy, sort):
@@ -92,17 +91,9 @@ def splitAdvancedSearchTerms(terms):
         if " " in bigValue:
             values = bigValue.split()
             for smallValue in values:
-                if len(smallValue) == 1:
-                    newEntries.append({ "field": entry["field"], 
-                                        "operator": entry["operator"], 
-                                        "value": smallValue + " "})
-                    newEntries.append({ "field": entry["field"], 
-                                        "operator": entry["operator"], 
-                                        "value": smallValue + "."})
-                else:
-                    newEntries.append({ "field": entry["field"], 
-                                        "operator": entry["operator"], 
-                                        "value": smallValue}) 
+                newEntries.append({ "field": entry["field"], 
+                                    "operator": entry["operator"], 
+                                    "value": smallValue}) 
             oldEntries.remove(entry);
             oldEntries += newEntries
     return oldEntries
@@ -117,18 +108,21 @@ def decorateAdvancedSearchTerms(terms):
     oldEntries = terms;
     for entry in oldEntries:
         if entry["operator"] == "contains" :
-            entry["value"] = "LIKE %" + entry["value"] + "% "
+            entry["value"] = "%" + entry["value"] + "% "
         else :
-            entry["value"] = "= " + entry["value"] + " "
+            entry["value"] = "" + entry["value"] + " "
     return oldEntries
 
 def getSQLQueryAndValues(terms):
     values = []
     query = ""
     for entry in terms:
-        query += entry["field"] + "? "
+        if entry["operator"] == "contains" :
+            query += entry["field"] + "LIKE ? "
+        else:
+            query += entry["field"] + "= ? "
         if entry != terms[-1]:
-            query += "OR "
+            query += "AND "
         values.append(entry["value"])
 
     return (query, values)
