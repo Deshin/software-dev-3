@@ -36,7 +36,6 @@ def getAllAccountDocs(self,username,skip, length, sortBy, sort):
             documentDetails=[]
             for item in authorPubs:
                 pubs = self._databaseWrapper.query("SELECT * FROM Publications WHERE ID=? "+self.sortDocuments(sortBy, sort) + " LIMIT ? OFFSET ?", (item[1],length, skip))
-                print pubs
                 if pubs == []:
                     return "404"
                 
