@@ -8,6 +8,7 @@ dbCols = {  "Title":"Publications.Title",
             "Conference Title":"Conferences.ConferenceTitle ",
             "Publication Title":"Publications.Title ",
             "Journal Title":"Journals.JournalTitle ",
+            "Accreditation":"Publications.Accreditation"
             } 
 
 def simpleSearch(self, searchTerm, skip, length, sortBy, sort):
@@ -71,8 +72,9 @@ def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
 #   TODO: add sortby, sort fields
 
     query += queryPart
-    query += "GROUP BY Publications.Title "\
-      "LIMIT ? OFFSET ? "   
+    query += "GROUP BY Publications.Title "
+    query += sortDocuments(self,sortBy, sort)
+    query += "LIMIT ? OFFSET ? "   
     queryValues.append(length)
     queryValues.append(skip)
 
