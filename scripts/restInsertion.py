@@ -250,7 +250,7 @@ def insertAuthors(self, details, publicationID):
     except:
         return "400", sys.exc_info()[1]
 
-def insertPublicationAccreditation(self, publicationID, isAcreddited):
+def insertPublicationAccreditation(self, publicationID, isAccredited):
     """Changes the accreditation status of a document in the database.
     Changes the accreditation of a document that is already in the database to either "Accredited" or "Not Accredited"
     
