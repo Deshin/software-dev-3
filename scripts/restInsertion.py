@@ -4,7 +4,13 @@ import json
 import sys
 import os
 import base64
+
 def insertDocument(self, details):
+    """ Inserts a new publication into the database based on the details entered on the submission form.
+        Creates a database entry representing the new publication. New publications can only be added by Registered users (lecturers) and Administrators
+        
+        :param details: json object containing fields based on the category of publication being added (i.e. conference, journal, or book section)
+    """
     details["Accreditation"]="Not Evaluated"   
     details["Type"]="Unknown"   
 
@@ -38,6 +44,12 @@ def insertDocument(self, details):
     
         
 def insertConferencePaper(self,details):
+    """ Inserts a new publication with the category "Conference"
+    Inserts a new conference paper into the database using the details entered on the submission form.
+    Checks if the conference that the paper belongs to already exists and calls the appropriate function (insertExistingConference or insertNewConference)
+    
+    :param details: json object containing all details relating to a new conference paper
+    """
     existingConference=self._databaseWrapper.query("SELECT * FROM Conferences WHERE ConferenceTitle=?",[details["ConferenceTitle"]])
     if existingConference!=[]:
         for item in existingConference:
@@ -51,6 +63,12 @@ def insertConferencePaper(self,details):
     return result
         
 def insertExistingConference(self,details, conferenceID):
+    """ Inserts a new publication with the category "Conference" that belongs to an existing conference.
+    Inserts a new conference paper into the database using the details entered on the submission form.
+    
+    :param details: json object containing all details relating to a new conference paper
+    :param conferenceID: the id (primary key) of the conference to which the paper will be added
+    """
     try:          
         
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"]+'TOC.pdf', details["ScanPath"]+details["ScanFileName"], details["Accreditation"]))
@@ -77,6 +95,11 @@ def insertExistingConference(self,details, conferenceID):
         return "400",sys.exc_info()[1]
 
 def insertNewConference(self,details):
+    """ Inserts a new publication with the category "Conference" where the conference the paper belongs to does not exist.
+    Inserts a new conference into the database using the details entered on the submission form. Then calls insertExistingConference to add the actual conference paper since the conference now exists.
+    
+    :param details: json object containing all details relating to a new conference paper
+    """
     try:
        self._databaseWrapper.query("INSERT INTO Conferences(ConferenceTitle, Year, Country) VALUES(?,?,?)",(details["ConferenceTitle"],details["Year"], details["Country"]))
        conferenceID=self._databaseWrapper._cur.lastrowid
@@ -87,6 +110,12 @@ def insertNewConference(self,details):
  
     
 def insertJournalPaper(self,details):
+    """ Inserts a new publication with the category "Journal"
+    Inserts a new journal article into the database using the details entered on the submission form.
+    Checks if the journal that the article belongs to already exists and calls the appropriate function (insertExistingJournal or insertNewJournal)
+    
+    :param details: json object containing all details relating to a new conference paper
+    """
     existingJournal=self._databaseWrapper.query("SELECT * FROM Journals WHERE JournalTitle=?",[details["JournalTitle"]])
     if existingJournal!=[]:
         journalID=existingJournal[0][0]
@@ -96,6 +125,12 @@ def insertJournalPaper(self,details):
     return result
 
 def insertExistingJournal(self,details,journalID):
+    """ Inserts a new publication with the category "Journal" that belongs to an existing journal.
+    Inserts a new journal article into the database using the details entered on the submission form.
+    
+    :param details: json object containing all details relating to a new journal article
+    :param journalID: the id (primary key) of the journal to which the paper will be added
+    """
     try:        
         journal=self._databaseWrapper.query("SELECT * FROM Journals WHERE ID=?",[journalID])
         status=journal[0][4]
@@ -125,6 +160,11 @@ def insertExistingJournal(self,details,journalID):
         return "400", sys.exc_info()[1]
 
 def insertNewJournal(self,details):
+    """ Inserts a new publication with the category "Journal" where the journal the paper belongs to does not exist.
+    Inserts a new journal into the database using the details entered on the submission form. Then calls insertExistingJournal to add the actual journal article since the journal now exists.
+    
+    :param details: json object containing all details relating to a new journal article
+    """
     try:
        self._databaseWrapper.query("INSERT INTO Journals(JournalTitle, ISSN, HIndex,Type) VALUES(?,?,?,?)",(details["JournalTitle"],details["ISSN"], details["HIndex"], details["Type"]))
        journalID=self._databaseWrapper._cur.lastrowid
@@ -134,6 +174,12 @@ def insertNewJournal(self,details):
         return "400",sys.exc_info()[1]
     
 def insertBookSection(self,details):
+    """ Inserts a new publication with the category "Book"
+    Inserts a new book section into the database using the details entered on the submission form.
+    Checks if the book that the book section belongs to already exists and calls the appropriate function (insertExistingBook or insertNewBook)
+    
+    :param details: json object containing all details relating to a new conference paper
+    """
     existingBook=self._databaseWrapper.query("SELECT * FROM Books WHERE BookTitle=?",[details["BookTitle"]])
     if existingBook!=[]:
         bookID=existingBook[0][0]
@@ -144,6 +190,12 @@ def insertBookSection(self,details):
     
     
 def insertExistingBook(self,details,bookID):
+    """ Inserts a new publication with the category "Book" that belongs to an existing book.
+    Inserts a new jbook section into the database using the details entered on the submission form.
+    
+    :param details: json object containing all details relating to a new book section
+    :param bookID: the id (primary key) of the book to which the section will be added
+    """
     try:        
         #note: although this is repeated code from conference insertion, it is important
         #that it is repeated here to ensure atomicity of insertions
@@ -171,6 +223,11 @@ def insertExistingBook(self,details,bookID):
         return "400", sys.exc_info()[1]
 
 def insertNewBook(self,details):
+    """ Inserts a new publication with the category "Book" where the book the book section belongs to does not exist.
+    Inserts a new book into the database using the details entered on the submission form. Then calls insertExistingBook to add the actual book section since the book now exists.
+    
+    :param details: json object containing all details relating to a new book section
+    """
     try:
        self._databaseWrapper.query("INSERT INTO Books(BookTitle, ISBN,Type) VALUES(?,?,?)",(details["BookTitle"],details["ISBN"], details["Type"]))
        bookID=self._databaseWrapper._cur.lastrowid
@@ -180,6 +237,12 @@ def insertNewBook(self,details):
         return "400",sys.exc_info()[1]    
     
 def insertAuthors(self, details, publicationID):
+    """ Inserts all the authors tied to a particular publication.
+    Inserts new authors based on the details entered on the submission form.
+    
+    :param details: json object containing all details relating to the inserted publication.
+    :param publicationID: the id of the publication to which the authors need to be linked.
+    """
     try:
         for item in details["Authors"]:
             self._databaseWrapper.query("INSERT INTO Authors(PublicationID, FirstName, Surname,Initials) VALUES(?,?,?,?)",(publicationID,item["FirstName"], item["Surname"], item["Initials"]))
@@ -188,6 +251,12 @@ def insertAuthors(self, details, publicationID):
         return "400", sys.exc_info()[1]
 
 def insertPublicationAccreditation(self, publicationID, isAcreddited):
+    """Changes the accreditation status of a document in the database.
+    Changes the accreditation of a document that is already in the database to either "Accredited" or "Not Accredited"
+    
+    :param publicationID: the ID (primary key) of the publication that needs to be updated
+    :param isAccredited: boolean determining if a publication should be accredited or not
+    """
     query = "UPDATE Publications "\
         "SET Accreditation = ? "\
         "WHERE ID = ?"
