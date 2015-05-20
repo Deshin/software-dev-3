@@ -49,7 +49,10 @@
 			<!-- ko if: loginState() === 'admin' -->
 			<div class="row" data-bind="page: {id: 'createAccount', title: 'Create Account', sourceOnShow: 'views/createAccount.html', withOnShow: getVM('createAccount')}">
 			</div>
+			<div class="row" data-bind="page: {id: 'removeAccount', title: 'Remove Account', sourceOnShow: 'views/removeAccount.html', withOnShow: getVM('removeAccount')}">
+			</div>
 			<!-- /ko -->
+
 			<div class="row" data-bind="page: {role: 'start', id: 'publications', title: 'All publications', params:{'search' : '', 'page': 1, 'pageSize':20, sort: 'ASC', sortBy: 'Title'}, sourceOnShow: 'views/publications.html', withOnShow: getVM('publications')}">
 			</div>
 
@@ -74,6 +77,9 @@
 			<!-- ko if: loginState() === 'admin' -->
 			<ul class="nav nav-sidebar">
 				<li class="active"><a href="#!/createAccount">Create Account</a></li>
+			</ul>
+			<ul class="nav nav-sidebar">
+				<li class="active"><a href="#!/removeAccount">Remove an Account</a></li>
 			</ul>
 			<!-- /ko -->
 		</div>
