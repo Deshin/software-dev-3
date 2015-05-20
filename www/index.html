@@ -70,21 +70,17 @@
 				<!-- /ko -->
 				<!-- ko if: loginState() !== 'unregistered'  -->
 				<li class="active"><a href="#" data-bind="click: logout" >Logout</a></li>
+				<li class="active"><a href="#!/publicationUpload">Upload</a></li>
+				<!-- /ko -->
+				<!-- ko if: loginState() === 'admin' -->
+				<li class="active"><a href="#!/createAccount">Create Account</a></li>
+				<li class="active"><a href="#!/removeAccount">Remove an Account</a></li>
 				<!-- /ko -->
 			</ul>
-			<!-- ko if: loginState() !== 'unregistered' -->
 			<ul class="nav nav-sidebar">
-				<li class="active"><a href="#!/publicationUpload">Upload</a></li>
-			</ul>
-			<!-- /ko -->
-			<!-- ko if: loginState() === 'admin' -->
-			<ul class="nav nav-sidebar">
-				<li class="active"><a href="#!/createAccount">Create Account</a></li>
 			</ul>
 			<ul class="nav nav-sidebar">
-				<li class="active"><a href="#!/removeAccount">Remove an Account</a></li>
 			</ul>
-			<!-- /ko -->
 		</div>
 
 	</div>
