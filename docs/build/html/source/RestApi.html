@@ -53,11 +53,12 @@
 <dl class="class">
 <dt id="RestApi.RestApi">
 <em class="property">class </em><code class="descclassname">RestApi.</code><code class="descname">RestApi</code><span class="sig-paren">(</span><em>DatabaseWrapper</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi" title="Permalink to this definition">¶</a></dt>
-<dd><p>RestApi is the central class used for the REST API, all REST enpoints pass through this class. The functions used in those endpoints are documented in their respective files.</p>
+<dd><p>RestApi is the central class used for the REST API, all REST enpoints pass through this class. The functions in this class are simply references to other functions which are documented in their respective modules. See the appropriate links below fro mode details.</p>
 <dl class="method">
 <dt id="RestApi.RestApi.accreditPublication">
 <code class="descname">accreditPublication</code><span class="sig-paren">(</span><em>publicationID</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.accreditPublication" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>see <a class="reference internal" href="restInsertion.html#restInsertion.insertPublicationAccreditation" title="restInsertion.insertPublicationAccreditation"><code class="xref py py-func docutils literal"><span class="pre">restInsertion.insertPublicationAccreditation()</span></code></a> for more info</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="RestApi.RestApi.advancedSearch">
@@ -111,6 +112,11 @@
 </dd></dl>
 
 <dl class="method">
+<dt id="RestApi.RestApi.getCSVFormats">
+<code class="descname">getCSVFormats</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.getCSVFormats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="RestApi.RestApi.getDocumentDetails">
 <code class="descname">getDocumentDetails</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.getDocumentDetails" title="Permalink to this definition">¶</a></dt>
 <dd><p>see <a class="reference internal" href="restRetrieval.html#restRetrieval.getDocumentDetails" title="restRetrieval.getDocumentDetails"><code class="xref py py-func docutils literal"><span class="pre">restRetrieval.getDocumentDetails()</span></code></a> for more info</p>
@@ -131,7 +137,8 @@
 <dl class="method">
 <dt id="RestApi.RestApi.insertDocument">
 <code class="descname">insertDocument</code><span class="sig-paren">(</span><em>details</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.insertDocument" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>see <a class="reference internal" href="restInsertion.html#restInsertion.insertDocument" title="restInsertion.insertDocument"><code class="xref py py-func docutils literal"><span class="pre">restInsertion.insertDocument()</span></code></a> for more info</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="RestApi.RestApi.simpleSearch">
@@ -142,6 +149,24 @@
 <dt id="RestApi.RestApi.sortDocuments">
 <code class="descname">sortDocuments</code><span class="sig-paren">(</span><em>sortBy</em>, <em>sort</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.sortDocuments" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="method">
+<dt id="RestApi.RestApi.updateAccredited">
+<code class="descname">updateAccredited</code><span class="sig-paren">(</span><em>accreditedCSV</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.updateAccredited" title="Permalink to this definition">¶</a></dt>
+<dd><p>see <a class="reference internal" href="restAccounts.html#restAccounts.updateAccredited" title="restAccounts.updateAccredited"><code class="xref py py-func docutils literal"><span class="pre">restAccounts.updateAccredited()</span></code></a> for more info</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="RestApi.RestApi.updateHIndex">
+<code class="descname">updateHIndex</code><span class="sig-paren">(</span><em>HIndexCSV</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.updateHIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>see <a class="reference internal" href="restAccounts.html#restAccounts.updateHIndex" title="restAccounts.updateHIndex"><code class="xref py py-func docutils literal"><span class="pre">restAccounts.updateHIndex()</span></code></a> for more info</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="RestApi.RestApi.updatePredatory">
+<code class="descname">updatePredatory</code><span class="sig-paren">(</span><em>predatoryCSV</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.updatePredatory" title="Permalink to this definition">¶</a></dt>
+<dd><p>see <a class="reference internal" href="restAccounts.html#restAccounts.updatePredatory" title="restAccounts.updatePredatory"><code class="xref py py-func docutils literal"><span class="pre">restAccounts.updatePredatory()</span></code></a> for more info</p>
+</dd></dl>
 
 </dd></dl>
 

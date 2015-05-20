@@ -53,32 +53,116 @@
 <dl class="function">
 <dt id="restRetrieval.getAllAuthors">
 <code class="descclassname">restRetrieval.</code><code class="descname">getAllAuthors</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#restRetrieval.getAllAuthors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns information on all the authors in the database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">An array of dictionaries containing author details for all authors</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">An array of Dict objects</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restRetrieval.getAllDocuments">
 <code class="descclassname">restRetrieval.</code><code class="descname">getAllDocuments</code><span class="sig-paren">(</span><em>self</em>, <em>skip</em>, <em>length</em>, <em>sortBy</em>, <em>sort</em><span class="sig-paren">)</span><a class="headerlink" href="#restRetrieval.getAllDocuments" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Finds information on all the documents listend in the database.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>skip</strong> &#8211; Integer, represents the first entry to return -1. Used for pagination.</li>
+<li><strong>length</strong> &#8211; Integer, defines how many entries to return. Used for pagination.</li>
+<li><strong>sortBy</strong> &#8211; A string representing a field name to sort the results by.</li>
+<li><strong>sort</strong> &#8211; A string, &#8220;ASC&#8221; or &#8220;DESC&#8221; which signifies &#8220;ascending or descending&#8221;. This determines in which order to sorth the returned document details.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A json array containing json objects that hold document details. The array contains <cite>length</cite> number of elements.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">A stringified json array of objects</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restRetrieval.getAuthors">
 <code class="descclassname">restRetrieval.</code><code class="descname">getAuthors</code><span class="sig-paren">(</span><em>self</em>, <em>pubId</em><span class="sig-paren">)</span><a class="headerlink" href="#restRetrieval.getAuthors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Function to find all the authors associated with a publication ID</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pubId</strong> &#8211; Integer publication ID number which uniquely identifies a publication in the database.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">An array of dictionaries containing all the information regarding a certain author.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">An array of Dict objects</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restRetrieval.getDocumentDetails">
 <code class="descclassname">restRetrieval.</code><code class="descname">getDocumentDetails</code><span class="sig-paren">(</span><em>self</em>, <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#restRetrieval.getDocumentDetails" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Finds the details for the specified document</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id</strong> &#8211; The Publication ID integer that uniquely identifies a publication in the database.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A stringified json object containing the details for the specified publication.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">A String, representing a json object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restRetrieval.getExtraDocuments">
 <code class="descclassname">restRetrieval.</code><code class="descname">getExtraDocuments</code><span class="sig-paren">(</span><em>self</em>, <em>pubId</em><span class="sig-paren">)</span><a class="headerlink" href="#restRetrieval.getExtraDocuments" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Find information on all the extra documents associated with a publication.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pubId</strong> &#8211; An integer which uniquely identifies a publication in the database</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">An array of dictionaries containing document information for all the documents associated with a publication.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">An array of Dict objects.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restRetrieval.getLoginCredentials">
 <code class="descclassname">restRetrieval.</code><code class="descname">getLoginCredentials</code><span class="sig-paren">(</span><em>self</em>, <em>username</em><span class="sig-paren">)</span><a class="headerlink" href="#restRetrieval.getLoginCredentials" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Finds the login credentials for a certain user</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>username</strong> &#8211; A string that uniquely identifies a certain user account in the database.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A dictionary containing the permission level and hashed password of the specified user account.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">A Dict object.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 
