@@ -4,7 +4,8 @@ from DatabaseWrapper import DatabaseWrapper
 import json
 import restRetrieval
 import restSearch
-import ru1
+import restInsertion
+import restAccounts
 
 class RestApi:
     def __init__(self, DatabaseWrapper):
@@ -14,6 +15,9 @@ class RestApi:
     @property
     def databaseWrapper(self):
         return self._databaseWrapper
+    
+    def createAccount(self,username, password, permission, firstName, surname, initials):
+        return restAccounts.createAccount(self,username, password, permission, firstName, surname, initials)
 
     def getAuthors(self, pubId):
         return restRetrieval.getAuthors(self, pubId)
@@ -27,17 +31,26 @@ class RestApi:
     def getDocumentDetails(self, id):
         return restRetrieval.getDocumentDetails(self, id)
     
+    def getExtraDocuments(self, pubId):  
+        return restRetrieval.getExtraDocuments(self, pubId) 
+    
     def getLoginCredentials(self,username):
         return restRetrieval.getLoginCredentials(self,username)
         
     def insertDocument(self, details):
-        return ru1.insertDocument(self, details)
+        return restInsertion.insertDocument(self, details)
 
     def simpleSearch(self, searchTerms, skip, length, sortBy, sort):
         return restSearch.simpleSearch(self, searchTerms, skip, length, sortBy, sort)
    
     def sortDocuments(self,sortBy, sort):
         return restSearch.sortDocuments(self, sortBy, sort)
+
+    def getAdvancedSearchFields(self):
+        return restSeatch.advancedSearchFields()
+
+    def advancedSearch(self, searchTerms, skip, length, limit, offset):
+        return restSearch.advancedSearch(self, searchTerms, skip, length, limit, offset) 
     
 
 

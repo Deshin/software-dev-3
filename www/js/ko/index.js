@@ -22,11 +22,11 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
   function RootViewModel() {
     var self = this;
     self.search = ko.observable("");
-    self.loginState = ko.observable('UnregisteredUser');
+    self.loginState = ko.observable('unregistered');
 
     self.onSearchClick = function() {
       if (self.search() === "") {
-        window.location.assign("/");
+        window.location.assign("/#!/");
       } else {
         window.location.assign("/#!/publications?search="+encodeURIComponent(self.search()));
       }
@@ -34,18 +34,20 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
     self.loginModal = function() {
       bootbox.dialog({
         message: '<form id="loginModal"></form>',
-        title: "Custom title",
+        title: "Login",
         show: true,
         backdrop: true,
         closeButton: true,
         animate: true,
         className: "my-modal",
         buttons: {
-          "Confirm": {
+          success: {
+            label: "Login",
             className: "btn-success",
             callback: loginUser
           },
-          "Cancel": {
+          danger: {
+            label: "Cancel",
             className: "btn-danger"
           }
         }
@@ -53,7 +55,8 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
       $('#loginModal').load('views/loginModal.html');
     };
     self.logout = function() {
-      self.loginState('UnregisteredUser');
+      self.loginState('unregistered');
+      window.location.assign("/#!/");
     };
     self.getVM = function(path) {
       return function(callback) {
@@ -86,21 +89,14 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
         hash: password.toString()
       };
 
-      // $.ajax({
-      //   url: "/api/login.py",
-      //   type: "POST",
-      //   contentType: "application/json",
-      //   data: JSON.stringify(loginObject),
-      //
-      //   success: function(data) {
-      //     rootViewModel.loginState('RegisteredUser');
-      //   },
-      //
-      //   error: function (jqXHR) {
-      //     console.log("Error: " + jqXHR.status + " - " + jqXHR.statusText);
-      //   },
-      // });
-      rootViewModel.loginState('RegisteredUser');
+      $.get('/api/login.py', loginObject)
+        .done(function(data) {
+          rootViewModel.loginState(data.Permission);
+        })
+        .error(function (jqXHR) {
+          rootViewModel.loginState('unregistered');
+          console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
+        });
     }
 
   }

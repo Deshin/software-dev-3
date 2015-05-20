@@ -22,7 +22,7 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a href="/" class="navbar-brand">Wits Research Repository
+				<a href="/#!/" class="navbar-brand">Wits Research Repository
 					<small>by Wits-Epsilon</small>
 				</a>
 			</div>
@@ -36,13 +36,13 @@
 	</nav>
 
 	<div class="container-fluid">
-		<div class="col-md-10">
+		<div class="col-md-10 col-sm-9">
 			<div class="row" data-bind="page: {id: 'test', title: 'Test Page', sourceOnShow: 'views/test.html', withOnShow: getVM('test')}">
 			</div>
 
 			<div class="row" data-bind="page: {id: 'publicationDetails', params: ['pubId'], title: 'Publication Details', sourceOnShow: 'views/publicationDetails.html', withOnShow: getVM('publicationDetails')}">
 			</div>
-			<!-- ko if: loginState() === 'RegisteredUser' -->
+			<!-- ko if: loginState() === 'registered' -->
 			<div class="row" data-bind="page: {id: 'publicationUpload', title: 'Publication Upload', sourceOnShow: 'views/publicationUpload.html', withOnShow: getVM('publicationUpload')}">
 			</div>
 			<!-- /ko -->
@@ -53,16 +53,16 @@
 
 		</div>
 
-		<div class="col-md-2 col-md-offset-10 sidebar">
+		<div class="col-md-2 col-md-offset-10 col-sm-3 col-sm-offset-9 sidebar sidebar-right">
 			<ul class="nav nav-sidebar">
-				<!-- ko if: loginState() === 'UnregisteredUser' -->
+				<!-- ko if: loginState() === 'unregistered' -->
 				<li class="active"><a href="#" data-bind="click: loginModal" >Login</a></li>
 				<!-- /ko -->
-				<!-- ko if: loginState() === 'RegisteredUser'  -->
+				<!-- ko if: loginState() === 'registered'  -->
 				<li class="active"><a href="#" data-bind="click: logout" >Logout</a></li>
 				<!-- /ko -->
 			</ul>
-			<!-- ko if: loginState() === 'RegisteredUser' -->
+			<!-- ko if: loginState() === 'registered' -->
 			<ul class="nav nav-sidebar">
 				<li class="active"><a href="#!/publicationUpload">Upload</a></li>
 			</ul>

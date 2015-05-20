@@ -24,7 +24,17 @@ def getAllAuthors(self):
                      "FirstName" : auths[j][2],
                      "Surname" : auths[j][3], 
                      "Initials" : auths[j][4]})
-    return auth      
+    return auth    
+
+def getExtraDocuments(self, pubId):  
+    peerReview=self._databaseWrapper.query("SELECT * FROM PeerReviewDocumentation WHERE PublicationID=(?)",[str(pubId)])
+    docs=[]
+    for j in range(0,len(peerReview)):
+        docs.append({"ID":peerReview[j][0],
+                     "PublicationID":peerReview[j][1],
+                     "PathToFile":peerReview[j][2],
+                     "DocumentTitle":peerReview[j][3]})
+    return docs
 
 def getAllDocuments(self, skip, length, sortBy, sort):
     pubs = self._databaseWrapper.query("SELECT * FROM Publications "+self.sortDocuments(sortBy, sort) + " LIMIT ? OFFSET ?", (length, skip))
@@ -54,6 +64,9 @@ def getDocumentDetails(self, id):
         authors = self.getAuthors(id)
         authors={"Authors":authors}
         data=dict(data, **authors)
+        docs = self.getExtraDocuments(id)
+        docs={"PeerReviewDocumentation":docs}
+        data=dict(data, **docs)
         category=data["Category"].lower()
     
     
@@ -68,10 +81,6 @@ def getDocumentDetails(self, id):
             journalDetails=dict(zip(columnNames, journalDetails[0]))
             data=dict(data, **journalDetails)
             
-            #peerReview=self._databaseWrapper.query("SELECT * FROM PeerReviewDocumentation WHERE PublicationID=(?)",[str(id)])
-            #columnNames = [i[0] for i in self._databaseWrapper._cur.description]
-            #peerReview=dict(zip(columnNames, peerReview[0]))
-            #data=dict(data, **peerReview)
             
         elif category.startswith("conference"):
             conferencePubDetails=self._databaseWrapper.query("SELECT * FROM ConferencePublicationDetail WHERE PublicationID=(?)",[str(data["ID"])])
@@ -83,11 +92,7 @@ def getDocumentDetails(self, id):
             columnNames = [i[0] for i in self._databaseWrapper._cur.description]
             conferenceDetails=dict(zip(columnNames, conferenceDetails[0]))
             data=dict(data, **conferenceDetails)
-            
-            #peerReview=self._databaseWrapper.query("SELECT * FROM PeerReviewDocumentation WHERE PublicationID=(?)",[str(id)])
-            #columnNames = [i[0] for i in self._databaseWrapper._cur.description]
-            #peerReview=dict(zip(columnNames, peerReview[0]))
-            #data=dict(data, **peerReview)
+    
             
         elif category.startswith("book"):
             bookPubDetails=self._databaseWrapper.query("SELECT * FROM BookPublications WHERE PublicationID=(?)",[str(data["ID"])])
@@ -100,11 +105,6 @@ def getDocumentDetails(self, id):
             bookDetails=dict(zip(columnNames, bookDetails[0]))
             data=dict(data, **bookDetails)
             
-            #peerReview=self._databaseWrapper.query("SELECT * FROM PeerReviewDocumentation WHERE PublicationID=(?)",[str(id)])
-            #columnNames = [i[0] for i in self._databaseWrapper._cur.description]
-            #peerReview=dict(zip(columnNames, peerReview[0]))
-            #data=dict(data, **peerReview)
-            
         data=json.dumps(data)
         if data==[]:
             return "404"
@@ -116,11 +116,9 @@ def getDocumentDetails(self, id):
 def getLoginCredentials(self,username):
     try:
         loginDetails=self._databaseWrapper.query("SELECT * FROM Users WHERE Username=(?)",[username])
-        columnNames = [i[0] for i in self._databaseWrapper._cur.description]
-        loginDetails=dict(zip(columnNames, loginDetails[0]))
-        data=dict(data, **loginDetails)
-        data=json.dumps(data)
-        return data["Password"]
+        data={"Password":loginDetails[0][3].encode("unicode-escape"),
+            "Permission":loginDetails[0][2].encode("unicode-escape")}
+        return data
     except:
         return "401"
     

@@ -13,9 +13,10 @@ def main(id):
         print "Content-Type: text/html"
         print ""
         print "No document details were found"
-    print "Content-Type: application/json"
-    print ""
-    print result    
+    else:      
+        print "Content-Type: application/json"
+        print ""
+        print result    
 
 if __name__ == "__main__":
     form=cgi.FieldStorage()

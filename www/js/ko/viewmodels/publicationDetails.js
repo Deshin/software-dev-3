@@ -19,7 +19,6 @@ define(["jquery", "knockout"], function($, ko) {
 			}
 			data.Authors = authors;
 			vm.publication(data);
-			console.log(data);
 			vm.pdfUrl("files/" + vm.publication().ScanPath.replace(/\\/g, "/"));
 			vm.statusMsg("Success!");
 		}).fail(function(jqxhr) {
