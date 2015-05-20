@@ -21,6 +21,9 @@ class RestApi:
     
     def deleteAccount(self,username):
         return restAccounts.deleteAccount(self,username)
+    
+    def lockAccount(self,username):
+        return restAccounts.lockAccount(self,username)
 
     def getAuthors(self, pubId):
         return restRetrieval.getAuthors(self, pubId)
