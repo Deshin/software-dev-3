@@ -28,8 +28,7 @@ def main(username,hash):
         
 if __name__ == "__main__":
     form = cgi.FieldStorage()
-#    username = form.getvalue("username", None)
-#    hash = form.getvalue("hash", None)
-    username="ELEN4010"
+    username = form.getvalue("username", None)
+    hash = form.getvalue("hash", None)
     password="f53f5a42cad02d80e8db99e87a2f176d09f6dfdf8da5ff5a21a78e74e16734df"
     main(username,password)  
