@@ -45,7 +45,7 @@
 
 			<div class="row" data-bind="page: {id: 'publicationDetails', params: ['pubId'], title: 'Publication Details', sourceOnShow: 'views/publicationDetails.html', withOnShow: getVM('publicationDetails')}">
 			</div>
-			<!-- ko if: loginState() === 'registered' -->
+			<!-- ko if: loginState() !== 'unregistered' -->
 			<div class="row" data-bind="page: {id: 'publicationUpload', title: 'Publication Upload', sourceOnShow: 'views/publicationUpload.html', withOnShow: getVM('publicationUpload')}">
 			</div>
 			<!-- /ko -->
@@ -72,7 +72,7 @@
 				<li class="active"><a href="#" data-bind="click: logout" >Logout</a></li>
 				<!-- /ko -->
 			</ul>
-			<!-- ko if: loginState() === 'registered' -->
+			<!-- ko if: loginState() !== 'unregistered' -->
 			<ul class="nav nav-sidebar">
 				<li class="active"><a href="#!/publicationUpload">Upload</a></li>
 			</ul>
