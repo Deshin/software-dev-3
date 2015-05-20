@@ -8,6 +8,7 @@ import json
 def main(username, password, permission, firstName, surname, initials):
     db = SqliteWrapper()
     rest = RestApi(db)
+
     result = rest.createAccount(username, password, permission, firstName, surname, initials)
     if result=="400":
         print "Status:400"
@@ -29,7 +30,8 @@ if __name__ == "__main__":
     username = form.getvalue("username", None)
     password = form.getvalue("password", None)
     permission = "registered"
-    firstName=form.getvalue("firstName", None)
+    firstName=form.getvalue("firstname", None)
     surname=form.getvalue("surname", None)
     initials=form.getvalue("initials",None)
+    
     main(username, password, permission, firstName, surname, initials)
