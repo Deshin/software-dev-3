@@ -28,5 +28,8 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.removeListing = function(index) {
 		vm.listings.splice(index(), 1);
 	};
+	vm.upload = function() {
+
+	};
 	return vm;
 });
