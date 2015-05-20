@@ -5,11 +5,11 @@ from SqliteWrapper import SqliteWrapper
 import cgi
 import json
 
-def main(username,skip, length, sortBy, sort):
+def main(username):
     db = SqliteWrapper()
     rest = RestApi(db)
 
-    result = rest.getAllAccountDocs(username,skip, length, sortBy, sort)
+    result = rest.getAllAccountDocs(username)
     if result=="400":
         print "Status:400"
         print "Content-Type: text/html"
@@ -23,9 +23,5 @@ def main(username,skip, length, sortBy, sort):
 if __name__ == "__main__":
     form = cgi.FieldStorage()
     username = form.getvalue("username", None)
-    skip = form.getvalue("skip", None)
-    length = form.getvalue("length", None)
-    sortBy=form.getvalue("sortBy", None)
-    sort=form.getvalue("sort", None)
     
-    main(username,skip, length, sortBy, sort)
+    main(username)

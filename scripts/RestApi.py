@@ -22,8 +22,8 @@ class RestApi:
     def deleteAccount(self,username):
         return restAccounts.deleteAccount(self,username)
     
-    def getAllAccountDocs(self,username,skip, length, sortBy, sort):
-        return restAccounts.getAllAccountDocs(self,username,skip, length, sortBy, sort)
+    def getAllAccountDocs(self,username):
+        return restAccounts.getAllAccountDocs(self,username)
 
     def getAuthors(self, pubId):
         return restRetrieval.getAuthors(self, pubId)
