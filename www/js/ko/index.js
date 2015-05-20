@@ -86,8 +86,9 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
         hash: password.toString()
       };
 
-      $.post('/api/login.py', loginObject)
+      $.get('/api/login.py', loginObject)
         .success(function(data) {
+          
           rootViewModel.loginState('RegisteredUser');
         })
         .error(function (jqXHR) {
