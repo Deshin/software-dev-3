@@ -21,8 +21,6 @@ def simpleSearch(self, searchTerm, skip, length, sortBy, sort):
         "GROUP BY Publications.Title "+sortDocuments(self,sortBy, sort)+\
         "LIMIT ? OFFSET ? "
     pubs = self._databaseWrapper.query(query, ('%'+searchTerm+'%','%'+searchTerm+'%','%'+searchTerm+'%', length, skip))
-    if pubs == []:
-        return "200"
     data = []
     for i in range(0,len(pubs)):
         auths = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID=? ", (str(pubs[i][0]),))
