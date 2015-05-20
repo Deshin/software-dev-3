@@ -35,7 +35,7 @@ def getAllAccountDocs(self,username):
         if existingAccount==[]:
             return "400"
         else:
-            result={"username":existingAccount[0][1], "firstname":existingAccount[0][4], "surname":existingAccount[0][5], "initials":existingAccount[0][6]}
+            result={"username":existingAccount[0][1], "firstname":existingAccount[0][4], "surname":existingAccount[0][5], "initials":existingAccount[0][6], "permission":existingAccount[0][2]}
             result=json.dumps(result)
             return result
     except:
