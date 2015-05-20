@@ -31,6 +31,7 @@
     <button class="btn btn-danger col-md-12" data-bind="click: removeAccount">Remove</button>
   </div>
 </div>
+<!-- ko if: publications()[0] -->
 <table class="col-md-12 table table-hover">
 	<thead>
 		<tr>
@@ -51,6 +52,7 @@
 		</tr>
 	</tbody>
 </table>
+<!-- /ko -->
 <nav>
   <ul class="pager">
   	{{#ifnot page() == 1}}
