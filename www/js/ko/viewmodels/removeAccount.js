@@ -114,7 +114,7 @@ define(["jquery", "knockout"], function($, ko) {
 
   function findAccount() {
     if($('#searchAccount').valid()) {
-			vm.publications([]);
+			vm.publications.removeAll();
 
 			vm.firstname('');
 			vm.surname('');
@@ -145,7 +145,18 @@ define(["jquery", "knockout"], function($, ko) {
   }
 
   function removeAccount() {
+		$.post('/api/deleteAccount.py', {username: vm.username})
+			.done(function(data) {
+				vm.username('');
+				vm.firstname('');
+				vm.surname('');
+				vm.initials('');
 
+				vm.publications.removeAll();
+			})
+			.fail(function(jqXHR) {
+				console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
+			});
   }
 
   function publicationRules() {
