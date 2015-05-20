@@ -57,7 +57,9 @@ class RestApi:
 
     def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
         return restSearch.advancedSearch(self, searchTerms, skip, length, sortBy, sort) 
-    
+
+    def accreditPublication(self, publicationID) :
+        return restInsertion.insertPublicationAcceditation(self, publicationID)
 
 
         
