@@ -49,9 +49,10 @@ define(["jquery", "knockout"], function($, ko) {
 		vm.page(vm.page()-1);
 	};
 	vm.first = function() {
-		vm.page(1);
+		vm.page(1);	
 	};
 	vm.sorting = function(item){
+		console.log(item);
 		if (vm.sortBy() === item) {
 			if (vm.sort() === "ASC") {
 				vm.sort("DESC");

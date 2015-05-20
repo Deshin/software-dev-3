@@ -1,10 +1,10 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th><a href="#" click="{{sorting('Title')}}">Title</a></th>
-			<th><a href="#" click="{{sorting('Category')}}">Category</a></th>
-			<th><a href="#" click="{{sorting('Year')}}">Year</a></th>
-			<th><a href="#" click="{{sorting('Publisher')}}">Publisher</a></th>
+			<th click="{{sorting.bind($data, 'Title')}}">Title</th>
+			<th click="{{sorting.bind($data, 'Category')}}">Category</th>
+			<th click="{{sorting.bind($data, 'Year')}}">Year</th>
+			<th click="{{sorting.bind($data, 'Publisher')}}">Publisher</th>
 			<th>Authors</th>
 		</tr>
 	</thead>
