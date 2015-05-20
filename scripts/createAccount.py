@@ -10,15 +10,15 @@ def main(username, password, permission, firstName, surname, initials):
     rest = RestApi(db)
     result = rest.createAccount(username, password, permission, firstName, surname, initials)
     if result=="400":
-        print "Status:404"
+        print "Status:400"
         print "Content-Type: text/html"
         print ""
-        print "No document details were found"
+        print "Account couldnt be added"
     elif result=="409":
         print "Status:409"
         print"Content-Type: text/html"
         print ""
-        print "Account already exists"
+        print "Username is not unique"
     else:
         print "Content-Type: application/json"
         print ""

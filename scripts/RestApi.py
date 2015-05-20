@@ -18,6 +18,9 @@ class RestApi:
     
     def createAccount(self,username, password, permission, firstName, surname, initials):
         return restAccounts.createAccount(self,username, password, permission, firstName, surname, initials)
+    
+    def deleteAccount(self,username):
+        return restAccounts.deleteAccount(self,username)
 
     def getAuthors(self, pubId):
         return restRetrieval.getAuthors(self, pubId)
