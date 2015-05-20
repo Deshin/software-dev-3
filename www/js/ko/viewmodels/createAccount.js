@@ -21,7 +21,7 @@ define(["jquery", "knockout", "crypto.SHA"], function($, ko, crypto) {
   function init() {
     var form = {};
 
-    form.name = ko.observable("");
+    form.firstname = ko.observable("");
     form.surname = ko.observable("");
     form.initials = ko.observable("");
     form.username = ko.observable("");
@@ -48,12 +48,12 @@ define(["jquery", "knockout", "crypto.SHA"], function($, ko, crypto) {
     if(vm.password() === vm.retypePassword() && $('#createAccount').valid()) {
       var submitForm = ko.toJS(vm.form);
       submitForm.password = CryptoJS.SHA256(vm.password()).toString();
-      $.get('/api/createAccount.py', submitForm)
+      $.post('/api/createAccount.py', submitForm)
         .done(function(data) {
           console.log('DONE!');
         })
         .error(function (jqXHR) {
-          
+
           console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
         });
     } else if(vm.password() !== vm.retypePassword()) {
