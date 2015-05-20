@@ -22,6 +22,7 @@ define(["jquery", "knockout"], function($, ko) {
 			vm.publication(data);
 			vm.pdfUrl("files/" + vm.publication().ScanPath);
 			vm.tocUrl("files/" + vm.publication().TableOfContentsPath);
+			vm.suppDocs.removeAll();
 			for (var i = 0; i < vm.publication().PeerReviewDocumentation.length; i++) {
 				var fileDetail = {
 					name: vm.publication().PeerReviewDocumentation[i].DocumentTitle,

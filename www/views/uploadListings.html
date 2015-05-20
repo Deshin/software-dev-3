@@ -1,0 +1,22 @@
+<div class="main">
+	<form novalidate>
+		{{#foreach: listings}}
+		<div class="row form-group">
+			<div class="col-md-4"><select class="form-control" options="{{types}}" value="{{type}}"></select></div>
+			<div class="col-md-2"><select class="form-control" options="{{formats}}" value="{{format}}"></select></div>
+			<div class="col-md-4"><button class="form-control btn btn-warning">{{name}}</button></div>
+			{{#ifnot $index}}
+			<div class="col-md-2"><button class="form-control btn btn-success" click="{{addListing}}">+</button></div>
+			{{/ifnot}}
+			{{#if ($index)}}
+			<div class="col-md-2"><button class="form-control btn btn-danger" click="{{removeListing.bind($data, $index)}}">-</button></div>
+			{{/if}}
+		</div>
+		{{/foreach}}
+		<div class="row">
+			<div class="col-md-offset-10 col-md-2">
+				<a class="btn btn-primary form-control" href="{{searchHref}}">Upload</a>
+			</div>
+		</div>
+	</form>
+</div>
