@@ -267,6 +267,10 @@ def insertPublicationAccreditation(self, publicationID, isAcreddited):
     self._databaseWrapper.query(query, [accreditation, publicationID])
     
 def getCSVFormats(self):
+    """ Returns all the valid formats that accreditation CSV files can be uploaded in.
+    Sends the formats that csv files can be uploaded in. This can easily be added to at a later point if new formats are introduced.
+    These formats are retrieved by the front end to populate a dropdown table for file upload
+    """
     validFormats=["DHET","ISI", "IBSS", "Predatory", "HIndex"]
     validFormats=json.dumps(validFormats)
     return validFormats
