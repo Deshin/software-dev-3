@@ -2,13 +2,12 @@ import json
 import string
 
 dbCols = {  "Title":"Publications.Title",
-            "Author":"Authors.FirstName OR Authors.Surname ",
+            "First Name":"Authors.FirstName",
             "Surname":"Authors.Surname ",
             "Book Title":"Books.BookTitle ",
             "Conference Title":"Conferences.ConferenceTitle ",
             "Publication Title":"Publications.Title ",
             "Journal Title":"Journals.JournalTitle ",
-            "Abstract":"BookPublications.Abstract OR ConferencePublicationDetail.Abstract OR JournalPublicationDetail.Abstract " 
             } 
 
 def simpleSearch(self, searchTerm, skip, length, sortBy, sort):
@@ -22,8 +21,6 @@ def simpleSearch(self, searchTerm, skip, length, sortBy, sort):
         "GROUP BY Publications.Title "+sortDocuments(self,sortBy, sort)+\
         "LIMIT ? OFFSET ? "
     pubs = self._databaseWrapper.query(query, ('%'+searchTerm+'%','%'+searchTerm+'%','%'+searchTerm+'%', length, skip))
-    if pubs == []:
-        return "200"
     data = []
     for i in range(0,len(pubs)):
         auths = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID=? ", (str(pubs[i][0]),))
@@ -79,8 +76,14 @@ def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
     queryValues.append(skip)
 
     pubs = self._databaseWrapper.query(query, queryValues)
-    result = addAuthors(self, pubs)
-    return json.dumps(result)
+    data = []
+    for i in range(0,len(pubs)):
+        auths = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID=? ", (str(pubs[i][0]),))
+        auth = []
+        for j in range(0, len(auths)):
+            auth.append({"ID":auths[j][0], "PublicationID":auths[j][1], "First Name" : auths[j][2], "Surname" : auths[j][3],  "Initials" : auths[j][4]})
+        data.append({"PublicationId" : pubs[i][0], "Title" : pubs[i][1], "Category" : pubs[i][2], "Year" : pubs[i][3], "Publisher" :pubs[i][4], "Authors" : auth})
+    return json.dumps(data)
 
 def splitAdvancedSearchTerms(terms):
     oldEntries = terms
@@ -92,17 +95,9 @@ def splitAdvancedSearchTerms(terms):
         if " " in bigValue:
             values = bigValue.split()
             for smallValue in values:
-                if len(smallValue) == 1:
-                    newEntries.append({ "field": entry["field"], 
-                                        "operator": entry["operator"], 
-                                        "value": smallValue + " "})
-                    newEntries.append({ "field": entry["field"], 
-                                        "operator": entry["operator"], 
-                                        "value": smallValue + "."})
-                else:
-                    newEntries.append({ "field": entry["field"], 
-                                        "operator": entry["operator"], 
-                                        "value": smallValue}) 
+                newEntries.append({ "field": entry["field"], 
+                                    "operator": entry["operator"], 
+                                    "value": smallValue}) 
             oldEntries.remove(entry);
             oldEntries += newEntries
     return oldEntries
@@ -117,18 +112,21 @@ def decorateAdvancedSearchTerms(terms):
     oldEntries = terms;
     for entry in oldEntries:
         if entry["operator"] == "contains" :
-            entry["value"] = "LIKE %" + entry["value"] + "% "
+            entry["value"] = "%" + entry["value"] + "% "
         else :
-            entry["value"] = "= " + entry["value"] + " "
+            entry["value"] = "" + entry["value"] + " "
     return oldEntries
 
 def getSQLQueryAndValues(terms):
     values = []
     query = ""
     for entry in terms:
-        query += entry["field"] + "? "
+        if entry["operator"] == "contains" :
+            query += entry["field"] + "LIKE ? "
+        else:
+            query += entry["field"] + "= ? "
         if entry != terms[-1]:
-            query += "OR "
+            query += "AND "
         values.append(entry["value"])
 
     return (query, values)
