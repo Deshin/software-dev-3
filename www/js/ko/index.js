@@ -86,21 +86,13 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
         hash: password.toString()
       };
 
-      // $.ajax({
-      //   url: "/api/login.py",
-      //   type: "POST",
-      //   contentType: "application/json",
-      //   data: JSON.stringify(loginObject),
-      //
-      //   success: function(data) {
-      //     rootViewModel.loginState('RegisteredUser');
-      //   },
-      //
-      //   error: function (jqXHR) {
-      //     console.log("Error: " + jqXHR.status + " - " + jqXHR.statusText);
-      //   },
-      // });
-      rootViewModel.loginState('RegisteredUser');
+      $.post('/api/login.py', loginObject)
+        .success(function(data) {
+          rootViewModel.loginState('RegisteredUser');
+        })
+        .error(function (jqXHR) {
+          console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
+        });
     }
 
   }
