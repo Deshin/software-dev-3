@@ -53,17 +53,58 @@
 <dl class="function">
 <dt id="restAccounts.createAccount">
 <code class="descclassname">restAccounts.</code><code class="descname">createAccount</code><span class="sig-paren">(</span><em>self</em>, <em>username</em>, <em>password</em>, <em>permission</em>, <em>firstName</em>, <em>surname</em>, <em>initials</em><span class="sig-paren">)</span><a class="headerlink" href="#restAccounts.createAccount" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Creates an account with the given parameters.
+Creates a database entry representing the user-account. User accounts can only be created by administrators.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>username</strong> &#8211; String to be used as a user-name.</li>
+<li><strong>password</strong> &#8211; String hash of the user password to be saved in the Database.</li>
+<li><strong>permission</strong> &#8211; String representing the permission level of the account to be created.</li>
+<li><strong>firstName</strong> &#8211; String representing the first name of the person the account is associated with.</li>
+<li><strong>surname</strong> &#8211; String representing the surname of the person the account is associated with.</li>
+<li><strong>initials</strong> &#8211; A string with the Initials - the first letters of each name of the person the acocunt is associated with.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restAccounts.deleteAccount">
 <code class="descclassname">restAccounts.</code><code class="descname">deleteAccount</code><span class="sig-paren">(</span><em>self</em>, <em>username</em><span class="sig-paren">)</span><a class="headerlink" href="#restAccounts.deleteAccount" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Deletes a user-account, identified by the username</p>
+<p>Removes a user-account from the database, identified by the username, which can uniquely identify a user.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>username</strong> &#8211; A string holding the user-name of the account to be deleted.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restAccounts.getAllAccountDocs">
 <code class="descclassname">restAccounts.</code><code class="descname">getAllAccountDocs</code><span class="sig-paren">(</span><em>self</em>, <em>username</em><span class="sig-paren">)</span><a class="headerlink" href="#restAccounts.getAllAccountDocs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns all the information associated with a user-account.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>username</strong> &#8211; A string used to uniquely identify the user-account of which information is returned.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A json object holding the user-name, first-name, surname, initials and permissions associated with the account.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">A json string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 

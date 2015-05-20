@@ -53,7 +53,8 @@
 <dl class="class">
 <dt id="RestApi.RestApi">
 <em class="property">class </em><code class="descclassname">RestApi.</code><code class="descname">RestApi</code><span class="sig-paren">(</span><em>DatabaseWrapper</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
+<dd><p>RestApi is the central class used for the REST API, all REST enpoints pass through this class. The functions used in those endpoints are documented in their respective files.</p>
+<dl class="method">
 <dt id="RestApi.RestApi.accreditPublication">
 <code class="descname">accreditPublication</code><span class="sig-paren">(</span><em>publicationID</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.accreditPublication" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
@@ -66,15 +67,7 @@
 <dl class="method">
 <dt id="RestApi.RestApi.createAccount">
 <code class="descname">createAccount</code><span class="sig-paren">(</span><em>username</em>, <em>password</em>, <em>permission</em>, <em>firstName</em>, <em>surname</em>, <em>initials</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.createAccount" title="Permalink to this definition">¶</a></dt>
-<dd><p>REST endpoint for creating a user account.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>username</strong> &#8211; A string for username.</td>
-</tr>
-</tbody>
-</table>
+<dd><p>see <a class="reference internal" href="restAccounts.html#restAccounts.createAccount" title="restAccounts.createAccount"><code class="xref py py-func docutils literal"><span class="pre">restAccounts.createAccount()</span></code></a> for more info</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -85,7 +78,8 @@
 <dl class="method">
 <dt id="RestApi.RestApi.deleteAccount">
 <code class="descname">deleteAccount</code><span class="sig-paren">(</span><em>username</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.deleteAccount" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>see <a class="reference internal" href="restAccounts.html#restAccounts.deleteAccount" title="restAccounts.deleteAccount"><code class="xref py py-func docutils literal"><span class="pre">restAccounts.deleteAccount()</span></code></a> for more info</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="RestApi.RestApi.getAdvancedSearchFields">
@@ -95,37 +89,44 @@
 <dl class="method">
 <dt id="RestApi.RestApi.getAllAccountDocs">
 <code class="descname">getAllAccountDocs</code><span class="sig-paren">(</span><em>username</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.getAllAccountDocs" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>see <a class="reference internal" href="restAccounts.html#restAccounts.getAllAccountDocs" title="restAccounts.getAllAccountDocs"><code class="xref py py-func docutils literal"><span class="pre">restAccounts.getAllAccountDocs()</span></code></a> for more info</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="RestApi.RestApi.getAllAuthors">
 <code class="descname">getAllAuthors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.getAllAuthors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>see <a class="reference internal" href="restRetrieval.html#restRetrieval.getAllAuthors" title="restRetrieval.getAllAuthors"><code class="xref py py-func docutils literal"><span class="pre">restRetrieval.getAllAuthors()</span></code></a> for more info</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="RestApi.RestApi.getAllDocuments">
 <code class="descname">getAllDocuments</code><span class="sig-paren">(</span><em>skip</em>, <em>length</em>, <em>sortBy</em>, <em>sort</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.getAllDocuments" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>see <a class="reference internal" href="restRetrieval.html#restRetrieval.getAllDocuments" title="restRetrieval.getAllDocuments"><code class="xref py py-func docutils literal"><span class="pre">restRetrieval.getAllDocuments()</span></code></a> for more info</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="RestApi.RestApi.getAuthors">
 <code class="descname">getAuthors</code><span class="sig-paren">(</span><em>pubId</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.getAuthors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>see <a class="reference internal" href="restRetrieval.html#restRetrieval.getAuthors" title="restRetrieval.getAuthors"><code class="xref py py-func docutils literal"><span class="pre">restRetrieval.getAuthors()</span></code></a> for more info</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="RestApi.RestApi.getDocumentDetails">
 <code class="descname">getDocumentDetails</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.getDocumentDetails" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>see <a class="reference internal" href="restRetrieval.html#restRetrieval.getDocumentDetails" title="restRetrieval.getDocumentDetails"><code class="xref py py-func docutils literal"><span class="pre">restRetrieval.getDocumentDetails()</span></code></a> for more info</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="RestApi.RestApi.getExtraDocuments">
 <code class="descname">getExtraDocuments</code><span class="sig-paren">(</span><em>pubId</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.getExtraDocuments" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>see <a class="reference internal" href="restRetrieval.html#restRetrieval.getExtraDocuments" title="restRetrieval.getExtraDocuments"><code class="xref py py-func docutils literal"><span class="pre">restRetrieval.getExtraDocuments()</span></code></a> for more info</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="RestApi.RestApi.getLoginCredentials">
 <code class="descname">getLoginCredentials</code><span class="sig-paren">(</span><em>username</em><span class="sig-paren">)</span><a class="headerlink" href="#RestApi.RestApi.getLoginCredentials" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>see <a class="reference internal" href="restRetrieval.html#restRetrieval.getLoginCredentials" title="restRetrieval.getLoginCredentials"><code class="xref py py-func docutils literal"><span class="pre">restRetrieval.getLoginCredentials()</span></code></a> for more info</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="RestApi.RestApi.insertDocument">

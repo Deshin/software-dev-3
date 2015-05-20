@@ -3,6 +3,16 @@
 import json
 
 def createAccount(self,username, password, permission, firstName, surname, initials):
+    """ Creates an account with the given parameters.
+    Creates a database entry representing the user-account. User accounts can only be created by administrators.
+    
+    :param username: String to be used as a user-name.
+    :param password: String hash of the user password to be saved in the Database.
+    :param permission: String representing the permission level of the account to be created.
+    :param firstName: String representing the first name of the person the account is associated with.
+    :param surname: String representing the surname of the person the account is associated with.
+    :param initials: A string with the Initials - the first letters of each name of the person the acocunt is associated with. 
+    """
     try:
         existingAccount=self._databaseWrapper.query("SELECT * FROM Users WHERE Username=?",[username])
         if existingAccount!=[]:
@@ -15,6 +25,11 @@ def createAccount(self,username, password, permission, firstName, surname, initi
         return"400"
     
 def deleteAccount(self,username):
+    """ Deletes a user-account, identified by the username
+    
+    Removes a user-account from the database, identified by the username, which can uniquely identify a user.
+    
+    :param username: A string holding the user-name of the account to be deleted. """
     try:
         existingAccount=self._databaseWrapper.query("SELECT * FROM Users WHERE Username=?",[username])
         if existingAccount==[]:
@@ -30,6 +45,11 @@ def deleteAccount(self,username):
         return "400"
     
 def getAllAccountDocs(self,username):
+    """ Returns all the information associated with a user-account.
+    
+    :param username: A string used to uniquely identify the user-account of which information is returned.
+    :returns: A json object holding the user-name, first-name, surname, initials and permissions associated with the account.
+    :rtype: A json string """
     try:
         existingAccount=self._databaseWrapper.query("SELECT * FROM Users WHERE Username=?",[username])
         if existingAccount==[]:

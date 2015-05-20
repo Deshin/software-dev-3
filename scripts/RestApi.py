@@ -8,6 +8,8 @@ import restInsertion
 import restAccounts
 
 class RestApi:
+    """ RestApi is the central class used for the REST API, all REST enpoints pass through this class. The functions used in those endpoints are documented in their respective files. """
+    
     def __init__(self, DatabaseWrapper):
         self._databaseWrapper = DatabaseWrapper
         self.databaseWrapper.connect()
@@ -17,30 +19,39 @@ class RestApi:
         return self._databaseWrapper
     
     def createAccount(self,username, password, permission, firstName, surname, initials):
+        """see :func:`restAccounts.createAccount` for more info"""
         return restAccounts.createAccount(self,username, password, permission, firstName, surname, initials)
     
     def deleteAccount(self,username):
+        """see :func:`restAccounts.deleteAccount` for more info"""
         return restAccounts.deleteAccount(self,username)
     
     def getAllAccountDocs(self,username):
+        """see :func:`restAccounts.getAllAccountDocs` for more info"""
         return restAccounts.getAllAccountDocs(self,username)
 
     def getAuthors(self, pubId):
+        """see :func:`restRetrieval.getAuthors` for more info"""
         return restRetrieval.getAuthors(self, pubId)
 
     def getAllAuthors(self):
+        """see :func:`restRetrieval.getAllAuthors` for more info"""
         return restRetrieval.getAllAuthors(self)
         
     def getAllDocuments(self, skip, length, sortBy, sort):
+        """see :func:`restRetrieval.getAllDocuments` for more info"""
         return restRetrieval.getAllDocuments(self, skip, length, sortBy, sort)
 
     def getDocumentDetails(self, id):
+        """see :func:`restRetrieval.getDocumentDetails` for more info"""
         return restRetrieval.getDocumentDetails(self, id)
     
     def getExtraDocuments(self, pubId):  
+        """see :func:`restRetrieval.getExtraDocuments` for more info"""
         return restRetrieval.getExtraDocuments(self, pubId) 
     
     def getLoginCredentials(self,username):
+        """see :func:`restRetrieval.getLoginCredentials` for more info"""
         return restRetrieval.getLoginCredentials(self,username)
         
     def insertDocument(self, details):

@@ -5,6 +5,12 @@ import json
 
 
 def getAuthors(self, pubId):
+    """ Function to find all the authors associated with a publication ID
+
+    :param pubId: Integer publication ID number which uniquely identifies a publication in the database.
+
+    :return A dictionary containing all the information regarding a certain author.
+    :rtype A Dict object"""
     auths = self._databaseWrapper.query("SELECT * FROM Authors WHERE PublicationID="+str(pubId))
     auth = []
     for j in range(0, len(auths)):
