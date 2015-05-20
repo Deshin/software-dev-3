@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import cgi
+import json
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
 
@@ -23,11 +24,12 @@ def main(username,hash):
         print "Content-Type: application/json"
         print
         print ""
-        print result
+        print json.dumps(result)
         
         
 if __name__ == "__main__":
     form = cgi.FieldStorage()
     username = form.getvalue("username", None)
     hash = form.getvalue("hash", None)
+    username="ELEN4010"
     main(username,hash)  
