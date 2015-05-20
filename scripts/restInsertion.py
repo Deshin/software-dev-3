@@ -183,3 +183,13 @@ def insertAuthors(self, details, publicationID):
         return"200"
     except:
         return "400", sys.exc_info()[1]
+
+def insertPublicationAccreditation(self, publicationID, isAcreddited):
+    query = "UPDATE Publications "\
+        "SET Accreditation = ? "\
+        "WHERE ID = ?"
+    if isAccredited:
+        accreditation = "Accredited"
+    else:
+        accreditation = "Not Accredited"
+    self._databaseWrapper.query(query, [accreditation, publicationID])
