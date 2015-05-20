@@ -53,18 +53,16 @@ def getAdvancedSearchFields():
 
 
 def advancedSearch(searchTerms, skip, length, limit, offset):
-    query = 
-        "SELECT Publications.* "\
+    query = "SELECT Publications.* "\
         "FROM Publications "\
         "LEFT JOIN Authors ON Authors.PublicationID=Publications.ID "\
         "LEFT JOIN BookPublications ON BookPublications.PublicationID=Publications.ID "\
         "LEFT JOIN ConferencePublicationDetail "\
             "ON ConferencePublicationDetail.PublicationID=Publications.ID "\
         "LEFT JOIN JournalPublicationDetail "\
-            "ON JournalPublicationDetail.PublicationID=Publications.ID "\ 
-        "WHERE "\
+            "ON JournalPublicationDetail.PublicationID=Publications.ID "
     
-    terms = json.loads(searchTerms) add this back
+    #terms = json.loads(searchTerms) add this back
     terms = splitAdvancedSearchTerms(terms)
     terms = updateAdvancedSearchTermsFields(terms, dbCols)
     terms = decorateAdvancedSearchTerms(terms)
