@@ -116,9 +116,9 @@ def getDocumentDetails(self, id):
 def getLoginCredentials(self,username):
     try:
         loginDetails=self._databaseWrapper.query("SELECT * FROM Users WHERE Username=(?)",[username])
-        columnNames = [i[0] for i in self._databaseWrapper._cur.description]
-        loginDetails=dict(zip(columnNames, loginDetails[0]))
-        return loginDetails
+        data={"Password":loginDetails[0][3].encode("unicode-escape"),
+            "Permission":loginDetails[0][2].encode("unicode-escape")}
+        return data
     except:
         return "401"
     
