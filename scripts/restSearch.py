@@ -102,30 +102,18 @@ def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
     data = []
     return json.dumps(addAuthors(self,pubs))
 
-def splitAdvancedSearchTerms(terms):
-    oldEntries = terms
-    newEntries = []
-    for entry in oldEntries:
-        bigValue = entry["value"];
-        for p in string.punctuation:
-            bigValue = bigValue.replace(p, " ")
-        if " " in bigValue:
-            values = bigValue.split()
-            for smallValue in values:
-                newEntries.append({ "field": entry["field"], 
-                                    "operator": entry["operator"], 
-                                    "value": smallValue}) 
-            oldEntries.remove(entry);
-            oldEntries += newEntries
-    return oldEntries
-
 def updateAdvancedSearchTermsFields(terms, dbCols):
+    """Replaces the `field` term values with the actual database column names
+
+    :param terms: The json search terms. See "func:`restSearch.advancedSearch`
+    :param dbCols: A dictionary containing the database columns, indexed by their `field` name."""
     oldEntries = terms;
     for entry in oldEntries:
         entry["field"] = dbCols[entry["field"]] + " "
     return oldEntries
 
 def decorateAdvancedSearchTerms(terms):
+    """ Update the `field` term so as to add 'LIKE' or '=' so it may be used in an SQL statement."""
     oldEntries = terms;
     for entry in oldEntries:
         if entry["operator"] == "contains" :
@@ -135,6 +123,7 @@ def decorateAdvancedSearchTerms(terms):
     return oldEntries
 
 def getSQLQueryAndValues(terms):
+    """Decomposes the json array of search terms to an SQL query and a string array of values to be sanitized before they are inserted into the query. See :func:`SqliteWrapper.query` """
     values = []
     query = ""
     for entry in terms:
@@ -150,6 +139,8 @@ def getSQLQueryAndValues(terms):
 
 # to be called with pubs being the result of: "SELECT Publications.* WHERE ..."
 def addAuthors(self, pubs):
+    """ Adds authors to the SQL result of getting publications.*
+    :param pubs: A List of publication details"""
     if pubs == []:
         return "200"
     data = []

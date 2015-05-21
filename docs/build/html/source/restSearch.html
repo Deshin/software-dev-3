@@ -54,7 +54,9 @@
 <dl class="function">
 <dt id="restSearch.addAuthors">
 <code class="descclassname">restSearch.</code><code class="descname">addAuthors</code><span class="sig-paren">(</span><em>self</em>, <em>pubs</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.addAuthors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Adds authors to the SQL result of getting publications.*
+:param pubs: A List of publication details</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="restSearch.advancedSearch">
@@ -81,7 +83,8 @@ Valid <a href="#id3"><span class="problematic" id="id4">`</span></a>value`s may 
 <dl class="function">
 <dt id="restSearch.decorateAdvancedSearchTerms">
 <code class="descclassname">restSearch.</code><code class="descname">decorateAdvancedSearchTerms</code><span class="sig-paren">(</span><em>terms</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.decorateAdvancedSearchTerms" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Update the <cite>field</cite> term so as to add &#8216;LIKE&#8217; or &#8216;=&#8217; so it may be used in an SQL statement.</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="restSearch.getAdvancedSearchFields">
@@ -100,7 +103,8 @@ Valid <a href="#id3"><span class="problematic" id="id4">`</span></a>value`s may 
 <dl class="function">
 <dt id="restSearch.getSQLQueryAndValues">
 <code class="descclassname">restSearch.</code><code class="descname">getSQLQueryAndValues</code><span class="sig-paren">(</span><em>terms</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.getSQLQueryAndValues" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Decomposes the json array of search terms to an SQL query and a string array of values to be sanitized before they are inserted into the query. See <code class="xref py py-func docutils literal"><span class="pre">SqliteWrapper.query()</span></code></p>
+</dd></dl>
 
 <dl class="function">
 <dt id="restSearch.simpleSearch">
@@ -145,14 +149,22 @@ Valid <a href="#id3"><span class="problematic" id="id4">`</span></a>value`s may 
 </dd></dl>
 
 <dl class="function">
-<dt id="restSearch.splitAdvancedSearchTerms">
-<code class="descclassname">restSearch.</code><code class="descname">splitAdvancedSearchTerms</code><span class="sig-paren">(</span><em>terms</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.splitAdvancedSearchTerms" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
 <dt id="restSearch.updateAdvancedSearchTermsFields">
 <code class="descclassname">restSearch.</code><code class="descname">updateAdvancedSearchTermsFields</code><span class="sig-paren">(</span><em>terms</em>, <em>dbCols</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.updateAdvancedSearchTermsFields" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Replaces the <cite>field</cite> term values with the actual database column names</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>terms</strong> &#8211; The json search terms. See &#8220;func:<cite>restSearch.advancedSearch</cite></li>
+<li><strong>dbCols</strong> &#8211; A dictionary containing the database columns, indexed by their <cite>field</cite> name.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 
