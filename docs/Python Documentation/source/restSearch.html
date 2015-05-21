@@ -1,0 +1,224 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>restSearch module &mdash; elen4010 1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="elen4010 1 documentation" href="../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">elen4010 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-restSearch">
+<span id="restsearch-module"></span><h1>restSearch module<a class="headerlink" href="#module-restSearch" title="Permalink to this headline">¶</a></h1>
+<p>Contains functions relating to searching for publications.</p>
+<dl class="function">
+<dt id="restSearch.addAuthors">
+<code class="descclassname">restSearch.</code><code class="descname">addAuthors</code><span class="sig-paren">(</span><em>self</em>, <em>pubs</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.addAuthors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds authors to the SQL result of getting publications.*</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pubs</strong> &#8211; A List of publication details</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="restSearch.advancedSearch">
+<code class="descclassname">restSearch.</code><code class="descname">advancedSearch</code><span class="sig-paren">(</span><em>self</em>, <em>searchTerms</em>, <em>skip</em>, <em>length</em>, <em>sortBy</em>, <em>sort</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.advancedSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs an advanced search on the database.
+:param searchTerms: A json array containing json objects with three fields: <cite>field</cite>, <cite>operator</cite> and <cite>value</cite>.</p>
+<p>Valid <cite>field`s may be found by :func:`restSearch.getAdvancedSearchFields</cite> 
+Valid <a href="#id1"><span class="problematic" id="id2">`</span></a>operator`s are &#8220;equals&#8221; and &#8220;contains&#8221;.
+Valid <a href="#id3"><span class="problematic" id="id4">`</span></a>value`s may be any string.
+:param skip: Pagination- start of page.
+:param length: Pagination- amount of results.
+:param sortBy: A string representing a db column to sort the results by.
+:param sort: A tring that determines whether to sort ascending or decenting.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A json array of objects representing publications and their authors.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="restSearch.decorateAdvancedSearchTerms">
+<code class="descclassname">restSearch.</code><code class="descname">decorateAdvancedSearchTerms</code><span class="sig-paren">(</span><em>terms</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.decorateAdvancedSearchTerms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the <cite>field</cite> term so as to add &#8216;LIKE&#8217; or &#8216;=&#8217; so it may be used in an SQL statement.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="restSearch.getAdvancedSearchFields">
+<code class="descclassname">restSearch.</code><code class="descname">getAdvancedSearchFields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.getAdvancedSearchFields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the fields by which an advanced search may be done</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A json array containing all the fields by which an advanced search may be done.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="restSearch.getSQLQueryAndValues">
+<code class="descclassname">restSearch.</code><code class="descname">getSQLQueryAndValues</code><span class="sig-paren">(</span><em>terms</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.getSQLQueryAndValues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decomposes the json array of search terms to an SQL query and a string array of values to be sanitized before they are inserted into the query. See <code class="xref py py-func docutils literal"><span class="pre">SqliteWrapper.query()</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="restSearch.simpleSearch">
+<code class="descclassname">restSearch.</code><code class="descname">simpleSearch</code><span class="sig-paren">(</span><em>self</em>, <em>searchTerm</em>, <em>skip</em>, <em>length</em>, <em>sortBy</em>, <em>sort</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.simpleSearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does a simple search on the database entries.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>searchTerm</strong> &#8211; The string term to search the database for.</li>
+<li><strong>skip</strong> &#8211; An integer defining which result to return first: for pagination.</li>
+<li><strong>length</strong> &#8211; An integer defining how many terms to return: for pagination.</li>
+<li><strong>sortBy</strong> &#8211; A database column name to sort the results by.</li>
+<li><strong>sort</strong> &#8211; A string defining whether to sort ascending or descending.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">A stringified json array with objects containing details of publications matching the search-term</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="restSearch.sortDocuments">
+<code class="descclassname">restSearch.</code><code class="descname">sortDocuments</code><span class="sig-paren">(</span><em>self</em>, <em>sortBy</em>, <em>sort</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.sortDocuments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a SQL command to do sorting</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sortBy</strong> &#8211; A String representing a database column to sort by.</li>
+<li><strong>sort</strong> &#8211; A string which determines whether to sort ascending or decending.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="restSearch.updateAdvancedSearchTermsFields">
+<code class="descclassname">restSearch.</code><code class="descname">updateAdvancedSearchTermsFields</code><span class="sig-paren">(</span><em>terms</em>, <em>dbCols</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.updateAdvancedSearchTermsFields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces the <cite>field</cite> term values with the actual database column names</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>terms</strong> &#8211; The json search terms. See &#8220;func:<cite>restSearch.advancedSearch</cite></li>
+<li><strong>dbCols</strong> &#8211; A dictionary containing the database columns, indexed by their <cite>field</cite> name.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/source/restSearch.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Jacques Visser, Sarah Ward, Anthony Farquharson, Deshin Subramoney.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.4</a>
+      
+      |
+      <a href="../_sources/source/restSearch.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>
