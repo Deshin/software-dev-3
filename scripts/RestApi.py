@@ -59,18 +59,23 @@ class RestApi:
         return restInsertion.insertDocument(self, details)
 
     def simpleSearch(self, searchTerms, skip, length, sortBy, sort):
+        """see :func:`restSearch.simpleSearch` for more info"""
         return restSearch.simpleSearch(self, searchTerms, skip, length, sortBy, sort)
    
     def sortDocuments(self,sortBy, sort):
+        """see :func:`restSearch.sortDocuments` for more info"""
         return restSearch.sortDocuments(self, sortBy, sort)
 
     def getAdvancedSearchFields(self):
+        """see :func:`restSearch.getAdvancedSearchFields` for more info"""
         return restSearch.getAdvancedSearchFields()
     
     def getCSVFormats(self):
+        """see :func: `restInsertion.getCSVFormats` for more info"""
         return restInsertion.getCSVFormats(self)
 
     def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
+        """see :func:`restSearch.advancedSearch` for more info"""
         return restSearch.advancedSearch(self, searchTerms, skip, length, sortBy, sort) 
 
     def accreditPublication(self, publicationID) :
@@ -90,12 +95,15 @@ class RestApi:
         return restAccounts.updateHIndex(self,HIndexCSV)
     
     def updateDHET(self,accreditedCSV):
+        """see :func:`restAccounts.updateDHET` for more info"""
         return restAccounts.updateDHET(self,accreditedCSV)
     
     def updateIBSS(self,accreditedCSV):
+        """see :func:`restAccounts.updateIBBS` for more info"""
         return restAccounts.updateIBBS(self,accreditedCSV)
     
     def updateISI(self,accreditedCSV):
+        """see :func:`restAccounts.updateISI` for more info"""
         return restAccounts.updateISI(self,accreditedCSV)
 
 
