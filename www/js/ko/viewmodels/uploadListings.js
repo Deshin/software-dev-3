@@ -1,6 +1,7 @@
-define(["jquery", "knockout"], function($, ko) {
+define(["jquery", "knockout", "bootbox"], function($, ko, bootbox) {
 	var vm = this;
 	vm.formats = ko.observableArray(['']);
+	vm.errorMessage = ko.observable('');
 	$.getJSON("/api/CSVFormats.py", function(data) {
 		vm.formats(data);
 	});
@@ -24,6 +25,7 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.upload = function() {
 		if(checkFiles()) {
 			var uploadListings = toJson();
+			$('#submitListings').html('Submitting');
 			$.ajax({
 				url: "/api/updateAccredited.py",
 				type: "POST",
@@ -31,11 +33,29 @@ define(["jquery", "knockout"], function($, ko) {
 				data: JSON.stringify(uploadListings),
 
 				success: function(data) {
-					console.log('Success');
+					$('#submitListings').html('Success!');
+
+					vm.listings.removeAll();
+					vm.addListing();
+
+					setTimeout(function() {
+						$('#submitListings').html('Submit');
+						window.location.href = "/#!/";
+					}, 2000);
 				},
 
 				error: function (jqXHR) {
 					console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
+					$('#submitListings').html('Submit');
+
+					bootbox.dialog({
+						message: "Error (" + jqXHR.status + ") " + jqXHR.statusText,
+						title: "Error Uploading",
+						buttons: {
+							'OK': {
+								className: "btn-success"
+							}
+						}});
 				},
 			});
 		}
@@ -43,13 +63,14 @@ define(["jquery", "knockout"], function($, ko) {
 	return vm;
 
 	function checkFiles() {
-		var checkListings = true;
 		for(var id = 0; id < vm.listings().length; id++) {
 			if(!vm.listings()[id].fileData().base64String()) {
-				checkListings = false;
+				vm.errorMessage('Please upload files in ALL added fields.');
+				return false;
 			}
 		}
-		return checkListings;
+		vm.errorMessage('');
+		return true;
 	}
 
 	function toJson() {
