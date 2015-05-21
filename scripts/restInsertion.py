@@ -18,7 +18,7 @@ def insertDocument(self, details):
         details["ScanPath"]="conferences/"+details["ConferenceTitle"].replace(' ', '_')+"/publications/"
         details["ScanFileName"]=details["Title"].replace(' ', '_')+".pdf"
         details["TableOfContentsPath"]="conferences/"+details["ConferenceTitle"].replace(' ', '_')+"/TOCs/"
-        details["PeerReviewPath"]="conferences/"+details["ConferenceTitle"].replace(' ', '_')+"/peerReviews/"+details["Title"].replace(' ', '_')+'/'
+        details["PeerReviewPath"]="conferences/"+details["ConferenceTitle"].replace(' ', '_')+"/peerReviews/"
         result=insertConferencePaper(self,details)
         
     elif details["Category"].lower().startswith("journal"):
@@ -30,7 +30,7 @@ def insertDocument(self, details):
         details["ScanPath"]="journals/"+details["JournalTitle"].replace(' ', '_')+"/publications/"
         details["ScanFileName"]=details["Title"].replace(' ', '_')+".pdf"
         details["TableOfContentsPath"]="journals/"+details["JournalTitle"].replace(' ', '_')+"/TOCs/"
-        details["PeerReviewPath"]="journals/"+details["JournalTitle"].replace(' ', '_')+"/peerReviews/"+details["Title"].replace(' ', '_')+'/'
+        details["PeerReviewPath"]="journals/"+details["JournalTitle"].replace(' ', '_')+"/peerReviews/"
         result=insertJournalPaper(self,details)
         
     elif details["Category"].lower().startswith("book"):
@@ -38,7 +38,7 @@ def insertDocument(self, details):
         details["ScanPath"]="books/"+details["BookTitle"].replace(' ', '_')+"/publications/"
         details["ScanFileName"]=details["Title"].replace(' ', '_')+".pdf"
         details["TableOfContentsPath"]="books/"+details["BookTitle"].replace(' ', '_')+"/TOCs/"
-        details["PeerReviewPath"]="books/"+details["BookTitle"].replace(' ', '_')+"/peerReviews/"+details["Title"].replace(' ', '_')+'/'
+        details["PeerReviewPath"]="books/"+details["BookTitle"].replace(' ', '_')+"/peerReviews/"
         result=insertBookSection(self,details)
 
     return result
