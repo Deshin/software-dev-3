@@ -119,7 +119,7 @@ define(["jquery", "knockout"], function($, ko) {
   });
 
 	if(vm.permission() !== 'admin') {
-		vm.username(rootViewModel.username());
+		vm.username(rootViewModel.loginUsername());
 
 		sendAccountRequest();
 	}

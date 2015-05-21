@@ -69,8 +69,9 @@
 				<!-- /ko -->
 				<!-- ko if: loginState() !== 'unregistered'  -->
 				<li class="active"><a href="#" data-bind="click: logout" >Logout</a></li>
-				<li class="active"><a href="#!/viewAccount">View Account</a></li>
+				<li class="inactive"><a><span data-bind="text: loginUsername"></span> (<span data-bind="text: loginState"></span>)</a></li>
 				<li class="active"><a href="#!/publicationUpload">Upload</a></li>
+				<li class="active"><a href="#!/viewAccount">View Account</a></li>
 				<!-- /ko -->
 				<!-- ko if: loginState() === 'admin' -->
 				<li class="active"><a href="#!/createAccount">Create Account</a></li>
