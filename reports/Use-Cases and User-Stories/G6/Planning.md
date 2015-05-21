@@ -1,8 +1,8 @@
-###First estimate: 2h
+###First estimate: 1h
 
 ###Tasks:
 - Swagger Documentation
-- DisplayDocumentDetails: Frontend
-- GetDocumentDetails: Backend
+- Paging: Frontend
+- Paging: Backend
 
-###Second-Estimate: 3h
+###Second-Estimate: 1h

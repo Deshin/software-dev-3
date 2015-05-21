@@ -1,8 +1,8 @@
-###First estimate: 2h
+###First estimate: 10h
 
 ###Tasks:
 - Swagger Documentation
-- DisplayDocumentDetails: Frontend
-- GetDocumentDetails: Backend
+- SubmitForm: Frontend
+- Insertions: Backend
 
-###Second-Estimate: 3h
+###Second-Estimate: 15h

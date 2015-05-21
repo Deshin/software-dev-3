@@ -1,8 +1,10 @@
-###First estimate: 2h
+###First estimate: 5h
 
 ###Tasks:
 - Swagger Documentation
-- DisplayDocumentDetails: Frontend
-- GetDocumentDetails: Backend
+- Editing: Frontend
+- Adding: Backend
+- Adding: Frontend
+- Editing: Backend
 
-###Second-Estimate: 3h
+###Second-Estimate: 7h

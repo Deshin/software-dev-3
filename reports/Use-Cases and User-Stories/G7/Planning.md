@@ -1,8 +1,8 @@
-###First estimate: 2h
+###First estimate: 5h
 
 ###Tasks:
 - Swagger Documentation
-- DisplayDocumentDetails: Frontend
-- GetDocumentDetails: Backend
+- AdvancedSearchForm: Frontend
+- AdvancedSearchQuery: Backend
 
-###Second-Estimate: 3h
+###Second-Estimate: 10h

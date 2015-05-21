@@ -1,8 +1,8 @@
-###First estimate: 2h
+###First estimate: 1h
 
 ###Tasks:
 - Swagger Documentation
-- DisplayDocumentDetails: Frontend
-- GetDocumentDetails: Backend
+- AccreditationButton: Frontend
+- ReturnAccreditation: Backend
 
-###Second-Estimate: 3h
+###Second-Estimate: 2h
