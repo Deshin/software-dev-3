@@ -13,12 +13,12 @@ def main(details):
     rest = RestApi(db)
     result="404"
     for item in details:
-        if item["format"]=="DHET" or item["format"]==IBSS or item["format"]==ISI:
-            result= rest.updateAccredited(self, details)
-        elif item["format"]=="Predatory":
-            result= rest.updatePredatory(self, predatoryCSV)
-        elif item["format"]=="H-Index":
-            result= rest.updateHIndex(self,HIndexCSV)
+        if item["type"]=="Accredited":
+            result= rest.updateAccredited(self, item)
+        elif item["type"]=="Predatory":
+            result= rest.updatePredatory(self, item)
+        elif item["type"]=="H-Index":
+            result= rest.updateHIndex(self,item)
             
     if result[0]=="400":
         print "Status:400"
