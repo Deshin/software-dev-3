@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+""" RESTful endpoint for finding all the details related to a user"""
 
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
@@ -6,6 +7,7 @@ import cgi
 import json
 
 def main(username):
+    """Prints the output of :func:`restAccounts.getAllAccountDocs` """
     db = SqliteWrapper()
     rest = RestApi(db)
 

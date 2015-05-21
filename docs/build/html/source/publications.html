@@ -50,10 +50,30 @@
             
   <div class="section" id="module-publications">
 <span id="publications-module"></span><h1>publications module<a class="headerlink" href="#module-publications" title="Permalink to this headline">¶</a></h1>
+<p>RESTful endpoint for finding or searching for publications</p>
 <dl class="function">
 <dt id="publications.main">
 <code class="descclassname">publications.</code><code class="descname">main</code><span class="sig-paren">(</span><em>simpleSearch</em>, <em>advancedSearch</em>, <em>skip</em>, <em>length</em>, <em>sortBy</em>, <em>sort</em><span class="sig-paren">)</span><a class="headerlink" href="#publications.main" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Runs <a class="reference internal" href="restRetrieval.html#restRetrieval.getAllDocuments" title="restRetrieval.getAllDocuments"><code class="xref py py-func docutils literal"><span class="pre">restRetrieval.getAllDocuments()</span></code></a>,
+see <a class="reference internal" href="restSearch.html#restSearch.simpleSearch" title="restSearch.simpleSearch"><code class="xref py py-func docutils literal"><span class="pre">restSearch.simpleSearch()</span></code></a> or
+see <a class="reference internal" href="restSearch.html#restSearch.getAdvancedSearchFields" title="restSearch.getAdvancedSearchFields"><code class="xref py py-func docutils literal"><span class="pre">restSearch.getAdvancedSearchFields()</span></code></a> depending on the parameters, and prints the resulting stringified json object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>simpleSearch</strong> &#8211; String of search-terms for simpleSearch</li>
+<li><strong>advancedSearch</strong> &#8211; Stringified json array with objects for advancedSearch.</li>
+<li><strong>skip</strong> &#8211; An integer number defining which is the first result to be returned.</li>
+<li><strong>length</strong> &#8211; An integer defining how many terms must be returned.</li>
+<li><strong>sortBy</strong> &#8211; A string identifying the column to sort by.</li>
+<li><strong>sort</strong> &#8211; A string defining whether to sort ascending or descending.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </div>
 

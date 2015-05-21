@@ -54,6 +54,7 @@
 <dt id="SqliteWrapper.SqliteWrapper">
 <em class="property">class </em><code class="descclassname">SqliteWrapper.</code><code class="descname">SqliteWrapper</code><a class="headerlink" href="#SqliteWrapper.SqliteWrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="DatabaseWrapper.html#DatabaseWrapper.DatabaseWrapper" title="DatabaseWrapper.DatabaseWrapper"><code class="xref py py-class docutils literal"><span class="pre">DatabaseWrapper.DatabaseWrapper</span></code></a></p>
+<p>Wrapper class for sqlite3, enabling it&#8217;s use in the back-end</p>
 <dl class="method">
 <dt id="SqliteWrapper.SqliteWrapper.commit">
 <code class="descname">commit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SqliteWrapper.SqliteWrapper.commit" title="Permalink to this definition">¶</a></dt>
@@ -62,17 +63,32 @@
 <dl class="method">
 <dt id="SqliteWrapper.SqliteWrapper.connect">
 <code class="descname">connect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SqliteWrapper.SqliteWrapper.connect" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Allows for a connection to a database to be established.</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="SqliteWrapper.SqliteWrapper.disconnect">
 <code class="descname">disconnect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#SqliteWrapper.SqliteWrapper.disconnect" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Allows for disconnection from a database</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="SqliteWrapper.SqliteWrapper.query">
 <code class="descname">query</code><span class="sig-paren">(</span><em>queryString</em>, <em>values=()</em><span class="sig-paren">)</span><a class="headerlink" href="#SqliteWrapper.SqliteWrapper.query" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Performs and returns the results of an SQL query</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>queryString</strong> &#8211; A SQL query string, with the variables replaced with &#8216;?&#8217;</li>
+<li><strong>values</strong> &#8211; A tuple containing string values to be substituted into the place of the ?&#8217;s in the query string.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 </dd></dl>
 

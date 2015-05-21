@@ -1,10 +1,12 @@
 #!/usr/bin/env python
+"""RESTful endpoint for deleting a user-account"""
 
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
 import cgi
 
 def main(username):
+    """Prints the output of :func:`restAccounts.deleteAccount`, thus, the result of attempting to delete a user-account."""
     db = SqliteWrapper()
     rest = RestApi(db)
     result = rest.deleteAccount(username)

@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""RESTful endpoint for creating a user account"""
 
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
@@ -6,6 +7,7 @@ import cgi
 import json
 
 def main(username, password, permission, firstName, surname, initials):
+    """Prints the output of :func:`restAccounts.createAccount` with arguments supplief from the webpage"""
     db = SqliteWrapper()
     rest = RestApi(db)
 

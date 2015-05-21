@@ -1,3 +1,4 @@
+""" Contains functions relating to searching for publications."""
 import json
 import string
 
@@ -14,7 +15,15 @@ dbCols = {  "Title":"Publications.Title",
             } 
 
 def simpleSearch(self, searchTerm, skip, length, sortBy, sort):
-    # searchTerms is a list of strings
+    """Does a simple search on the database entries.
+
+    :param searchTerm: The string term to search the database for.
+    :param skip: An integer defining which result to return first: for pagination.
+    :param length: An integer defining how many terms to return: for pagination.
+    :param sortBy: A database column name to sort the results by.
+    :param sort: A string defining whether to sort ascending or descending.
+
+    :return: A stringified json array with objects containing details of publications matching the search-term"""
     query = "SELECT  Publications.* "\
         "FROM Publications JOIN Authors ON Authors.PublicationID=Publications.ID "\
         "WHERE "\
