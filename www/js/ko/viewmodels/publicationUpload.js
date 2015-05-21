@@ -1,4 +1,13 @@
 /**
+* Publication upload is the view model linked to the publication upload partial,
+* this will link the values of the form for uploading a new publication.
+* The form will be validated and sanitized before submitting to the server.
+*
+* @requires jQuery
+* @requires jQuery.validate
+* @requires knockout.js
+* @requires knockout.filebind
+* @requires bootbox
 *
 * @author Deshin
 * @author Anthony
@@ -14,6 +23,11 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 	vm.clearAuthors = clearAuthors;
 	var Authors = [];
 
+	/**
+	* Configure the validation for the form, using
+	* jquery validate
+	* @requires jQuery.validate
+	*/
 	$('#uploadPublication').validate({
 		rules: publicationRules(),
 		messages: publicationMessages(),
@@ -29,6 +43,12 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 
 	return vm;
 
+	/**
+	* @method submitPublication
+	* Submit the publication to the server, on success it will show a message
+	* and then redirect to the home page. On error a modal is shown that
+	* will display the error.
+	*/
 	function submitPublication(form) {
 		if($('#uploadPublication').valid() && vm.AuthorString()) {
 			var uploadPublication = vmToJson();
@@ -76,6 +96,10 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 			}
 		}
 
+		/**
+		* @method init
+		* Initialize all observables for the form partial.
+		*/
 		function init() {
 			var formVM = {};
 			formVM.Title = {
@@ -166,6 +190,11 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 			vm.fileVM = fileVM;
 		}
 
+		/**
+		* @method clearSupportingDoc
+		* Clear all data from the supporting Documentation object,
+		* the file is moved to a new array if it is kept.
+		*/
 		function clearSupportingDoc() {
 			vm.SupportingDocumentationFiles("");
 			SupportingDocs = [];
@@ -195,6 +224,11 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 			}
 		}
 
+		/**
+		* @method clearAuthors
+		* Clear all data from the authors object, if the authors are kept
+		* their data is moved to a new array.
+		*/
 		function clearAuthors() {
 			Authors = [];
 			vm.AuthorString("");
@@ -203,6 +237,10 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 			vm.AuthorInitials("");
 		}
 
+		/**
+		* @method publicationRules
+		* Configure all rules for validation of the create publication form.
+		*/
 		function publicationRules() {
 			return {
 				publicationTitle: {
@@ -264,6 +302,11 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 			};
 		}
 
+		/**
+		* @method publicationMessages
+		* Add the publication messages for validation in
+		* jquery validate.
+		*/
 		function publicationMessages() {
 			return {
 				publicationTitle: {
@@ -320,6 +363,11 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 			};
 		}
 
+		/**
+		* @method vmToJson
+		* Convert the form objects to a JSON matching the API endpoints
+		* specification, sanitize any data that requires sanitization.
+		*/
 		function vmToJson() {
 			var publication = {};
 			for (var id in vm.formVM) {
@@ -362,6 +410,11 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 			return publication;
 		}
 
+		/**
+		* @method clearForm
+		* Empty all data from the form, called after a successful POST,
+		* readying the document for new information.
+		*/
 		function clearForm() {
 			for (var id in vm.formVM) {
 				if(vm.formVM[id].value()) {

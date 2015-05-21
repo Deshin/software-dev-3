@@ -138,7 +138,7 @@ def updateISI(self,accreditedCSV):
                  self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE ISSN=?",("Accredited",journal["ISSN"]))
             self._databaseWrapper.commit()
         count=count+1
-    print "ISI"
+
     
 def updateIBBS(self,accreditedCSV):
     accredited=base64.urlsafe_b64decode(accreditedCSV["data"])
