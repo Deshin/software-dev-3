@@ -94,6 +94,9 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
           }
         }
       });
+      /**
+      * Load a partial page (loginModal.html) for the form inside the modal.
+      */
       $('#loginModal').load('views/loginModal.html');
     };
     /**

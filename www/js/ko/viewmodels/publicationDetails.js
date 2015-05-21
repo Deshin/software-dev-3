@@ -1,4 +1,11 @@
 /**
+* The publication details view model will load with the publication details
+* partial, this will display the details on a particular document to the user.
+* offers the option to download the files (publication, table of contents)
+* from the server.
+*
+* @requires jQuery
+* @requires knockout.js
 *
 * @author Deshin
 * @author Anthony
@@ -20,6 +27,11 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.pubId.subscribe(function(newVal) {
 		getData();
 	});
+	/**
+	* @method accredit
+	* Give the admin user the ability to accredit a particular
+	* document.
+	*/
 	vm.accredit = function() {
 		$.get('/api/accreditPublication.py', {publicationID: vm.pubId().toString()})
 		.done(function(data){
@@ -29,6 +41,11 @@ define(["jquery", "knockout"], function($, ko) {
 
 	return vm;
 
+	/**
+	* @method getData
+	* Get data from the endpoint for a particular
+	* publication.
+	*/
 	function getData() {
 		vm.publication(null);
 		vm.statusMsg('Loading Publication.');
