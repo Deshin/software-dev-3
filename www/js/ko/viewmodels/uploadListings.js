@@ -1,3 +1,9 @@
+/**
+*
+* @author Deshin
+* @author Anthony
+*/
+
 define(["jquery", "knockout", "bootbox"], function($, ko, bootbox) {
 	var vm = this;
 	vm.formats = ko.observableArray(['']);

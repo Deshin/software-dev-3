@@ -30,7 +30,9 @@ class SqliteWrapper(DatabaseWrapper):
         """ Performs and returns the results of an SQL query
 
         :param queryString: A SQL query string, with the variables replaced with '?'
-        :param values: A tuple containing string values to be substituted into the place of the ?'s in the query string. """
+        :param values: A tuple containing string values to be substituted into the place of the ?'s in the query string. 
+        
+        :return: A List object"""
         try:
             self._cur.execute(queryString, values)
             if queryString.startswith("SELECT"):

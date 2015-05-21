@@ -1,8 +1,27 @@
+/**
+* The create account vm is used for account creation, loaded with the
+* account creation partial. Contains necessary fields for the account
+* creation form.
+*
+* @requires jQuery
+* @requires knockout.js
+* @requires CryptoJS
+* @requires bootbox
+*
+* @author Deshin
+* @author Anthony
+*/
 define(["jquery", "knockout", "crypto.SHA", "bootbox"], function($, ko, crypto, bootbox) {
 	var vm = this;
 
 	vm.createAccount = createAccount;
 
+	/**
+	* Configure validation for fields, custom rules and messages are applied
+	* for the account creation form.
+	*
+	* @requires jQuery.validate
+	*/
 	$('#createAccount').validate({
 		rules: publicationRules(),
 		messages: publicationMessages(),
@@ -18,6 +37,13 @@ define(["jquery", "knockout", "crypto.SHA", "bootbox"], function($, ko, crypto, 
 
 	return vm;
 
+	/**
+	* @method init
+	* Initialize the observables for the account creation form,
+	* configure subscribers for modifying the value of passord.
+	* This is used when comparing the two password inputs to verify
+	* that they are correct.
+	*/
 	function init() {
 		var form = {};
 
@@ -44,6 +70,12 @@ define(["jquery", "knockout", "crypto.SHA", "bootbox"], function($, ko, crypto, 
 
 	}
 
+	/**
+	* @method createAccount
+	* Perform a jquery post to send the account details to the restfull endpoint.
+	* If completed successfully the page redirects after a few seconds,
+	* if failed a notification is dropped in modal form.
+	*/
 	function createAccount() {
 		if(vm.password() === vm.retypePassword() && $('#createAccount').valid()) {
 			$('#submitAccount').html('Submitting..');
@@ -87,6 +119,10 @@ define(["jquery", "knockout", "crypto.SHA", "bootbox"], function($, ko, crypto, 
 		}
 	}
 
+	/**
+	* @method publicationRules
+	* Configure the rules for validation of the form.
+	*/
 	function publicationRules() {
 		return {
 			username: {
@@ -110,6 +146,10 @@ define(["jquery", "knockout", "crypto.SHA", "bootbox"], function($, ko, crypto, 
 		};
 	}
 
+	/**
+	* @method publicationMessages
+	* Configure the messages for validation of the form.
+	*/
 	function publicationMessages() {
 		return {
 			username: {
