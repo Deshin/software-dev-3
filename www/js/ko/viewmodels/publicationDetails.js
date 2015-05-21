@@ -1,7 +1,7 @@
 define(["jquery", "knockout"], function($, ko) {
 	var vm = this;
 	vm.publication = ko.observable(null);
-	vm.permission = rootViewModel.loginState;
+	vm.permission = ko.observable(rootViewModel.loginState());
 
 	vm.permission.subscribe(function() {
 		getData();
@@ -16,7 +16,7 @@ define(["jquery", "knockout"], function($, ko) {
 		getData();
 	});
 	vm.accredit = function() {
-		$.get('/api/accreditPublication.py', {publicationID: vm.pubId()})
+		$.get('/api/accreditPublication.py', {publicationID: vm.pubId().toString()})
 		.done(function(data){
 			getData();
 		});
