@@ -6,10 +6,10 @@ define(["jquery", "knockout"], function($, ko) {
   vm.findAccount = findAccount;
   vm.removeAccount = removeAccount;
 
-  vm.sortBy=ko.observable(null);
-	vm.sort=ko.observable(null);
-	vm.pageSize = ko.observable(null);
-  vm.page = ko.observable(null);
+  vm.accountSortBy=ko.observable(null);
+	vm.accountSort=ko.observable(null);
+	vm.accountPageSize = ko.observable(null);
+  vm.accountPage = ko.observable(null);
 
   vm.username = ko.observable('');
 	vm.firstname = ko.observable('');
@@ -28,11 +28,11 @@ define(["jquery", "knockout"], function($, ko) {
     errorClass: "text-danger"
   });
 
-  vm.skip = ko.computed(function() {
-    return (vm.page()-1)*vm.pageSize();
+  vm.accountSkip = ko.computed(function() {
+    return (vm.accountPage()-1)*vm.accountPageSize();
   });
 
-  vm.gotData = function(data) {
+  vm.accountGotData = function(data) {
     vm.userPublications.removeAll();
 		if(data !== '200') {
 			for (var i = 0; i < data.length; i++) {
@@ -49,8 +49,8 @@ define(["jquery", "knockout"], function($, ko) {
 		}
   };
 
-  vm.updateList = function(newVal) {
-    if (vm.page() === null || vm.pageSize() === null || vm.sort() === null || vm.sortBy() === null) {
+  vm.accountUpdateList = function(newVal) {
+    if (vm.accountPage() === null || vm.accountPageSize() === null || vm.accountSort() === null || vm.accountSortBy() === null) {
       return;
     }
     var getUrl = '/api/publications.py';
@@ -72,46 +72,46 @@ define(["jquery", "knockout"], function($, ko) {
 			},
 		];
     var query = {
-      skip: vm.skip().toString(),
-      length: vm.pageSize().toString(),
-      sortBy: vm.sortBy(),
-      sort: vm.sort(),
+      skip: vm.accountSkip().toString(),
+      length: vm.accountPageSize().toString(),
+      sortBy: vm.accountSortBy(),
+      sort: vm.accountSort(),
 			advancedSearch: JSON.stringify(advSearch)
     };
     $.getJSON(getUrl, query)
-    .done(vm.gotData)
+    .done(vm.accountGotData)
     .fail(function(jqXHR) {
       console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
     });
   };
 
-  vm.next = function() {
-    vm.page(vm.page()+1);
+  vm.accountNext = function() {
+    vm.accountPage(vm.accountPage()+1);
   };
 
-  vm.previous = function() {
-    vm.page(vm.page()-1);
+  vm.accountPrevious = function() {
+    vm.accountPage(vm.accountPage()-1);
   };
 
-  vm.first = function() {
-    vm.page(1);
+  vm.accountFirst = function() {
+    vm.accountPage(1);
   };
 
-  vm.sorting = function(item){
-    if (vm.sortBy() === item) {
-      if (vm.sort() === "ASC") {
-        vm.sort("DESC");
+  vm.accountSorting = function(item){
+    if (vm.accountSortBy() === item) {
+      if (vm.accountSort() === "ASC") {
+        vm.accountSort("DESC");
       } else{
-        vm.sort("ASC");
+        vm.accountSort("ASC");
       }
     } else{
-      vm.sortBy(item);
-      vm.sort("ASC");
+      vm.accountSortBy(item);
+      vm.accountSort("ASC");
     }
   };
 
-  vm.sortIcon = ko.computed(function() {
-    if (vm.sort() === "ASC") {
+  vm.accountSortIcon = ko.computed(function() {
+    if (vm.accountSort() === "ASC") {
       return "glyphicon glyphicon-triangle-top";
     } else{
       return "glyphicon glyphicon-triangle-bottom";
@@ -139,15 +139,15 @@ define(["jquery", "knockout"], function($, ko) {
 		vm.surname('');
 		vm.initials('');
 
-		vm.page(1);
-		vm.pageSize(20);
-		vm.sort('ASC');
-		vm.sortBy('Title');
+		vm.accountPage(1);
+		vm.accountPageSize(20);
+		vm.accountSort('ASC');
+		vm.accountSortBy('Title');
 
-		vm.page.subscribe(updateList);
-		vm.pageSize.subscribe(updateList);
-		vm.sortBy.subscribe(updateList);
-		vm.sort.subscribe(updateList);
+		vm.accountPage.subscribe(vm.accountUpdateList);
+		vm.accountPageSize.subscribe(vm.accountUpdateList);
+		vm.accountSortBy.subscribe(vm.accountUpdateList);
+		vm.accountSort.subscribe(vm.accountUpdateList);
 
 		$.getJSON('/api/authorDocs.py', {username: vm.username()})
 			.done(function(data) {
@@ -155,7 +155,7 @@ define(["jquery", "knockout"], function($, ko) {
 				vm.surname(data.surname);
 				vm.initials(data.initials);
 
-				updateList();
+				vm.accountUpdateList();
 			})
 			.fail(function(jqXHR) {
 				console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);

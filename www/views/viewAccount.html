@@ -44,10 +44,10 @@
 <table class="col-md-12 table table-hover">
 	<thead>
 		<tr>
-      <th click="{{sorting.bind($data, 'Title')}}"><a href="#">Title</a><span class='{{sortIcon}}' visible="{{sortBy() === 'Title'}}"></span></th>
-      <th click="{{sorting.bind($data, 'Category')}}"><a href="#">Category</a><span class='{{sortIcon}}' visible="{{sortBy() === 'Category'}}"></span></th>
-      <th click="{{sorting.bind($data, 'Year')}}"><a href="#">Year</a><span class='{{sortIcon}}' visible="{{sortBy() === 'Year'}}"></span></th>
-      <th click="{{sorting.bind($data, 'Publisher')}}"><a href="#">Publisher</a><span class='{{sortIcon}}' visible="{{sortBy() === 'Publisher'}}"></span></th>
+      <th click="{{accountSorting.bind($data, 'Title')}}"><a href="#">Title</a><span class='{{accountSortIcon}}' visible="{{accountSortBy() === 'Title'}}"></span></th>
+      <th click="{{accountSorting.bind($data, 'Category')}}"><a href="#">Category</a><span class='{{accountSortIcon}}' visible="{{accountSortBy() === 'Category'}}"></span></th>
+      <th click="{{accountSorting.bind($data, 'Year')}}"><a href="#">Year</a><span class='{{accountSortIcon}}' visible="{{accountSortBy() === 'Year'}}"></span></th>
+      <th click="{{accountSorting.bind($data, 'Publisher')}}"><a href="#">Publisher</a><span class='{{accountSortIcon}}' visible="{{accountSortBy() === 'Publisher'}}"></span></th>
 			<th>Authors</th>
 		</tr>
 	</thead>
@@ -63,12 +63,12 @@
 </table>
 <nav>
   <ul class="pager">
-  	{{#ifnot page() == 1}}
-  	<li class="previous"><a href="#" click="{{first}}"><span aria-hidden="true">&larr;</span>First</a></li>
-    <li class="previous"><a href="#" click="{{previous}}"><span aria-hidden="true">&larr;</span>Previous</a></li>
+  	{{#ifnot accountPage() == 1}}
+  	<li class="previous"><a href="#" click="{{accountFirst}}"><span aria-hidden="true">&larr;</span>First</a></li>
+    <li class="previous"><a href="#" click="{{accountPrevious}}"><span aria-hidden="true">&larr;</span>Previous</a></li>
     {{/ifnot}}
-    {{#ifnot: userPublications().length < pageSize()}}
-    <li class="next"><a href="#" click="{{next}}">Next<span aria-hidden="true">&rarr;</span></a></li>
+    {{#ifnot: userPublications().length < accountPageSize()}}
+    <li class="next"><a href="#" click="{{accountNext}}">Next<span aria-hidden="true">&rarr;</span></a></li>
     {{/ifnot}}
 
   </ul>
