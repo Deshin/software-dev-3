@@ -140,6 +140,7 @@ def getSQLQueryAndValues(terms):
 # to be called with pubs being the result of: "SELECT Publications.* WHERE ..."
 def addAuthors(self, pubs):
     """ Adds authors to the SQL result of getting publications.*
+
     :param pubs: A List of publication details"""
     if pubs == []:
         return "200"

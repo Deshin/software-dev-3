@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+""" RESTful endpoint for accrediting a document """
 
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
@@ -9,6 +10,7 @@ import base64
 
 
 def main(details):
+    """ Runs and prints the results of :func:`restAccounts.updateAccredited`, :func:`restAccounts.updatePredatory or :func:`restAccounts.updateHIndex` """
     db = SqliteWrapper()
     rest = RestApi(db)
     result="404"
