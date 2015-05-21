@@ -78,7 +78,7 @@ def insertExistingConference(self,details, conferenceID):
         if not os.path.exists("../www/files/"+details['PeerReviewPath']): os.makedirs("../www/files/"+details['PeerReviewPath'])
         for suppDoc in details["SupportingDocumentation"]:
             PathToFile=details["PeerReviewPath"]+suppDoc['file']['name'].replace(' ', '_')
-            self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationId,PathToFile, DocumentTitle) VALUES(?,?,?)",(publicationID,PathToFile,suppDoc['file']['name'].replace(' ', '_')))
+            self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationId,PathToFile,DocumentTitle) VALUES(?,?,?)",(publicationID,PathToFile,suppDoc['file']['name'].replace(' ', '_')))
             peerreviewdocfile=open("../www/files/"+PathToFile, "wb+")
             peerreviewdocfile.write(base64.b64decode(suppDoc["data"]))
         insertAuthors(self,details,publicationID)
