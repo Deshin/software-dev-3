@@ -254,7 +254,7 @@
                     {
                         "name": "username",
                         "in": "query",
-                        "description": "A string to search for",
+                        "description": "Username",
                         "required": true,
                         "type": "string"
                     }
@@ -288,6 +288,204 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/accreditPublication.py": {
+            "get": {
+                "description": "Changes the accreditation status of a publication to 'Accredited'\n",
+                "parameters": [
+                    {
+                        "name": "publicationID",
+                        "in": "query",
+                        "description": "The ID of the publication to be accredited",
+                        "required": true,
+                        "type": "int32"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                }
+            }
+        },
+        "/createAccount.py": {
+            "get": {
+                "description": "Creates a user account\n",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Username",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "SHA256 hash of the user's password",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "firstName",
+                        "in": "query",
+                        "description": "The user's first name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "permissions",
+                        "in": "query",
+                        "description": "The type of user to be created",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "surname",
+                        "in": "query",
+                        "description": "The user's surname",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "permission",
+                        "in": "query",
+                        "description": "The type of user",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "409": {
+                        "description": "Conflict"
+                    }
+                }
+            }
+        },
+        "/deleteAccount.py": {
+            "get": {
+                "description": "Deletes the account associated to a username\n",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Username",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/login.py": {
+            "get": {
+                "description": "Succeeds if a username and password hash are valid\n",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "Username",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "hash",
+                        "in": "query",
+                        "description": "SHA256 hash of the user's password",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                }
+            }
+        },
+        "/insertions.py": {
+            "post": {
+                "description": "Add a publication to the archive\n",
+                "parameters": [
+                    {
+                        "name": "details",
+                        "in": "body",
+                        "description": "Details of the publication",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/updateAccredited.py": {
+            "post": {
+                "description": "Read in a csv listing of predatory/accredited journals\n",
+                "parameters": [
+                    {
+                        "name": "details",
+                        "in": "body",
+                        "description": "Username",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "403": {
+                        "description": "Forbidden"
                     }
                 }
             }

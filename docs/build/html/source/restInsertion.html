@@ -53,7 +53,10 @@
 <dl class="function">
 <dt id="restInsertion.getCSVFormats">
 <code class="descclassname">restInsertion.</code><code class="descname">getCSVFormats</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.getCSVFormats" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns all the valid formats that accreditation CSV files can be uploaded in.
+Sends the formats that csv files can be uploaded in. This can easily be added to at a later point if new formats are introduced.
+These formats are retrieved by the front end to populate a dropdown table for file upload</p>
+</dd></dl>
 
 <dl class="function">
 <dt id="restInsertion.insertAuthors">
@@ -241,7 +244,7 @@ Inserts a new journal into the database using the details entered on the submiss
 
 <dl class="function">
 <dt id="restInsertion.insertPublicationAccreditation">
-<code class="descclassname">restInsertion.</code><code class="descname">insertPublicationAccreditation</code><span class="sig-paren">(</span><em>self</em>, <em>publicationID</em>, <em>isAcreddited</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertPublicationAccreditation" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">restInsertion.</code><code class="descname">insertPublicationAccreditation</code><span class="sig-paren">(</span><em>self</em>, <em>publicationID</em>, <em>isAccredited</em><span class="sig-paren">)</span><a class="headerlink" href="#restInsertion.insertPublicationAccreditation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Changes the accreditation status of a document in the database.
 Changes the accreditation of a document that is already in the database to either &#8220;Accredited&#8221; or &#8220;Not Accredited&#8221;</p>
 <table class="docutils field-list" frame="void" rules="none">
