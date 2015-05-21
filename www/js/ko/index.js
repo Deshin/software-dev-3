@@ -91,15 +91,22 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
       };
 
       $.get('/api/login.py', loginObject)
-        .done(function(data) {
-          rootViewModel.loginState(data.Permission);
-          rootViewModel.username(username);
-        })
-        .error(function (jqXHR) {
-          rootViewModel.loginState('unregistered');
-          console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
+      .done(function(data) {
+        rootViewModel.loginState(data.Permission);
+        rootViewModel.username(username);
+      })
+      .error(function (jqXHR) {
+        rootViewModel.loginState('unregistered');
+        bootbox.dialog({
+          message: "Error (" + jqXHR.status + ") " + jqXHR.statusText,
+          title: "Error Uploading",
+          buttons: {
+            'OK': {
+              className: "btn-success"
+            }
+          }});
         });
-    }
+      }
 
-  }
-});
+    }
+  });
