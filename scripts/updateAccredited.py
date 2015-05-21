@@ -11,7 +11,15 @@ import base64
 def main(details):
     db = SqliteWrapper()
     rest = RestApi(db)
-    result= rest.insertDocument(details)
+    result="404"
+    for item in details:
+        if item["format"]=="DHET" or item["format"]==IBSS or item["format"]==ISI:
+            result= rest.updateAccredited(self, details)
+        elif item["format"]=="Predatory":
+            result= rest.updatePredatory(self, predatoryCSV)
+        elif item["format"]=="H-Index":
+            result= rest.updateHIndex(self,HIndexCSV)
+            
     if result[0]=="400":
         print "Status:400"
         print "Content-Type: text/html"
