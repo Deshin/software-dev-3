@@ -1,7 +1,8 @@
 <div class="col-sm-3 col-md-2 sidebar">
 	<ul class="nav nav-sidebar">
-		<li class="active"><a data-bind="attr: {target: '_blank', href: pdfUrl}" ><span class="glyphicon glyphicon-download"></span> Download PDF</a></li>
-		<li class="active"></li>
+
+		<li class="active"><a click="{{accredit}}"> Accredit</a></li>
+		<li><a></a></li>
 		<li class="active"><a data-bind="attr: {target: '_blank', href: tocUrl}" ><span class="glyphicon glyphicon-download"></span> Download TOC PDF</a></li>
 		<li class="inactive"><a>Supporting Documentation:</a></li>
 		{{#foreach: suppDocs}}

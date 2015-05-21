@@ -263,8 +263,13 @@ def insertPublicationAccreditation(self, publicationID, isAccredited):
     if isAccredited:
         accreditation = "Accredited"
     else:
-        accreditation = "Not Accredited"
-    self._databaseWrapper.query(query, [accreditation, publicationID])
+        accreditation = "Not Yet Accredited"
+    try:
+        self._databaseWrapper.query(query, [accreditation, publicationID])
+        self._databaseWrapper.commit()
+        return"200"
+    except:
+        return "400", sys.exc_info()[1]
     
 def getCSVFormats(self):
     """ Returns all the valid formats that accreditation CSV files can be uploaded in.
