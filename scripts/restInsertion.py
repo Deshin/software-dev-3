@@ -259,7 +259,7 @@ def insertPublicationAccreditation(self, publicationID, isAccredited):
     """
     query = "UPDATE Publications "\
         "SET Accreditation = ? "\
-        "WHERE ID = ?"
+        "WHERE Id = (?)"
     if isAccredited:
         accreditation = "Accredited"
     else:
