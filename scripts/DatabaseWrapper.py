@@ -4,6 +4,9 @@
 import abc
 
 class DatabaseWrapper(object):
+    """Abstract base class for a database-wrapper.
+
+    Has methods that must be overloaded so that any SQL-database may be wrapped and used in the back-end"""
     __metaclass__=abc.ABCMeta
     
     @abc.abstractmethod
