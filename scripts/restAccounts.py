@@ -62,7 +62,7 @@ def getAllAccountDocs(self,username):
         return"404"
     
 def updateAccredited(self, accreditedCSV):
-    print "Accredited"
+    if accreditedCSV["format"]==
     
 def updateDHET(self,accreditedCSV):
     print "DHET"
