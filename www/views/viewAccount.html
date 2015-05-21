@@ -1,0 +1,77 @@
+<div class="col-md-12">
+  <!-- ko if: permission() === 'admin' -->
+  <h1>View an Account</h1>
+  <!-- /ko -->
+  <!-- ko if: permission() === 'registered' -->
+  <h1 data-bind="text: username"></h1>
+  <!-- /ko -->
+</div>
+<br/>
+<!-- ko if: permission() === 'admin' -->
+<form id="searchAccount" submit="" data-bind="submit: findAccount" novalidate>
+  <div class="form-group col-md-12">
+    <label for="username" class="col-md-2">Username:</label>
+    <div class="col-md-8">
+      <input class="form-control col-md-12" type="text" name="username" id="username" data-bind="textInput: username" />
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary col-md-12" id="findAccount" type="submit">Find User</button>
+    </div>
+  </div>
+</form>
+<!-- /ko -->
+<!-- ko if: firstname() -->
+<div class="col-md-12 well">
+  <div class="col-md-3">
+    <strong>First Name:</strong>
+    <div data-bind="text: firstname"></div>
+  </div>
+  <div class="col-md-3">
+    <strong>Surname:</strong>
+    <div data-bind="text: surname"></div>
+  </div>
+  <div class="col-md-3">
+    <strong>Intials:</strong>
+    <div data-bind="text: initials"></div>
+  </div>
+  <!-- ko if: permission() === 'admin' -->
+  <div class="col-md-3">
+    <button class="btn btn-danger col-md-12" data-bind="click: removeAccount">Remove</button>
+  </div>
+  <!-- /ko -->
+</div>
+<!-- ko if: userPublications()[0] -->
+<table class="col-md-12 table table-hover">
+	<thead>
+		<tr>
+      <th click="{{accountSorting.bind($data, 'Title')}}"><a href="#">Title</a><span class='{{accountSortIcon}}' visible="{{accountSortBy() === 'Title'}}"></span></th>
+      <th click="{{accountSorting.bind($data, 'Category')}}"><a href="#">Category</a><span class='{{accountSortIcon}}' visible="{{accountSortBy() === 'Category'}}"></span></th>
+      <th click="{{accountSorting.bind($data, 'Year')}}"><a href="#">Year</a><span class='{{accountSortIcon}}' visible="{{accountSortBy() === 'Year'}}"></span></th>
+      <th click="{{accountSorting.bind($data, 'Publisher')}}"><a href="#">Publisher</a><span class='{{accountSortIcon}}' visible="{{accountSortBy() === 'Publisher'}}"></span></th>
+			<th>Authors</th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach: userPublications">
+		<tr>
+			<td>{{Title}}</td>
+			<td>{{Category}}</td>
+			<td>{{Year}}</td>
+			<td>{{Publisher}}</td>
+			<td>{{Authors}}</td>
+		</tr>
+	</tbody>
+</table>
+<nav>
+  <ul class="pager">
+  	{{#ifnot accountPage() == 1}}
+  	<li class="previous"><a href="#" click="{{accountFirst}}"><span aria-hidden="true">&larr;</span>First</a></li>
+    <li class="previous"><a href="#" click="{{accountPrevious}}"><span aria-hidden="true">&larr;</span>Previous</a></li>
+    {{/ifnot}}
+    {{#ifnot: userPublications().length < accountPageSize()}}
+    <li class="next"><a href="#" click="{{accountNext}}">Next<span aria-hidden="true">&rarr;</span></a></li>
+    {{/ifnot}}
+
+  </ul>
+</nav>
+<!-- /ko -->
+<!-- /ko  -->

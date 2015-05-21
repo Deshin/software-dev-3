@@ -5,7 +5,7 @@
 			<div class="col-md-4"><select class="form-control" options="{{types}}" value="{{type}}"></select></div>
 			<div class="col-md-2"><select class="form-control" options="{{formats}}" value="{{format}}"></select></div>
 			<div class="col-md-4"><button class="form-control btn btn-warning btn-file">
-				<input type="file" data-bind="fileInput: fileData"/>
+				<input type="file" accept=".csv" data-bind="fileInput: fileData"/>
 				<!-- ko if: fileData().file -->
 				{{fileData().file().name}}
 				<!-- /ko -->

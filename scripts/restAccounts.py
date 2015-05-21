@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import json
+import base64
 
 def createAccount(self,username, password, permission, firstName, surname, initials):
     """ Creates an account with the given parameters.
@@ -62,15 +63,27 @@ def getAllAccountDocs(self,username):
         return"404"
     
 def updateAccredited(self, accreditedCSV):
-    if accreditedCSV["type"]=="DHET":
+    if accreditedCSV["format"]=="DHET":
         self.updateDHET(accreditedCSV)
-    elif accreditedCSV["type"]=="IBSS":
+    elif accreditedCSV["format"]=="IBSS":
         self.updateIBBS(accreditedCSV)
-    elif accreditedCSV["type"]=="ISI":
+    elif accreditedCSV["format"]=="ISI":
         self.updateISI(accreditedCSV)
     
 def updateDHET(self,accreditedCSV):
-    print accreditedCSV["data"]
+    accredited=base64.b64decode(accreditedCSV["data"])
+    data=[]
+    accredited=accredited.split("\n")
+    for item in accredited:
+        item=item.split(",")
+        data.append(item)
+    journals=[]
+    print data[3]
+        #journals.append({"ISSN":item[2],"JournalTitle":item[0]})
+        
+    #print journals[0]
+        
+    
     
 def updateISI(self,accreditedCSV):
     print "ISI"

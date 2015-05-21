@@ -1,11 +1,6 @@
-<div class="col-sm-3 col-md-2 sidebar">
-	<!-- <ul class="nav nav-sidebar">
-	<li class="active"><a href="#" ><span class="glyphicon glyphicon-download"></span>Temp Button</a></li>
-</ul> -->
-</div>
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-	<div>
-		<h1>Upload a form</h1>
+<div>
+	<div class="col-md-12">
+		<h1>Upload a Publication</h1>
 	</div>
 	<div>
 		<form id="uploadPublication" submit="" data-bind="submit: submitPublication" novalidate>
@@ -145,7 +140,7 @@
 						<!-- /ko -->
 					</span>
 					<button class="col-md-4 btn btn-success btn-file">
-						<input type="file" name="publicationFile" id="publicationFile" data-bind="fileInput: fileVM.PublicationFile">
+						<input type="file" name="publicationFile" accept="application/pdf" id="publicationFile" data-bind="fileInput: fileVM.PublicationFile">
 						Upload
 					</button>
 				</div>
@@ -162,7 +157,7 @@
 						<!-- /ko -->
 					</span>
 					<button class="col-md-4 btn btn-success btn-file">
-						<input type="file" name="publicationToc" id="publicationToc" data-bind="fileInput: fileVM.PublicationToc">
+						<input type="file" name="publicationToc" accept="application/pdf" id="publicationToc" data-bind="fileInput: fileVM.PublicationToc">
 						Upload
 					</button>
 				</div>
@@ -179,7 +174,7 @@
 						<!-- /ko -->
 					</span>
 					<button class="col-md-2 btn btn-success btn-file">
-						<input type="file" name="SupportingDocumentation" id="SupportingDocumentation"
+						<input type="file" name="SupportingDocumentation" accept="application/pdf" id="SupportingDocumentation"
 						data-bind="fileInput: SupportingDocumentation"/>
 						Upload
 					</button>
