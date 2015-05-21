@@ -48,11 +48,11 @@
 			<!-- ko if: loginState() !== 'unregistered' -->
 			<div class="row" data-bind="page: {id: 'publicationUpload', title: 'Publication Upload', sourceOnShow: 'views/publicationUpload.html', withOnShow: getVM('publicationUpload')}">
 			</div>
+			<div class="row" data-bind="page: {id: 'viewAccount', title: 'View Account', sourceOnShow: 'views/viewAccount.html', withOnShow: getVM('viewAccount')}">
+			</div>
 			<!-- /ko -->
 			<!-- ko if: loginState() === 'admin' -->
 			<div class="row" data-bind="page: {id: 'createAccount', title: 'Create Account', sourceOnShow: 'views/createAccount.html', withOnShow: getVM('createAccount')}">
-			</div>
-			<div class="row" data-bind="page: {id: 'removeAccount', title: 'Remove Account', sourceOnShow: 'views/removeAccount.html', withOnShow: getVM('removeAccount')}">
 			</div>
 			<div class="row" data-bind="page: {id: 'uploadListings', title: 'Upload Listings', sourceOnShow: 'views/uploadListings.html', withOnShow: getVM('uploadListings')}"></div>
 			<!-- /ko -->
@@ -71,11 +71,11 @@
 				<!-- /ko -->
 				<!-- ko if: loginState() !== 'unregistered'  -->
 				<li class="active"><a href="#" data-bind="click: logout" >Logout</a></li>
+				<li class="active"><a href="#!/viewAccount">View Account</a></li>
 				<li class="active"><a href="#!/publicationUpload">Upload</a></li>
 				<!-- /ko -->
 				<!-- ko if: loginState() === 'admin' -->
 				<li class="active"><a href="#!/createAccount">Create Account</a></li>
-				<li class="active"><a href="#!/removeAccount">Remove an Account</a></li>
 				<li class="active"><a href="#!/uploadListings">Update Journal Listings</a></li>
 				<!-- /ko -->
 			</ul>

@@ -23,6 +23,7 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
     var self = this;
     self.search = ko.observable("");
     self.loginState = ko.observable('unregistered');
+    self.username = ko.observable("");
 
     self.onSearchClick = function() {
       if (self.search() === "") {
@@ -56,7 +57,7 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
     };
     self.logout = function() {
       self.loginState('unregistered');
-      window.location.assign("/#!/");
+      window.location.assign("/");
     };
     self.getVM = function(path) {
       return function(callback) {
@@ -92,6 +93,7 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
       $.get('/api/login.py', loginObject)
         .done(function(data) {
           rootViewModel.loginState(data.Permission);
+          rootViewModel.username(username);
         })
         .error(function (jqXHR) {
           rootViewModel.loginState('unregistered');

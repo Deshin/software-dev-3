@@ -1,6 +1,8 @@
 define(["jquery", "knockout"], function($, ko) {
 	var vm = this;
 
+	vm.permission = ko.observable(rootViewModel.loginState());
+
   vm.findAccount = findAccount;
   vm.removeAccount = removeAccount;
   vm.sortBy=ko.observable(null);
@@ -34,17 +36,19 @@ define(["jquery", "knockout"], function($, ko) {
 
   vm.gotData = function(data) {
     vm.publications.removeAll();
-    for (var i = 0; i < data.length; i++) {
-      var authors = "";
-      for (var j = 0; j < data[i].Authors.length; j++) {
-        authors += data[i].Authors[j].Initials + " " + data[i].Authors[j].Surname;
-        if(j != data[i].Authors.length - 1) {
-          authors += ", ";
-        }
-      }
-      data[i].Authors = authors;
-      vm.publications.push(data[i]);
-    }
+		if(data !== '200') {
+			for (var i = 0; i < data.length; i++) {
+	      var authors = "";
+	      for (var j = 0; j < data[i].Authors.length; j++) {
+	        authors += data[i].Authors[j].Initials + " " + data[i].Authors[j].Surname;
+	        if(j != data[i].Authors.length - 1) {
+	          authors += ", ";
+	        }
+	      }
+	      data[i].Authors = authors;
+	      vm.publications.push(data[i]);
+	    }
+		}
   };
 
   vm.updateList = function(newVal) {
@@ -115,42 +119,52 @@ define(["jquery", "knockout"], function($, ko) {
       return "glyphicon glyphicon-triangle-top";
     } else{
       return "glyphicon glyphicon-triangle-bottom";
-    };
+    }
   });
+
+	if(vm.permission() !== 'admin') {
+		vm.username(rootViewModel.username());
+
+		sendAccountRequest();
+	}
 
 	return vm;
 
   function findAccount() {
     if($('#searchAccount').valid()) {
-			vm.publications.removeAll();
-
-			vm.firstname('');
-			vm.surname('');
-			vm.initials('');
-
-      vm.page(1);
-      vm.pageSize(20);
-      vm.sort('ASC');
-      vm.sortBy('Title');
-
-      vm.page.subscribe(updateList, vm, 'change');
-      vm.pageSize.subscribe(updateList, vm, 'change');
-      vm.sortBy.subscribe(updateList, vm, 'change');
-      vm.sort.subscribe(updateList, vm, 'change');
-
-			$.getJSON('/api/authorDocs.py', {username: vm.username})
-				.done(function(data) {
-					vm.firstname(data.firstname);
-					vm.surname(data.surname);
-					vm.initials(data.initials);
-
-					updateList();
-				})
-				.fail(function(jqXHR) {
-					console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
-				});
+			sendAccountRequest();
     }
   }
+
+	function sendAccountRequest() {
+		vm.publications.removeAll();
+
+		vm.firstname('');
+		vm.surname('');
+		vm.initials('');
+
+		vm.page(1);
+		vm.pageSize(20);
+		vm.sort('ASC');
+		vm.sortBy('Title');
+
+		vm.page.subscribe(updateList, vm, 'change');
+		vm.pageSize.subscribe(updateList, vm, 'change');
+		vm.sortBy.subscribe(updateList, vm, 'change');
+		vm.sort.subscribe(updateList, vm, 'change');
+
+		$.getJSON('/api/authorDocs.py', {username: vm.username()})
+			.done(function(data) {
+				vm.firstname(data.firstname);
+				vm.surname(data.surname);
+				vm.initials(data.initials);
+
+				updateList();
+			})
+			.fail(function(jqXHR) {
+				console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
+			});
+	}
 
   function removeAccount() {
 		$.post('/api/deleteAccount.py', {username: vm.username})
