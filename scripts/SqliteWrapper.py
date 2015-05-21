@@ -6,7 +6,7 @@ from DatabaseWrapper import DatabaseWrapper
 import sqlite3
 
 class SqliteWrapper(DatabaseWrapper):
-"""Wrapper class for sqlite3, enabling it's use in the back-end"""
+    """Wrapper class for sqlite3, enabling it's use in the back-end"""
 
     def __init__(self):
         self._database= "../db/elen4010.sqlite3"
