@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 import cgi
+from RestApi import RestApi
+from SqliteWrapper import SqliteWrapper
 
 def main(publicationID):
     db = SqliteWrapper()

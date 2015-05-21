@@ -26,7 +26,7 @@ define(["jquery", "knockout"], function($, ko) {
 			for (var i = 0; i < vm.publication().PeerReviewDocumentation.length; i++) {
 				var fileDetail = {
 					name: vm.publication().PeerReviewDocumentation[i].DocumentTitle,
-					path: vm.publication().PeerReviewDocumentation[i].PathToFile
+					path: "files/" + vm.publication().PeerReviewDocumentation[i].PathToFile
 				}
 				vm.suppDocs.push(fileDetail);
 			};
@@ -35,7 +35,9 @@ define(["jquery", "knockout"], function($, ko) {
 			vm.statusMsg("Error " + jqxhr.status + " - " + jqxhr.statusText);
 		});
 	});
-
+	vm.accredit = function() {
+		$.get('/api/accreditPublication.py', {publicationID: vm.pubId()})
+	};
 	return vm;
 
 });

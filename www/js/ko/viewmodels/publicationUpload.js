@@ -318,34 +318,38 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 		function vmToJson() {
 			var publication = {};
 			for (var id in vm.formVM) {
-				if(vm.formVM[id].value()) {
-					if(id === 'CategoryTitle') {
-						if(vm.formVM.Category.value() === 'Journal Article') {
-							publication.JournalTitle = vm.formVM[id].value();
-						} else if (vm.formVM.Category.value() === 'Conference Paper') {
-							publication.ConferenceTitle = vm.formVM[id].value();
-						} else if (vm.formVM.Category.value() === 'Book Chapter') {
-							publication.BookTitle = vm.formVM[id].value();
+				if(vm.formVM.hasOwnProperty(id)){
+					if(vm.formVM[id].value()) {
+						if(id === 'CategoryTitle') {
+							if(vm.formVM.Category.value() === 'Journal Article') {
+								publication.JournalTitle = vm.formVM[id].value();
+							} else if (vm.formVM.Category.value() === 'Conference Paper') {
+								publication.ConferenceTitle = vm.formVM[id].value();
+							} else if (vm.formVM.Category.value() === 'Book Chapter') {
+								publication.BookTitle = vm.formVM[id].value();
+							}
+						} else {
+							if(vm.formVM[id].sanatize) {
+								publication[id] = vm.formVM[id].value().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/ /g, "");
+							} else {
+								publication[id] = vm.formVM[id].value();
+							}
 						}
 					} else {
-						if(vm.formVM[id].sanatize) {
-							publication[id] = vm.formVM[id].value().replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").replace(/ /g, "");
-						} else {
-							publication[id] = vm.formVM[id].value();
-						}
+						delete publication[id];
 					}
-				} else {
-					delete publication[id];
 				}
 			}
 
 			for (var fileId in vm.fileVM) {
-				publication[fileId] = {
-					data: "",
-					file: {}
-				};
-				publication[fileId].data = vm.fileVM[fileId]().base64String();
-				publication[fileId].file = vm.fileVM[fileId]().file();
+				if(vm.fileVM.hasOwnProperty(fileId)) {
+					publication[fileId] = {
+						data: "",
+						file: {}
+					};
+					publication[fileId].data = vm.fileVM[fileId]().base64String();
+					publication[fileId].file = vm.fileVM[fileId]().file();
+				}
 			}
 
 			publication.SupportingDocumentation = SupportingDocs;
@@ -369,7 +373,5 @@ define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], functi
 			fileVM.PublicationToc({
 				base64String: ko.observable()
 			});
-
 		}
-
 	});
