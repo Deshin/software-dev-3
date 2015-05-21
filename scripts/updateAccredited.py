@@ -21,7 +21,7 @@ def main(details):
             result= rest.updatePredatory(item)
         elif item["type"]=="H-Index":
             result= rest.updateHIndex(item)
-            
+        
     if result=="400":
         print "Status:400"
         print "Content-Type: text/html"
@@ -36,5 +36,7 @@ def main(details):
 
 if __name__ == "__main__":
     details = json.load(sys.stdin)
+    db = SqliteWrapper()
+    rest = RestApi(db)
               
     main(details)

@@ -74,7 +74,7 @@ def updateAccredited(self, accreditedCSV):
         self.updateISI(accreditedCSV)
     
 def updateDHET(self,accreditedCSV):
-    accredited=base64.b64decode(accreditedCSV["data"])
+    accredited=base64.urlsafe_b64decode(accreditedCSV["data"])
     data=[]
     if not os.path.exists("../www/files/AccreditedJournals/DHET"): os.makedirs("../www/files/AccreditedJournals/DHET")
     scanfile = open("../www/files/AccreditedJournals/DHET/DHET.csv", "wb")
@@ -83,7 +83,6 @@ def updateDHET(self,accreditedCSV):
     journals=[]
     with open('../www/files/AccreditedJournals/DHET/DHET.csv', 'rb') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=',')
-        rowCount=0
         for row in spamreader:
             issn=None
             count=0
@@ -92,29 +91,87 @@ def updateDHET(self,accreditedCSV):
                     title=item
                 elif count==1:
                     issn=item
-                    print item
-                if issn!=None and rowCount!=0:
-                    journals.append({"JournalTitle":title,"ISSN":issn.replace("-","")})
+                else:
+                    journals.append({"JournalTitle":title,"ISSN":issn.replace("-","").replace(",","")})
                 count=count+1
-            rowCount=rowCount+1
 
-        
+    count=0;   
     for journal in journals:
-        existingJournal=self._databaseWrapper.query("SELECT * FROM Journals WHERE ISSN=?",int(journal["ISSN"]))
-        if existingJournal!=[]:
-            self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE ISSN=?",("Accredited",journal["ISSN"]))
-        else:
-            self._databaseWrapper.query("INSERT INTO Journals(JournalTitle, ISSN,Type) VALUES(?,?,?)",(journal["JournalTitle"],journal["ISsN"], "Accredited"))
-       
-        self._databaseWrapper.commit()
+        if count!=0:
+            existingJournal=[]
+            existingJournal=self._databaseWrapper.query("SELECT * FROM Journals WHERE ISSN=?",[journal["ISSN"]])
+            if existingJournal!=[]:
+                 self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE ISSN=?",("Accredited",journal["ISSN"]))
+            self._databaseWrapper.commit()
+        count=count+1
         
     
     
 def updateISI(self,accreditedCSV):
+    accredited=base64.urlsafe_b64decode(accreditedCSV["data"])
+    data=[]
+    if not os.path.exists("../www/files/AccreditedJournals/ISI"): os.makedirs("../www/files/AccreditedJournals/ISI")
+    scanfile = open("../www/files/AccreditedJournals/ISI/ISI.csv", "wb")
+    scanfile.write(accredited)
+    
+    journals=[]
+    with open('../www/files/AccreditedJournals/ISI/ISI.csv', 'rb') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=',')
+        for row in spamreader:
+            issn=None
+            count=0
+            for item in row:
+                if count==0:
+                    title=item
+                elif count==1:
+                    issn=item
+                else:
+                    journals.append({"JournalTitle":title,"ISSN":issn.replace("-","").replace(",","")})
+                count=count+1
+
+    count=0;   
+    for journal in journals:
+        if count!=0:
+            existingJournal=[]
+            existingJournal=self._databaseWrapper.query("SELECT * FROM Journals WHERE ISSN=?",[journal["ISSN"]])
+            if existingJournal!=[]:
+                 self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE ISSN=?",("Accredited",journal["ISSN"]))
+            self._databaseWrapper.commit()
+        count=count+1
     print "ISI"
     
 def updateIBBS(self,accreditedCSV):
-    print "IBBS"
+    accredited=base64.urlsafe_b64decode(accreditedCSV["data"])
+    data=[]
+    if not os.path.exists("../www/files/AccreditedJournals/IBSS"): os.makedirs("../www/files/AccreditedJournals/IBSS")
+    scanfile = open("../www/files/AccreditedJournals/IBSS/IBSS.csv", "wb")
+    scanfile.write(accredited)
+    
+    journals=[]
+    with open('../www/files/AccreditedJournals/IBSS/IBSS.csv', 'rb') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=',')
+        for row in spamreader:
+            issn=None
+            count=0
+            for item in row:
+                if count==0:
+                    title=item
+                elif count==1:
+                    issn=item
+                else:
+                    journals.append({"JournalTitle":title,"ISSN":issn.replace("-","").replace(",","")})
+                count=count+1
+
+    count=0;   
+    for journal in journals:
+        if count!=0:
+            existingJournal=[]
+            existingJournal=self._databaseWrapper.query("SELECT * FROM Journals WHERE ISSN=?",[journal["ISSN"]])
+            if existingJournal!=[]:
+                 self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE ISSN=?",("Accredited",journal["ISSN"]))
+            self._databaseWrapper.commit()
+        count=count+1
+
     
 def updatePredatory(self, predatoryCSV):
     print "Predatory"
