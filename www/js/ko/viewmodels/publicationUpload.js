@@ -1,3 +1,8 @@
+/**
+*
+* @author Deshin
+* @author Anthony
+*/
 define(["jquery", "jqueryvalidate", "knockout", "kofilebind", "bootbox"], function($, $valid, ko, kofilebind, bootbox) {
 	var vm = this;
 

@@ -1,3 +1,8 @@
+/**
+*
+* @author Deshin
+* @author Anthony
+*/
 define(["jquery", "knockout", "crypto.SHA", "bootbox"], function($, ko, crypto, bootbox) {
 	var vm = this;
 

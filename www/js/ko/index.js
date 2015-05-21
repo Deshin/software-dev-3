@@ -1,3 +1,9 @@
+/**
+* 
+* @author Deshin
+* @author Anthony
+*/
+
 requirejs.config({
   baseUrl: 'js',
   urlArgs: "bust=" + (new Date()).getTime(),
