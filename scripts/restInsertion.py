@@ -34,11 +34,12 @@ def insertDocument(self, details):
         result=insertJournalPaper(self,details)
         
     elif details["Category"].lower().startswith("book"):
-        result=insertBookSection(self,details)
+        
         details["ScanPath"]="books/"+details["BookTitle"].replace(' ', '_')+"/publications/"
         details["ScanFileName"]=details["Title"].replace(' ', '_')+".pdf"
         details["TableOfContentsPath"]="books/"+details["BookTitle"].replace(' ', '_')+"/TOCs/"
         details["PeerReviewPath"]="books/"+details["BookTitle"].replace(' ', '_')+"/peerReviews/"+details["Title"].replace(' ', '_')+'/'
+        result=insertBookSection(self,details)
 
     return result
     
@@ -73,9 +74,8 @@ def insertExistingConference(self,details, conferenceID):
         
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"]+'TOC.pdf', details["ScanPath"]+details["ScanFileName"], details["Accreditation"]))
         publicationID=self._databaseWrapper._cur.lastrowid
-        self._databaseWrapper.query("INSERT INTO ConferencePublicationDetail(ConferenceID,PublicationID,Abstract,MotivationForAccreditation,PeerReviewProcess) VALUES(?,?,?,?,?)",(conferenceID,publicationID,details["Abstract"], details["MotivationForAccreditation"], details["PeerReview"]))
+        self._databaseWrapper.query("INSERT INTO ConferencePublicationDetail(ConferenceID,PublicationID,Abstract,MotivationForAccreditation,PeerReviewProcess) VALUES(?,?,?,?,?)",(conferenceID,publicationID,details["Abstract"], details["MotivationForAccreditation"], details["PeerReviewProcess"]))
         if not os.path.exists("../www/files/"+details['PeerReviewPath']): os.makedirs("../www/files/"+details['PeerReviewPath'])
-        print details;
         for suppDoc in details["SupportingDocumentation"]:
             PathToFile=details["PeerReviewPath"]+suppDoc['file']['name'].replace(' ', '_')
             self._databaseWrapper.query("INSERT INTO PeerReviewDocumentation(PublicationID,PathToFile, DocumentTitle) VALUES(?,?,?)",(publicationID,PathToFile,suppDoc['file']['name'].replace(' ', '_')))
@@ -196,13 +196,12 @@ def insertExistingBook(self,details,bookID):
     :param details: json object containing all details relating to a new book section
     :param bookID: the id (primary key) of the book to which the section will be added
     """
-    try:        
+    try:  
         #note: although this is repeated code from conference insertion, it is important
         #that it is repeated here to ensure atomicity of insertions
-        
         self._databaseWrapper.query("INSERT INTO Publications(Title,Category,Year,Publisher,TableOfContentsPath,ScanPath,Accreditation) VALUES(?,?,?,?,?,?,?)",(details["Title"],details["Category"],details["Year"],details["Publisher"], details["TableOfContentsPath"]+'TOC.pdf', details["ScanPath"]+details["ScanFileName"], details["Accreditation"]))
         publicationID=self._databaseWrapper._cur.lastrowid
-        self._databaseWrapper.query("INSERT INTO BookPublications(PublicationID,Chapter,Abstract, BooksID) VALUES(?,?,?,?)",(publicationID, details["Chapter"], details["Abstract"], bookID))
+        self._databaseWrapper.query("INSERT INTO BookPublications(PublicationID,Chapter,Abstract, BooksID) VALUES(?,?,?,?)",(publicationID, details["Title"], details["Abstract"], bookID))
         insertAuthors(self,details,publicationID)
         if not os.path.exists("../www/files/"+details['PeerReviewPath']): os.makedirs("../www/files/"+details['PeerReviewPath'])
         for suppDoc in details["SupportingDocumentation"]:
