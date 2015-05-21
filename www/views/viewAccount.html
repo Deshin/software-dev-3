@@ -35,7 +35,7 @@
   </div>
   <!-- /ko -->
 </div>
-<!-- ko if: publications()[0] -->
+<!-- ko if: userPublications()[0] -->
 <table class="col-md-12 table table-hover">
 	<thead>
 		<tr>
@@ -46,7 +46,7 @@
 			<th>Authors</th>
 		</tr>
 	</thead>
-	<tbody data-bind="foreach: publications">
+	<tbody data-bind="foreach: userPublications">
 		<tr>
 			<td>{{Title}}</td>
 			<td>{{Category}}</td>
@@ -56,17 +56,17 @@
 		</tr>
 	</tbody>
 </table>
-<!-- /ko -->
 <nav>
   <ul class="pager">
   	{{#ifnot page() == 1}}
   	<li class="previous"><a href="#" click="{{first}}"><span aria-hidden="true">&larr;</span>First</a></li>
     <li class="previous"><a href="#" click="{{previous}}"><span aria-hidden="true">&larr;</span>Previous</a></li>
     {{/ifnot}}
-    {{#ifnot: publications().length < pageSize()}}
+    {{#ifnot: userPublications().length < pageSize()}}
     <li class="next"><a href="#" click="{{next}}">Next<span aria-hidden="true">&rarr;</span></a></li>
     {{/ifnot}}
 
   </ul>
 </nav>
+<!-- /ko -->
 <!-- /ko  -->

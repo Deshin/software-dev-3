@@ -5,14 +5,17 @@ define(["jquery", "knockout"], function($, ko) {
 
   vm.findAccount = findAccount;
   vm.removeAccount = removeAccount;
+
   vm.sortBy=ko.observable(null);
 	vm.sort=ko.observable(null);
+	vm.pageSize = ko.observable(null);
+  vm.page = ko.observable(null);
 
   vm.username = ko.observable('');
 	vm.firstname = ko.observable('');
 	vm.surname = ko.observable('');
 	vm.initials = ko.observable('');
-  vm.publications = ko.observableArray([]);
+  vm.userPublications = ko.observableArray([]);
 
   $('#searchAccount').validate({
     rules: publicationRules(),
@@ -25,17 +28,12 @@ define(["jquery", "knockout"], function($, ko) {
     errorClass: "text-danger"
   });
 
-  vm.pageSize = ko.observable(null);
-  vm.page = ko.observable(null);
-  vm.sortBy=ko.observable(null);
-  vm.sort=ko.observable(null);
-
   vm.skip = ko.computed(function() {
     return (vm.page()-1)*vm.pageSize();
   });
 
   vm.gotData = function(data) {
-    vm.publications.removeAll();
+    vm.userPublications.removeAll();
 		if(data !== '200') {
 			for (var i = 0; i < data.length; i++) {
 	      var authors = "";
@@ -46,7 +44,7 @@ define(["jquery", "knockout"], function($, ko) {
 	        }
 	      }
 	      data[i].Authors = authors;
-	      vm.publications.push(data[i]);
+	      vm.userPublications.push(data[i]);
 	    }
 		}
   };
@@ -86,8 +84,6 @@ define(["jquery", "knockout"], function($, ko) {
       console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
     });
   };
-
-  vm.publications = ko.observableArray([]);
 
   vm.next = function() {
     vm.page(vm.page()+1);
@@ -137,7 +133,7 @@ define(["jquery", "knockout"], function($, ko) {
   }
 
 	function sendAccountRequest() {
-		vm.publications.removeAll();
+		vm.userPublications.removeAll();
 
 		vm.firstname('');
 		vm.surname('');
@@ -148,10 +144,10 @@ define(["jquery", "knockout"], function($, ko) {
 		vm.sort('ASC');
 		vm.sortBy('Title');
 
-		vm.page.subscribe(updateList, vm, 'change');
-		vm.pageSize.subscribe(updateList, vm, 'change');
-		vm.sortBy.subscribe(updateList, vm, 'change');
-		vm.sort.subscribe(updateList, vm, 'change');
+		vm.page.subscribe(updateList);
+		vm.pageSize.subscribe(updateList);
+		vm.sortBy.subscribe(updateList);
+		vm.sort.subscribe(updateList);
 
 		$.getJSON('/api/authorDocs.py', {username: vm.username()})
 			.done(function(data) {
@@ -174,7 +170,7 @@ define(["jquery", "knockout"], function($, ko) {
 				vm.surname('');
 				vm.initials('');
 
-				vm.publications.removeAll();
+				vm.userPublications.removeAll();
 			})
 			.fail(function(jqXHR) {
 				console.log("Error (" + jqXHR.status + ") " + jqXHR.statusText);
