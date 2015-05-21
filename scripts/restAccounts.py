@@ -2,6 +2,9 @@
 
 import json
 import base64
+import string
+import os
+import csv
 
 def createAccount(self,username, password, permission, firstName, surname, initials):
     """ Creates an account with the given parameters.
@@ -73,15 +76,37 @@ def updateAccredited(self, accreditedCSV):
 def updateDHET(self,accreditedCSV):
     accredited=base64.b64decode(accreditedCSV["data"])
     data=[]
-    accredited=accredited.split("\n")
-    for item in accredited:
-        item=item.split(",")
-        data.append(item)
+    if not os.path.exists("../www/files/AccreditedJournals/DHET"): os.makedirs("../www/files/AccreditedJournals/DHET")
+    scanfile = open("../www/files/AccreditedJournals/DHET/DHET.csv", "wb")
+    scanfile.write(accredited)
+    
     journals=[]
-    print data[3]
-        #journals.append({"ISSN":item[2],"JournalTitle":item[0]})
+    with open('../www/files/AccreditedJournals/DHET/DHET.csv', 'rb') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=',')
+        rowCount=0
+        for row in spamreader:
+            issn=None
+            count=0
+            for item in row:
+                if count==0:
+                    title=item
+                elif count==1:
+                    issn=item
+                    print item
+                if issn!=None and rowCount!=0:
+                    journals.append({"JournalTitle":title,"ISSN":issn.replace("-","")})
+                count=count+1
+            rowCount=rowCount+1
+
         
-    #print journals[0]
+    for journal in journals:
+        existingJournal=self._databaseWrapper.query("SELECT * FROM Journals WHERE ISSN=?",int(journal["ISSN"]))
+        if existingJournal!=[]:
+            self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE ISSN=?",("Accredited",journal["ISSN"]))
+        else:
+            self._databaseWrapper.query("INSERT INTO Journals(JournalTitle, ISSN,Type) VALUES(?,?,?)",(journal["JournalTitle"],journal["ISsN"], "Accredited"))
+       
+        self._databaseWrapper.commit()
         
     
     
