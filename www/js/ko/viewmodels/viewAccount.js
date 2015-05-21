@@ -1,4 +1,12 @@
 /**
+* The view account view model and partial is used for displaying account
+* information and submitted publications of a particular user,
+* if the user is a registered user it is their credentials shown.
+* If an admin navigates to the page they can fetch any user's information
+* and delete a user if necessary.
+*
+* @requires jQuery
+* @requires knockout.js
 *
 * @author Deshin
 * @author Anthony
@@ -23,6 +31,11 @@ define(["jquery", "knockout"], function($, ko) {
 	vm.initials = ko.observable('');
   vm.userPublications = ko.observableArray([]);
 
+	/**
+	* Configure the jquery validation for the search box, with custom
+	* rules and messages defined.
+	* @requires jQuery.validate
+	*/
   $('#searchAccount').validate({
     rules: publicationRules(),
     messages: publicationMessages(),
@@ -34,10 +47,21 @@ define(["jquery", "knockout"], function($, ko) {
     errorClass: "text-danger"
   });
 
+	/**
+	* @method accountSkip
+	* The account skip function is used for calculating the skip amount
+	* when querying the endpoint.
+	*/
   vm.accountSkip = ko.computed(function() {
     return (vm.accountPage()-1)*vm.accountPageSize();
   });
 
+	/**
+	* @callback accountGotData
+	* Once the data has been fetched this callback is
+	* called, it converts data from the server into observables
+	* on th vm.
+	*/
   vm.accountGotData = function(data) {
     vm.userPublications.removeAll();
 		if(data !== '200') {
@@ -55,6 +79,12 @@ define(["jquery", "knockout"], function($, ko) {
 		}
   };
 
+	/**
+	* @callback accountUpdateList
+	* The update list function is called if any of the observed query options
+	* are called, it will build a query string and pass it to the get function.
+	* On successful get the date is shown.
+	*/
   vm.accountUpdateList = function(newVal) {
     if (vm.accountPage() === null || vm.accountPageSize() === null || vm.accountSort() === null || vm.accountSortBy() === null) {
       return;
@@ -91,18 +121,36 @@ define(["jquery", "knockout"], function($, ko) {
     });
   };
 
+	/**
+	* @method accountNext
+	* Get the next page for pagination.
+	*/
   vm.accountNext = function() {
     vm.accountPage(vm.accountPage()+1);
   };
 
+	/**
+	* @method accountPrevious
+	* Get the previous page for pagination.
+	*/
   vm.accountPrevious = function() {
     vm.accountPage(vm.accountPage()-1);
   };
 
+	/**
+	* @method accountFirst
+	* Get the first page for pagination.
+	*/
   vm.accountFirst = function() {
     vm.accountPage(1);
   };
 
+	/**
+	* @method accountSorting
+	* The sorting method which is called when the table columns are
+	* reorganized, causes a callback that will get data from the
+	* database using the query string.
+	*/
   vm.accountSorting = function(item){
     if (vm.accountSortBy() === item) {
       if (vm.accountSort() === "ASC") {
@@ -116,6 +164,11 @@ define(["jquery", "knockout"], function($, ko) {
     }
   };
 
+	/**
+	* @method accountSortIcon
+	* Determines the icon that is shown on the table depending on whether
+	* the fields are sorted by ascending or descending.
+	*/
   vm.accountSortIcon = ko.computed(function() {
     if (vm.accountSort() === "ASC") {
       return "glyphicon glyphicon-triangle-top";
@@ -124,6 +177,10 @@ define(["jquery", "knockout"], function($, ko) {
     }
   });
 
+	/**
+	* If the permission level of the user is not admin then just get
+	* the account of the current user.
+	*/
 	if(vm.permission() !== 'admin') {
 		vm.username(rootViewModel.loginUsername());
 
@@ -132,12 +189,21 @@ define(["jquery", "knockout"], function($, ko) {
 
 	return vm;
 
+	/**
+	* @method findAccount
+	* Search for a particular account to display the information and
+	* owned publications of.
+	*/
   function findAccount() {
     if($('#searchAccount').valid()) {
 			sendAccountRequest();
     }
   }
 
+	/**
+	* @method sendAccountRequest
+	* Fetch the account data for a particular user.
+	*/
 	function sendAccountRequest() {
 		vm.userPublications.removeAll();
 
@@ -168,6 +234,11 @@ define(["jquery", "knockout"], function($, ko) {
 			});
 	}
 
+	/**
+	* @method
+	* Remove the account of the user currently displayed, this function is
+	* limited to admin.
+	*/
   function removeAccount() {
 		$.post('/api/deleteAccount.py', {username: vm.username})
 			.done(function(data) {
@@ -183,6 +254,10 @@ define(["jquery", "knockout"], function($, ko) {
 			});
   }
 
+	/**
+	* @method publicationRules
+	* Configure rules for search box validation.
+	*/
   function publicationRules() {
     return {
       username: {
@@ -191,6 +266,10 @@ define(["jquery", "knockout"], function($, ko) {
     };
   }
 
+	/**
+	* @method publicationMessages
+	* Configure the messages for search box validation.
+	*/
   function publicationMessages() {
     return {
       username: {

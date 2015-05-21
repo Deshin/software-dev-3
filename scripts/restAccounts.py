@@ -101,7 +101,9 @@ def updateDHET(self,accreditedCSV):
             existingJournal=[]
             existingJournal=self._databaseWrapper.query("SELECT * FROM Journals WHERE ISSN=?",[journal["ISSN"]])
             if existingJournal!=[]:
-                 self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE ISSN=?",("Accredited",journal["ISSN"]))
+                self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE ISSN=?",("Accredited",journal["ISSN"]))
+                for item in existingJournal:
+                    journal2=self._databaseWrapper.query("UPDATE Publications SET Accreditation = ? WHERE Id = (?)",["Accredited",item["ID"]])
             self._databaseWrapper.commit()
         count=count+1
         
@@ -135,7 +137,9 @@ def updateISI(self,accreditedCSV):
             existingJournal=[]
             existingJournal=self._databaseWrapper.query("SELECT * FROM Journals WHERE ISSN=?",[journal["ISSN"]])
             if existingJournal!=[]:
-                 self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE ISSN=?",("Accredited",journal["ISSN"]))
+                self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE ISSN=?",("Accredited",journal["ISSN"]))
+                for item in existingJournal:
+                    journal2=self._databaseWrapper.query("UPDATE Publications SET Accreditation = ? WHERE Id = (?)",["Accredited",item["ID"]])
             self._databaseWrapper.commit()
         count=count+1
 
@@ -168,15 +172,76 @@ def updateIBBS(self,accreditedCSV):
             existingJournal=[]
             existingJournal=self._databaseWrapper.query("SELECT * FROM Journals WHERE ISSN=?",[journal["ISSN"]])
             if existingJournal!=[]:
-                 self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE ISSN=?",("Accredited",journal["ISSN"]))
+                self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE ISSN=?",("Accredited",journal["ISSN"]))
+                for item in existingJournal:
+                    journal2=self._databaseWrapper.query("UPDATE Publications SET Accreditation = ? WHERE Id = (?)",["Accredited",item["ID"]])
             self._databaseWrapper.commit()
         count=count+1
 
     
 def updatePredatory(self, predatoryCSV):
-    print "Predatory"
+    predatory=base64.urlsafe_b64decode(predatoryCSV["data"])
+    data=[]
+    if not os.path.exists("../www/files/PredatoryJournals"): os.makedirs("../www/files/PredatoryJournals")
+    scanfile = open("../www/files/PredatoryJournals/predatory.csv", "wb")
+    scanfile.write(predatory)
+    
+    journals=[]
+    with open('../www/files/PredatoryJournals/predatory.csv', 'rb') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=',')
+        for row in spamreader:
+            issn=None
+            count=0
+            for item in row:
+                if count==0:
+                    title=item
+                elif count==1:
+                    journals.append({"JournalTitle":title})
+                count=count+1
+                
+    count=0;   
+    for journal in journals:
+        if count!=0:
+            existingJournal=[]
+            existingJournal=self._databaseWrapper.query("SELECT * FROM Journals WHERE Title=?",[journal["JournalTitle"]])
+            if existingJournal!=[]:
+                self._databaseWrapper.query("UPDATE Journals SET Type=? WHERE Title=?",("Predatory",journal["JournalTitle"]))
+                for item in existingJournal:
+                    journal2=self._databaseWrapper.query("UPDATE Publications SET Accreditation = ? WHERE Id = (?)",["Accredited",item["ID"]])
+            self._databaseWrapper.commit()
+
     
 def updateHIndex(self,HIndexCSV):
-    print "HIndex"
+    HI=base64.urlsafe_b64decode(HIndexCSV["data"])
+    data=[]
+    if not os.path.exists("../www/files/HIndex"): os.makedirs("../www/files/HIndex")
+    scanfile = open("../www/files/HIndex/HI.csv", "wb")
+    scanfile.write(HI)
+    
+    journals=[]
+    with open('../www/files/HIndex/HI.csv', 'rb') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=',')
+        for row in spamreader:
+            count=0
+            issn=None
+            hindex=None
+            for item in row:
+                if count==3:
+                    issn=item[5:]
+                if count==5:
+                    hindex=item
+                if issn!=None and hindex!=None:
+                    journals.append({"ISSN":issn, "HIndex":hindex})
+                count=count+1
+                
+    count=0;   
+    for journal in journals:
+        if count!=0:
+            existingJournal=[]
+            existingJournal=self._databaseWrapper.query("SELECT * FROM Journals WHERE ISSN=?",[journal["ISSN"]])
+            if existingJournal!=[]:
+                self._databaseWrapper.query("UPDATE Journals SET HIndex=? WHERE ISSN?",(journal["HIndex"],journal["ISSN"]))
+            
+            self._databaseWrapper.commit()
 
         
