@@ -88,6 +88,15 @@ class RestApi:
     def updateHIndex(self,HIndexCSV):
         """see :func:`restAccounts.updateHIndex` for more info"""
         return restAccounts.updateHIndex(self,HIndexCSV)
+    
+    def updateDHET(self,accreditedCSV):
+        return restAccounts.updateDHET(self,accreditedCSV)
+    
+    def updateIBSS(self,accreditedCSV):
+        return restAccounts.updateIBBS(self,accreditedCSV)
+    
+    def updateISI(self,accreditedCSV):
+        return restAccounts.updateISI(self,accreditedCSV)
 
 
         

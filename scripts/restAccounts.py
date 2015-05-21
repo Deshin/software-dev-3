@@ -62,10 +62,15 @@ def getAllAccountDocs(self,username):
         return"404"
     
 def updateAccredited(self, accreditedCSV):
-    if accreditedCSV["format"]==
+    if accreditedCSV["type"]=="DHET":
+        self.updateDHET(accreditedCSV)
+    elif accreditedCSV["type"]=="IBSS":
+        self.updateIBBS(accreditedCSV)
+    elif accreditedCSV["type"]=="ISI":
+        self.updateISI(accreditedCSV)
     
 def updateDHET(self,accreditedCSV):
-    print "DHET"
+    print accreditedCSV["data"]
     
 def updateISI(self,accreditedCSV):
     print "ISI"

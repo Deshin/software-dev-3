@@ -14,13 +14,13 @@ def main(details):
     result="404"
     for item in details:
         if item["type"]=="Accredited":
-            result= rest.updateAccredited(self, item)
+            rest.updateAccredited(item)
         elif item["type"]=="Predatory":
-            result= rest.updatePredatory(self, item)
+            result= rest.updatePredatory(item)
         elif item["type"]=="H-Index":
-            result= rest.updateHIndex(self,item)
+            result= rest.updateHIndex(item)
             
-    if result[0]=="400":
+    if result=="400":
         print "Status:400"
         print "Content-Type: text/html"
         print ""
