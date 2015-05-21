@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""RESTful endpoint for logging a user in"""
 
 import cgi
 import json
@@ -6,6 +7,8 @@ from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
 
 def main(username,hash):
+    """Runs :func:`restRetrieval.getLoginCredentials` and prints a message based on the output: success or failure"""
+
     db = SqliteWrapper()
     rest = RestApi(db)
     result=rest.getLoginCredentials(username)

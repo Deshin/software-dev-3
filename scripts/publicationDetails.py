@@ -1,10 +1,12 @@
 #!/usr/bin/env python
+"""RESTful endpoint for finding the details of a publication"""
 
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
 import cgi
 
 def main(id):
+    """Runs :func:`restRetrieval.getDocumentDetails` and prints the results"""
     db = SqliteWrapper()
     rest = RestApi(db)
     result = rest.getDocumentDetails(id)

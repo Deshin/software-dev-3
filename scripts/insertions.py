@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+"""RESTful endpoint for inserting a document into the database."""
 
 from RestApi import RestApi
 from SqliteWrapper import SqliteWrapper
@@ -9,6 +10,7 @@ import base64
 
 
 def main(details):
+    """Runs and prints the output of :func:`restInsertion.insertDocument`, the result of attempting to insert a document into the database."""
     db = SqliteWrapper()
     rest = RestApi(db)
     result= rest.insertDocument(details)
