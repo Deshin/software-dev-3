@@ -1,7 +1,11 @@
 <div class="col-sm-3 col-md-2 sidebar">
 	<ul class="nav nav-sidebar">
+		<!-- ko if: publication() -->
+		<!-- ko if: publication().Accreditation !== 'Accredited'-->
 		<!-- ko if: permission() === 'admin' -->
 		<li class="active"><a href="#" click="{{accredit}}">Accredit</a></li>
+		<!-- /ko -->
+		<!-- /ko -->
 		<!-- /ko -->
 		<li class="inactive"><a>Publication Documentation:</a></li>
 		<li class="active"><a data-bind="attr: {target: '_blank', href: pdfUrl}" ><span class="glyphicon glyphicon-download"></span> Download PDF</a></li>
