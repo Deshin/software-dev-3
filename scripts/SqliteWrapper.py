@@ -43,9 +43,3 @@ class SqliteWrapper(DatabaseWrapper):
             self._con.commit()
         except sqlite3.Error,e:
             raise
-    
-#if __name__=='__main__':
-#    wrapper=SqliteWrapper()
-#    wrapper.connect()
-#    print wrapper.query("SELECT Publications.ID, Publications.Title FROM Publications JOIN Authors ON Publications.ID=Authors.PublicationID")
-#    wrapper.disconnect()

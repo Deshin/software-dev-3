@@ -21,7 +21,7 @@ def main(username, password, permission, firstName, surname, initials):
         print ""
         print "Username is not unique"
     else:
-        print "Content-Type: text/htlm"
+        print "Content-Type: text/html"
         print ""
 
 if __name__ == "__main__":
