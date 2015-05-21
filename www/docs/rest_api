@@ -2,7 +2,7 @@
     "swagger": "2.0",
     "basePath": "/api",
     "info": {
-        "version": "0.0.0",
+        "version": "0.2.0",
         "title": "Wits Research Publication Archive - REST API"
     },
     "paths": {
@@ -11,12 +11,50 @@
                 "description": "Gets an array of `DocumentListItem` objects for each document in the archive\n",
                 "parameters": [
                     {
-                        "name": "page",
+                        "name": "simpleSearch",
                         "in": "query",
-                        "description": "Which page to fetch",
+                        "description": "A string to search for",
                         "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "advancedSearch",
+                        "in": "query",
+                        "description": "A json describing advanced search parameters",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "length",
+                        "in": "query",
+                        "description": "The number of publications to retrieve",
+                        "required": true,
                         "type": "number",
                         "format": "int32"
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "description": "The number of documents to skip befor returning results",
+                        "required": true,
+                        "type": "number",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "The direction to sort in 'ASC' or 'DESC'",
+                        "required": true,
+                        "type": "string",
+                        "enum": ["ASC", "DESC"]
+                    },
+                    {
+                        "name": "sortBy",
+                        "in": "query",
+                        "description": "The field by which to sort",
+                        "required": true,
+                        "type": "string",
+                        "enum": ["Title", "Year"]
                     }
                 ],
                 "responses": {
@@ -164,6 +202,89 @@
                                         "type": "string",
                                         "required": false
                                     }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/CSVFormats.py": {
+            "get": {
+                "description": "Gets an array of valid CSV formats\n",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "The requested array",
+                        "schema": {
+                            "title": "ArrayOfCSVFormats",
+                            "type": "array",
+                            "items": {
+                                "title": "CSVFormatItem",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/advancedSearchFields.py": {
+            "get": {
+                "description": "Gets an array of valid advanced search fields\n",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "The requested array",
+                        "schema": {
+                            "title": "ArrayOfAdvancedSearchFields",
+                            "type": "array",
+                            "items": {
+                                "title": "AdvancedSearchFieldItem",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/authorDocs.py": {
+            "get": {
+                "description": "Gets an the user details for a username\n",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "A string to search for",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The requested details",
+                        "schema": {
+                            "title": "UserDetailItem",
+                            "type": "object",
+                            "properties": {
+                                "username": {
+                                    "type": "string",
+                                    "required" : true
+                                },
+                                "permission": {
+                                    "type": "string",
+                                    "required" : true
+                                },
+                                "firstname": {
+                                    "type": "string",
+                                    "required" : true
+                                },
+                                "surname": {
+                                    "type": "string",
+                                    "required" : true
+                                },
+                                "initials": {
+                                    "type": "string",
+                                    "required" : true
                                 }
                             }
                         }
