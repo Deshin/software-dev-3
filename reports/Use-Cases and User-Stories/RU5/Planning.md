@@ -1,8 +1,8 @@
-###First estimate: 2h
+###First estimate: 1h
 
 ###Tasks:
-- Swagger Documentation
-- DisplayDocumentDetails: Frontend
-- GetDocumentDetails: Backend
+- Add viewlog to database
+- query viewlog
+- display viewlog
 
-###Second-Estimate: 3h
+###Second-Estimate: Will not implement
