@@ -24,6 +24,11 @@ requirejs(['jquery', 'knockout', 'kopunches', 'kofilebind', 'pager', 'jqueryvali
     self.search = ko.observable("");
     self.loginState = ko.observable('unregistered');
     self.loginUsername = ko.observable("");
+    self.accreditationUrl = ko.observable('/#!/publications?search='+JSON.stringify([{
+      field: 'Accreditation',
+      value: 'Accredited',
+      operator: 'equals'
+    }]));
 
     self.onSearchClick = function() {
       if (self.search() === "") {
