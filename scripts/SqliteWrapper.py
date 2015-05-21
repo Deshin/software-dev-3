@@ -14,7 +14,7 @@ class SqliteWrapper(DatabaseWrapper):
         self._con=[]
 
     def connect(self):
-    """ Allows for a connection to a database to be established."""
+        """ Allows for a connection to a database to be established."""
         try:
             self._con=sqlite3.connect(self._database)
             sqlite3.isolation_level = None
@@ -23,14 +23,14 @@ class SqliteWrapper(DatabaseWrapper):
             raise
         
     def disconnect(self):
-    """ Allows for disconnection from a database """
+        """ Allows for disconnection from a database """
         self._con.close()
 
     def query(self, queryString, values=()):
-    """ Performs and returns the results of an SQL query
+        """ Performs and returns the results of an SQL query
 
-    :param queryString: A SQL query string, with the variables replaced with '?'
-    :param values: A tuple containing string values to be substituted into the place of the ?'s in the query string. """
+        :param queryString: A SQL query string, with the variables replaced with '?'
+        :param values: A tuple containing string values to be substituted into the place of the ?'s in the query string. """
         try:
             self._cur.execute(queryString, values)
             if queryString.startswith("SELECT"):
