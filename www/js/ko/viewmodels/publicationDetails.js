@@ -1,6 +1,7 @@
 define(["jquery", "knockout"], function($, ko) {
 	var vm = this;
 	vm.publication = ko.observable(null);
+	vm.permission = ko.observable(rootViewModel.loginState());
 	vm.pubId = ko.observable();
 	vm.statusMsg = ko.observable('');
 	vm.pdfUrl = ko.observable('');
