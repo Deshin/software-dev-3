@@ -1,5 +1,10 @@
 <div class="col-md-12">
+  <!-- ko if: permission() === 'admin' -->
   <h1>View an Account</h1>
+  <!-- /ko -->
+  <!-- ko if: permission() === 'registered' -->
+  <h1 data-bind="text: username"></h1>
+  <!-- /ko -->
 </div>
 <br/>
 <!-- ko if: permission() === 'admin' -->
