@@ -59,7 +59,24 @@
 <dl class="function">
 <dt id="restSearch.advancedSearch">
 <code class="descclassname">restSearch.</code><code class="descname">advancedSearch</code><span class="sig-paren">(</span><em>self</em>, <em>searchTerms</em>, <em>skip</em>, <em>length</em>, <em>sortBy</em>, <em>sort</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.advancedSearch" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Performs an advanced search on the database.
+:param searchTerms: A json array containing json objects with three fields: <cite>field</cite>, <cite>operator</cite> and <cite>value</cite>.</p>
+<p>Valid <cite>field`s may be found by :func:`restSearch.getAdvancedSearchFields</cite> 
+Valid <a href="#id1"><span class="problematic" id="id2">`</span></a>operator`s are &#8220;equals&#8221; and &#8220;contains&#8221;.
+Valid <a href="#id3"><span class="problematic" id="id4">`</span></a>value`s may be any string.
+:param skip: Pagination- start of page.
+:param length: Pagination- amount of results.
+:param sortBy: A string representing a db column to sort the results by.
+:param sort: A tring that determines whether to sort ascending or decenting.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A json array of objects representing publications and their authors.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restSearch.decorateAdvancedSearchTerms">
@@ -69,7 +86,16 @@
 <dl class="function">
 <dt id="restSearch.getAdvancedSearchFields">
 <code class="descclassname">restSearch.</code><code class="descname">getAdvancedSearchFields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.getAdvancedSearchFields" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Finds the fields by which an advanced search may be done</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">A json array containing all the fields by which an advanced search may be done.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restSearch.getSQLQueryAndValues">
@@ -103,7 +129,20 @@
 <dl class="function">
 <dt id="restSearch.sortDocuments">
 <code class="descclassname">restSearch.</code><code class="descname">sortDocuments</code><span class="sig-paren">(</span><em>self</em>, <em>sortBy</em>, <em>sort</em><span class="sig-paren">)</span><a class="headerlink" href="#restSearch.sortDocuments" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Generates a SQL command to do sorting</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>sortBy</strong> &#8211; A String representing a database column to sort by.</li>
+<li><strong>sort</strong> &#8211; A string which determines whether to sort ascending or decending.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="function">
 <dt id="restSearch.splitAdvancedSearchTerms">

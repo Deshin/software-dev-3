@@ -36,6 +36,10 @@ def simpleSearch(self, searchTerm, skip, length, sortBy, sort):
     return json.dumps(addAuthors(self,pubs))
 
 def sortDocuments(self, sortBy, sort):
+    """ Generates a SQL command to do sorting 
+
+    :param sortBy: A String representing a database column to sort by.
+    :param sort: A string which determines whether to sort ascending or decending. """
     validSortBy=["Title", "Category", "Year", "Publisher"]
     validSort=["ASC", "DESC"]
     
@@ -49,6 +53,9 @@ def sortDocuments(self, sortBy, sort):
     return sortString
 
 def getAdvancedSearchFields():
+    """ Finds the fields by which an advanced search may be done
+
+    :return: A json array containing all the fields by which an advanced search may be done."""
     fields = []
     for a in dbCols.keys():
         fields.append(a)
@@ -56,6 +63,18 @@ def getAdvancedSearchFields():
 
 
 def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
+    """ Performs an advanced search on the database.
+    :param searchTerms: A json array containing json objects with three fields: `field`, `operator` and `value`. 
+    
+    Valid `field`s may be found by :func:`restSearch.getAdvancedSearchFields` 
+    Valid `operator`s are "equals" and "contains".
+    Valid `value`s may be any string.
+    :param skip: Pagination- start of page.
+    :param length: Pagination- amount of results.
+    :param sortBy: A string representing a db column to sort the results by.
+    :param sort: A tring that determines whether to sort ascending or decenting. 
+    
+    :return: A json array of objects representing publications and their authors."""
     query = "SELECT Publications.* "\
         "FROM Publications "\
         "LEFT JOIN Authors ON Authors.PublicationID=Publications.ID "\
@@ -68,7 +87,6 @@ def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
         "WHERE "
     
     terms = json.loads(searchTerms) 
-#   terms = splitAdvancedSearchTerms(terms)
     terms = updateAdvancedSearchTermsFields(terms, dbCols)
     terms = decorateAdvancedSearchTerms(terms)
     (queryPart, queryValues) = getSQLQueryAndValues(terms)
@@ -79,12 +97,6 @@ def advancedSearch(self, searchTerms, skip, length, sortBy, sort):
     query += "LIMIT ? OFFSET ? "   
     queryValues.append(length)
     queryValues.append(skip)
-
-#    print 
-#    print query
-#    print
-#    print queryValues
-#    print 
 
     pubs = self._databaseWrapper.query(query, queryValues)
     data = []
