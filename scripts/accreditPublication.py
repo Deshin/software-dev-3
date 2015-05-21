@@ -4,7 +4,11 @@ import cgi
 def main(publicationID):
     db = SqliteWrapper()
     rest = RestApi(db)
-    rest.accreditPublication(publicationID, True)
+    print "Status:200"
+    print "Content-Type: text/html"
+    print ""
+    print "Success"
+    rest.accreditPublication(publicationID)
 
 if __name__ == "__main__":
     form = cgi.FieldStorage()

@@ -54,14 +54,13 @@
 			</div>
 			<div class="row" data-bind="page: {id: 'removeAccount', title: 'Remove Account', sourceOnShow: 'views/removeAccount.html', withOnShow: getVM('removeAccount')}">
 			</div>
+			<div class="row" data-bind="page: {id: 'uploadListings', title: 'Upload Listings', sourceOnShow: 'views/uploadListings.html', withOnShow: getVM('uploadListings')}"></div>
 			<!-- /ko -->
 
 			<div class="row" data-bind="page: {role: 'start', id: 'publications', title: 'All publications', params:{'search' : '', 'page': 1, 'pageSize':20, sort: 'ASC', sortBy: 'Title'}, sourceOnShow: 'views/publications.html', withOnShow: getVM('publications')}">
 			</div>
 
 			<div class="row" data-bind="page: {id: 'advancedSearch', title: 'Advanced Search', sourceOnShow: 'views/advancedSearch.html', withOnShow: getVM('advancedSearch')}"></div>
-
-			<div class="row" data-bind="page: {id: 'uploadListings', title: 'Upload Listings', sourceOnShow: 'views/uploadListings.html', withOnShow: getVM('uploadListings')}"></div>
 
 		</div>
 
@@ -77,6 +76,7 @@
 				<!-- ko if: loginState() === 'admin' -->
 				<li class="active"><a href="#!/createAccount">Create Account</a></li>
 				<li class="active"><a href="#!/removeAccount">Remove an Account</a></li>
+				<li class="active"><a href="#!/uploadListings">Update Journal Listings</a></li>
 				<!-- /ko -->
 			</ul>
 			<ul class="nav nav-sidebar">
